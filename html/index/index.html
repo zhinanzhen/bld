@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>共享便利店</title>
+    <link rel="stylesheet" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" href="../../css/mui_img.css"/>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/footer.css"/>
+    <link rel="stylesheet" href="../../css/index/index.css"/>
+</head>
+<body style="background-color: #fff;">
+<div class="layer">
+    <!--头部-->
+    <header class="clearfix">
+        <div class="header_left"> <em></em><span>扫码 </span></div>
+
+        <input type="text" placeholder="手机 电脑"/>
+        <div class="header_right"> <em></em><span> 分类</span></div>
+    </header>
+    <!--主体部分-->
+    <div class="main">
+        <!--轮播图-->
+        <div id="slider" class="mui-slider" >
+            <div class="mui-slider-group mui-slider-loop">
+                <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="#">
+                        <img src="../../img/index_s1.png">
+                    </a>
+                </div>
+                <!-- 第一张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_s1.png">
+                    </a>
+                </div>
+                <!-- 第二张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_s1.png">
+                    </a>
+                </div>
+                <!-- 第三张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_s1.png">
+                    </a>
+                </div>
+                <!-- 第四张 -->
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="../../img/index_s1.png">
+                    </a>
+                </div>
+                <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="#">
+                        <img src="../../img/index_s1.png">
+                    </a>
+                </div>
+            </div>
+            <div class="mui-slider-indicator">
+                <div class="mui-indicator mui-active"></div>
+                <div class="mui-indicator"></div>
+                <div class="mui-indicator"></div>
+                <div class="mui-indicator"></div>
+            </div>
+        </div>
+        <!--四宫格-->
+        <div class="nav">
+            <ul class="clearfix">
+                <li>
+                    <a href="javascript:;">
+                        <span></span>
+                        <em>共享便利店</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <span></span>
+                        <em>租房</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <span></span>
+                        <em>我的兴趣</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <span></span>
+                        <em>共享商城</em>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--广告列表-->
+        <div class="advertisement_list">
+            <a href="">
+                <img src="../../img/index_small_1.png" alt=""/>
+            </a>
+            <a href="">
+                <img src="../../img/index_small_2.png" alt=""/>
+            </a>
+            <a href="">
+                <img src="../../img/index_small_s.png" alt=""/>
+            </a>
+        </div>
+    </div>
+    <!--来过-->
+    <div class="came_goods">
+            <div class="came_top">
+                <img src="../../img/headpic.png" alt=""/>
+                <div class="center">
+                    <em>aaxiao兔子</em>
+                    <del>15分钟来过</del>
+                </div>
+                <div class="right">
+                    ￥200
+                </div>
+            </div>
+        <div class="img_box">
+            <img src="../../img/index_list1.png" data-preview-src="" data-preview-group="1" alt=""/>
+            <img src="../../img/index_list2.png" data-preview-src="" data-preview-group="1" alt=""/>
+            <img src="../../img/index_list1.png" data-preview-src="" data-preview-group="1" alt=""/>
+        </div>
+    </div>
+    <!--页脚-->
+    <footer>
+        <ul>
+            <li onclick="location.href='index.html'">
+                <i></i>
+                <em>首页</em>
+            </li>
+            <li onclick="location.href='index.html'">
+                <i></i>
+                <em>封地</em>
+            </li>
+
+            <li onclick="location.href='../publish/publish.html'">
+                <i></i>
+                <em>发布</em>
+            </li>
+            <li onclick="location.href='index.html'">
+                <i></i>
+                <em>消息</em>
+            </li>
+            <li onclick="location.href='../personal/personal.html'">
+                <i></i>
+                <em>我的</em>
+            </li>
+        </ul>
+    </footer>
+</div>
+</body>
+<script src="../../js/base/mui.min.js"></script>
+<script src="../../js/base/fonts.js"></script>
+<script src="../../js/base/jquery.min.js"></script>
+<script src="../../js/base/mui.zoom.js"></script>
+<script src="../../js/base/mui.preview.js"></script>
+<script>
+   $(function () {
+       mui.init({
+           swipeBack:true //启用右滑关闭功能
+       });
+       mui.previewImage();
+       mui('body').on('tap','a',function(){document.location.href=this.href;});
+
+       var slider = mui("#slider");
+       slider.slider({
+           interval: 2000//自动轮播周期，若为0则不自动播放，默认为0；
+       });
+   })
+
+</script>
+</html>

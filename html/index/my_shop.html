@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>自营商城</title>
+    <link rel="stylesheet" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/index/my_shop.css"/>
+</head>
+<body>
+<div class="layer" style="background-color:#fff;">
+    <header>
+        <i onclick="back()"></i>
+        <h3>营养保健</h3>
+    </header>
+    <div class="main">
+        <nav>
+            <ul class="clearfix">
+                <li>
+                    综合
+                    <i class="mui-icon mui-icon-arrowdown"></i>
+                </li>
+                <li>
+                    销量
+                </li>
+                <li class="active price">
+                    价格
+                    <i class="mui-icon mui-icon-arrowdown"></i>
+                </li>
+                <li>
+                    筛选
+                </li>
+            </ul>
+        </nav>
+        <!--lists-->
+        <div class="lists">
+            <ul class="clearfix">
+                <li>
+                    <div class="img_box">
+                        <img src="../../img/index_shop_goods.png" alt=""/>
+                    </div>
+                    <div class="detail">
+                        <p>
+                            <em>￥9.98</em>
+                            <i>￥9.99</i>
+                            <del>折扣</del>
+                        </p>
+                        <h4>增肌养生不二选择，帮助您拥有一副羡 煞旁人的身材。 </h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="img_box">
+                        <img src="../../img/index_shop_goods.png" alt=""/>
+                    </div>
+                    <div class="detail">
+                        <p>
+                            <em>￥9.98</em>
+                            <i>￥9.99</i>
+                            <del>折扣</del>
+                        </p>
+                        <h4>增肌养生不二选择，帮助您拥有一副羡 煞旁人的身材。 </h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="img_box">
+                        <img src="../../img/index_shop_goods.png" alt=""/>
+                    </div>
+                    <div class="detail">
+                        <p>
+                            <em>￥9.98</em>
+                            <i>￥9.99</i>
+                            <del>折扣</del>
+                        </p>
+                        <h4>增肌养生不二选择，帮助您拥有一副羡 煞旁人的身材。 </h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="img_box">
+                        <img src="../../img/index_shop_goods.png" alt=""/>
+                    </div>
+                    <div class="detail">
+                        <p>
+                            <em>￥9.98</em>
+                            <i>￥9.99</i>
+                            <del>折扣</del>
+                        </p>
+                        <h4>增肌养生不二选择，帮助您拥有一副羡 煞旁人的身材。 </h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="img_box">
+                        <img src="../../img/index_shop_goods.png" alt=""/>
+                    </div>
+                    <div class="detail">
+                        <p>
+                            <em>￥9.98</em>
+                            <i>￥9.99</i>
+                            <del>折扣</del>
+                        </p>
+                        <h4>增肌养生不二选择，帮助您拥有一副羡 煞旁人的身材。 </h4>
+                    </div>
+                </li>
+                <li>
+                    <div class="img_box">
+                        <img src="../../img/index_shop_goods.png" alt=""/>
+                    </div>
+                    <div class="detail">
+                        <p>
+                            <em>￥9.98</em>
+                            <i>￥9.99</i>
+                            <del>折扣</del>
+                        </p>
+                        <h4>增肌养生不二选择，帮助您拥有一副羡 煞旁人的身材。 </h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../js/base/fonts.js"></script>
+<script src="../../js/base/jquery.min.js"></script>
+<script src="../../js/base/Historyback.js"></script>
+<script>
+    $(function () {
+        $("nav>ul>li").click(function () {
+            $(this).addClass("active");
+            $(this).siblings().removeClass("active");
+        })
+        let flag=true;
+
+            $(".price").click(function () {
+                if (flag) {
+                    $(this).children().removeClass("mui-icon-arrowdown");
+                    $(this).children().addClass("mui-icon-arrowup");
+                    flag = false;
+                }
+                else {
+                    $(this).children().removeClass("mui-icon-arrowup");
+                    $(this).children().addClass("mui-icon-arrowdown");
+                }
+            })
+
+    })
+</script>
+</html>

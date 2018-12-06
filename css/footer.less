@@ -1,0 +1,64 @@
+.ft(@fontSize){
+  font-size: @fontSize;
+  [data-dpr="2"] & {
+    font-size: @fontSize * 2;
+  }
+  [data-dpr="3"] & {
+    font-size: @fontSize * 3;
+  }
+}
+footer{
+  width: 100%;
+  height: 100/75rem;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  border-top: 1px solid #eeeeee;
+  >ul {
+    width: 100%;
+    height: 100%;
+    >li {
+      width: 20%;
+      float: left;
+      text-align: center;
+      height: 100%;
+      &:nth-of-type(2) i{
+        background-image: url("../img/footer/ting.png");
+        -webkit-background-size: 100%;
+        background-size: 100%;
+      }
+      &:nth-of-type(3) i{
+        background-image: url("../img/logo.png");
+        -webkit-background-size: 130%;
+        background-size: 130%;
+        width:70%;
+        height: 70%;
+      }
+      &:nth-of-type(4) i{
+        background-image: url("../img/footer/chat.png");
+        -webkit-background-size:90%;
+        background-size: 90%;
+      }
+      &:nth-of-type(5) i{
+        background-image: url("../img/footer/message.png");
+        -webkit-background-size: 120%;
+        background-size: 120%;
+      }
+      >i {
+        width: 60/75rem;
+        display: block;
+        height: 60/75rem;
+        margin: 0 auto;
+        background: url("../img/footer/index.png") no-repeat center;
+        -webkit-background-size: 120%;
+        background-size: 120%;
+
+      }
+      >em {
+        display: block;
+        .ft(14px);
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布二手商品</title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <link rel="stylesheet" href="../../css/header.css"/>
+    <link rel="stylesheet" href="../../css/publish/publish.css"/>
+    <style>
+        body{
+            background-color: #fff;!important;
+        }
+    </style>
+</head>
+<body>
+<div class="layer">
+    <header>
+        <i onclick="back()"></i>
+        <h3>发布商品</h3>
+    </header>
+    <div class="content">
+        <div class="say">
+            <input type="text" class="style"  placeholder="请描述物品名称，型号等"/>
+            <textarea placeholder="详细描述会为你带来更加快速的成交哦;
+     1.请描述你的物品优势，例如品牌，原价
+     2.请描述该物品的相关信息，是否损坏，是否拆卸
+     3.请描述该物品是否保留保修凭证，是否还在保修期内"></textarea>
+        <p>注：必须完整描述，不可隐瞒瑕疵</p>
+        </div>
+        <div class="imageBox">
+           <div class="z_photo">
+                <div class="z_file">
+                    <input type="file" capture="camera" name="file" id="file" value=""  accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+                </div>
+            </div>
+            <div class="z_mask">
+                <div class="z_alert">
+                    <p>确定删除这张图片吗？</p>
+                    <p>
+                        <span class="z_cancel">取消</span>
+                        <span class="z_sure">确定</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <h3>价格标准：</h3>
+        <div class="status">请选择竞价方式</div>
+        <div class="status_span clearfix">
+            <span class="active">+/-20%</span>
+            <span>+/-10%</span>
+            <span>原价</span>
+            <span>无所谓</span>
+        </div>
+        <div class="get_goods">
+            <span>
+                物流发货
+                <i class="active">√</i>
+            </span>
+            <span>
+               同城自提
+                <i>√</i>
+            </span>
+        </div>
+        <div class="title">
+            <h3>添加标签丰富信息，出租更快捷哦</h3>
+            <div class="title_span clearfix">
+                <span class="active">95新</span>
+                <span>免运费</span>
+                <span>送吃鸡账号</span>
+                <span>更多</span>
+            </div>
+
+        </div>
+        <div class="promise">
+            <input type="checkbox"/>
+            我保证该物品为原厂正品，不存在仿制伪造。
+        </div>
+        <div class="publish">
+            <button>确定发布</button>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script src="../../js/base/fonts.js"></script>
+<script src="../../js/base/base.js"></script>
+<script src="../../js/base/jquery.min.js"></script>
+<script src="../../js/base/Historyback.js"></script>
+
+<script>
+
+    //竞价方式的选择
+    $(".status_span span").click(function(){
+            $(this).addClass("active");
+        $(this).siblings().removeClass("active");
+        console.log($(this).text());
+    })
+
+
+    /*提货方式*/
+    $(".get_goods>span").click(function(){
+        $(this).children().addClass("active");
+       // console.log($(this).siblings());
+        $(this).siblings().children().removeClass("active");
+        console.log($(this).text());
+    })
+    /*标签*/
+    var flag=true;
+
+    $(".title_span span").click(function(){
+        if(flag){
+            $(this).addClass("active");
+            flag=false;
+        }else{
+            $(this).removeClass("active");
+            flag=true;
+        }
+    })
+    var list=[];
+    $(".publish button ").click(function(){
+
+        $(".title_span .active").each(function(i){
+            var sortid=$(this).data("value");
+            list.push(sortid);
+        });
+        //console.log(list);//成功 数组形式
+    })
+
+    /*上传图片*/
+    function imgChange(obj1, obj2) {
+        var file = document.getElementById("file");
+        var imgContainer = document.getElementsByClassName(obj1)[0];
+        var fileList = file.files;
+        var input = document.getElementsByClassName(obj2)[0];
+        var imgArr = [];
+        for (var i = 0; i < fileList.length; i++) {
+            if(file.files && file.files[i]){
+                var fileData = file.files[i];
+                var size = fileData.size;   //是字节数
+                var isAllow = false;
+                if(!size) isAllow = false;
+                var maxSize = 2048;
+                maxSize = maxSize * 1024;   //转化为字节
+                isAllow = size <= maxSize;
+                if(!isAllow){
+                    alert("大小超过2 M，请重新上传");
+                    return false;
+                }
+            }
+            //结束
+            var imgUrl = window.URL.createObjectURL(file.files[i]);
+            imgArr.push(imgUrl);
+            var img = document.createElement("img");
+            img.setAttribute("src", imgArr[i]);
+            var imgAdd = document.createElement("div");
+            imgAdd.setAttribute("class", "z_addImg");
+            imgAdd.appendChild(img);
+            imgContainer.appendChild(imgAdd);
+            //getBase64Image(img,imgArr[i]);
+        };
+        for(let i=0;i<imgArr.length;i++){
+            (function(image, x, y,index){
+                drawing(image, x, y,index)
+            })(imgArr[i],0,0,i)
+        }
+        imgRemove();
+    };
+    function imgRemove() {
+        var imgList = document.getElementsByClassName("z_addImg");
+        var mask = document.getElementsByClassName("z_mask")[0];
+        var cancel = document.getElementsByClassName("z_cancel")[0];
+        var sure = document.getElementsByClassName("z_sure")[0];
+        for (var j = 0; j < imgList.length; j++) {
+            imgList[j].index = j;
+            imgList[j].onclick = function() {
+                var t = this;
+                mask.style.display = "block";
+                cancel.onclick = function() {
+                    mask.style.display = "none";
+                };
+                sure.onclick = function() {
+                    mask.style.display = "none";
+                    t.style.display = "none";
+                };
+            }
+        };
+    };
+    var container=document.querySelector(".z_photo");
+    var images=[];
+    function drawing(image, x, y,index) {
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = image;
+        img.onload = function () {
+            let id='canvas'+index;
+            createCanvas(id,img.width,img.height);
+            var cs = document.getElementById(id);
+            var ctx = cs.getContext("2d");
+            ctx.drawImage(img, x, y);
+            var imageUrl=cs.toDataURL('', 1);
+            images.push(imageUrl);
+            //转换成功
+            // console.log(images);
+            removeDom(id);
+        } ;
+    }
+    function createCanvas(id,width,height){
+        var canvas=document.createElement("canvas");
+        canvas.setAttribute('id',id);
+        canvas.setAttribute('width',width);
+        canvas.setAttribute('height',height);
+        canvas.style.display="none";
+        container.appendChild(canvas);
+    }
+    function removeDom(id){
+        document.getElementById(id).outerHTML='';
+    }
+</script>
+</html>

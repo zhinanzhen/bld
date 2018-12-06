@@ -1,0 +1,90 @@
+.ft(@fontSize){
+  font-size: @fontSize;
+  [data-dpr="2"] & {
+    font-size: @fontSize * 2;
+  }
+  [data-dpr="3"] & {
+    font-size: @fontSize * 3;
+  }
+}
+
+.main{
+  background-color: #eee;
+  padding:0 60/75rem;
+  padding-top: 150/75rem;
+  >.my_pub,.my_sell,.my_buy{
+    width: 100%;
+    h3{
+      .ft(16px);
+      height: 80/75rem;
+      line-height: 80/75rem;
+    }
+    >ul{
+      .mui-table-view-cell{
+        background-color: #fff;
+          border-bottom: 20/75rem solid #eee;
+          .my_pub_list{
+            position: relative;
+            >img{
+              width: 160/75rem;
+              height: 160/75rem;
+
+            }
+            .center{
+              position: absolute;
+              left: 180/75rem;
+              top: 10%;
+              >h3{
+                .ft(14px);
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                word-break: break-all;
+              }
+              .bt{
+                position: relative;
+                em{
+                  position: absolute;
+                  left: 3%;
+                  top: 10%;
+                  color:#fa754d;
+                  .ft(12px);
+                }
+                del{
+                  position: absolute;
+                  right: 3%;
+                  top: 10%;
+                  .ft(10px);
+                }
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+
+}
+.mui-popup{
+  width: 80%;
+}
+.mui-popup-title{
+  .ft(16px);
+}
+.mui-popup-title+.mui-popup-text{
+  .ft(14px);
+}
+.mui-popup-button{
+  .ft(14px);
+  height: 75/75rem;
+  line-height: 75/75rem;
+}
+.mui-popup-buttons{
+  height: 75/75rem;
+  line-height: 75/75rem;
+}
+.mui-btn.mui-btn-red{
+  .ft(16px);
+}

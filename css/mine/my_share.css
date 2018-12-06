@@ -1,0 +1,158 @@
+.main {
+  background-color: #eee;
+  padding: 0 0.8rem;
+  padding-top: 2rem;
+}
+.main > .my_pub,
+.main .my_sell,
+.main .my_buy {
+  width: 100%;
+}
+.main > .my_pub h3,
+.main .my_sell h3,
+.main .my_buy h3 {
+  font-size: 16px;
+  height: 1.06666667rem;
+  line-height: 1.06666667rem;
+}
+[data-dpr="2"] .main > .my_pub h3,
+[data-dpr="2"] .main .my_sell h3,
+[data-dpr="2"] .main .my_buy h3 {
+  font-size: 32px;
+}
+[data-dpr="3"] .main > .my_pub h3,
+[data-dpr="3"] .main .my_sell h3,
+[data-dpr="3"] .main .my_buy h3 {
+  font-size: 48px;
+}
+.main > .my_pub > ul .mui-table-view-cell,
+.main .my_sell > ul .mui-table-view-cell,
+.main .my_buy > ul .mui-table-view-cell {
+  background-color: #fff;
+  border-bottom: 0.26666667rem solid #eee;
+}
+.main > .my_pub > ul .mui-table-view-cell .my_pub_list,
+.main .my_sell > ul .mui-table-view-cell .my_pub_list,
+.main .my_buy > ul .mui-table-view-cell .my_pub_list {
+  position: relative;
+}
+.main > .my_pub > ul .mui-table-view-cell .my_pub_list > img,
+.main .my_sell > ul .mui-table-view-cell .my_pub_list > img,
+.main .my_buy > ul .mui-table-view-cell .my_pub_list > img {
+  width: 2.13333333rem;
+  height: 2.13333333rem;
+}
+.main > .my_pub > ul .mui-table-view-cell .my_pub_list .center,
+.main .my_sell > ul .mui-table-view-cell .my_pub_list .center,
+.main .my_buy > ul .mui-table-view-cell .my_pub_list .center {
+  position: absolute;
+  left: 2.4rem;
+  top: 10%;
+}
+.main > .my_pub > ul .mui-table-view-cell .my_pub_list .center > h3,
+.main .my_sell > ul .mui-table-view-cell .my_pub_list .center > h3,
+.main .my_buy > ul .mui-table-view-cell .my_pub_list .center > h3 {
+  font-size: 14px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+[data-dpr="2"] .main > .my_pub > ul .mui-table-view-cell .my_pub_list .center > h3,
+[data-dpr="2"] .main .my_sell > ul .mui-table-view-cell .my_pub_list .center > h3,
+[data-dpr="2"] .main .my_buy > ul .mui-table-view-cell .my_pub_list .center > h3 {
+  font-size: 28px;
+}
+[data-dpr="3"] .main > .my_pub > ul .mui-table-view-cell .my_pub_list .center > h3,
+[data-dpr="3"] .main .my_sell > ul .mui-table-view-cell .my_pub_list .center > h3,
+[data-dpr="3"] .main .my_buy > ul .mui-table-view-cell .my_pub_list .center > h3 {
+  font-size: 42px;
+}
+.main > .my_pub > ul .mui-table-view-cell .my_pub_list .center .bt,
+.main .my_sell > ul .mui-table-view-cell .my_pub_list .center .bt,
+.main .my_buy > ul .mui-table-view-cell .my_pub_list .center .bt {
+  position: relative;
+}
+.main > .my_pub > ul .mui-table-view-cell .my_pub_list .center .bt em,
+.main .my_sell > ul .mui-table-view-cell .my_pub_list .center .bt em,
+.main .my_buy > ul .mui-table-view-cell .my_pub_list .center .bt em {
+  position: absolute;
+  left: 3%;
+  top: 10%;
+  color: #fa754d;
+  font-size: 12px;
+}
+[data-dpr="2"] .main > .my_pub > ul .mui-table-view-cell .my_pub_list .center .bt em,
+[data-dpr="2"] .main .my_sell > ul .mui-table-view-cell .my_pub_list .center .bt em,
+[data-dpr="2"] .main .my_buy > ul .mui-table-view-cell .my_pub_list .center .bt em {
+  font-size: 24px;
+}
+[data-dpr="3"] .main > .my_pub > ul .mui-table-view-cell .my_pub_list .center .bt em,
+[data-dpr="3"] .main .my_sell > ul .mui-table-view-cell .my_pub_list .center .bt em,
+[data-dpr="3"] .main .my_buy > ul .mui-table-view-cell .my_pub_list .center .bt em {
+  font-size: 36px;
+}
+.main > .my_pub > ul .mui-table-view-cell .my_pub_list .center .bt del,
+.main .my_sell > ul .mui-table-view-cell .my_pub_list .center .bt del,
+.main .my_buy > ul .mui-table-view-cell .my_pub_list .center .bt del {
+  position: absolute;
+  right: 3%;
+  top: 10%;
+  font-size: 10px;
+}
+[data-dpr="2"] .main > .my_pub > ul .mui-table-view-cell .my_pub_list .center .bt del,
+[data-dpr="2"] .main .my_sell > ul .mui-table-view-cell .my_pub_list .center .bt del,
+[data-dpr="2"] .main .my_buy > ul .mui-table-view-cell .my_pub_list .center .bt del {
+  font-size: 20px;
+}
+[data-dpr="3"] .main > .my_pub > ul .mui-table-view-cell .my_pub_list .center .bt del,
+[data-dpr="3"] .main .my_sell > ul .mui-table-view-cell .my_pub_list .center .bt del,
+[data-dpr="3"] .main .my_buy > ul .mui-table-view-cell .my_pub_list .center .bt del {
+  font-size: 30px;
+}
+.mui-popup {
+  width: 80%;
+}
+.mui-popup-title {
+  font-size: 16px;
+}
+[data-dpr="2"] .mui-popup-title {
+  font-size: 32px;
+}
+[data-dpr="3"] .mui-popup-title {
+  font-size: 48px;
+}
+.mui-popup-title + .mui-popup-text {
+  font-size: 14px;
+}
+[data-dpr="2"] .mui-popup-title + .mui-popup-text {
+  font-size: 28px;
+}
+[data-dpr="3"] .mui-popup-title + .mui-popup-text {
+  font-size: 42px;
+}
+.mui-popup-button {
+  font-size: 14px;
+  height: 1rem;
+  line-height: 1rem;
+}
+[data-dpr="2"] .mui-popup-button {
+  font-size: 28px;
+}
+[data-dpr="3"] .mui-popup-button {
+  font-size: 42px;
+}
+.mui-popup-buttons {
+  height: 1rem;
+  line-height: 1rem;
+}
+.mui-btn.mui-btn-red {
+  font-size: 16px;
+}
+[data-dpr="2"] .mui-btn.mui-btn-red {
+  font-size: 32px;
+}
+[data-dpr="3"] .mui-btn.mui-btn-red {
+  font-size: 48px;
+}

@@ -1,0 +1,41 @@
+.ft(@fontSize){
+  font-size: @fontSize;
+  [data-dpr="2"] & {
+    font-size: @fontSize * 2;
+  }
+  [data-dpr="3"] & {
+    font-size: @fontSize * 3;
+  }
+}
+.baseColor{
+  background-color:#fac74d;
+}
+header {
+  width: 100%;
+  height: 150/75rem;
+  .ft(26px);
+  padding-top: 50/75rem;
+  position: fixed;
+  z-index: 1;
+
+  .baseColor;
+  >i{
+    width: 60/75rem;
+    height: 60/75rem;
+    background: url("../img/left.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    left: 3%;
+    top:45%;
+    position: absolute;
+  }
+  >h3{
+    line-height: 100/75rem;
+    text-align: center;
+    .ft(26px);
+  }
+  >em{
+    position: absolute;
+    right: 5%;
+  }
+}
