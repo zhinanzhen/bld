@@ -1,0 +1,81 @@
+.sets {
+  top: 0.4rem;
+  bottom: 0;
+}
+
+#swiper1 .swiper-slide {
+  width: 100%;
+  height: 1.785rem;
+}
+#swiper1 .swiper-slide > img {
+  width: 100%;
+  height: 100%;
+}
+
+.bld {
+  border-bottom: 0.1rem solid #eeeeee;
+}
+
+.bld:last-child {
+  border: none;
+  padding-bottom: 0.15rem;
+}
+
+.joins {
+  width: 100%;
+  height: 0.585rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 0.3rem;
+}
+.joins > div:nth-child(1) {
+  width: 0.21rem;
+  height: 0.21rem;
+}
+.joins > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+}
+.joins > div:nth-child(2) {
+  margin-left: 0.16rem;
+  color: #333333;
+  font: normal 0.15rem SimHei;
+}
+
+.joina {
+  width: 100%;
+  padding: 0 0.16rem;
+  display: flex;
+  justify-content: space-between;
+}
+.joina > div > div:nth-child(1) {
+  width: 1.095rem;
+  height: 1.09rem;
+}
+.joina > div > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+}
+.joina > div > div:nth-child(2) {
+  padding: 0.15rem 0;
+  color: #191919;
+  font: normal 0.154rem SimHei;
+  text-align: center;
+}
+
+.joinb > div > div:nth-child(2) {
+  padding: 0.15rem 0 0.08rem 0;
+}
+.joinb > div > div:nth-child(3) {
+  width: 0.49rem;
+  height: 0.14rem;
+  background-color: #fea12a;
+  border-radius: 0.058rem;
+  border: solid 0.005rem #d7d5d7;
+  color: #191919;
+  text-align: center;
+  font: normal 0.128rem SimHei;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=home.css.map */

@@ -1,0 +1,186 @@
+@charset "utf-8";
+.sets{
+    top:0.4rem;
+    bottom:0.49rem;
+}
+.shopa{
+    display: flex;
+    padding:0.2rem;
+    border-bottom:0.01rem solid #eeeeee;
+    >div:nth-child(1){
+        width: 0.41rem;
+        height: 0.41rem;
+        border-radius:50%;
+        overflow: hidden;
+        >img{
+            width:100%;
+            height:100%;
+        }
+    }
+    >div:nth-child(2){
+        margin-left:0.1rem;
+        >div:nth-child(1){
+            color: #010101;
+            font:normal 0.15rem AdobeHeitiStd-Regular;
+        }
+        >div:nth-child(2){
+            color: #313131;
+            font:normal 0.095rem AdobeHeitiStd-Regular;
+            >i{
+                font-size:0.13rem;
+                margin-right:0.05rem;
+            }
+        }
+    }
+}
+.icon-sexw{
+    color:#F74049;
+}
+.shopb{
+    width: 3.75rem;
+    height: 2.61rem;
+    padding:0.2rem;
+    >img{
+        width:100%;
+        height:100%;
+    }
+}
+.shopc{
+    padding:0 18%;
+    >div:nth-child(1){
+        color: #000000;
+        font:normal 0.141rem SimHei;
+    }
+    >div:nth-child(2){
+        color: #666666;
+        font:normal 0.106rem SimHei;
+        padding:0.1rem 0;
+    }
+    >div:nth-child(3){
+        color: #ff6600;
+        font:normal 0.106rem SimHei;
+        padding-bottom:0.1rem;
+    }
+}
+.shopd{
+    padding:0.15rem 0.2rem;
+    text-align: center;
+    color: #000000;
+    font:normal 0.15rem SimHei;
+    border-top:0.01rem solid #eeeeee;
+    border-bottom:0.01rem solid #eeeeee;
+}
+.shope{
+    >div{
+        display: flex;
+        border-bottom:0.01rem solid #eeeeee;
+        padding:0.1rem 0.2rem;
+        >div:nth-child(1){
+            width: 0.49rem;
+            height: 0.49rem;
+            border-radius:50%;
+            overflow: hidden;
+            >img{
+                width:100%;
+                height:100%;
+            }
+        }
+        >div:nth-child(2){
+            width:2.8rem;
+            margin-left:0.1rem;
+            >div:nth-child(1){
+                color: #000000;
+                font:normal 0.15rem SimHei;
+            }
+            >div:nth-child(2){
+                color:#7D7D7D;
+                font:normal 0.12rem SimHei;
+                margin-top:0.1rem;
+                word-wrap:break-word;/*强制换行*/
+            }
+        }
+    }
+}
+.shopf{
+    padding:0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    >div{
+        color: #666666;
+        font:normal 0.15rem SimHei;
+    }
+    >i{
+        color: #666666;
+        font-size:0.18rem;
+    }
+}
+footer{
+    position: absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:0.49rem;
+    background:#eeeeee;
+    box-shadow: 0rem 0rem 0.04rem 0rem rgba(150, 149, 149, 0.38);
+    display: flex;
+    >div:nth-child(1){
+        width:60%;
+        height:100%;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        >div{
+            width:0.45rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >i{
+                color:#C25D5D;
+                font-size:0.22rem;
+            }
+            >span{
+                color: #666666;
+                font:normal 0.15rem SimHei;
+            }
+        }
+    }
+    >div:nth-child(2){
+        width:40%;
+        height:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        >div{
+            width: 1.2rem;
+            height: 0.37rem;
+            background-color: #ef1866;
+            border-radius: 0.04rem;
+            color: #ffffff;
+            font:normal 0.12rem SimHei;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+.pinglun{
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #ffffff;
+    box-shadow: 0rem 0rem 0.04rem 0rem rgba(150, 149, 149, 0.38);
+    position:fixed;
+    right:0.1rem;
+    bottom:1.35rem;
+    border-radius:50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    >div:nth-child(1){
+        font-size:0.22rem;
+    }
+    >div:nth-child(2){
+        font-size:0.12rem;
+    }
+}

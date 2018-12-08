@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>共享便利店</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/layout.css"/>
+		<link rel="stylesheet" type="text/css" href="css/home.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/swiper-4.3.3.min.css"/>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/children.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header class="heads">
+			<i class="iconfont icon-guanbi" onclick="location.href='../../index/index.html'"></i>
+			<div>共享便利店</div>
+		</header>
+		<section class="sets">
+			<div>
+				<div class="swiper-container" id="swiper1">
+				  	<div class="swiper-wrapper">
+					    <div class="swiper-slide">
+					    	<img src="../img/bl_02.png"/>
+					    </div>
+					    <div class="swiper-slide">
+					    	<img src="../img/bl_02.png"/>
+					    </div>
+					    <div class="swiper-slide">
+					    	<img src="../img/bl_02.png"/>
+					    </div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+				<div class="bld">
+					<div class="joins">
+						<div>
+							<img src="../img/bl_04.png"/>
+						</div>
+						<div>我加入的便利店</div>
+					</div>
+					<div class="joina">
+						<div>
+							<div>
+								<img src="../img/bl_01.png"/>
+							</div>
+							<div>007</div>
+						</div>
+						<div>
+							<div>
+								<img src="../img/bl_01.png"/>
+							</div>
+							<div>007</div>
+						</div>
+						<div>
+							<div>
+								<img src="../img/bl_01.png"/>
+							</div>
+							<div>007</div>
+						</div>
+					</div>
+				</div>
+				<div class="bld">
+					<div class="joins">
+						<div>
+							<img src="../img/bl_03.png"/>
+						</div>
+						<div>附近便利店</div>
+					</div>
+					<div class="joina joinb">
+						<div>
+							<div>
+								<img src="../img/bl_01.png"/>
+							</div>
+							<div>007</div>
+							<div>加入</div>
+						</div>
+						<div>
+							<div>
+								<img src="../img/bl_01.png"/>
+							</div>
+							<div>007</div>
+							<div>加入</div>
+						</div>
+						<div>
+							<div>
+								<img src="../img/bl_01.png"/>
+							</div>
+							<div>007</div>
+							<div>加入</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+<script type="text/javascript">
+	$(function(){
+		var mySwiper = new Swiper('#swiper1',{
+			autoplay: false,//可选选项，自动滑动
+			pagination: {
+			    el:'.swiper-pagination'
+			  },
+		})
+		$(".joina>div").click(function(){
+			window.location.href="../buy/order.html";
+		})
+		//登录
+		var parameter={
+			mobile:"13521822119",
+			password:"123456"
+		}
+		ajaxs("api/user/login",'post',parameter,function(data){
+			console.log(data);
+		},function(err){
+			console.log(err);
+		})
+		
+		/*var parameter={
+			cityName: '杭州'
+		}
+		ajaxs("api/store/mylist",'post',parameter,function(data){
+			console.log(data);
+		},function(err){
+			console.log(err);
+		})*/
+	})
+</script>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+@charset "utf-8";
+html,body{
+    background:#eeeeee;
+}
+.heads{
+    >p:nth-child(3){
+        position: absolute;
+        top:0;
+        right:0;
+        width:0.8rem;
+        height:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333333;
+        font:normal 0.15rem PingFang-SC-Medium;
+    }
+}
+.sets{
+    top:0.4rem;
+    bottom:0;
+}
+.txts{
+    width:100%;
+    height:2rem;
+    resize:none;/*禁止拉伸*/
+    outline:none;
+    display:block;
+    border:none;
+    background:white;
+    padding:0.15rem;
+    color: #333333;
+    font:normal 0.15rem PingFang-SC-Medium;
+}

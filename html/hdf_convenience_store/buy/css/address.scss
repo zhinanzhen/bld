@@ -1,0 +1,91 @@
+$fonta:normal 0.15rem PingFang-SC-Regular;
+$fontb:normal 0.12rem PingFang-SC-Regular;
+.sets{
+    top:0.4rem;
+    bottom:0.4rem;
+}
+.adds{
+    border-top:0.1rem solid #eeeeee;
+    padding:0 0.2rem;
+    >div:nth-child(1){
+        display: flex;
+        padding:0.1rem 0 0.04rem 0;
+        >div{
+            color: #333333;
+            font:$fonta;
+        }
+        >div:nth-child(2){
+            margin-left:0.1rem;
+        }
+        >div:nth-child(3){
+            margin-left:1rem;
+        }
+    }
+    >div:nth-child(2){
+        color: #333333;
+        font:$fontb;
+        padding:0.04rem 0 0.1rem 0;
+        border-bottom:0.01rem solid #eeeeee;
+        >span{
+            color: #333333;
+            font:$fontb;
+        }
+    }
+    >div:nth-child(3){
+       padding:0.1rem 0 0.15rem 0;
+       display: flex;
+       position:relative;
+       >div:nth-child(1){
+           color: #666666;
+           font:normal 0.14rem PingFang-SC-Regular;
+           >.icon-tubiao-xuanze{
+               color:#333333;
+           }
+           >.icon-xuanze-danxuan{
+               color:#B1DB77;
+           }
+       }
+       >div:nth-child(2){
+           display: flex;
+           position: absolute;
+           top:0.1rem;
+           right:0;
+           >div{
+               color: #666666;
+               font:$fontb;
+               width:0.555rem;
+               height:0.24rem;
+               border-radius: 0.03rem;
+               border:solid 0.005rem #d2d2d2;
+               display:flex;
+               align-items: center;
+               justify-content: center;
+           }
+           >div:nth-child(1){
+               margin-right:0.1rem;
+           }
+       } 
+    }
+}
+footer{
+    width:100%;
+    height: 0.6rem;
+    position:absolute;
+    left:0;
+    bottom:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0rem 0rem 0.04rem 0rem rgba(150, 149, 149, 0.38);
+    >div{
+        width: 3.445rem;
+        height: 0.49rem;
+        color: #333333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.03rem;
+        background-color: #fac74d;
+        font:normal 0.18rem PingFang-SC-Regular;
+    }
+}

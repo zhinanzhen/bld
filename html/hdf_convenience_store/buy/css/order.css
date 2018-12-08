@@ -1,0 +1,102 @@
+.sets {
+  top: 0.4rem;
+  bottom: 0.4rem;
+}
+
+.locations {
+  width: 100%;
+  padding: 0.15rem;
+  display: flex;
+  align-items: center;
+  background-image: url(../../img/bl_11.png);
+  background-size: 100% 100%;
+}
+.locations > div:nth-child(1) > div:nth-child(1) {
+  display: flex;
+  margin-left: 0.2rem;
+}
+.locations > div:nth-child(1) > div:nth-child(1) > div {
+  color: #333333;
+  font: normal 0.18rem AdobeHeitiStd-Regular;
+}
+.locations > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {
+  margin-left: 0.5rem;
+}
+.locations > div:nth-child(1) > div:nth-child(2) {
+  display: flex;
+  color: #333333;
+  font: normal 0.15rem AdobeHeitiStd-Regular;
+}
+.locations > div:nth-child(1) > div:nth-child(2) > i {
+  padding: 0.01rem 0.02rem 0 0;
+  font-size: 0.15rem;
+}
+.locations > div:nth-child(2) {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ora {
+  padding: 0.19rem 0.1rem 0.19rem 0.3rem;
+}
+.ora > div {
+  color: #333333;
+  font: normal 0.15rem AdobeHeitiStd-Regular;
+}
+.ora > div > span {
+  font: normal 0.15rem AdobeHeitiStd-Regular;
+}
+.ora > div:nth-child(2) {
+  margin-top: 0.05rem;
+}
+.ora > div:nth-child(2) > span {
+  color: #ff3300;
+}
+
+.orb > div {
+  width: 100%;
+  padding: 0.2rem 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eeeeee;
+}
+.orb > div > div:nth-child(1) {
+  color: #3FC60C;
+  font-size: 0.27rem;
+}
+.orb > div > div:nth-child(2) {
+  margin-left: 0.2rem;
+  color: #333333;
+  font: normal 0.18rem AdobeHeitiStd-Regular;
+}
+.orb > div > div:nth-child(3) {
+  font-size: 0.2rem;
+}
+.orb > div:nth-child(2) {
+  border-top: 0.01rem solid #cccccc;
+}
+.orb > div:nth-child(2) > div:nth-child(1) {
+  color: #09AAF0;
+}
+.orb > div:nth-child(2) > div:nth-child(3) {
+  color: #FFCC66;
+  font-size: 0.2rem;
+}
+
+.orc {
+  width: 1.955rem;
+  height: 0.35rem;
+  background-color: #ffcc66;
+  border-radius: 0.06rem;
+  margin: 0.365rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.18rem AdobeHeitiStd-Regular;
+}
+
+/*# sourceMappingURL=order.css.map */
