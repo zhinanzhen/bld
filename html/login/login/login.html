@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/loginAndRe.css">
+    <script src="../js/lib/flexible.js"></script>
+    <script src="../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../js/lib/common.js"></script>
+</head>
+<body>
+    <div class="loginBox">
+        <div class="login-tit">
+            <a href="./register.html">注册</a>
+        </div>
+        <div class="login-logo">
+            <img src="../images/logo.png" alt="">
+        </div>
+        <div class="login-user">
+            <div class="user-box">
+                <img src="../images/mobile.png" alt="">
+                <input type="text" placeholder="手机号/邮箱" value="13521822119" class="phoneVal">
+            </div>
+            <div class="user-box user-password">
+                <img src="../images/pass.png" alt="">
+                <input type="text" placeholder="请输入密码" value="123456" class="passWord">
+            </div>
+        </div>
+        <div class="login-submit">
+            <p><a href="">忘记密码？</a></p>
+            <input type="submit"value="登录" class="loginBtn">
+        </div>
+        <div class="three-box">
+            <div class="three-text">第三方</div>
+            <div class="login-footer">
+                <img src="../images/qq.png" alt="">
+                <img src="../images/weixin.png" alt="">
+                <img src="../images/weibo.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(function(){
+        // 登陆
+        $('.loginBtn').click(function(){
+            var phoneVal = $('.phoneVal').val();
+            var pwd = $('.passWord').val();
+            $.ajax({
+                type:'POST',
+                url:url_prefix+'api/user/login',
+                dataType:'json',
+                data:{
+                    mobile: phoneVal,
+                    password: pwd
+                },
+                success:function(data){
+                    console.log(data);
+                    console.log('登录成功');
+                    window.location.href="../../index/index.html";
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+        })
+    
+    })
+</script>
+</html>

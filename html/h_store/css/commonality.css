@@ -1,0 +1,76 @@
+.h-width{
+	padding: 0 .3rem;
+}
+/*颜色*/
+.b-c-fa{
+	background: #FAC74D;
+	/*橘黄色*/   
+}
+
+.b-c-e{
+	/*灰色*/
+	background-color: #EEEEEE;
+}
+
+.b-c-f{
+	background-color: #FFFFFF;
+}
+.c-84{
+	color: #848484;
+}
+
+.c-fa{
+	color: #fac74d;	
+}
+
+.b-99c{
+	/*蓝色*/
+	background-color: #99cdff
+}
+
+
+/*背景图片样式*/
+.b-i-4{
+ 	background-size: 100%;
+    height: .44rem;
+    width: .44rem;
+}
+
+
+/*间距*/
+.p-t-3{
+	padding-top: .3rem;
+}
+
+.m-l-34{
+	margin-left: .34rem;
+}
+
+/*高度*/
+.header{
+	height: 1rem;
+}
+
+.z-herder{
+	height: 1rem;
+	padding-top: .3rem;
+}
+
+/*字体*/
+.f-s-38{
+	font-size: .38rem;
+}
+.f-s-36{
+	font-size: .36rem;
+}
+.f-s-32{
+	font-size: .32rem;
+}
+
+.f-s-3{
+	font-size: .3rem;
+}
+
+
+
+

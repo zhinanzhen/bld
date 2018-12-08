@@ -1,0 +1,1 @@
+var url_prefix='http://39.104.181.50:8080/bld/';

@@ -1,13 +1,16 @@
+@charset "utf-8";
+$heights:0.4rem;/*head高度*/
+$heighta:0.4rem;/*后退键高度*/
 html, body {
     height: 100%;
     overflow:auto;
     position: relative;
-    top: 0;
-    left: 0;
+    top:0;
+    left:0;
 }
 .heads{
     width: 100%;
-    height:0.4rem;
+    height:$heights;
     display: flex;
     position:absolute;
     top: 0;
@@ -16,10 +19,10 @@ html, body {
     box-shadow: 0rem 0rem 0.5rem 0rem rgba(164, 164, 164, 0.33);
     >.icon-guanbi{
         width:0.6rem;
-        height:100%;
+        height:$heighta;
         position:absolute;
-        top:0;
         left:0;
+        bottom:0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,6 +36,18 @@ html, body {
         justify-content: center;
         color: #333333;
         font:normal 0.18rem PingFang-SC-Regular;
+    }
+    >.fbs{
+        position: absolute;
+        right:0;
+        bottom:0;
+        width:0.8rem;
+        height:$heighta;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333333;
+        font:normal 0.15rem PingFang-SC-Medium;
     }
 }
 .sets{

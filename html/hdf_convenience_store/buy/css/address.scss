@@ -1,7 +1,9 @@
+@charset "utf-8";
+@import "../../css/layout.scss";
 $fonta:normal 0.15rem PingFang-SC-Regular;
 $fontb:normal 0.12rem PingFang-SC-Regular;
 .sets{
-    top:0.4rem;
+    top:$heights;
     bottom:0.4rem;
 }
 .adds{

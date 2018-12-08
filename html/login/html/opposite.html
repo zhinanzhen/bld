@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>他的主页</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <script src="../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../js/lib/flexible.js"></script>
+    <script src="../js/lib/common.js"></script>
+    <style>
+        header{
+            width: 10rem /* 750/75 */;
+            height: 2.666667rem /* 200/75 */;
+            background: #fac74d;
+        }
+        .tit-left{
+            overflow: hidden;
+            float: left;
+        }
+        .tit-left img{
+            width: .266667rem /* 20/75 */;
+            height: .493333rem /* 37/75 */;
+            margin-top: .4rem /* 30/75 */;
+            margin-left: .533333rem /* 40/75 */;
+        }
+        .tit-right{
+            float: left;
+            margin-left: .533333rem /* 40/75 */;
+        }
+        .tit-text span{
+            display: inline-block;
+            height: .48rem /* 36/75 */;
+            line-height: .48rem /* 36/75 */;
+            border: .013333rem /* 1/75 */ solid #eeeeee;
+            vertical-align: top;
+            margin-right: .333333rem /* 25/75 */;
+            font-size: .306667rem /* 23/75 */;
+            width: 1.2rem /* 90/75 */;
+            text-align: center;
+            margin-top: .053333rem /* 4/75 */;
+        }
+        .tit-name{
+            font-size: .48rem /* 36/75 */;
+            margin-right: .666667rem /* 50/75 */;
+        }
+        .tit-bot span{
+            margin: .266667rem /* 20/75 */;
+        }
+        .tit-tit{
+          float: right;
+        }
+        .tit-tit img{
+            width: 1.16rem /* 87/75 */;
+            height: 1.16rem /* 87/75 */;
+            
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="tit-left">
+            <img src="../images/back.png" alt="">
+        </div>
+        <div class="tit-right">
+            <p class="tit-text"><b class="tit-name">李涵</b><span>+ 关注</span><span>+ 好友</span></p>
+            <p class="tit-bot">关注 <span>23</span>粉丝 <span>54</span> 信誉分 <span>0</span>赞 <span>23</span></p>
+        </div>
+        <div class="tit-tit">
+            <img src="../images/name.png" alt="">
+        </div>
+    </header>
+</body>
+<script>
+    $(function(){
+       $.ajax({
+             //处理session每次不唯一问题
+			xhrFields: {
+				withCredentials: true
+			},
+            //请求方式
+            type:'POST',
+            url:url_prefix+'api/user/login',
+            dataType:'json',
+            data:{
+                mobile:'123',
+                password: '2'
+            },
+            success:function(data){
+               console.log(data);
+               
+            },
+            error:function(data){
+                alert(data);
+            }
+        });
+
+    })
+</script>
+</html>
