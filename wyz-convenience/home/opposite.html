@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>他的主页</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../js/lib/flexible.js"></script>
+    <script src="../js/lib/common.js"></script>
+</head>
+<body>
+    <header class="opposite-nav">
+        <div class="opposite-navleft">
+            <img src="../images/back.png" alt="">
+        </div>
+        <div class="opposite-navright">
+            <p class="opposite-text"><b class="opposite-name">李涵</b><span>+ 关注</span><span>+ 好友</span></p>
+            <p class="opposite-bot">关注<span>23</span>粉丝 <span>54</span> 信誉分 <span>0</span>赞 <span>23</span></p>
+        </div>
+        <div class="opposite-names">
+            <img src="../images/name.png" alt="">
+        </div>
+    </header>
+    <div class="opposite-navbox">
+        <button class="opposite-navcolor">他的动态</button>
+        <button>他的商品</button>
+    </div>
+    <div class="opposite-conbox">
+        <div class="opposite-con">
+            <div class="opposite-user">
+                <div class="opposite-username">
+                    <img src="../images/total.png" alt="">
+                    <div class="opposite-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
+                </div>
+                <div class="opposite-usercon">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝121，美味多多，快乐多多</p>
+                </div>
+                <div class="opposite-userft">
+                    <div>
+                        <img src="../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="opposite-con">
+            <div class="opposite-user">
+                <div class="opposite-username">
+                    <img src="../images/total.png" alt="">
+                    <div class="opposite-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
+                </div>
+                <div class="opposite-usercon">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
+                    <img src="../images/foots-2.png" alt=""><img src="../images/foots-1.png" alt="">
+                </div>
+                <div class="opposite-userft">
+                    <div>
+                        <img src="../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="opposite-userbox">
+            <div class="opposite-user">
+                <img src="../images/head.png" alt="" class="opposite-userhead">
+                <div class="opposite-userspid">
+                    <p>aaxiao兔子</p>
+                    <img src="../images/identity.png" alt="">
+                </div>
+            </div>
+            <div class="opposite-usertheme">
+                <p>
+                    <span class="opposite-price">￥15</span>
+                    <span>夏日斜跨小包包女2018新款潮韩版百搭时尚</span>
+                </p>
+                <div class="opposite-userimgbox">
+                    <div class="opposite-usersimg">
+                        <img src="../images/concen.png" alt="">
+                        <img src="../images/concen.png" alt="">
+                        <img src="../images/concen.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <span class="opposite-browse">浏览12</span>
+        </div>
+    </div>
+    
+    <footer class="opposite-news">
+        <div class="opposite-chat" onClick="location.href='../home/hechat.html'">
+            <img src="../images/liaotian.png" alt="">
+            <span>聊天</span>
+        </div>
+    </footer>
+</body>
+<script>
+    $(function(){
+        //动态，商品切换
+        $('.opposite-navbox button').click(function(){
+            $(this).addClass('opposite-navcolor').siblings().removeClass('opposite-navcolor');
+            var index =$(this).index();
+            if(index){
+                $('.opposite-userbox').css("display","block");
+                $('.opposite-con').css("display","none");
+            }else{
+                $('.opposite-userbox').css("display","none");
+                $('.opposite-con').css("display","block");
+            }
+        })
+    })
+</script>
+</html>

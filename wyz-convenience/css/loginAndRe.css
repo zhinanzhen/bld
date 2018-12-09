@@ -1,0 +1,195 @@
+
+/* login register */
+.loginBox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url(../images/bg.png) no-repeat;
+    background-size: 110% 52%;
+    background-position: 0 8.50rem /* 768/75 */; 
+}
+.login-tit{
+    overflow: hidden;
+}
+.login-tit img{
+    width: .48rem /* 36/75 */;
+    height: .48rem /* 36/75 */;
+    float: left;
+    margin-top: .266667rem /* 20/75 */;
+    margin-left: .8rem /* 60/75 */;
+}
+.login-tit a{
+    font-size: .48rem /* 36/75 */;
+    float: right;
+    margin-right: .666667rem /* 50/75 */;
+    margin-top: .2rem /* 15/75 */;
+}
+.login-logo{
+    width: 100%;
+    height: 5.2rem /* 390/75 */;
+    padding-top: .733333rem /* 55/75 */;
+    box-sizing: border-box;
+}
+.login-logo img{
+    width: 2.08rem /* 156/75 */;
+    height: 2.4rem /* 180/75 */;
+    margin: 0 auto;
+    
+}
+.user-box{
+    width: 5.6rem /* 420/75 */;
+    margin: 0 auto;
+    background: #f9f9f9;
+    font-size: 0;
+    border-radius: .04rem /* 3/75 */;
+    border: 1px solid #f9f9f9;
+    box-shadow: 0px 1px 2px #ddd;
+}
+
+.login-user img{
+    display: inline-block;
+    width: .36rem /* 27/75 */;
+    height: .613333rem /* 46/75 */;
+    vertical-align: middle;
+    margin-left: .553333rem /* 40/75 */;
+    margin-right: .523333rem /* 40/75 */
+
+}
+.login-user input{
+    border: none;
+    background: #f9f9f9;
+    height: .826667rem ;/* 62/75 */
+    width: 4.133333rem /* 310/75 */;
+}
+.user-verify{
+    width: 5.6rem /* 420/75 */;
+    margin: 0 auto;
+    font-size: 0;
+    /* overflow: hidden; */
+}
+.verify{
+    display: inline-block;
+    width: 3.666667rem /* 275/75 */;
+    border-radius: .04rem /* 3/75 */;
+    border: 1px solid #f9f9f9;
+    box-shadow: 0px 1px 2px #ddd;
+    background: #f9f9f9;
+}
+.verify-right{
+    display: inline-block;
+    float: right;
+    width: 1.733333rem /* 130/75 */;
+    height: .826667rem /* 62/75 */;
+    vertical-align: top;
+    background: #ff5757;
+    color: #fff;
+    font-size: .32rem /* 24/75 */;
+    line-height: .826667rem /* 62/75 */;
+    text-align: center;
+}
+
+.user-verify input{
+    width: 2.266667rem /* 170/75 */;
+}
+.user-verify img{
+    width: .6rem /* 45/75 */;
+    height: .6rem /* 45/75 */;
+    margin-right: .32rem /* 30/75 */;
+    margin-left: .48rem;
+}
+.user-password,.user-verify,.user-id{
+    margin-top: .8rem /* 60/75 */;
+}
+
+.user-password img{
+    width: .48rem /* 36/75 */;
+    margin-right: .4rem /* 30/75 */
+}
+.user-id img{
+    width: .533333rem /* 40/75 */;
+    height: .4rem /* 30/75 */;
+    margin-right: .333333rem /* 25/75 */;
+}
+.user-id input{
+    width: 3.333333rem /* 250/75 */;
+}
+input::-webkit-input-placeholder{
+    color:#969696;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#969696;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#969696;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:#969696;
+}
+.login-submit{
+    text-align: center;
+}
+.login-submit a{
+    line-height: .8rem /* 60/75 */;
+    color: #1e71fb;
+}
+.login-submit input{
+    width: 4.44rem /* 333/75 */;
+    height: .813333rem /* 61/75 */;
+    border: none;
+    border-radius: 2rem;
+    background: #ffd787;
+    color: #fff;
+    font-size: .44rem /* 33/75 */;
+}
+.register-submit{
+    margin-top: .8rem /* 60/75 */;
+}
+.register-confirm{
+    width: .373333rem /* 28/75 */;
+    height: .373333rem /* 28/75 */;
+    border-radius: 50%;
+    display: inline-block;
+    border: .04rem /* 3/75 */ solid #121212;
+    margin-right: .533333rem /* 40/75 */;
+}
+.register-footer p{
+    display: inline-block;
+    color: #ccc;
+    vertical-align: top;
+    line-height: .373333rem /* 28/75 */;
+}
+.register-footer a{
+    color: #1e71fb;
+}
+.register-footer{
+    text-align: center;
+    margin-top: 2rem /* 150/75 */;
+    line-height: .373333rem /* 28/75 */;
+}
+.three-box{
+    text-align: center;
+    margin-top: 1.333333rem /* 100/75 */;
+}
+.login-footer{
+    width: 5.2rem /* 390/75 */;
+    height: 3.066667rem /* 230/75 */;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    border-top: .013333rem /* 1/75 */ solid #b8b8b8;
+}
+.three-text{
+    color: #b8b8b8;
+    font-size: .32rem /* 24/75 */;
+    position: relative;
+    top: .093333rem /* 7/75 */;
+    background: #fff;
+    width: 1.5rem /* 75/75 */;
+    margin: 0 auto;
+    text-align: center;
+}
+.login-footer img{
+    width: 1.08rem /* 81/75 */;
+    height: 1.08rem /* 81/75 */;
+    margin-top: .933333rem /* 70/75 */;
+}

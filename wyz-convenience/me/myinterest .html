@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的兴趣</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../js/lib/flexible.js"></script>
+    <script src="../js/lib/common.js"></script>
+</head>
+<body>
+    <header class="interest-nav">
+        <img src="../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>我的兴趣</p>
+    </header>
+    <div class="interest-navcon">
+        <div class="interest-navbor">商品</div>
+        <div>封地</div>
+        <div>好友动态</div>
+    </div>
+    <div class="interest-sp">
+        <div class="interest-spbox">
+            <div class="interest-itme">
+                <img src="../images/spdb.png" alt="">
+                <div class="interest-jgbox"><span class="interest-jgco">￥9.98</span><s>￥9.99</s><span class="interest-jgzk">折扣</span></div>
+                <p>增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。</p>
+            </div>
+            <div class="interest-itme">
+                <img src="../images/spdb.png" alt="">
+                <div class="interest-jgbox"><span class="interest-jgco">￥9.98</span><s>￥9.99</s><span class="interest-jgzk">折扣</span></div>
+                <p>增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。</p>
+            </div>
+            
+        </div>
+        <div class="interest-mythemeconb">
+            <div>
+                <img src="../images/grill.png" alt="">
+                <p>小路烧烤</p>
+                <button>加入</button>
+            </div>
+            <div>
+                <img src="../images/housing.png" alt="">
+                <p>链家房源</p>
+                <button>加入</button>
+            </div>
+            <div>
+                <img src="../images/outdoors-.png" alt="">
+                <p>阿旺户外</p>
+                <button>加入</button>
+            </div>
+        </div>
+        <div class="interest-con">
+            <div class="interest-user">
+                <div class="interest-username">
+                    <img src="../images/total.png" alt="">
+                    <div class="interest-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
+                </div>
+                <div class="interest-usercon" onClick="location.href='../me/meparticulars.html'">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
+                </div>
+                <div class="interest-userft">
+                    <div class="interest-userfx">
+                        <img src="../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="interest-con">
+            <div class="interest-user">
+                <div class="interest-username">
+                    <img src="../images/total.png" alt="">
+                    <div class="interest-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
+                </div>
+                <div class="interest-usercon" onClick="location.href='../me/meparticulars.html'">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
+                    <img src="../images/foots-2.png" alt=""><img src="../images/foots-1.png" alt="">
+                </div>
+                <div class="interest-userft">
+                    <div class="interest-userfx">
+                        <img src="../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="interest-layer">
+        <div class="interest-qqwx">
+            <p>分享到:</p>
+            <div class="interest-fxbox">
+                <div>
+                    <img src="../images/wx-1.png" alt="">
+                    微信好友
+                </div>
+                <div>
+                    <img src="../images/qq-1.png" alt="">
+                    QQ好友
+                </div>
+            </div>
+            <div class="interest-qx">
+                <button>取消</button>
+            </div>
+        </div>   
+    </div>
+</body>
+<script>
+     $(function(){
+        //动态，商品切换
+        $('.interest-navcon div').click(function(){
+            $(this).addClass('interest-navbor').siblings().removeClass('interest-navbor');
+            var index =$(this).index();
+            if(index==0){
+                $('.interest-spbox').css("display","block");
+                $('.interest-mythemeconb').css("display","none");
+                $('.interest-con').css("display","none");
+            }else if(index==1){
+                $('.interest-spbox').css("display","none");
+                $('.interest-mythemeconb').css("display","block");
+                $('.interest-con').css("display","none");
+            }else if(index==2){
+                $('.interest-spbox').css("display","none");
+                $('.interest-mythemeconb').css("display","none");
+                $('.interest-con').css("display","block");
+            }
+        })
+        $('.interest-userfx').click(function(){
+            $('.interest-layer').css("display","block");
+        })
+        $('.interest-qx button').click(function(){
+            $('.interest-layer').css("display","none");
+        })
+    })
+</script>
+</html>
