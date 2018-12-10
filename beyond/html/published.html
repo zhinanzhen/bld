@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>发表</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=dab2ba81e6cf73424073bac951dba319"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <style>
+        html{
+            background-color: #eeeeee;
+        }
+        .publish_layer{
+            width: 100%;
+            height: 100%;
+
+        }
+        .publish_header{
+            box-sizing: border-box;
+            padding:0 0.3rem;
+            width: 100%;
+            height: 1rem;
+            background-color: #fff;
+        }
+        .publish_header i{
+            width: 0.6rem;
+            height: 100%;
+            background:url("../img/b_left_03.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .publish_header span{
+            margin-top: 0.15rem;
+            padding:0.1rem 0.6rem;
+            border:1px solid #f093a2;
+            color:#f093a1;
+            font-size: 0.34rem;
+            border-radius: 20px;
+        }
+        .say {
+            width: 100%;
+            background-color: #fff;
+        }
+        .say textarea{
+            resize: none;
+           text-indent: 1em;
+            border:none;
+            /*padding:0 0.3rem;*/
+        }
+        .common{
+            width: 100%;
+            height:4rem;
+           padding-left: 0.3rem;
+            background-color: #fff;
+
+        }
+        .common a{
+            display: block;
+            width:3rem;
+            background-color: #eeeeee;
+            height: 3rem;
+            position: relative;
+        }
+        .common a img{
+
+            display: block;
+           position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            width: 0.8rem;
+        }
+        .common a span{
+            position: absolute;
+            left: 20%;
+            bottom: 20%;
+        }
+        .location {
+            width: 100%;
+            line-height: 0.88rem;
+            background-color: #fff;
+            height: 0.88rem;
+            padding-left: 0.3rem;
+            padding-bottom: 0.5rem;
+        }
+        .location img{
+            width: 0.4rem;
+            /*height: 0.88rem;*/
+            vertical-align: middle;
+            display: inline-block;
+           /* background: url("../img/point.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;*/
+        }
+        .location em{
+            display: inline-block;
+
+        }
+        #cameraInput{
+            display: inline-block;
+            width: 3rem;
+            height: 3rem;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="publish_layer">
+    <header class="publish_header">
+        <i class="f_left" onclick="back()" ></i>
+        <span class="f_right publish">发布</span>
+    </header>
+    <div class="say">
+        <textarea name="" id="" cols="50" rows="10" placeholder="这一刻，我想说....."></textarea>
+        <!--<form action="">
+            <input type="text" placeholder="这一刻我想说....."/>
+        </form>-->
+    </div>
+    <div class="common">
+        <a href="javascript:;">
+            <img src="../img/publish_common.png" alt="" class="userImg"/>
+            <span class="add_pic">点击添加图片</span>
+            <input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" multiple>
+        </a>
+    </div>
+    <div class="location" >
+        <img src="../img/point.png" alt=""/>
+        <em >所在位置</em>
+    </div>
+    <div id="container" style="display: none">
+
+    </div>
+</div>
+
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/jquery.js"></script>
+<script>
+ $(function(){
+
+     //建立一個可存取到該file的url
+     function getObjectURL(file) {
+         var url = null ;
+         // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
+         if (window.createObjectURL!=undefined) { // basic
+             url = window.createObjectURL(file) ;
+         } /*else if (window.URL!=undefined) { // mozilla(firefox)
+             url = window.URL.createObjectURL(file) ;
+         } */else if (window.webkitURL!=undefined) { // webkit or chrome
+             url = window.webkitURL.createObjectURL(file) ;
+         }
+         var reader = new FileReader();
+         var AllowImgFileSize = 2100000; //上传图片最大值(单位字节)（ 2 M = 2097152 B ）超过2M上传失败
+         var file = $("#cameraInput")[0].files[0];
+         var imgUrlBase64;
+         if (file) {
+             //将文件以Data URL形式读入页面
+             imgUrlBase64 = reader.readAsDataURL(file);
+             reader.onload = function (e) {
+                 //var ImgFileSize = reader.result.substring(reader.result.indexOf(",") + 1).length;//截取base64码部分（可选可不选，需要与后台沟通）
+                 if (AllowImgFileSize != 0 && AllowImgFileSize < reader.result.length) {
+                     alert( '上传失败，请上传不大于2M的图片！');
+                     return;
+                 }else{
+                     //执行上传操作
+                     obj.url=reader.result;
+                     return reader.result;
+                 }
+             }
+         }
+         return url ;
+     }
+     $("input").change(function(){
+         // getObjectURL是自定义的函数，见下面
+         // this.files[0]代表的是选择的文件资源的第一个，因为上面写了 multiple="multiple" 就表示上传文件可能不止一个
+         // ，但是这里只读取第一个
+         var objUrl = getObjectURL(this.files[0]) ;
+         if (objUrl) {
+             // 在这里修改图片的地址属性
+             $(".userImg").attr("src", objUrl) ;
+             $(".userImg").width("100%") ;
+             $(".add_pic").text("");
+         }
+     }) ;
+
+     var obj={};
+     var userId=localStorage.getItem("userId");
+     console.log("userId:"+userId);
+     $(".publish").click(function(){
+         //获取用户输入的全部内容之后 包括图片的地址  发送给后台 在进行页面的跳转
+        var content=$("textarea").val() ;
+//图片地址显示在代码的141行】
+         if(content!==""){
+             obj.content=content;
+             obj.userId=userId;
+             obj.type=0;
+
+
+             console.log(obj);
+             $.ajax({
+                 //处理session每次不唯一问题
+                 xhrFields: {
+                     withCredentials: true
+                 },
+                 async: false,
+                 //请求方式
+                 type:'post',
+                 url:'http://39.104.127.252:8080/beyond/api/spacedynamic/addSpaceDynamic',
+                 dataType:'json',
+                 data:obj,
+                 success:function(data){
+                     console.log(data);
+                     // window.location.href="./focus.html";
+                 },
+                 error:function(data){
+                     console.log(data);
+                 }
+             })
+         }else{
+             alert("记得填写内容喔");
+         }
+
+     })
+
+     //点击所在位置定位
+     $(".location").click(function(){
+
+         var map, geolocation;
+         //加载地图，调用浏览器定位服务
+         map = new AMap.Map('container', {
+             resizeEnable: true
+         });
+         map.plugin('AMap.Geolocation', function() {
+             geolocation = new AMap.Geolocation({
+                 enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                 timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+                 buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                 zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+                 buttonPosition:'RB'
+             });
+             map.addControl(geolocation);
+             geolocation.getCurrentPosition();
+             AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+             AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+
+         });
+         //解析定位结果
+         function onComplete(data) {
+             var str=['定位成功'];
+             str.push('经度：' + data.position.getLng());
+             str.push('纬度：' + data.position.getLat());
+             if(data.accuracy){
+                 str.push('精度：' + data.accuracy + ' 米');
+             }//如为IP精确定位结果则没有精度信息
+             str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+             console.log(str.join(""));
+             // document.getElementById('tip').innerHTML = str.join('<br>');
+
+         }
+         //解析定位错误信息
+         function onError(data) {
+             document.getElementById('tip').innerHTML = '定位失败';
+         }
+     })
+
+ })
+
+
+</script>
+</body>
+</html>

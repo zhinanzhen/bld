@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>支付界面</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/pay.css"/>
+</head>
+<body>
+<div class="pay_layer">
+    <header class="pay_header clearfix">
+        <i onclick="back()"></i>
+        <h3>支付金额</h3>
+    </header>
+    <div class="pay_money clearfix">
+        <div class="pay_money_content">
+            <img src="../img/pay_03.png" alt=""/><span>订单金额</span>
+        </div>
+    </div>
+    <div class="money clearfix">
+        <del>125.3</del>
+        <em>元</em>
+    </div>
+
+    <ul class="methods">
+        <li>选择支付方式</li>
+        <li>
+            <a href=""><img src="../img/zhi.png" alt=""/> 支付宝  </a>
+        </li>
+        <li>
+            <a href=""><img src="../img/wechat_pay_03.png" alt=""/> 微信支付  </a>
+        </li>
+        <li>
+            <a href=""><img src="../img/card.png" alt=""/> 银行卡支付 </a>
+        </li>
+    </ul>
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+</body>
+</html>

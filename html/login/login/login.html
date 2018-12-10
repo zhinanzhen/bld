@@ -22,6 +22,7 @@
         <div class="login-user">
             <div class="user-box">
                 <img src="../images/mobile.png" alt="">
+                <!--13521822119-->
                 <input type="text" placeholder="手机号/邮箱" value="13521822119" class="phoneVal">
             </div>
             <div class="user-box user-password">
@@ -60,6 +61,8 @@
                 success:function(data){
                     console.log(data);
                     console.log('登录成功');
+                    /*localStorage.setItem('My_information', JSON.stringify(data));
+                    var location = JSON.parse(localStorage.getItem('location'));*/
                     window.location.href="../../index/index.html";
                 },
                 error:function(data){

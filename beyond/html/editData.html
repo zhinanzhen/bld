@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>高考设置</title>
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link rel="stylesheet" href="../css/mui.picter.min.css"/>
+    <link rel="stylesheet" href="../css/base.css"/>
+
+    <script src="../js/datepicker.js"></script>
+
+    <!--//生日-->
+    <script src="../js/birthday/jquery.1.7.2.min.js"></script>
+    <script src="../js/birthday/mobiscroll_002.js" type="text/javascript"></script>
+    <script src="../js/birthday/mobiscroll_004.js" type="text/javascript"></script>
+    <link href="../css/birthday/mobiscroll_002.css" rel="stylesheet" type="text/css">
+    <link href="../css/birthday/mobiscroll.css" rel="stylesheet" type="text/css">
+    <script src="../js/birthday/mobiscroll.js" type="text/javascript"></script>
+    <script src="../js/birthday/mobiscroll_003.js" type="text/javascript"></script>
+    <script src="../js/birthday/mobiscroll_005.js" type="text/javascript"></script>
+    <link href="../css/birthday/mobiscroll_003.css" rel="stylesheet" type="text/css">
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/mui.picker.min.js"></script>
+    <style>
+        input{
+            border: none;!important;
+        }
+        .mui-btn{
+            border: 0;
+        }
+        .mui-btn-blue, .mui-btn-primary, input[type=submit]{
+            background-color: #f093a1;
+        }
+        input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+            height: 0.9rem;
+            margin:0;
+            padding: 0;
+            -webkit-user-select: text;
+            border: 0;
+            outline: 0;
+            background-color: #fff;
+            -webkit-appearance: none
+
+            position: absolute;
+            right: 5%;
+            top: 30%;
+            width: 70%;
+            text-align: right
+        }
+        /* mui */
+        html,
+        body,
+        .mui-content {
+            height: 0px;
+            margin: 0px;
+            background-color: #efeff4;
+        }
+        h5.mui-content-padded {
+            margin-left: 3px;
+            margin-top: 20px !important;
+        }
+        h5.mui-content-padded:first-child {
+            margin-top: 12px !important;
+        }
+        .mui-btn {
+            font-size: 16px;
+            padding: 8px;
+            margin: 3px;
+        }
+        .ui-alert {
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 16px;
+        }
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+        /*mui*/
+        html{
+            background-color: #eeeeee;
+        }
+        /*改变placeholder的字体颜色*/
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #a0a0a0; opacity:1;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #a0a0a0;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color: #a0a0a0;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #a0a0a0;opacity:1;
+        }
+
+        .college_setting_layer{
+            width: 100%;
+            height: 100%;
+        }
+        .seting{
+            height: 1.3rem;
+            line-height: 1rem;
+            padding-top: 0.4rem;
+            width: 100%;
+            background-color: #fff;
+            position: relative;
+            margin-bottom: 0.2rem;
+        }
+        .seting em{
+            position: absolute;
+            width: 0.64rem;
+            height: 0.88rem;
+            background: url("../img/b_left_03.png") no-repeat center;
+            left: 2%;
+            top: 30%;
+            -webkit-background-size: 80%;
+            background-size: 80%;
+        }
+        .seting h3{
+            text-align: center;
+            line-height: 0.8rem;
+            font-size: 0.32rem;
+            color: #5a5a5a;
+        }
+        .college_setting_content{
+            width: 100%;
+        }
+        .college_setting_content li{
+            font-size: 0.3rem;
+            height: 1.02rem;
+            line-height: 1.02rem;
+            background-color: #fff;
+            padding-left: 0.3rem;
+        }
+        .college_setting_content li:nth-of-type(2n+1){
+
+            border-bottom: 1px solid #eee;
+        }
+        .college_setting_content li:nth-of-type(2n){
+            margin-top: 0.3rem;
+              border-bottom: 1px solid #eee;
+          }
+
+
+        .college_setting_content li a{
+            color:#5a5a5a;
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+        .college_setting_content li a i{
+            position: absolute;
+            width: 0.64rem;
+            height: 1rem;
+            background: url("../img/b_left_03.png") no-repeat center;
+            transform: rotate(180deg);
+            right: 2%;
+            top: 0%;
+            -webkit-background-size: 80%;
+            background-size: 80%;
+        }
+
+
+        .editData_layer .edit{
+            background-color: #f093a1;
+            position: relative;
+        }
+        .editData_layer .edit em{
+            background-image: url("../img/left.png");
+        }
+        .editData_layer .edit h3{
+            color: #fff;
+        }
+        #finish{
+            color: #fff;
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            font-size: 0.34rem;
+        }
+        .editData_layer_content a{
+            font-size: 0.32rem;
+        }
+        .editData_layer_content a input{
+            position: absolute;
+            right: 5%;
+            top:5%;
+            width: 70%;
+            text-align: right;
+        }
+        .inSchool{
+            margin-top: 0.3rem;
+        }
+        .college_setting_content #onSchool, .college_setting_content #onClass{
+            margin-top: 0;
+        }
+        .date_btn{
+            font-size: 2em;!important;
+        }
+    </style>
+</head>
+<body>
+<div class="college_setting_layer editData_layer">
+    <header class="seting edit">
+        <em onclick="back()"></em>
+        <h3>资料编辑</h3>
+        <h4 id="finish">完成</h4>
+    </header>
+    <ul class="college_setting_content editData_layer_content">
+
+    </ul>
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/template-web.js"></script>
+<script type="text/html" id="info">
+    <li><a href="head.html">头像<i></i></a></li>
+    <li><a href="javascript:;">昵称 <input type="text" class="remark" placeholder="请输入"  value="{{user.nickname}}"/></a></li>
+    <li class="birthday"><a href="javascript:;">生日
+       <!-- <input data-options='{"type":"date","beginYear":2014,"endYear":2016}' class="birthday btn mui-btn mui-btn-block" placeholder="XXXX_XX_XX" value="{{user.birthday}} " id="demo2"  />-->
+        <input value="{{user.birthday}}" class="birthday" readonly="" name="appDate1" id="appDate1" type="text">
+    </a></li>
+    <!-- <li><a href="phone_link.html">电话换绑 <i></i></a></li>-->
+    <li class="inSchool"><a href="javascript:;" id="IN">入学时间 <!--<input type="text" placeholder="请输入" class="forInschool"  id="demo1" value="{{user.prop1}}"/>-->
+
+        <input id='demo1' data-options='{"type":"date"}' placeholder="请输入" class="btn mui-btn mui-btn-block forInschool" value="{{user.prop1}}">
+        <div id='result' class="ui-alert"></div>
+    </a></li>
+    <li id="onSchool"><a href="javascript:;">学校 <input type="text" placeholder="请输入" class="school" value="{{user.school}}"/></a></li>
+    <li><a href="javascript:;">年级 <input type="text" placeholder="请输入" class="grade" value="{{user.grade}}"/></a>
+    </li>
+    <li id="onClass"><a href="javascript:;">班级 <input type="text" placeholder="请输入." class="class" value="{{user.uclass}}"/></a>
+    </li>
+</script>
+<script>
+$(function(){
+    function back(){
+        history.go(-1);
+    }
+    var href=location.href.split("=")[1];
+    function render(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async: false,
+            url: "http://39.104.127.252:8080/beyond/api/user/userInfo",
+            data:{
+                userId:href
+            },
+            dataType: 'json',
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    var html=template("info",data);
+                    $(".editData_layer_content").html(html);
+                    //mui 日期
+                    (function($) {
+                        $.init();
+                        var result = $('#result')[0];
+                        var btns = $('.btn');
+                        btns.each(function(i, btn) {
+                            btn.addEventListener('tap', function() {
+                                var optionsJson = this.getAttribute('data-options') || '{}';
+                                var options = JSON.parse(optionsJson);
+                                var id = this.getAttribute('id');
+                                /*
+                                 * 首次显示时实例化组件
+                                 * 示例为了简洁，将 options 放在了按钮的 dom 上
+                                 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+                                 */
+                                var picker = new $.DtPicker(options);
+                                picker.show(function(rs) {
+                                    /*
+                                     * rs.value 拼合后的 value
+                                     * rs.text 拼合后的 text
+                                     * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+                                     * rs.m 月，用法同年
+                                     * rs.d 日，用法同年
+                                     * rs.h 时，用法同年
+                                     * rs.i 分（minutes 的第二个字母），用法同年
+                                     */
+                                    var demo1=document.querySelector("#demo1");
+                                    demo1.value=rs.text;
+                                    //result.innerText = '选择结果: ' + rs.text;
+                                    /*
+                                     * 返回 false 可以阻止选择框的关闭
+                                     * return false;
+                                     */
+                                    /*
+                                     * 释放组件资源，释放后将将不能再操作组件
+                                     * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+                                     * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+                                     * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+                                     */
+                                    picker.dispose();
+                                });
+                            }, false);
+                        });
+                    })(mui);
+                   /* var calendar = new datePicker();
+                    calendar.init({
+                        'trigger': '#demo1', /!*按钮选择器，用于触发弹出插件*!/
+                        'type': 'date',/!*模式：date日期；datetime日期时间；time时间；ym年月；*!/
+                        'minDate':'1900-1-1',/!*最小日期*!/
+                        'maxDate':'2021-12-31',/!*最大日期*!/
+                        'onSubmit':function(){/!*确认时触发事件*!/
+                            var theSelectData=calendar.value;
+                            var inSchool=$("#demo1").val();
+                        },
+                        'onClose':function(){/!*取消时触发事件*!/
+                        }
+                    });*/
+                birthday()
+                }
+
+            },
+            error:function(data){
+                console.log(data);
+            }
+        })
+
+    }
+    render()
+   /* var birthday=localStorage.getItem("birthday");
+    $(".birthday").val(birthday);
+    var inSchool=localStorage.getItem("inSchool");
+    $(".forInschool").val(inSchool);
+    var classNum=localStorage.getItem("class_name").replace(/\"/g,"");
+    $(".class").val(classNum);
+    var grade=localStorage.getItem("grade_name").replace(/\"/g,"");
+    $(".grade").val(grade);
+    var school=localStorage.getItem("school_name").replace(/\"/g,"")
+    $(".school").val(school);
+    var userId=localStorage.getItem('userId');
+    var sex=localStorage.getItem('sex');
+    var sexType=2;
+    if(sex=="女"){
+        sexType=2
+    }else{
+        sexType=1
+    }*/
+   /* if(userId){
+        userId.replace(/\"/g,"");
+    }*/
+    function IsDateTime(){
+        var str = $(".birthday").val().trim();
+        if(str.length!=0){
+            var reg = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;
+            var r = str.match(reg);
+        }
+            if(r==null){
+                alert('对不起，您输入的日期格式不正确!'); //请将“日期”改成你需要验证的属性名称!
+                $(".birthday").val("");
+            }
+    }
+   /* $(".birthday").blur(function(){
+        IsDateTime();
+    });*/
+    var obj={};
+    $("#finish").click(function(){
+       var  birthday1= $("#appDate1").val();
+        console.log(birthday1);
+        birthday1 = birthday1.replace(/-/g,"/");
+        //birthday=birthday.split("-").join("");
+        birthday1=new Date(birthday1);
+        classNum= $(".class").val();
+        grade= $(".grade").val();
+       school= $(".school").val();
+        var remark=$(".remark").val();
+       obj.birthday=birthday1;
+        obj.userId=href;
+        obj.type=0;
+        obj.school=school;
+        obj.uclass=classNum;
+        obj.grade=grade;
+        obj.prop1=$(".forInschool").val();
+        obj.nickname=remark;
+        /*obj.sexType=sexType;*/
+        console.log(obj);
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async: false,
+            url: "http://39.104.127.252:8080/beyond/api/user/update",
+            data:obj,
+            dataType: 'json',
+            success:function(data) {
+                console.log(data);
+
+                if(data.code==0){
+                    //更新 本地存储的年级  之前的本地存储是在addDate 里面显示的；
+                   var grade_name=grade;
+                    localStorage.setItem("grade_name",grade_name);
+                    alert("已完成资料编辑");
+                    window.location.href="mine.html";
+              /* localStorage.removeItem("birthday");
+                 localStorage.removeItem("inSchool");
+                    localStorage.removeItem("class_name");
+                  localStorage.removeItem("grade_name");
+                   localStorage.removeItem("school_name");
+                    localStorage.removeItem('userId');
+                   loc                    alStorage.removeItem('sex');*/
+
+
+
+                }
+            }
+
+        })
+    })
+    function birthday(){
+        var currYear = (new Date()).getFullYear();
+        var opt={};
+        opt.date = {preset : 'date'};
+        opt.datetime = {preset : 'datetime'};
+        opt.time = {preset : 'time'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            lang: 'zh',
+            showNow: true,
+            nowText: "今天",
+            startYear: currYear - 100, //出生生日开始年份
+            endYear: currYear + 0 //结束年份
+        };
+        //$("#demo1").mobiscroll($.extend(opt['date'], opt['default']));
+       $("#appDate1").mobiscroll($.extend(opt['date'], opt['default']));
+        //$("#appDate2").mobiscroll($.extend(opt['date'], opt['default']));
+        var optDateTime = $.extend(opt['datetime'], opt['default']);
+        var optTime = $.extend(opt['time'], opt['default']);
+        $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
+        $("#appTime").mobiscroll(optTime).time(optTime);
+    }
+
+})
+
+
+</script>
+<!--mui时间 -->
+<script>
+    (function($) {
+        $.init();
+        var result = $('#result')[0];
+        var btns = $('.btn');
+        btns.each(function(i, btn) {
+            btn.addEventListener('tap', function() {
+                var optionsJson = this.getAttribute('data-options') || '{}';
+                var options = JSON.parse(optionsJson);
+                var id = this.getAttribute('id');
+                /*
+                 * 首次显示时实例化组件
+                 * 示例为了简洁，将 options 放在了按钮的 dom 上
+                 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+                 */
+                var picker = new $.DtPicker(options);
+                picker.show(function(rs) {
+                    /*
+                     * rs.value 拼合后的 value
+                     * rs.text 拼合后的 text
+                     * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+                     * rs.m 月，用法同年
+                     * rs.d 日，用法同年
+                     * rs.h 时，用法同年
+                     * rs.i 分（minutes 的第二个字母），用法同年
+                     */
+                    var demo1=document.querySelector("#demo1");
+                    demo1.value=rs.text;
+                    //result.innerText = '选择结果: ' + rs.text;
+                    /*
+                     * 返回 false 可以阻止选择框的关闭
+                     * return false;
+                     */
+                    /*
+                     * 释放组件资源，释放后将将不能再操作组件
+                     * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+                     * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+                     * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+                     */
+                    picker.dispose();
+                });
+            }, false);
+        });
+    })(mui);
+</script>
+</body>
+</html>

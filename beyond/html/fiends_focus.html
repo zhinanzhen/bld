@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>我的动态</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+</head>
+<link rel="stylesheet" href="../css/mui.min.css"/>
+<link rel="stylesheet" href="../css/mui_img.css"/>
+<link rel="stylesheet" href="../css/base.css"/>
+<link rel="stylesheet" href="../css/topic.css"/>
+<link rel="stylesheet" href="../css/mine.css"/>
+<link rel="stylesheet" href="../css/Dynamic-hot.css"/>
+<link rel="stylesheet" href="../css/focus.css"/>
+<link rel="stylesheet" href="../css/social%20update.css"/>
+<style>
+    #mask_delete{
+        width: 100%;
+        height: 100%;
+        opacity: 0.4; /*半透明*/
+        filter: alpha(opacity=40); /*ie 6半透明*/
+        background-color: black;
+        position: fixed;
+        z-index:1000;
+        top: 0;
+        left: 0;
+        display: none;
+    }
+    #share{
+        border-radius: 5px;
+    }
+    #share li{
+        height: 1rem;
+    }
+    #confirm_delete{
+        width: 5.65rem;
+        position:fixed;
+        left: 12%;
+        top:50%;
+        transform: translateY(-50%);
+        background: #fff;
+        z-index:1001;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        display: none;
+
+    }
+
+    #confirm_delete h4{
+        text-align: center;
+        height: 1.83rem;
+        line-height: 1.83rem;
+        font-size: 0.32rem;
+        margin-bottom:0.5rem;
+    }
+    #confirm_delete button{
+        font-size: 0.32rem;
+        position: absolute;
+        border:none;
+        height: 0.92rem;
+        line-height: 0.92rem;
+        background-color:rgba(0,0,0,0);
+    }
+    #confirm_delete .quit{
+        left: 20%;
+        bottom: 0;
+    }
+    #confirm_delete .confirm{
+        right: 20%;
+        bottom: 0;
+        color:#ea6476;
+    }
+    .confirm_delete_show{
+        padding:0.2rem 0.5rem;
+        color:#fff;
+        background-color: rgba(0, 0, 0, .4);
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 5px;
+        bottom: 1.4rem;
+        /* display:block;*/
+        display: none;
+    }
+    /*mui的状态*/
+    html{
+        background-color: #FFFFFF;!important;
+    }
+    a{
+        color: #333;!important;
+    }
+    .layer{
+        background-color: #fff;!important;
+    }
+
+    p img {
+        max-width: 100%;
+        height: auto;
+    }
+    .header{
+        position: relative;
+    }
+    .header .center i {
+        width: 0.6rem;
+        height: 0.8rem;
+        position: absolute;
+        left: 0;
+        top: -70%;
+        background: url("../img/left.png") no-repeat center;
+        -webkit-background-size: 100%;
+        background-size: 100%;
+    }
+    #share li a{
+        margin-left: 0.3rem ;
+    }
+    .attention{
+        color:#fff;
+        right: 5%;
+        position: absolute;
+        top:45%;
+        width: 1.5rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
+        text-align: center;
+        font-size: 0.3rem;
+        background-color: #f093a1;
+        border-radius: 5px;
+    }
+    .more{
+        position: absolute;
+        right: 0%;
+        top: -52%;
+        color: #fff;
+        font-size: 0.36rem;
+        display: none;
+    }
+    .no_dynamic{
+        margin-top: 0.5rem;
+        color:#999;
+        font-size: 0.38rem;
+        text-indent: 2em;
+    }
+    .dynamic_topic p{
+        margin-top: 0.5rem;
+    }
+
+
+</style>
+<body>
+<div id="loading">
+    <img src="../img/login.gif" alt=""/>
+</div>
+<div class="layer social_layer">
+    <!--分享弹框-->
+    <!--<div id="mask_delete"></div>
+    <div id="mask_share"></div>-->
+    <div class="header">
+       <!--头部-->
+    </div>
+    <div class="content clearfix social_content" >
+        <div class="content_main dynamic_topic">
+
+        </div>
+    </div>
+
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/all.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/mui.zoom.js"></script>
+<script src="../js/mui.preview.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/template-web.js"></script>
+<script src="../js/template.js"></script>
+<script id="my_info" type="text/html">
+    <div class="center">
+        <i onclick="back()"></i>
+        {{if user.headpicPath ==''|| !user.headpicPath}}
+        <img src="../img/beyond.png" alt=""/>
+        {{else }}
+        <img src="{{user.headpicPath}}" alt=""/>
+        {{/if}}
+        <div class="minddle">
+            <div class="middle_up">
+                <span>{{user.nickname?user.nickname:user.username}}</span>
+            </div>
+            <div class="middle_center">
+                {{user.username?user.username:user.nickname}}
+            </div>
+        </div>
+    </div>
+    <div class="attention" onclick="connect()">+关注</div>
+</script>
+<script id="my_dynamic" type="text/html">
+   {{if spaceDynamicList.length==0}}
+   <div class="no_dynamic">该用户暂时没有动态哦 ！</div>
+   {{else}}
+   <!--遮罩-->
+   {{ each spaceDynamicList as value i }}
+   <div class="dynamic_header clearfix">
+       {{if user.headpic_path !==""}}
+       <img src="{{user.headpic_path}}" alt=""/>
+       {{else}}
+       <img src="../img/beyond.png"  alt=""/>
+       {{/if}}
+       <em ></em>
+       <div class="middle clearfix">
+           <h4>{{user.name?user.name:user.user_id}}  </h4>
+           <span>{{value.publish_time.substr(6,10)}}</span>
+       </div>
+   </div>
+   <div class="content_bottom" >
+       <div>
+
+           <p class="link" onclick="window.location.href='./all_comment.html?space_dynamic_id={{value.space_dynamic_id}}'"> {{value.content}}
+           </p>
+       </div>
+       <!--判断有没有图片-->
+       <!-- {{if value.img}}-->
+
+       <!--  {{/if}}-->
+       {{if value.resources=="null" || !value.resources}}
+       <img src="" data-preview-src="" data-preview-group="{{i+1}}" class="picture" alt=""/>
+       {{else}}
+       {{value.resources=jsonStringToArr(value.resources)}}
+       {{each value.resources as resource j}}
+       <div class="img_Box">
+           <img src="{{resource}}" data-preview-src="" data-preview-group="{{i}}" class="picture" alt=""/>
+       </div>
+       {{/each}}
+       {{/if}}
+       <div class="content_footer">
+           <ul class="clearfix">
+               <li>
+                   <a href="javascript:;" onclick="goHref()">
+                       <img src="../img/point.png" alt=""/>
+                       <span class="location_size">{{value.location}}</span>
+                   </a>
+               </li>
+
+               <li onclick="window.location.href='./detail.html?space_dynamic_id={{value.space_dynamic_id}}'">
+                   <a href="javascript:;">
+                       <img src="../img/commit.png" alt="" />{{value.comment}}
+                   </a>
+               </li>
+               <li>
+                   <a href="javascript:;">
+                       <img src="../img/hand.png" alt="" data-dynamicId={{i+1}} class="prise" onclick="prise('{{value.space_dynamic_id}}')" />{{value.praise}}
+                   </a>
+               </li>
+           </ul>
+       </div>
+   </div>
+   {{/each}}
+    {{/if}}
+</script>
+<script>
+    $(document).ajaxStop(function(){
+        $("#loading").hide();
+    });
+    mui.previewImage();
+    //mui('body').on('tap','a',function(){document.location.href=this.href;});
+    //我的动态的接口
+
+    var userId=localStorage.getItem("userId");
+    if(userId){
+        userId=userId.replace(/\"/g,"");
+    }
+    var href=location.href.split("=")[1];
+    //console.log(userId);
+
+    //4.1.6关注/取消关注联系人
+    function connect(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async: false,
+            url: "http://39.104.127.252:8080/beyond/api/attention/attention",
+            data:{
+                userId:userId,
+                id:href,
+                type:0,
+                isAttention:1
+
+            },
+            dataType: 'json',
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    /*var html=template("my_dynamic",data);
+                    $(".content_main").html(html);*/
+                    $(".attention").html("已关注");
+                    /*alert("关注成功");*/
+                }
+
+            },
+            error:function(data){
+                alert(data.msg);
+            }
+        })
+    }
+
+
+    //3.1.3指定用户的动态
+    function render(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async: false,
+            //contentType:'application/json;charset=UTF-8',
+            url: "http://39.104.127.252:8080/beyond/api/spacedynamic/queryMySpaceDynamic",
+            data:{userId:href},
+            dataType: 'json',
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    template.helper('jsonStringToArr', function(data) {
+                        return JSON.parse(data);
+                    });
+                    template.helper('math_random', function(){
+                        return Math.random();
+                    });
+                    var html=template("my_dynamic",data);
+
+                    $(".content_main").html(html);
+                }
+            }
+        })
+    }
+    render();
+    //api/attention/attention 4.1.6关注/取消关注联系人
+    var href=location.href.split("=")[1];
+    console.log(href);
+    function attention(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async: false,
+            url: "http://39.104.127.252:8080/beyond/api/attention/attention",
+            data:{
+                userId:userId,
+                id:href,/*从focus 传来的  而后需要确定*/
+                type:0,
+                isAttention:1
+            },
+            dataType: 'json',
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+
+                    $(this).text("已关注");
+                    $(".more").show();
+                }
+
+            },
+            error:function(data){
+                console.log(data);
+            }
+        })
+
+    }
+    function user_info(){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "post",
+            async: false,
+            url: "http://39.104.127.252:8080/beyond/api/user/userInfo",
+            data:{
+                userId:href
+            },
+            dataType: 'json',
+            success:function(data){
+                console.log(data);
+                if(data.code==0){
+                    var html=template("my_info",data);
+                    $(".header").html(html);
+                }
+
+            },
+            error:function(data){
+                console.log(data);
+            }
+        })
+    }
+    user_info()
+
+    var isprise=true;
+
+    function prise(dynamicId){
+        if(isprise){
+            $.ajax({
+                url:"http://39.104.127.252:8080/beyond/api/spacedynamic/praise",
+                data:{dynamicId:dynamicId,
+                    userId:userId,
+                    isPraise:1
+                },
+                dataType:'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                async: false,
+                success:function(data){
+                    render();
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+            isprise=false;
+        }else{
+            $.ajax({
+                url:"http://39.104.127.252:8080/beyond/api/spacedynamic/praise",
+                data:{dynamicId:dynamicId,
+                    userId:data,
+                    isPraise:0},
+                dataType:'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                async: false,
+                success:function(data){
+                    //console.log(data);
+                    render();
+                    //$(this).text()-1;
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+            isprise=true;
+        }
+    }
+
+</script>
+</body>
+</html>

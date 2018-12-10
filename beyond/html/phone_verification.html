@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    
+    <title>手机号验证</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <style>
+        html{
+            background-color: #eeeeee;
+        }
+        /*头部css*/
+        header{
+            height: 0.93rem;
+            line-height: 0.93rem;
+            width: 100%;
+            background-color: #fff;
+            position:fixed;
+            z-index:11;
+
+        }
+        header h3{
+            text-align: center;
+            color:#686868;
+            font-size: 0.36rem;
+        }
+        header  i,header em{
+            background: url("../img/b_left_03.png") no-repeat center;
+            height: 0.45rem;
+            width: 0.6rem;
+            position: absolute;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        header  i{
+            left: 2%;
+            top: 25%;
+        }
+        .verification_center{
+            padding-top: 1rem;
+        }
+        .verification_center img{
+            position: relative;
+            left:20%;
+        }
+        .verification_center p{
+            text-align: center;
+            font-size: 0.36rem;
+            color:#333333;
+        }
+        .verification_center button{
+            width: 90%;
+            position: relative;
+            left: 5%;
+            margin-top: 0.2rem;
+        }
+        .verification_center button {
+            display: block;
+            color: #fff;
+            font-size: 0.36rem;
+            background-color: #f093a1;
+            padding:0.3rem 0;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+
+        }
+        #mask{
+            width: 100%;
+            height: 100%;
+            opacity: 0.4; /*半透明*/
+            filter: alpha(opacity=40); /*ie 6半透明*/
+            background-color: black;
+            position: fixed;
+            z-index: 1111;
+            top: 0;
+            left: 0;
+            /*display: block;*/
+            display: none;
+        }
+        #show{
+            position: absolute;
+            width: 80%;
+            height: 3.5rem;
+            z-index: 1112;
+            background-color: #fff;
+            left:10%;
+            top:30%;
+            display: none;
+            border-radius: 10px;
+            padding:0.5rem 0.3rem 0.3rem 0.3rem;
+        }
+        #show h3{
+            font-size:0.36rem;
+            margin-bottom: 0.2rem;
+        }
+        #show p{
+            font-size: 0.32rem;
+            margin-bottom: 0.5rem;
+        }
+        #show button:first-of-type{
+            margin-left: 50%;
+        }
+        #show button{
+            width: 1.3rem;
+            font-size: 0.36rem;
+            border:none;
+            background-color: #fff;
+        }
+        #show .quit{
+            color:#666;
+        }
+        #show .confirm{
+            color:#f093a2;
+        }
+    </style>
+</head>
+<body>
+<div class="phone_verification_layer">
+    <div id="mask"></div>
+    <header class="clearfix">
+        <i onclick="back()" ></i>
+        <h3>手机号验证</h3>
+    </header>
+    <div class="verification_center">
+            <img src="../img/phone_03.png" alt=""/>
+            <p>当前的手机号是：<em class="phone_number"></em></p>
+            <button class="gain">获取验证码</button>
+        <!---->
+    </div><!--message_link.html-->
+    <div id="show">
+        <h3>确认手机号码</h3>
+        <p>我们将发送验证码短信到这个号码：<em class="phone_number"></em></p>
+        <button class="quit">取消</button>
+        <button class="confirm">确定</button>
+    </div>
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/jquery.js"></script>
+<script>
+    $(function(){
+        /*出现遮罩和弹框*/
+        $(".gain").click(function(){
+            $("#mask").css("display","block");
+            $("#show").css("display","block");
+            console.log(1);
+
+        })
+        $(".quit").click(function(){
+            $("#mask").css("display","none");
+            $("#show").css("display","none");
+            window.location.href="./editData.html";
+        }) ;
+        $(".confirm").click(function(){
+            $("#mask").css("display","none");
+            $("#show").css("display","none");
+            confirm();
+
+        })
+        var phone=localStorage.getItem('phone');
+
+        var userId=localStorage.getItem('userId');
+        $(".phone_number").text(phone);
+        //发送短信验证码：ajax
+        function confirm(){
+            $.ajax({
+                //处理session每次不唯一问题
+                xhrFields: {
+                    withCredentials: true
+                },
+                //请求方式
+                type:'POST',
+                url:'http://localhost:8089/beyond-web/api/user/sendCaptcha',
+                dataType:'json',
+                data:{
+                    mobile:phone,
+                    uuid:Math.random(),
+                    type:1
+                },
+                success:function(data){
+                    console.log(data);
+                    window.location.href="./message_link.html";
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>好友搜索</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <script src="../js/all.js"></script>
+    <style>
+        /*改变placeholder的字体颜色*/
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #808080; opacity:1;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #808080;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color: #808080;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #808080;opacity:1;
+        }
+        .layer{
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+        }
+        .layer header{
+            width: 100%;
+            background-color:#f093a1;
+            height: 1.3rem;
+            padding-top: 0.6rem;
+            position: relative;
+        }
+        .layer header:before{
+            content:"";
+            position: absolute;
+            width: 0.6rem;
+            height: 0.98rem;
+            left: 5.5%;
+            top: 34%;
+            z-index: 11;
+            background: url("../img/search_friends.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+
+        }
+        .layer header input{
+            height: 0.88rem;
+            position: relative;
+            left: 5%;
+            display: inline-block;
+            width: 80%;
+            background-color: #fff;
+            top: 0.1rem;
+            font-size: 0.36rem;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding-left: 0.8rem;
+        }
+        .layer header em{
+            display: inline-block;
+            position: relative;
+            right:-5%;
+            top: 10%;
+            font-size: 0.34rem;
+            color: #fff;
+            padding:0.2rem;
+        }
+        .main{
+            width: 100%;
+
+        }
+        .main ul{
+            width: 100%;
+        }
+        .main ul li{
+            width: 100%;
+            padding-left: 0.5rem;
+            margin-top: 0.4rem;
+        }
+        .main ul li img{
+            width: 15%;
+            min-height: 0.8rem;
+            max-height: 1rem;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 0.2rem;
+            color:#f093a1;
+        }
+    </style>
+</head>
+<body>
+<!--<div id="loading">
+    <img src="../img/login.gif" alt=""/>
+</div>-->
+<div class="layer">
+    <header>
+        <input type="text" id="search" placeholder="搜索" />
+        <em onclick="back()">取消</em>
+    </header>
+    <div class="main">
+        <ul>
+
+        </ul>
+    </div>
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/template-web.js"></script>
+<script id="search_Friends" type="text/html">
+    {{if list.length==0}}
+    <li>对不起，没有符合条件的联系人</li>
+    {{else}}
+    {{each list as value i}}
+    <!--有的话就遍历-->
+    <li onclick="location.href='Friends introduce.html?id={{value.id}}'">
+        {{if value.headPic==""||value.headPic==null}}
+        <img src="../img/beyond.png" alt=""/>
+        {{else}}
+        <img src="{{value.headPic}}" alt=""/>
+        {{/if}}
+        <span>{{value.remark?value.remark:value.name}} (<em>{{value.id}}</em>)</span>
+    </li>
+    {{/each}}
+    {{/if}}
+</script>
+<script>
+    $(function(){
+//        $(document).ajaxStop(function(){
+//            $("#loading").hide();
+//        });
+        var userId=localStorage.getItem('userId');
+        if(userId){
+            userId=userId.replace(/\"/g,"");
+        }
+        $("#search").keyup(function(){
+            // alert($(".search").val());
+            //出现匹配的结果
+            $.ajax({
+                data:{
+                    userId:userId,
+                    key:$("#search").val()
+                },
+                dataType:"json",
+                type:"post",
+                url:"http://39.104.127.252:8080/beyond/api/relationuser/search",
+                xhrFields: {
+                    withCredentials: true
+                },
+                success:function(data){
+                    console.log(data);
+                    var html=template("search_Friends",data);
+                    $(".main ul").html(html);
+                    //渲染
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

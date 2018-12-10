@@ -1,0 +1,17 @@
+.social_layer .header .center{
+    margin-top: 1.2rem;
+}
+.social_layer .header {
+    background-image: url("../img/bg.png");
+}
+.social_content{
+   padding-top:0rem;
+    margin-bottom: 0;
+}
+.social_content .content_main{
+    border:none;
+
+}
+.social_content .dynamic_header{
+    border:none;
+}

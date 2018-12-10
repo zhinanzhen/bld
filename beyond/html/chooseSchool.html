@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>选择学校</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css"/>
+    <link rel="stylesheet" href="../css/city/mpicker.css"/>
+    <style>
+        /*头部css*/
+        header{
+            height:50px;
+            line-height: 50px;
+            width: 100%;
+            background-color: #f093a2;
+            position:fixed;
+            z-index:11;
+        }
+        header h4{
+            text-align: center;
+            color:#fff;
+            line-height: 50px;
+            font-size: 20px;
+        }
+        header  i,header em{
+            background: url("../img/left.png") no-repeat center;
+            height: 45px;
+            width: 35px;
+            position: absolute;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        header  i{
+            left: 2%;
+            top: 25%;
+        }
+        .main{
+            padding-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="layer slide-wapper">
+    <header class="clearfix slide-item">
+        <i onclick="back()" ></i>
+        <h4>选择学校</h4>
+    </header>
+   <div class="main">
+
+       <input type="text" class="select-value1 form-control" value="广东省-东莞市" readonly="readonly" style="transform: translateY(0px);">
+   </div>
+
+
+</div>
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/city/json.js"></script>
+<script src="../js/city/jsonExchange.js"></script>
+<script src="../js/city/mPicker.min.js"></script>
+<script>
+    $(function() {
+
+        /**
+         * 联动的picker--添加修改后修改数据的效果
+         * 两级
+         */
+        $('.select-value1').mPicker({
+            level: 2,
+            dataJson: dataJson,
+            Linkage: true,
+            rows: 6,
+            idDefault: true,
+            splitStr: '-',
+
+            confirm: function (json) {
+                console.info('当前选中json：', json);
+                var _this= this;
+                console.info('【json里有带value的情况】');
+                //更新json
+                console.info('3s后更新json...');
+                setTimeout(function(){
+                    _this.container.data('mPicker').updateData.call(_this,level3);
+                    var json = getVal();
+                    var valArr = json.value;
+                   // console.info('更新成功!!');
+                   // console.info('更新后的value为空', valArr[0], valArr[1]);
+                   // console.info('更新后的value拼接值为空', json.result);
+                },3000);
+
+            },
+            cancel: function (json) {
+            }
+        })
+
+
+        /**
+         * 不联动的picker
+         * 两级
+         */
+        var method2=$('.select-value2').mPicker({
+            level:2,
+            dataJson:level3,
+            rows:5,
+            Linkage:false,
+            header:'<div class="mPicker-header">非联动选择插件</div>',
+            idDefault:true,
+            confirm:function(json){
+                console.info('当前选中json：', json);
+            }
+        })
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+.layer{
+    width: 100%;
+    overflow-x: hidden;
+}
+.data{
+
+    width: 100%;
+    padding-top: 30px;
+    background-color: #f093a1;
+    line-height: 50px;
+    text-align: center;
+    font-size: 20px;
+    color: #ffffff;
+}
+.main{
+    width: 100%;
+
+}
+.main ul{
+    width: 100%;
+
+}
+.main ul li{
+    width: 100%;
+    height:50px;
+    line-height: 50px;   padding:0  20px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+.main ul li a{
+    color: #666666;
+    font-size: 18px;
+}
+.main ul li a i{
+    width:20px;
+    height: 100%;
+    line-height: 100%;
+    text-align: right;
+    background: url("../img/r_trig_03.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.main #save{
+    margin-top:44px;
+    display: block;
+    font-size: 20px;
+    width: 90%;
+    text-align: center;
+    color:#999;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 20px;
+    position: relative;
+    left: 5%;
+    background-color: #eeeeee;
+
+}
+#chooseSchool{
+    border:none;
+    width: 50%;
+   border:none;
+    background-color:rgba(0,0,0,0);
+    position: absolute;
+    outline: none;
+    right:-16%;
+    top:9%;
+    box-shadow: none;
+    display: none;
+}
+/*.mui-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 998;
+    background-color: rgba(0,0,0,.3);
+}*/
+#mask{
+    width: 100%;
+    height: 100%;
+    opacity: 0.4; /*半透明*/
+    filter: alpha(opacity=40); /*ie 6半透明*/
+    background-color: black;
+    position: fixed;
+    z-index: 111111111;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.sex{
+    width: 85%;
+    height: 150px;
+    background-color: #fff;
+    position: fixed;
+    z-index:111111112;
+    display:none;
+    left: 8%;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.sex ul{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.sex ul del{
+    margin-top: 10px;
+}
+.sex ul input{
+    margin-top: 60px;
+
+}
+.sex ul .man,.sex ul .women{
+    width: 50%;
+    float: left;
+    text-align: center;
+    position: relative;
+    border-bottom: none;
+    top: 52%;
+    transform:translateY(-50%);
+    height: 100%;
+}
+.sex ul .man{
+    left:0;
+}
+.sex ul .women{
+    right: 0;
+}
+/*.sex .man em {
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    -webkit-background-size: 100%;
+    background-size: 200%;
+    position: absolute;
+    background: url("../img/man.png") no-repeat center;
+    left: 40%;
+    top:-9%;
+}
+.women em{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    -webkit-background-size: 100%;
+    background-size: 200%;
+    position: absolute;
+    background: url("../img/women.png") no-repeat center ;
+    right: 40%;
+    top:-9%;
+}*/
+label{
+    width: 100%;
+    height: 100%;
+display: inline-block;
+}
+.sex del{
+    font-size: 16px;
+    position: absolute;
+    transform: translateX(-50%);
+    top:37%;
+    left:50%;
+}
+.sex input{
+  position: absolute;
+    left:0%;
+    top:0%;
+    width: 100%;
+    height: 10%;
+
+
+   /*   font-size: 30px;
+    border-radius: 50%;*/
+}
+.sex ul .man em{
+    position: absolute;
+    left: 40%;
+    top: 15%;
+    width: 25px;
+    height: 25px;
+    background: url("../img/man.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+
+}
+.sex ul .women em{
+    position: absolute;
+   right: 40%;
+    top: 15%;
+
+    width: 25px;
+    height: 25px;
+    background: url("../img/women.png") no-repeat center;
+    -webkit-background-size: 90%;
+    background-size:90%;
+}
+#birthday,#IN{
+    position: relative;
+    width: 100% ;
+    height: 100%;
+    display: block;
+}
+.birthday{
+    position: absolute;
+    right: 1%;
+    width: 67%;
+    height: 100%;
+    color:#666;
+    text-align: right;
+    display: none;
+   /* font-size:16px;
+    margin-left:30%;
+    position:absolute;
+    text-align: right;
+    top:0%;
+    display: none;
+    padding-top: 0.5rem;
+   /!* z-index: -1;*!/
+    width:250px;*/
+    /*background-color: pink;*/
+    /*background-color: rgba(0,0,0,0);*/
+}
+#demo1{
+    color:#666;
+    text-align: right;
+    position: relative;
+    right: -9%;
+    width:67%;
+    height: 99%;
+    font-size: 18px;
+    font-family: sans-serif;
+}

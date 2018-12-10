@@ -1,0 +1,159 @@
+html{
+    height: 100%;
+    width: 100%;
+    background: url("../img/login_Background.png") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.layer{
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.box{
+    margin-top: 75%;
+    width: 100%;
+    text-align: center;
+}
+.username input,.password input{
+    background-color: rgba(0,0,0,0);
+    font-size: 0.36rem;
+    vertical-align: middle;
+    width: 50%;
+    padding-bottom: 0.1rem;
+    margin-left: 0.1rem;
+    display: inline-block;
+    border-bottom:2px solid #fff;
+}
+.username,.password{
+    height: 1rem;
+    width: 90%;
+}
+
+.username input{
+    margin-top: -0.3rem;
+    width: 70%;
+    display: block;
+    position: relative;
+    left: 25%;
+    color: #fff;
+}
+.username span,.password span{
+    background: url("../img/username_03.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size:90%;
+    width: 0.6rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+   position: absolute;
+    border:1px solid #fff;
+    border-radius: 50%;
+    left: 10%;
+}
+.password{
+    margin-top: 0.5rem;
+}
+.password span {
+    background-size: 100%;
+    background-image: url("../img/lock.png");
+}
+.password input{
+  margin-top: -0.5rem;
+    width: 70%;
+    display: block;
+    position: relative;
+    left: 25%;
+    color:#fff;
+}
+.login_Button,.register_Button{
+    display: block;
+    width: 80%;
+    height: 0.68rem;
+    line-height:0.28rem;
+    position: relative;
+    left:10%;
+    padding:0.2rem 0;
+    background-color: rgba(0, 0, 0, 0);
+    border:1px solid #fff;
+    border-radius:15px;
+    color:#fff;
+    font-size: 0.34rem;
+}
+.login_Button{
+    margin-top: 0.3rem;
+    border:none;
+    background-color: #f093a2;
+}
+.register_Button{
+    margin-top: 0.3rem;
+ }
+.footer{
+    width: 80%;
+    position: relative;
+    left:0%;
+    color:#fff;
+   /* margin:0 auto;*/
+    margin-top: 0.3rem;
+}
+.remember{
+    position: relative;
+    left: -25%;
+}
+.remember input{
+    /*background-color: rgba(0, 0, 0, 0);
+    position: relative;
+    left:0%;*/
+    color:#fff;
+    vertical-align: middle;
+}
+/*.remember :before{
+    width: 0.15rem;
+    height: 0.15rem;
+    content:"";
+    position: absolute;
+    left:35%;
+    top: 5%;
+    background-color:#adadb1;
+}*/
+.footer p{
+    position: absolute;
+    right: -10%;
+    top: 0;
+}
+
+/*label {
+    position: relative;
+    cursor: pointer;
+}
+label input {
+    cursor: pointer;
+}
+
+input:checked  {
+    background: #ec6337;
+}
+
+.show-box {
+    position: absolute;
+    top: 0;
+    left: 36%;
+    width: 0.2rem;
+    height: 0.2rem;
+    border-radius: 2px;
+    border: 1px solid #fff;
+    background: #adadb1;
+/!*!/ / 这里取个巧，与下面颜色一样而已*!/
+}
+.show-box :before {
+/!*!// 使用了 absolute 所以无所谓是 before 还是 after*!/
+    content: ''; /!*!// 空白内容占位，当做盒模型处理，见下面*!/
+    position: absolute;
+    top: 0.02%;
+    left: 36%;
+    width: 0.18rem; /!*!// 勾的短边*!/
+    height:0.18rem;/!* // 勾的长边*!/
+    border: solid #000;/!* // 勾的颜色*!/
+    border-width: 0 0.1rem 0.1rem 0; /!*!// 勾的宽度*!/
+    transform: rotate(45deg); /!*!// 定制宽高加上旋转可以伪装内部的白色勾*!/
+}*/

@@ -1,0 +1,383 @@
+/*头部的处理 样式的覆盖*/
+.Focus_header .focus span{
+    border-bottom:3px solid #fff;
+}
+.Focus_header ul li:last-of-type span{
+    border: none;
+}
+.Focus_header ul li a{
+    color:#fff;
+    font-size: 0.36rem;
+}
+/*页脚的处理 样式的覆盖*/
+.Focus_footer ul li:nth-of-type(2) a i{
+    -webkit-background-size: 85%;
+    background-size: 85%;
+}
+.layer{
+    overflow: hidden;
+}
+/*content header不设置 ul 很大 li不设置宽度 img设置宽度*/
+.content{
+    width: 100%;
+    margin: 0.2rem 0.2rem 1rem 0.2rem;
+    padding-top:1.5rem;
+}
+.content .content_header{
+    height: 1.6rem;
+    width: 100%;
+    overflow-X: auto;
+}
+.content .content_header ul{
+
+    height: 100%;
+    box-sizing: border-box;
+}
+.content .content_header ul li{
+    float:left;
+    margin-right: 0.3rem;
+    cursor: pointer;
+}
+.content .content_header ul li a{
+
+}
+.content .content_header ul li img{
+    width: 0.82rem;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+}
+.content .content_header ul li span{
+    display: block;
+    text-align: center;
+    font-size: 0.28rem;
+    position: relative;
+}
+ .vip{
+    position: absolute;
+    width: 0.4rem;
+    height: 0.4rem;
+    left: 55%;
+    bottom :80%;
+    background: url("../img/vip.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.content_main{
+    box-sizing: border-box;
+    border-top: 3px solid #fdf7f8;
+
+    margin:0;
+}
+.dynamic_header{
+    padding-top: 0.2rem;
+    border-top: 2px solid #fdf7f8 ;
+}
+.content_bottom .picture{
+    width: 45%;
+   /* margin-top: 0.3rem;*/
+    margin-right: 0.1rem;
+}
+.content_bottom .middle h4{
+    font-size:0.3rem;
+}
+.middle span{
+    margin-top: 0.1rem;
+    color:#999;
+    width: 4rem;
+    font-weight: 400;
+}
+.dynamic_header img{
+    width: 0.82rem;
+    min-height: 0.8rem;
+    max-height: 0.82rem;
+}
+.middle{
+    left:1rem;
+}
+.content_main .vip{
+    left: 8%;
+    bottom: 0%;
+}
+.down,.down1{
+    position: absolute;
+    right: 5%;
+    bottom: 25%;
+    width: 0.5rem;
+    height: 0.2rem;
+    background: url("../img/down.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.content_footer{
+    width: 100%;
+    height: 0.7rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.3rem;
+}
+.content_footer ul{
+    width: 100%;
+}
+.content_footer ul li{
+    float: left;
+    width: 25%;
+}
+.content_footer ul li:nth-of-type(2),.content_footer ul li:nth-of-type(3){
+    text-align: center;
+}
+.content_footer ul li a{
+    color:#b0b0b0;
+}
+.content_footer ul li:first-of-type{
+    width: 50%;
+}
+.content_footer ul li img{
+    width: 0.4rem;
+margin-right: 0.1rem;
+   /* vertical-align: middle;*/
+}
+/*.content_footer ul li:first-of-type img{
+    margin-top: -0.3rem;
+}*/
+.location_size{
+    font-size: 0.22rem;
+    display: inline-block;
+    width:80%;
+    line-height: 120%;
+
+}
+#mask_share,#mask_cancel,#mask_close{
+    width: 100%;
+    height: 100%;
+    opacity: 0.4; /*半透明*/
+    filter: alpha(opacity=40); /*ie 6半透明*/
+    background-color: black;
+    position: fixed;
+    z-index:999;
+    top: 0;
+    left: 0;
+    display: none;
+    overflow: hidden;
+}
+.share,.share1{
+    width: 5.65rem;
+    position:fixed;
+    left: 12%;
+    top:38%;
+    /*transform: translateY(-50%);*/
+    background: #fff;
+    z-index: 1000;
+    border-radius: 25px;
+    display:none;
+}
+.share1{
+    top:50%;
+}
+.share li,.share1 li {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    box-sizing: border-box;
+    text-indent: 1em;
+    font-size:0.32rem;
+    color:#333333;
+}
+.share li a:first-of-type,.share1 li a:first-of-type{
+    text-indent: 1em;
+}
+.share li a,#share1 li a{
+    font-size:0.32rem;
+    display: block;
+    width: 100%;
+}
+.share li:first-of-type{
+    text-indent: 0em;
+}
+.share li span,.share1 li span{
+    width: 23%;
+    height: 100%;
+    text-indent: 1em;
+    display: inline-block;
+    font-size:0.32rem;
+    color:#333333;
+    vertical-align: middle;
+}
+.QQ{
+    background:url("../img/QQ.png") no-repeat center;
+    -webkit-background-size: 80%;
+    background-size: 80%;
+}
+.we_chat{
+    background:url("../img/WeChat.png") no-repeat center;
+    -webkit-background-size: 90%;
+    background-size: 90%;
+}
+.sina{
+    background:url("../img/sina.png") no-repeat center;
+    -webkit-background-size: 80%;
+    background-size: 80%;
+}
+#cancel_focus,.close_focus{
+    width: 5.65rem;
+    position: fixed;
+    left: 12%;
+    top:50%;
+    transform: translateY(-50%);
+    background: #fff;
+
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    display: none;
+
+}
+#cancel_focus{
+    z-index: 1009;
+}
+.close_focus{
+    z-index: 1010;
+}
+#cancel_focus h4{
+    text-align: center;
+    height: 1.83rem;
+    line-height: 1.83rem;
+    font-size: 0.32rem;
+    margin-bottom:0.5rem;
+}
+#cancel_focus button{
+    font-size: 0.32rem;
+    position: absolute;
+    border:none;
+    height: 0.92rem;
+    line-height: 0.92rem;
+    background-color:rgba(0,0,0,0);
+}
+#cancel_focus .quit{
+    left: 20%;
+    bottom: 0;
+}
+#cancel_focus .confirm{
+    right: 20%;
+    bottom: 0;
+    color:#ea6476;
+}
+/*屏蔽*/
+.close_focus{
+    height: 2.2rem;
+}
+.close_focus h4{
+    text-align: center;
+   font-size: 0.32rem;
+    line-height: 0.9rem;
+}
+/*已取消关注*/
+.cancel_focus_confirm,.collect_confirm,.close_focus_confirm{
+    padding:0.2rem 0.5rem;
+    color:#fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    bottom: 1.4rem;
+   /* display:block;*/
+    display: none;
+}
+.collect_confirm{
+    z-index: 11111111111;
+}
+.fix{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+#mask_delete{
+    width: 100%;
+    height: 100%;
+    opacity: 0.4; /*半透明*/
+    filter: alpha(opacity=40); /*ie 6半透明*/
+    background-color: black;
+    position: fixed;
+    z-index:1000;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.share1{
+    border-radius: 5px;
+}
+.share1 li{
+    height: 1rem;
+}
+#confirm_delete{
+    width: 5.65rem;
+    position:fixed;
+    left: 12%;
+    top:50%;
+    transform: translateY(-50%);
+    background: #fff;
+    z-index:1001;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    display: none;
+
+}
+
+#confirm_delete h4{
+    text-align: center;
+    height: 1.83rem;
+    line-height: 1.83rem;
+    font-size: 0.32rem;
+    margin-bottom:0.5rem;
+}
+#confirm_delete button{
+    font-size: 0.32rem;
+    position: absolute;
+    border:none;
+    height: 0.92rem;
+    line-height: 0.92rem;
+    background-color:rgba(0,0,0,0);
+}
+#confirm_delete .quit{
+    left: 20%;
+    bottom: 0;
+}
+#confirm_delete .confirm{
+    right: 20%;
+    bottom: 0;
+    color:#ea6476;
+}
+.confirm_delete_show{
+    padding:0.2rem 0.5rem;
+    color:#fff;
+    background-color: rgba(0, 0, 0, .2);
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    bottom: 1.4rem;
+    /* display:block;*/
+    display: none;
+}
+/*图片 固定大小*/
+.img_Box{
+    width: 32%;
+    position: relative;
+    overflow: hidden;
+    height: 2.6rem;
+    background-color: #333;
+    display: inline-block;
+}
+
+.img_Box .picture{
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    vertical-align: middle;
+}

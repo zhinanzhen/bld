@@ -1,0 +1,165 @@
+{
+  "html/index.html": {
+    "refer": [
+      "html/swiper.html",
+      "html/login.html"
+    ],
+    "resources": []
+  },
+  "html/login.html": {
+    "refer": [
+      "html/focus.html"
+    ],
+    "resources": []
+  },
+  "html/focus.html": {
+    "refer": [
+      "html/publish_photo.html",
+      "html/mine.html",
+      "html/connect.html",
+      "html/login.html",
+      "html/swiper.html",
+      "html/social_update.html",
+      "html/all_comment.html",
+      "html/detail.html"
+    ],
+    "resources": []
+  },
+  "html/publish_photo.html": {
+    "refer": [
+      "html/focus.html"
+    ],
+    "resources": []
+  },
+  "html/mine.html": {
+    "refer": [
+      "html/dynamic_photo.html",
+      "html/focus.html",
+      "html/myFans.html",
+      "html/timetablenew.html",
+      "html/college_seting.html",
+      "html/connect.html",
+      "html/my_literure.html",
+      "html/mine.html",
+      "html/editData.html",
+      "html/activity.html",
+      "html/my_dynamic.html"
+    ],
+    "resources": []
+  },
+  "html/dynamic_photo.html": {
+    "refer": [
+      "html/mine.html",
+      "html/focus.html",
+      "html/connect.html"
+    ],
+    "resources": []
+  },
+  "html/connect.html": {
+    "refer": [
+      "html/focus.html",
+      "html/mine.html",
+      "html/add_friends.html"
+    ],
+    "resources": []
+  },
+  "html/timetablenew.html": {
+    "refer": [
+      "html/mine.html",
+      "html/countDown.html"
+    ],
+    "resources": []
+  },
+  "html/myFans.html": {
+    "refer": [
+      "html/mine.html"
+    ],
+    "resources": []
+  },
+  "html/college_seting.html": {
+    "refer": [
+      "html/login.html",
+      "html/mine.html",
+      "html/focus.html"
+    ],
+    "resources": []
+  },
+  "html/add_friends.html": {
+    "refer": [
+      "html/search_newFriends.html",
+      "html/connect.html"
+    ],
+    "resources": []
+  },
+  "html/search_newFriends.html": {
+    "refer": [
+      "html/add_friends.html"
+    ],
+    "resources": []
+  },
+  "html/editData.html": {
+    "refer": [
+      "html/head.html",
+      "html/mine.html"
+    ],
+    "resources": []
+  },
+  "html/head.html": {
+    "refer": [
+      "html/mine.html"
+    ],
+    "resources": []
+  },
+  "html/my_literure.html": {
+    "refer": [
+      "html/mine.html",
+      "html/literature_created.html",
+      "html/focus.html"
+    ],
+    "resources": []
+  },
+  "html/activity.html": {
+    "refer": [
+      "html/activity_detil.html",
+      "html/mine.html"
+    ],
+    "resources": []
+  },
+  "html/my_dynamic.html": {
+    "refer": [
+      "html/mine.html",
+      "html/focus.html"
+    ],
+    "resources": []
+  },
+  "html/countDown.html": {
+    "refer": [
+      "html/timetablenew.html"
+    ],
+    "resources": []
+  },
+  "html/swiper.html": {
+    "refer": [
+      "html/login.html"
+    ],
+    "resources": []
+  },
+  "html/all_comment.html": {
+    "refer": [
+      "html/focus.html"
+    ],
+    "resources": []
+  },
+  "html/detail.html": {
+    "refer": [
+      "html/focus.html",
+      "html/mine.html"
+    ],
+    "resources": []
+  },
+  "html/social_update.html": {
+    "refer": [
+      "html/focus.html"
+    ]
+  }
+}

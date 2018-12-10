@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>聊天界面</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/chat.css"/>
+    <link href="../css/email/webiaoqing_2.css" rel="stylesheet" type="text/css">
+    <script src="../js/email/jquery_min_2.js" ></script>
+    <script src="../js/email/webiaoqin_2.js" ></script>
+    <style>
+      #page_emotion{
+            position: fixed;
+            bottom: 0%;
+            display: none;
+          background-color: #fff;
+          width: 100%;
+          height: 2.2rem;
+          overflow: hidden;
+        }
+      #form_article{
+          border:none;
+          outline: none;
+      }
+      #form_article:focus{
+          border:none;
+      }
+        .bottom article{
+            height: 100%;
+            line-height: 100%;
+            font-size: 0.3rem;
+            padding-top: 0.3rem;
+        }
+      .nav_emotion span{
+         /* background-color:red;*/
+      }
+        img{
+            vertical-align: middle;
+        }
+        .photo{
+            position: relative;
+        }
+      .photo #photo{
+          position: absolute;
+          left: 10%;
+      }
+      #add_show{
+         border-top: 0.1rem solid #eee;
+          height: 3rem;
+      }
+     #add_show input{
+         height: 100%;
+         width: 80%;
+         opacity: 0;
+      }
+        .shootingr{
+            position: relative;
+        }
+      .shootingr #camera{
+          position: absolute;
+          right: 10%;
+      }
+    </style>
+</head>
+<body >
+<div class="layer">
+    <!--头部-->
+    <header class="clearfix">
+        <i onclick="back()" ></i>
+        <h3>雯雯</h3>
+        <em onclick="window.location.href='chatInforamtion.html'"></em>
+    </header>
+    <div class="chat_main">
+        <div class="left">
+            <img src="../img/portrait.png" alt="" class="chat_info"/>
+            <div class="user_chat">
+                <span>您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您您好，在嘛好，在嘛您好，在嘛</span>
+            </div>
+        </div><div class="left">
+            <img src="../img/portrait.png" alt="" class="chat_info"/>
+            <div class="user_chat">
+                <span>您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您好，在嘛您您好，在嘛好，在嘛您好，在嘛</span>
+            </div>
+        </div>
+        <div id="time">昨天 20：58</div>
+        <div class="right clearfix">
+            <img src="../img/focus-img1.png" class="f_right" alt=""/>
+           <div class="user_chat">
+               <span class="f_right">您好，在的>您好，在的>您好，在的>您好，在的>您好，在的>您好，在的>您好，在的d</span>
+           </div>
+        </div>
+    </div>
+    <div class="bottom clearfix">
+        <article type="text" id="form_article" autofocus   contenteditable="true" onkeydown="myInput.listen(this, event);" ></article>
+        <span class="chat_email" ></span><!--点击表情出现表情包-->
+        <span class="chat_add" id="chat_add"></span>
+    </div>
+    <div class="page_emotion box_swipe" id="page_emotion">
+        <dl id="list_emotion" class="list_emotion pt_10"></dl><!-- 表情框 -->
+        <dt><ol id="nav_emotion" class="nav_emotion"></ol></dt><!-- 分页提示点 -->
+    </div>
+    <!--点击加号出现的逻辑 相册和拍摄权限的获取 h 290 -->
+    <div id="add_show">
+        <div class="photo">
+            <input type="file" id="photo" accept="image/*" >
+            <img src="../img/camare_03.png" alt=""/>
+            <span>相册</span>
+        </div>
+        <div class="shootingr">
+            <input type="file" id="camera" accept="image/*" capture="camera" >
+            <img src="../img/camare_06.png" alt=""/>
+            <span>拍摄</span>
+        </div>
+    </div>
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/jquery.js"></script>
+<script>
+    $(function() {
+        function back() {
+            history.go(-1);
+        }
+        var flag=true;
+        $(".chat_email").click(function(){
+            if(flag){
+                $("#page_emotion").css("display","block");
+                $(".bottom").css("bottom", "2rem");
+                /*var say = '说点什么...';
+                if ($("#form_article").html() === "") {
+                    $("#form_article").html(say);
+                }
+                $("#form_article").click(function(){
+                    if($("#form_article").html() == say){
+                        $("#form_article").html("");
+                    }
+                });
+                $("#page_emotion  dd").click(function(){
+                    $("#form_article").html( $("#form_article").html().replace(say, '') );
+                     });*/
+
+                flag=false;
+            }else{
+                $("#page_emotion").css("display","none");
+                $(".bottom").css("bottom", "0rem");
+            }
+
+        })
+        $("#chat_add").click(function () {
+            //console.log(1);
+            $(".bottom").css("bottom", "3rem");
+            $("#add_show").show();
+            var add_show = $("#add_show");
+            var event = event || window.event;
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+            document.onclick = function (event) {
+                var event = event || window.event;
+                var target = event.target || event.srcElement;
+                if (target.id !== "add_show") {
+                    //获取事件目标 如果不是show才能消失
+                    $(".bottom").css("bottom", "0rem");
+                    $("#add_show").hide();
+                }
+            }
+        })
+        //在article 失去焦点的时候 获取里面的内容 渲染到页面上
+        $("#form_article").blur(function(){
+            var text=$("#form_article").html();
+            console.log(text);
+           if(text==""){
+               return false;
+           }else{
+               var html="<div class='right clearfix'><img src='../img/focus-img1.png' class='f_right'/><div class='user_chat'><span class='f_right'>"+text+"</span> </div> </div>";
+               $('.chat_main').append(html);
+               $(".user_chat img").css("verticle-align","middle").width("0.35rem").height("");
+               $(this).html("");
+           }
+
+        })
+      /*  $("#form_article").click(function () {
+            //console.log(1);
+            $(".bottom").css("bottom", "2rem");
+            $(" #page_emotion").css("display","block");
+        })*/
+        $(".chat_info").click(function(){
+            window.location.href="./social_update.html";
+        })
+    })
+
+
+
+</script>
+</body>
+</html>
+
+

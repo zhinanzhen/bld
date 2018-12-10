@@ -1,0 +1,196 @@
+html{
+    background-color: #eeeeee;
+}
+header{
+    height:1.3rem;
+    padding-top: 0.4rem;
+    background-color: #f093a1;
+    position: relative;
+}
+header i{
+    width: 0.6rem;
+    height: 100%;
+    position: absolute;
+    left: 2%;
+    top: 1%;
+    background: url("../img/left.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    margin-top: 0.2rem;
+}
+header h3{
+ margin-left:0.7rem;
+   line-height: 0.9rem;
+    font-size: 0.36rem;
+    color:#fff;
+
+}
+header em{
+    width: 0.5rem;
+    height: 0.5rem;
+    position: absolute;
+    right: 5%;
+    top: 25%;
+    background: url("../img/etc.png") no-repeat center;
+    background-size: 100%;
+}
+.chat_main{
+   /* padding-top:0.88rem;*/
+    margin-top: 0.5rem;
+    width: 100%;
+    padding:0.2rem 0.2rem 0.2rem 0.2rem;
+
+}
+.chat_main img{
+    width: 0.88rem;
+    /*height: 0.88rem;*/
+    display: inline-block;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    vertical-align: top;
+
+}
+.chat_main .left,.chat_main .right {
+    margin-bottom: 0.3rem;
+}
+.chat_main .left .user_chat,.chat_main .right .user_chat{
+    width: 80%;
+    display: inline-block;
+
+}
+.chat_main .left .user_chat span,.chat_main .right .user_chat span{
+    display: inline-block;
+    padding:0 0.3rem 0 0.5rem;
+    border:5px solid red;
+    border-image-source: url("../img/chat_bg_03.png");
+    border-image-slice: 5 fill;
+    border-image-width: 5px ;
+    border-radius: 5px ;
+}
+.chat_main .right img{
+    margin-right: 10px;
+}
+.chat_main .right .user_chat span{
+    border-image-source: url("../img/chat_bg_07.png");
+    color:#fff;
+    padding:0 0.4rem 0 0.5rem;
+}
+/*
+.chat_main span{
+    display: inline-block;
+    padding:0.2rem 0.3rem;
+    margin-left: 0.9rem;
+    background-color: #fff;
+    /!*width: 60%;*!/
+    border:5px solid red;
+    border-image-source: url("../img/chat_bg_03.png");
+    border-image-slice: 5 fill;
+    border-image-width: 5px ;
+    border-radius: 5px ;
+}
+.chat_main .left,.chat_main .right{
+    position: relative;
+    padding:0.2rem 0 ;
+}
+.chat_main .left :before{
+    background: url("../img/chat_left.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    content:"";
+    position: absolute;
+    width: 0.2rem;
+    height: 0.2rem;
+    left:15%;
+    top:22%;
+}
+.chat_main .right span{
+    border-image-source: url("../img/chat_bg_07.png");
+    border-image-slice: 5 fill;
+    border-image-width: 5px ;
+    margin-right: 0.3rem;
+    color:#fff;
+}
+.chat_main .right :before{
+    background: url("../img/chat_right.png") no-repeat center;
+    -webkit-background-size: 120%;
+    background-size: 120%;
+    content:"";
+    position: absolute;
+    transform: rotate(180deg);
+    width: 0.2rem;
+    height: 0.2rem;
+    right:19%;
+    top:23%;
+}
+*/
+#time,.time{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding:0.1rem 0.2rem;
+    color:#fff;
+    background-color: rgba(0, 0, 0,.2);
+    border-radius: 3px;
+    margin-bottom: 0.2rem;
+}
+.bottom{
+    padding:0 0.2rem;
+    width: 100%;
+    position: fixed;
+   /* bottom: 3rem;*/
+    bottom: 0rem;
+    height:1.1rem;
+    background-color: #fff;
+}
+.bottom input{
+display:inline-block;
+    width: 60%;
+    line-height: 1.1rem;
+}
+.bottom .chat_email,.bottom .chat_add{
+    position: absolute;
+    top: 0;
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/chat1_05.png") no-repeat center;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.bottom .chat_email{
+    right: 20%;
+}
+.bottom .chat_add{
+    right: 5%;
+    -webkit-background-size: 120%;
+    background-size: 120%;
+    background-image: url("../img/chat1_03.png");
+}
+#add_show{
+    height: 2.9rem;
+    width: 100%;
+    position:fixed;
+    bottom: 0;
+    background-color: #fff;
+    display: none;
+
+}
+#add_show  .photo{
+    position: absolute;
+    left: 30%;
+    top: 15%;
+}
+#add_show  .photo img,#add_show .shootingr img{
+    width: 1.5rem;
+}
+#add_show  .photo span,#add_show  .shootingr span{
+    display: block;
+    text-align: center;
+    color:#666;
+}
+#add_show .shootingr{
+    position: absolute;
+    right: 20%;
+    top: 20%;
+}

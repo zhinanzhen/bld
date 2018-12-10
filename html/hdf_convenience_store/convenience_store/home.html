@@ -24,7 +24,7 @@
 			<div>
 				<div class="swiper-container" id="swiper1">
 				  	<div class="swiper-wrapper">
-					    <div class="swiper-slide">
+					    <!--<div class="swiper-slide">
 					    	<img src="../img/bl_02.png"/>
 					    </div>
 					    <div class="swiper-slide">
@@ -32,7 +32,7 @@
 					    </div>
 					    <div class="swiper-slide">
 					    	<img src="../img/bl_02.png"/>
-					    </div>
+					    </div>-->
 					</div>
 					<div class="swiper-pagination"></div>
 				</div>
@@ -43,23 +43,17 @@
 						</div>
 						<div>我加入的便利店</div>
 					</div>
-					<div class="joina">
+					<div class="joina joinc">
 						<div>
-							<div>
-								<img src="../img/bl_01.png"/>
-							</div>
+							<div></div>
 							<div>007</div>
 						</div>
 						<div>
-							<div>
-								<img src="../img/bl_01.png"/>
-							</div>
+							<div></div>
 							<div>007</div>
 						</div>
 						<div>
-							<div>
-								<img src="../img/bl_01.png"/>
-							</div>
+							<div></div>
 							<div>007</div>
 						</div>
 					</div>
@@ -73,23 +67,17 @@
 					</div>
 					<div class="joina joinb">
 						<div>
-							<div>
-								<img src="../img/bl_01.png"/>
-							</div>
+							<div></div>
 							<div>007</div>
 							<div>加入</div>
 						</div>
 						<div>
-							<div>
-								<img src="../img/bl_01.png"/>
-							</div>
+							<div></div>
 							<div>007</div>
 							<div>加入</div>
 						</div>
 						<div>
-							<div>
-								<img src="../img/bl_01.png"/>
-							</div>
+							<div></div>
 							<div>007</div>
 							<div>加入</div>
 						</div>
@@ -100,34 +88,73 @@
 		
 <script type="text/javascript">
 	$(function(){
-		var mySwiper = new Swiper('#swiper1',{
-			autoplay: false,//可选选项，自动滑动
-			pagination: {
-			    el:'.swiper-pagination'
-			  },
+		//5.1 	便利店页面banner
+		ajaxs("api/ad/list",'post',{type:2},function(data){
+			console.log(data);
+			var data=data.list,ks="";
+			for(i in data){
+				ks+=`<div class="swiper-slide" data-ida=${data[i].url} >
+				    	<img src=${data[i].image} />
+				    </div>`;
+			}
+			$("#swiper1>.swiper-wrapper").html(ks);
+			var mySwiper = new Swiper('#swiper1',{
+				autoplay: false,//可选选项，自动滑动
+				pagination: {
+				    el:'.swiper-pagination'
+				  },
+			})
+			//进入便利店
+			$(".joina>div").click(function(){
+				window.location.href="../buy/order.html";
+			})
+		},function(err){
+			console.log(err);
 		})
-		$(".joina>div").click(function(){
-			window.location.href="../buy/order.html";
+		//5.2	我加入的便利店
+		
+		/*ajaxs("api/user/login",'post',{mobile: '13521822119',password: '123456'},function(data){
+			console.log(data);
+			
+			
+			
+			ajaxs("api/store/mylist",'post',{},function(data){
+				console.log(data);
+			},function(err){
+				console.log(err);
+			});
+		},function(err){
+			console.log(err);
+		});*/
+		
+		
+		
+		
+		
+		
+		ajaxs("api/store/mylist",'post',{},function(data){
+			console.log(data);
+			var ks="",data=data.list;
+			for(i in data){
+				ks+=`<div>
+						<div>
+							<img src=${data[i].showPic} />
+						</div>
+						<div>${data[i].name}</div>
+					</div>`;
+			}
+//			$(".joinc").html(ks);
+		},function(err){
+			console.log(err);
 		})
-		//登录
-		var parameter={
-			mobile:"13521822119",
-			password:"123456"
-		}
-		ajaxs("api/user/login",'post',parameter,function(data){
+		
+		//5.3	附近便利店
+		ajaxs("api/store/nearlist",'post',{cityName:"郑州"},function(data){
 			console.log(data);
 		},function(err){
 			console.log(err);
 		})
 		
-		/*var parameter={
-			cityName: '杭州'
-		}
-		ajaxs("api/store/mylist",'post',parameter,function(data){
-			console.log(data);
-		},function(err){
-			console.log(err);
-		})*/
 	})
 </script>
 	</body>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>我的简介</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <script src="../js/all.js"></script>
+    <style>
+        .abstract_header{
+            width: 100%;
+            padding: 0 0.3rem;
+            height: 0.88rem;
+            background-color: #f093a1;
+            position: relative;
+        }
+        .abstract_header em{
+            width: 0.6rem;
+            height: 0.88rem;
+            display: inline-block;
+            background: url("../img/left.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .abstract_header h3{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            line-height: 0.88rem;
+            color: #ffffff;
+            font-size: 0.36rem;
+        }
+        .abstract_header a{
+            position: absolute;
+            right: 10%;
+            top: 20%;
+            color: #ffffff;
+            font-size: 0.36rem;
+        }
+        .title{
+            padding-left: 0.3rem;
+            margin-top: 0.5rem;
+        }
+        .title img{
+            display: inline-block;
+            width: 0.95rem;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+        .title span{
+            color: #333;
+            font-size: 0.36rem;
+            display: inline-block;
+            margin-left: 0.2rem;
+        }
+        .simple_mian{
+            margin-top: 0.3rem;
+        }
+        .simple_mian .time{
+            text-align: center;
+            color:#a1a1a1;
+        }
+        .dialog{
+            width: 80%;
+            height: 2rem;
+            background: url("../img/simple_abstruct.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+            position: relative;
+
+            margin:0.5rem 0 0.5rem 8% ;
+        }
+        .dialog span{
+            height: 2rem;
+            position: absolute;
+            top: 5%;
+            left: 8%;
+            width: 85%;
+            font-size: 0.3rem;
+            color: #ffffff;
+        }
+        .dialog em{
+            width: 0.5rem;
+            height: 0.5rem;
+            position: absolute;
+            right: -7%;
+            top: 38%;
+            background-color: #f093a1;
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 0.32rem;
+            text-align: center;
+            display: none;
+        }
+        .delete{
+            width: 90%;
+            background-color: #f093a1;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            height: 1rem;
+            line-height: 1rem;
+            text-align: center;
+            left: 5%;
+            font-size: 0.32rem;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="simple_layer">
+    <header class="abstract_header">
+        <em onclick="back()"></em>
+        <h3>我的简介</h3>
+        <a href="javascript:;" class="manage">管理 </a>
+    </header>
+    <div class="title">
+        <img src="../img/mine1.png" alt=""/>
+        <span>李涵</span>
+    </div>
+    <div class="simple_mian">
+        <div class="time">2018-03-05  22:48</div>
+        <div class="dialog">
+        <span>马上就要参加高考了，感觉很激动呢！马上就要参加高考了，感觉很激动呢</span>
+            <em></em>
+        </div>
+        <div class="time">2018-03-05  22:48</div>
+        <div class="dialog">
+        <span>马上就要参加高考了，感觉很激动呢！马上就要参加高考了，感觉很激动呢</span>
+            <em></em></div>
+
+    </div>
+    <button class="delete">删除</button>
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/jquery.js"></script>
+<script>
+//逻辑处理 点击管理按钮 出现删除框 小红圈 点击小红圈 出现innertext √ 点击删除按钮 发送ajax
+$(function() {
+   // var showDialog = true;
+    $(".manage").click(function () {
+       /* if (showDialog) {*/
+            $(".dialog em").show();
+            $(".delete").show();
+            var flag = true;
+            $(".dialog em").click(function () {
+                if (flag) {
+                    $(this).text("√");
+                    flag = false;
+                } else {
+                    $(this).text("");
+                    flag = true;
+                }
+
+            })
+           // showDialog = false;
+       // }
+            //console.log($(this).next(".dialog"));
+            // console.log($(".dialog").siblings(".dialog"));
+            //$(".dialog").sibling().text("");
+       /* else
+            {
+                $(".dialog em").hidden();
+                $(".delete").hidden();
+                showDialog = true;
+            }*/
+
+    })
+})
+</script>
+</body>
+</html>

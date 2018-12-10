@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>好友介绍页面</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/topic.css"/>
+    <link rel="stylesheet" href="../css/mine.css"/>
+    <link rel="stylesheet" href="../css/Dynamic-hot.css"/>
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link rel="stylesheet" href="../css/mui_img.css"/>
+    <link rel="stylesheet" href="../css/dynamic_photo.css"/>
+    <script src="../js/all.js"></script>
+    <style>
+        .friends_introduce_header .down{
+            margin-top: 0.5rem;
+        }
+        .friends_introduce_header{
+            background-image: url("../img/bg.jpg");
+
+        }
+
+
+        .button{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 1.12rem;
+        }
+        .button #delete,.button #send_message{
+            position: absolute;
+            width: 45%;
+            height: 100%;
+            top: 0;
+            border-radius: 5px;
+        }
+        .button #delete{
+            left: 3%;
+            border:1px solid #dcdcdc;
+            background-color: #fff;
+        }
+        .button #send_message{
+            right:3%;
+            color:#fff;
+            border:1px solid #f093a2;
+
+            background-color: #f093a1;
+        }
+        #confirm_delete{
+            width: 5.65rem;
+            position:absolute;
+            left: 12%;
+            top:50%;
+            transform: translateY(-50%);
+            background: #fff;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            border-radius: 15px;
+            display: none;
+        }
+        #confirm_delete{
+            z-index: 1009;
+        }
+        #confirm_delete{
+            z-index: 1010;
+        }
+        #confirm_delete h4{
+            text-align: center;
+            height: 1.83rem;
+            line-height: 1.83rem;
+            font-size: 0.32rem;
+            margin-bottom:0.5rem;
+        }
+        #confirm_delete button{
+            font-size: 0.32rem;
+            position: absolute;
+            border:none;
+            height: 0.92rem;
+            line-height: 0.92rem;
+            background-color:rgba(0,0,0,0);
+        }
+        #confirm_delete .quit{
+            left: 20%;
+            bottom: 0;
+        }
+        #confirm_delete .confirm{
+            right: 20%;
+            bottom: 0;
+            color:#ea6476;
+        }
+        .confirm_delete_show{
+            padding:0.2rem 0.5rem;
+            color:#fff;
+            background-color: rgba(0, 0, 0, .4);
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            bottom: 1.4rem;
+            /* display:block;*/
+            display: none;
+        }
+        #mask{
+            width: 100%;
+            height: 100%;
+            opacity: 0.4; /*半透明*/
+            filter: alpha(opacity=40); /*ie 6半透明*/
+            background-color: black;
+            position: fixed;
+            z-index:1000;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .header .center .more{
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #ffffff;
+            font-size: 0.30rem;
+        }
+        .friends_introduce_header .center em{
+            width: 0.6rem;
+            height: 0.9rem;
+            position: absolute;
+            left: 0;
+            top: -85%;
+            background: url("../img/left.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .header{
+            height: 3.8rem;
+        }
+        .header .center{
+            margin-top: 0.6rem;
+        }
+        .all_photo ul .no_photo,.all_dynamic .all_dynamic_ul .no_photo{
+            font-size: 0.34rem;
+            text-indent: 2em;
+            color:#999;
+            width: 100%;
+            padding-bottom: 0.3rem;
+        }
+        body{
+            background-color: #fff;!important;
+
+        }
+        .all_dynamic{
+            margin-bottom: 1rem;
+        }
+        .button {
+            width: 100%;
+            position: fixed;
+            bottom: 5%;
+            height: 1rem;
+        }
+        #shielding{
+            width: 25%;
+            height: 100%;
+            line-height: 100%;
+            text-align: center;
+            background-color: #f093a1;
+            color: #fff;
+            font-size: 0.36rem;
+        }
+    </style>
+</head>
+<body>
+<div id="loading">
+    <img src="../img/login.gif" alt=""/>
+</div>
+<div class="friends_introduce_layer">
+    <div id="mask"></div>
+    <div class="header friends_introduce_header">
+        <!--用户信息-->
+    </div>
+    <div class="all_photo clearfix">
+        <!--用户相册-->
+    </div>
+    <div class="all_dynamic">
+        <!--用户动态-->
+    </div>
+
+</div>
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/mui.preview.js"></script>
+<script src="../js/mui.zoom.js"></script>
+<script src="../js/template-web.js"></script>
+<script src="../js/template.js"></script>
+<script type="text/html" id="userInfo">
+    <div class="center">
+        <!--用户信息-->
+        <em onclick="back()"></em>
+        {{if user.headpicPath ==''|| !user.headpicPath}}
+        <img src="../img/beyond.png" alt=""/>
+        {{else }}
+        <img src="{{user.headpicPath}}" alt=""/>
+        {{/if}}
+        <div class="minddle">
+            <div class="middle_up">
+                <span>{{user.nickname?user.nickname:user.username}}</span>
+            </div>
+            <div class="middle_center">
+                {{user.userId}}
+            </div>
+            <div class="middle_down">
+                <i>{{user.sex}}</i>
+                <i>{{date()-user.birthday.split("-")[0]-0}}岁</i>
+                <i>{{user.school}}</i>
+            </div>
+        </div>
+        <div class="more" onclick="location.href='friends_introduce_more_noAtt.html?userId={{user.userId}}'">更多</div>
+    </div>
+    <div class="down">简介：
+        {{if user.intro==""}}
+        <span>此人很懒，还没有留下简介 ！</span>
+        {{else}}
+        <span>{{user.intro}}</span>
+        {{/if}}
+
+    </div>
+    <div class="button clearfix" onclick="shielding_fans('{{user.sourceId}}')">
+        <button id="shielding">屏蔽粉丝</button>
+    </div>
+
+</script>
+<script type="text/html" id="userPhoto">
+    <p>{{name}}的相册 <em onclick="location.href='dynamic_photo.html'"></em></p>
+    <ul class="all_photo_ul clearfix">
+        {{if imgs.length==0}}
+        <li class="no_photo">
+            暂时没有相册
+        </li>
+        {{else imgs.length !==0}}
+        {{each imgs as value i }}
+        <li>
+            <img src="{{value[0]}}" data-preview-src="" data-preview-group="{{i}}" alt=""/>
+            <span>{{value.length}}张</span>
+        </li>
+        {{/each}}
+        {{/if}}
+
+    </ul>
+</script>
+<script type="text/html" id="userDynamic">
+    <p>{{user.name}}的动态 <em onclick="location.href='social_update.html?userId={{user.user_id}}'"></em></p>
+    <ul class="all_dynamic_ul clearfix">
+        {{if spaceDynamicList.length==0}}
+        <li class="no_photo">
+            暂时没有相册
+        </li>
+        {{else }}
+        {{each spaceDynamicList as value i}}
+        {{value.resources=jsonStringToArr(value.resources)}}
+        {{each value.resources as resource as i}}
+        <li>
+            <img src="{{resource}}" data-preview-src="" data-preview-group="{{i}}" alt=""/>
+        </li>
+        {{/each}}
+        {{/each}}
+        {{/if}}
+    </ul>
+
+</script>
+<script>
+    $(document).ajaxStop(function(){
+        $("#loading").hide();
+    });
+
+    mui.previewImage();
+    $(function(){
+
+//api/spacedynamic/queryMySpaceDynamic  3.1.3指定用户的动态
+        var href=location.href.split("=")[1];
+        var userId=localStorage.getItem('userId');
+
+//5.1.2获取个人信息
+        function attentionDy(){
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                async: false,
+                url: "http://39.104.127.252:8080/beyond/api/user/userInfo",
+                data:{
+                    userId:href
+                },
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                    if(data.code==0){
+                        template.helper('date', function() {
+                            return new Date().getFullYear();
+                        });
+                        var html=template("userInfo",data);
+                        $(".friends_introduce_header").html(html);
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        }
+        attentionDy();
+        //获取指定用户的动态相册
+        function photo(){
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                async: false,
+                url: "http://39.104.127.252:8080/beyond/api/spacedynamic/spaceDynamicImgs",
+                data:{
+                    userId:href
+                },
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                    if(data.code==0){
+                        var html=template("userPhoto",data);
+                        $(".all_photo").html(html);
+                    }
+
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        }
+        photo();
+//3.1.3指定用户的动态
+        function userDynamic(){
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                async: false,
+                url: "http://39.104.127.252:8080/beyond/api/spacedynamic/queryMySpaceDynamic",
+                data:{
+                    userId:href,
+
+
+                },
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                    if(data.code==0){
+                        template.helper('jsonStringToArr', function(data) {
+                            return JSON.parse(data);
+                        });
+
+                        var html=template("userDynamic",data);
+                        $(".all_dynamic").html(html);
+                    }
+
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        }
+        userDynamic()
+        /* $(".more").click(function(){
+         location.href="friends_introduce_more.html?user_id='+'location.href.split('=')[1]'";
+         }) */
+        //屏蔽粉丝
+        function shielding_fans(sourceId){
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: "post",
+                async: false,
+                url: "http://39.104.127.252:8080/beyond/api/relationuser/auditList",
+                data:{
+                    userId:userId,
+                    type:1,
+                    sourceId:sourceId
+                },
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                    if(data.code==0){
+                      /*  var html=template("my_dynamic",data);
+                        $(".content_main").html(html);*/
+                        alert("已屏蔽");
+                    }
+
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>

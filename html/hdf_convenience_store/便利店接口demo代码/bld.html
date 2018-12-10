@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <title>便利店测试</title>
+</head>
+
+<body>
+<h3>公共</h3>
+<input type="button" value="商品类目" onclick="productcategory()"/>
+<br/>
+<hr/>
+<h3>首页</h3>
+<input type="button" value="首页banner" onclick="adList()"/>
+<br/>
+<hr/>
+<h3>登录注册</h3>
+<input type="button" value="发送验证码" onclick="sendCaptcha()"/>
+<input type="button" value="注册" onclick="register()"/>
+<input type="button" value="登录" onclick="login()"/>
+<br/>
+<hr/>
+<h3>二手宝贝</h3>
+<input type="button" value="发布二手商品" onclick="saveSecondgoods()"/>
+<br/>
+<hr/>
+<h3>便利店</h3>
+<input type="button" value="我加入的便利店" onclick="storemylist()"/>
+<input type="button" value="附近的便利店" onclick="storenearlist()"/>
+
+<br/>
+<hr/>
+<h3>动态</h3>
+<input type="button" value="搜索新用户" onclick="serchNewUser()"/>
+<input type="button" value="请求添加新用户" onclick="addUserSend()"/>
+<input type="button" value="审核添加新用户" onclick="audit()"/>
+<input type="button" value="发布动态" onclick="addSpaceDynamic()"/>
+<input type="button" value="朋友圈" onclick="queryFriendDynamic()"/>
+<input type="button" value="举报" onclick="addShield()"/>
+<input type="button" value="获取动态详情" onclick="infoFriendDynamic()"/>
+<input type="button" value="发表评论" onclick="addComment()"/>
+<input type="button" value="获取某人动态" onclick="queryMySpaceDynamic()"/>
+
+<script>
+    var baseUrl = 'http://39.104.181.50:8080/bld/';
+    //var baseUrl = 'http://127.0.0.1:8080/bld/';
+    function productcategory() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/productcategory/list',
+            dataType: 'json',
+            data: {
+                type: '0'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+    function storenearlist() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/store/nearlist',
+            dataType: 'json',
+            data: {
+                cityName: '杭州'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+    function storemylist() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/store/mylist',
+            dataType: 'json',
+            data: {
+                //type: '3'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+    function adList() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'GET',
+            url: baseUrl + 'api/ad/list',
+            dataType: 'json',
+            data: {
+                type: '3'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+    function saveSecondgoods() {
+        var array = [];
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/secondgoods/saveSecondgoods',
+            dataType: 'json',
+            data: {
+                userId: '3',
+                type: '0',
+                content: '我只是一条简单的动态',
+                resources: JSON.stringify(array)
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function sendCaptcha() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/user/sendCaptcha',
+            dataType: 'json',
+            data: {
+                mobile: '13521822119',
+                uuid: '123456',
+                type: '1'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+    function queryMySpaceDynamic() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/spacedynamic/queryMySpaceDynamic',
+            dataType: 'json',
+            data: {
+                userId: '654321'
+            },
+            success: function (data) {
+                console.log(data);
+                console.log(data.resources);
+                console.log(JSON.parse(data.resources));
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function addComment() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/comment/save',
+            dataType: 'json',
+            data: {
+                userId: '123456',
+                replyId: '1026479248947658753',
+                content: '我只是条更普通的回复',
+                sourceId: '1026011760048807938'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function infoFriendDynamic() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/spacedynamic/info',
+            dataType: 'json',
+            data: {
+                spaceDynamicId: '1030695257283850241'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function addShield() {
+        var array = ['太逗比', '笑话不好笑'];
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/complain/save',
+            dataType: 'json',
+            data: {
+                userId: '123456',
+                sourceType: '0',
+                sourceId: '1026011760048807938',
+                keywords: JSON.stringify(array)
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function addSpaceDynamic() {
+        var array = [];
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/spacedynamic/addSpaceDynamic',
+            dataType: 'json',
+            data: {
+                userId: '3',
+                type: '0',
+                content: '我只是一条简单的动态',
+                resources: JSON.stringify(array)
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function audit() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/relationuser/audit',
+            dataType: 'json',
+            data: {
+                relationId: '1033930644420599810',
+                result: '1',
+                name: '',
+                remark: ''
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function addUserSend() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/relationuser/add',
+            dataType: 'json',
+            data: {
+                userId: '18749986696',
+                relationUser: '15839613995',
+                relationName: '15839613995',
+                relationRemark: ''
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function register() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/user/register',
+            dataType: 'json',
+            data: {
+                mobile: '13521822119',
+                password: '123456',
+                uuid: '123456',
+                captcha: '86707'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function login() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/user/login',
+            dataType: 'json',
+            data: {
+                mobile: '654321',
+                password: '123456'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function serchNewUser() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/user/search',
+            dataType: 'json',
+            data: {
+                key: '56',
+                userId: '123456'
+            },
+            success: function (data) {
+                console.log(data);
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+
+    function queryFriendDynamic() {
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/spacedynamic/queryFriendDynamic',
+            dataType: 'json',
+            data: {
+                userId: '18749986696'
+            },
+            success: function (data) {
+                console.log(data);
+                console.log(data.list[0].resources);
+                console.log(JSON.parse((data.list[0].resources)));
+                alert("成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+    }
+</script>
+</body>
+
+
+</html>

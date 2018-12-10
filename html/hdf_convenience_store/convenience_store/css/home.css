@@ -51,6 +51,7 @@
 .joina > div > div:nth-child(1) {
   width: 1.095rem;
   height: 1.09rem;
+  border: 1px solid #eeeeee;
 }
 .joina > div > div:nth-child(1) > img {
   width: 100%;

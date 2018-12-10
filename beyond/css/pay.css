@@ -1,0 +1,84 @@
+.pay_header{
+    height: 0.88rem;
+    background-color: #fff;
+    padding:0 0.2rem;
+    position: relative;
+}
+.pay_header i{
+    position: absolute;
+
+    width: 0.6rem;
+    height: 100%;
+    background: url("../img/arrow.png") no-repeat center;
+    -webkit-background-size: 100%;
+    transform: rotate(180deg);
+    background-size: 100%;
+}
+.pay_header h3{
+    text-align: center;
+    font-size: 0.36rem;
+    line-height: 0.88rem;
+}
+.pay_money{
+    position: relative;
+    width: 100%;
+
+    border-top:1px solid #eee;
+}
+.pay_money_content{
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    height: 0.78rem;
+    margin-top: 0.4rem;
+    transform:translateX(-50%);
+}
+.pay_money_content img{
+    width: 0.4rem;
+    vertical-align: middle;
+}
+.pay_money_content span{
+    display: inline-block;
+    font-size:0.24rem;
+}
+.money{
+    height: 1.27rem;
+    position: relative;
+    margin-top: 1rem;
+}
+.money del{
+    display: block;
+    position: absolute;
+    left: 45%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+}
+.money em{
+    font-size: 0.24rem;
+    position: absolute;
+    right:40%;
+   padding-top:0.4rem;
+}
+.methods{
+    width: 100%;
+}
+.methods li{
+    padding: 0 0.2rem;
+    height: 1rem;
+}
+.methods li:first-of-type{
+    font-size: 0.3rem;
+    color:#6e6e6e;
+}
+.methods li a{
+    display: block;
+    height: 100%;
+    line-height: 1rem;
+    color:#333333;
+    font-size: 0.3rem;
+}
+.methods li a img{
+    display: inline-block;
+    width: 0.6rem;
+vertical-align: middle;
+}

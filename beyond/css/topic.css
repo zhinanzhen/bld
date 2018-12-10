@@ -1,0 +1,144 @@
+.layer{
+    width: 100%;
+    box-sizing: border-box;
+   /* padding:0 0.2rem;*/
+}
+/*头部css*/
+header{
+    height: 1.3rem;
+    line-height: 0.98rem;
+    padding-top: 0.4rem;
+    width: 100%;
+    background-color: #f093a1;
+    position:fixed;
+    z-index:11;
+
+}
+header h3{
+    text-align: center;
+    color:#fff;
+    font-size: 0.36rem;
+}
+header  i,header em{
+    background: url("../img/left.png") no-repeat center;
+    height: 0.45rem;
+    width: 0.45rem;
+    position: absolute;
+
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+header  i{
+    left: 2%;
+    top: 25%;
+}
+header em{
+    background-image: url("../img/add.png");
+    right: 2%;
+    top: 25%;
+}
+/*页脚*/
+footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 1rem;
+    background-color: #fff;
+}
+footer ul{
+    width: 100%;
+    padding:0 0.2rem;
+}
+footer ul li{
+    float: left;
+    width: 33%;
+
+}
+footer ul li a{
+    width: 100%;
+    display: block;
+    text-align: center;
+    position: relative;
+}
+footer ul li:first-of-type a i,footer ul li:nth-of-type(2) a i,footer ul li:last-of-type a i{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    background:url("../img/dynamic_03.png") no-repeat center;
+    -webkit-background-size: 118%;
+    background-size: 118%;
+    width:0.6rem;
+    height: 0.6rem;
+}
+footer ul li:nth-of-type(2) a i{
+    background: url("../img/person_03.png") no-repeat center;
+}
+footer ul li:last-of-type a i{
+    background-image: url("../img/mine_03.png");
+    -webkit-background-size: 105%;
+    background-size: 105%;
+}
+footer ul li:first-of-type span{
+   color:#e4939e;
+}
+footer ul li span{
+    margin-top: 0.6rem;
+    color:#959595;
+    font-size: 0.2rem;
+}
+/*中间话题部分*/
+.main{
+    width: 100%;
+    overflow: scroll;
+    margin-bottom: 1rem;
+    padding-top:0.88rem;
+}
+.main input{
+    display: block;
+    width: 94%;
+    height: 0.62rem;
+    background: #dad9d9;
+    margin:0.3rem 0.2rem;
+    border:2px solid #f093a1;
+    border-radius: 10px;
+}
+.main ul{
+    border-top: 3px solid #f093a1;
+    border-bottom: 10px solid #bfbfbf;
+}
+.main ul li{
+    padding: 0 0.2rem;
+
+}
+.main ul li h3 {
+    margin-top: 0.25rem;
+    font-size: 0.34rem;
+    height: 0.6rem;
+}
+
+.main ul li em{
+color: #fc0808;
+    font-weight: 400;
+}
+.main ul li p{
+    height: 0.6rem;
+}
+.main ul li p,.main ul li span{
+    font-size: 0.3rem;
+}
+.main ul li img{
+    width: 3.6rem;
+    /*height: 2.3rem;*/
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    margin-bottom: 0.2rem;
+}
+.main ul li h3 span{
+    font-weight: 400;
+    font-size: 0.26rem;
+}
+.main  ul:nth-of-type(2){
+    border-top: none;
+}

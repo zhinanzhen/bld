@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>高考倒计时</title>
+
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/topic.css"/>
+    <link rel="stylesheet" href="../css/Dynamic-hot.css"/>
+    <style>
+       html{
+           height: 100%;
+            background-color: #f093a1;!important;
+        }
+       body{
+           height: 100%;
+            background-color: #f093a1;!important;
+        }
+        .countDown_layer{
+            width: 100%;
+            overflow-x: hidden;
+        }
+       .Dynamic{
+           height: 1.5rem;
+       }
+       .Dynamic ul{
+           height: 1.5rem;
+       }
+        .Dynamic ul li:last-of-type span{
+            border-bottom: 3px solid #fff;
+        }
+        .countDown_layer img{
+            height: 6rem;
+            display: block;
+            border-bottom: 8px solid #fff;
+        }
+        .countDown_main{
+            width: 100%;
+            position: relative;
+        }
+        /*.timer{
+            width: 100%;
+            position: absolute;
+            left: 50%;
+            height: 2.5rem;
+            transform:translateX(-50%);
+        }*/
+        .timer{
+            position: relative;
+            /*left: 18%;*/
+            text-align: center;
+            margin: 1rem 0 0.5rem 0;
+        }
+        .timer span{
+            display: inline-block;
+            font-size: 2rem;
+            height: 100%;
+            color: #95e4ed;
+            /*padding:0.2rem 0.1rem;*/
+            border:2px solid #95e4ed;
+        }
+        .countDown_main h2,.countDown_main p{
+            text-align: center;
+            color:#fff;
+        }
+        .countDown_main h2{
+            font-size: 1.07rem;
+        }
+        .countDown_main p{
+            font-size: 0.45rem;
+        }
+        .Dynamic ul del{
+            width: 0.6rem;
+            position: absolute;
+            height: 0.88rem;
+            left: 3%;
+            top: 0%;
+            background: url("../img/left.png") no-repeat center;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="countDown_layer">
+    <!--头部-->
+    <header class= "Dynamic">
+
+        <ul class="clearfix">
+            <del onclick="back()"></del>
+            <li><a href="./timetablenew.html"> <span>课程表</span></a></li>
+            <li class="school">
+                <a href="javascript:;"><span>高考倒计时</span></a>
+            </li>
+        </ul>
+    </header>
+    <img src="../img/countDown.png" alt=""/>
+    <div class="countDown_main">
+        <div class="timer clearfix">
+            <span class="year">0</span>
+            <span class="month">0</span>
+            <span class="day">0</span>
+        </div>
+        <h2>高考倒计时</h2>
+        <p>加油！为梦想而战！</p>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script src="../js/x_rem.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/jquery.js"></script>
+<script>
+
+    function time(){
+        var grade_name=localStorage.getItem("grade_name");
+        if(grade_name){
+            grade_name=grade_name.replace(/\"/g,"");
+            // console.log(grade_name);
+            var date1=new Date();
+            var year=date1.getFullYear();
+            //console.log(year);
+            var getMonth=date1.getMonth()+1;
+            console.log("当前的月份是："+getMonth);
+            // console.log(date1)
+            if(grade_name=="高一"){
+                var one_year=year+3;
+                console.log(one_year);
+                var date2 = new Date(one_year+'-06-07');
+            }
+            if(grade_name=="高二"){
+                var two_year=year+2;
+                var date2 = new Date(two_year+'-06-07');
+            }
+            if(grade_name=="高三"){
+
+                if(getMonth>9){
+                    var three_year=year;
+                }else{
+                    var three_year=year+1;
+                }
+                var date2 = new Date(three_year+'-06-07');
+            }
+            var date = (date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000);
+            // console.log(date);
+            var span1=parseInt(date/100);
+            $(".year").text(span1);
+            //console.log(span1);
+            var span2=parseInt(date/10%10);
+            $(".month").text(span2);
+            // console.log(span2);
+            var span3=parseInt(date%10);
+            // console.log(span3);
+            $(".day").text(span3);
+            //console.log(parseInt(date));
+        }
+        }
+
+        time();
+    var timer=setInterval(function(){
+        time();
+    },86400);
+
+</script>
+</body>
+</html>
