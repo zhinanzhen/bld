@@ -22,20 +22,25 @@
 		</header>
 		<section class="sets">
 			<div>
-				<textarea class="txts" placeholder="至少输入5个字"></textarea>
+				<div class="txts">
+					<textarea placeholder="至少输入5个字"></textarea>
+				</div>
 			</div>
 		</section>
 <script type="text/javascript">
 	$(function(){
 		$(".heads p").click(function(){//发表后返回商品页
-			console.log($(".txts").html());
+			
+			console.log($(".txts>textarea").val().length);
 			
 			
-			/*if(){
-				
+			
+			if($(".txts>textarea").val().length<4){
+				alert("你眼瞎吗，说了至少输入5个字");
+			}else{
+				alert("发表成功");
 			}
-			alert("发表成功");
-			window.location.href="shopping.html";*/
+//			window.location.href="shopping.html";
 		})
 	})
 </script>

@@ -44,15 +44,15 @@
 						<div>我加入的便利店</div>
 					</div>
 					<div class="joina joinc">
-						<div>
+						<div class="sk">
 							<div></div>
 							<div>007</div>
 						</div>
-						<div>
+						<div class="sk">
 							<div></div>
 							<div>007</div>
 						</div>
-						<div>
+						<div class="sk">
 							<div></div>
 							<div>007</div>
 						</div>
@@ -104,46 +104,38 @@
 				    el:'.swiper-pagination'
 				  },
 			})
-			//进入便利店
-			$(".joina>div").click(function(){
-				window.location.href="../buy/order.html";
-			})
 		},function(err){
 			console.log(err);
 		})
 		//5.2	我加入的便利店
-		
-		/*ajaxs("api/user/login",'post',{mobile: '13521822119',password: '123456'},function(data){
-			console.log(data);
-			
-			
-			
+		var ssk = JSON.parse(localStorage.getItem('ssk'));
+		console.log(ssk);
+		if(ssk){
 			ajaxs("api/store/mylist",'post',{},function(data){
 				console.log(data);
+				var ks="",data=data.list;
+				for(i in data){
+					ks+=`<div>
+							<div>
+								<img src=${data[i].showPic} />
+							</div>
+							<div>${data[i].name}</div>
+						</div>`;
+				}
+	//			$(".joinc").html(ks);
+				//进入便利店
+				$(".joinc").on("click",".sk",function(){
+					console.log(1111);
+					window.location.href="../buy/order.html";
+				})
 			},function(err){
 				console.log(err);
-			});
-		},function(err){
-			console.log(err);
-		});*/
+			})
+		}
 		
-		
-		
-		
-		
-		
-		ajaxs("api/store/mylist",'post',{},function(data){
+		//5.4	id获取便利店信息
+		ajaxs("api/store/info",'post',{storeid:"1"},function(data){
 			console.log(data);
-			var ks="",data=data.list;
-			for(i in data){
-				ks+=`<div>
-						<div>
-							<img src=${data[i].showPic} />
-						</div>
-						<div>${data[i].name}</div>
-					</div>`;
-			}
-//			$(".joinc").html(ks);
 		},function(err){
 			console.log(err);
 		})

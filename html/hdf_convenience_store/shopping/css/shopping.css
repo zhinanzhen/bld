@@ -1,4 +1,6 @@
 @charset "UTF-8";
+/*head高度*/
+/*后退键高度*/
 html, body {
   height: 100%;
   overflow: auto;
@@ -36,6 +38,18 @@ html, body {
   justify-content: center;
   color: #333333;
   font: normal 0.18rem PingFang-SC-Regular;
+}
+.heads > .fbs {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0.8rem;
+  height: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.15rem PingFang-SC-Medium;
 }
 
 .sets {
@@ -154,7 +168,7 @@ html, body {
 }
 
 .shopf {
-  padding: 0.2rem;
+  padding: 0.15rem 0.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

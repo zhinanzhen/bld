@@ -50,27 +50,28 @@
         $('.loginBtn').click(function(){
             var phoneVal = $('.phoneVal').val();
             var pwd = $('.passWord').val();
+            var kh=false;
             $.ajax({
                 type:'POST',
                 url:url_prefix+'api/user/login',
+                xhrFields:{
+			        withCredentials:true
+			    },
                 dataType:'json',
                 data:{
                     mobile: phoneVal,
                     password: pwd
-                },
-                success:function(data){
+                },success:function(data){
                     console.log(data);
                     console.log('登录成功');
-                    /*localStorage.setItem('My_information', JSON.stringify(data));
-                    var location = JSON.parse(localStorage.getItem('location'));*/
+                    kh=true;
+					localStorage.setItem('ssk', JSON.stringify(kh));
                     window.location.href="../../index/index.html";
-                },
-                error:function(data){
+                },error:function(data){
                     console.log(data)
                 }
-            });
+            }); 
         })
-    
     })
 </script>
 </html>

@@ -7,6 +7,9 @@
 	    change();
 	    function change(){
 	        var Fs=doc.documentElement.clientWidth;
+	        if(Fs>2050){
+	        	Fs=375;
+	        }
 	        var nFs=Fs/(375/100);
 	        //字体大小为100px;
 	        doc.documentElement.style.fontSize=nFs+'px';
