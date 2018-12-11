@@ -18,9 +18,11 @@
 
 
 //ajax调用
+var urls="http://39.104.181.50:8080/bld/";
+var urla="http://39.104.181.50:8080";
 function ajaxs(url,type,data,suFn,erFn){
 	$.ajax({
-		url:"http://39.104.181.50:8080/bld/"+url,
+		url:urls+url,
  		xhrFields:{
            withCredentials:true
        	},
@@ -161,4 +163,8 @@ function textareas(){
 	$(".txt").on("keyup keydown", function(){
 	    $(this).height(this.scrollHeight);
 	})
+}
+//loading
+function loading(){
+	return html = '<div id="loading" style="width:100%;height:100%;background:#000000;filter:alpha(opacity=50);opacity:0.2;text-align:center;position:absolute;left:0px;top:0px;"><div style="width:32px;height:32px;position:fixed;top:45%;left:50%;margin-left:-16px;z-index:1000;"><img src="../img/loading.gif" /></div></div>';
 }

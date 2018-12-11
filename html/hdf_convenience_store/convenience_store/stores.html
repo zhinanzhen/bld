@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>家乐福便利店</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/layout.css"/>
+		<link rel="stylesheet" type="text/css" href="css/stores.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/swiper-4.3.3.min.css"/>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/children.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header class="heads">
+			<div class="iconfont icon-guanbi" onclick="location.href='home.html';"></div>
+			<div>家乐福</div>
+			<!--<div class="iconfont icon-sousuo1"></div>-->
+		</header>
+		<section class="sets">
+			<div>
+				<div class="banners">
+					<img src=""/>
+				</div>
+				<div class="category">
+					<ul class="menu"></ul>
+					<ul class="ccbg">
+						<li>
+							<div>
+								<img src="../img/bl_06.png"/>
+							</div>
+							<div>
+								<div>优质西蓝花</div>
+								<div>2.00/斤</div>
+								<div>
+									<div class="iconfont icon-jianshao"></div>
+									<input type="text" value="0"/>
+									<div class="iconfont icon-jia"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div>
+								<img src="../img/bl_06.png"/>
+							</div>
+							<div>
+								<div>优质西蓝花</div>
+								<div>2.00/斤</div>
+								<div>
+									<div class="iconfont icon-jianshao"></div>
+									<input type="text" value="0"/>
+									<div class="iconfont icon-jia"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div>
+								<img src="../img/bl_06.png"/>
+							</div>
+							<div>
+								<div>优质西蓝花</div>
+								<div>2.00/斤</div>
+								<div>
+									<div class="iconfont icon-jianshao"></div>
+									<input type="text" value="0"/>
+									<div class="iconfont icon-jia"></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div>
+				<span>合计：¥</span>
+				<span></span>
+				<span>元</span>
+			</div>
+			<div>结算</div>
+		</footer>
+		
+<script type="text/javascript">
+	$(function(){
+		var arr = JSON.parse(localStorage.getItem('bld_m'));
+		console.log(arr);
+		$(".heads>div:eq(1)").html(arr[1]);
+		$(".banners>img").attr("src",arr[2]);
+		
+		//5.4	id获取便利店信息
+		/*ajaxs("api/store/info",'post',{storeid:arr[0]},function(data){
+			console.log(data);
+		},function(err){
+			console.log(err);
+		})*/
+		//5.5	商品类目
+		ajaxs("api/productcategory/list",'post',{type:"0"},function(data){
+			console.log(data);
+			var data=data.list,ks="";
+			for(i in data){
+				ks+=`<li class="menu_child" data-ida=${data[i].id}>
+						${data[i].name}
+					</li>`;
+			}
+			$(".menu").html(ks);
+//			$(".menu li:eq(0)").addClass("active");
+			$(".menu").children(":first").addClass("active");
+			var index="",indexs="";
+			menu(index,indexs);
+			//5.6	指定类目下的商品
+			$(".menu").on("click",".menu_child",function(){
+				index=$(this).data("ida");
+				indexs=$(this).index();
+				//加载动画
+				$(".ccbg>li").hide();
+				$(".ccbg").append(loading());
+				menu(index,indexs);
+			})
+			function menu(index,indexs){
+				if(index==""){
+					index=1
+				}
+				if(indexs==""){
+					indexs=0;
+				}
+				$(".menu>li").eq(indexs+1).css({"border-top":"none"});
+				$(".menu>li").eq(indexs+1).siblings().css({"border-top":"0.01rem solid #666666"});
+				$(".menu>li").eq(indexs).css({"border-top":"none"});
+				$(".menu>li").eq(indexs).addClass("active").siblings().removeClass("active");
+				ajaxs("api/product/cproductlist",'post',{categoryId:index},function(data){
+					console.log(data);
+					//加载成功，隐藏动画
+					$(".ccbg>li").show();
+					$("#loading").remove();
+					var data=data.list,ks="";
+					for(i in data){
+						if(data[i].unit==null){
+							data[i].unit="斤"
+						}
+						ks+=`<li class="singles" data-singles=${data[i].id}>
+								<div>
+									<img src=${urla+data[i].image} />
+								</div>
+								<div>
+									<div>${data[i].name}</div>
+									<div>
+										<span>${data[i].price}</span>
+										<span>/${data[i].unit}</span>
+									</div>
+									<div>
+										<div class="iconfont icon-jianshao"></div>
+										<input type="text" class="inps" onkeyup="num(this)" value="0"/>
+										<div class="iconfont icon-jia"></div>
+									</div>
+								</div>
+							</li>`;
+					}
+					$(".ccbg").html(ks);
+					//商品数量
+					$(".ccbg").on("click",".icon-jia",function(){
+						var th=$(this);
+						var evl="+";
+						calculate(th,evl)
+					})
+					$(".ccbg").on("click",".icon-jianshao",function(){
+						var th=$(this);
+						var evl="-";
+						calculate(th,evl)
+					})
+					
+					function calculate(th,evl){
+						var singles=th.closest(".singles").data("singles");
+						console.log(singles);
+						var inps=Number(th.siblings(".inps").val());
+						console.log(inps);
+						if(evl=="+"){
+							th.siblings(".inps").val(inps+1);
+						}else{
+							if(inps<=0){
+								th.siblings(".inps").val(0);
+							}else{
+								th.siblings(".inps").val(inps-1);
+							}
+							
+						}
+					}
+					
+				},function(err){
+					console.log(err);
+				})
+			}
+		},function(err){
+			console.log(err);
+		})
+		$("footer>div:eq(1)").click(function(){
+			window.location.href="../buy/order.html";
+		})
+	})
+	function num(obj){//只能输入正整数,可以为0
+		var reg=/^([1-9]\d*|[0]{1,1})$/; //含0正整数
+		if(reg.test(obj.value)){
+			return;
+		}else{
+			obj.value=0;
+		}
+	}
+</script>		
+	</body>
+</html>

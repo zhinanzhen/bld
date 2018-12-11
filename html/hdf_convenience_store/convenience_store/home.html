@@ -87,7 +87,10 @@
 		</section>
 		
 <script type="text/javascript">
-	$(function(){
+	$(document).ready(function(){
+		//加载动画
+		$(".sets>div").hide();
+		$(".sets").append(loading());
 		//5.1 	便利店页面banner
 		ajaxs("api/ad/list",'post',{type:2},function(data){
 			console.log(data);
@@ -109,36 +112,37 @@
 		})
 		//5.2	我加入的便利店
 		var ssk = JSON.parse(localStorage.getItem('ssk'));
-		console.log(ssk);
 		if(ssk){
 			ajaxs("api/store/mylist",'post',{},function(data){
 				console.log(data);
 				var ks="",data=data.list;
 				for(i in data){
-					ks+=`<div>
+					ks+=`<div class="sk" data-idb=${data[i].storeId} data-names=${data[i].name} data-imgs=${urla+data[i].showPic} >
 							<div>
-								<img src=${data[i].showPic} />
+								<img src=${urla+data[i].showPic} />
 							</div>
 							<div>${data[i].name}</div>
 						</div>`;
 				}
-	//			$(".joinc").html(ks);
+				$(".joinc").html(ks);
 				//进入便利店
 				$(".joinc").on("click",".sk",function(){
-					console.log(1111);
-					window.location.href="../buy/order.html";
+					var index=$(this).data("idb");
+					var names=$(this).data("names");
+					var imgs=$(this).data("imgs");
+					var arr=[index,names,imgs];
+					localStorage.setItem('bld_m', JSON.stringify(arr));
+					window.location.href="stores.html";
 				})
 			},function(err){
 				console.log(err);
 			})
+		}else{
+			console.log("登录已过期，请重新登录,无法获取加入的便利店");
+			alert("登录已过期，请重新登录");
+			window.location.href="../../login/login/login.html";
 		}
 		
-		//5.4	id获取便利店信息
-		ajaxs("api/store/info",'post',{storeid:"1"},function(data){
-			console.log(data);
-		},function(err){
-			console.log(err);
-		})
 		
 		//5.3	附近便利店
 		ajaxs("api/store/nearlist",'post',{cityName:"郑州"},function(data){
@@ -147,6 +151,12 @@
 			console.log(err);
 		})
 		
+		$(document).ajaxStop(function(){
+			console.log("所有 AJAX 请求已完成");
+		  	//加载成功，隐藏动画
+			$(".sets>div").show();
+			$("#loading").remove();
+		});
 	})
 </script>
 	</body>

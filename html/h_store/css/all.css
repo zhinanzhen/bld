@@ -96,4 +96,26 @@
     height: 8.19rem;
 }
 
+ 
+.attract-input{
+	width: 4.77rem;
+	height: .80rem;
+	margin-top: .58rem;
+	border: solid 1px #a0a0a0;
+	padding: .2rem;
+}
 
+.attract-button{
+	width: 4.77rem;
+	height: .80rem;
+	margin: .23rem 0 .3rem 0;
+	font-size: 30px;
+	color: #ffffff;
+	background-color: #bd1e28;
+}
+
+/*意见反馈*/
+.feedback-radio{
+	height: .25rem;
+    width: .25rem;
+}

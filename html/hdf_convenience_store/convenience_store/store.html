@@ -3,51 +3,25 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
+		<title>家乐福便利店</title>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/store.css"/>
 		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
-		<!--<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>-->
 	</head>
-<style>
-	*{
-		margin:0;
-		padding:0;
-		position:relative;
-	}
-	header{
-		width:100%;
-		height:2.5rem;
-		position:absolute;
-		top:0;
-		left:0;
-		background:red;
-	}
-	section{
-		width:100%;
-		position:absolute;
-		top:2.5rem;
-		left:0;
-		bottom:2.5rem;
-		overflow: auto;
-	}
-	section>div{
-		
-	}
-	footer{
-		width:100%;
-		height:2.5rem;
-		position:absolute;
-		left:0;
-		bottom:0;
-		background:red;
-	}
-</style>
 	<body>
-		<header>头部</header>
+		<header>
+			<div class="iconfont icon-guanbi" onclick="location.href='home.html';"></div>
+			<div>家乐福</div>
+			<!--<div class="iconfont icon-sousuo1"></div>-->
+		</header>
 		<section>
 			<div>
+				<div class="banners">
+					<img src="../img/bl_05.png"/>
+				</div>
 				<div class="category">
 					<ul>
 						<li id="dd1"><a href="javascript:getProductCategoryHtml(1)">叶菜类</a></li>
@@ -68,7 +42,14 @@
 				</div>
 			</div>
 		</section>
-		<footer>底部</footer>
+		<footer>
+			<div>
+				<span>合计：¥</span>
+				<span></span>
+				<span>元</span>
+			</div>
+			<div>结算</div>
+		</footer>
 		
 <script>
     $(".category li").click(function(){
@@ -122,13 +103,17 @@
         $(".meunTab li").eq(1).click();
     }
 	function loadCart(){
-		//ajax
+		
 		$.ax("cart/view",null,'GET',null,'json',function(data){
 			$("#cartQuantity").text(data.quantity);
         },
             function(data){
         });
-	}	
+	}
+	$(".icon-guanbi").click(function(){
+		console.log(111);
+//		window.location.href="home.html";
+	})
 </script>
 		
 		
