@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" onclick="javascript :history.back(-1);"></i>
+			<i class="iconfont icon-guanbi" onclick="location.href='order.html'"></i>
 			<div>收货地址</div>
 		</header>
 		<section class="sets">
@@ -33,7 +33,7 @@
 							<i class="iconfont icon-tubiao-xuanze"></i>设为默认地址
 						</div>
 						<div>
-							<div>编辑</div>
+							<div class="editor">编辑</div>
 							<div>删除</div>
 						</div>
 					</div>
@@ -51,7 +51,7 @@
 							设为默认地址
 						</div>
 						<div>
-							<div>编辑</div>
+							<div class="editor">编辑</div>
 							<div>删除</div>
 						</div>
 					</div>
@@ -63,8 +63,13 @@
 		</footer>
 <script type="text/javascript">
 	$(function(){
+		//设为默认地址
 		$(".sets").on("click",".defaults",function(){
-			var defaults=
+			
+		})
+		//编辑地址
+		$(".sets").on("click",".editor",function(){
+			window.location.href="add_address.html";
 		})
 	})
 </script>
