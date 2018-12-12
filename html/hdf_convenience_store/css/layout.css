@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/*head高度*/
+/*head高度，沉浸式0.8，普通0.4*/
 /*后退键高度*/
 html, body {
   height: 100%;

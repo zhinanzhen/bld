@@ -27,50 +27,7 @@
 				</div>
 				<div class="category">
 					<ul class="menu"></ul>
-					<ul class="ccbg">
-						<li>
-							<div>
-								<img src="../img/bl_06.png"/>
-							</div>
-							<div>
-								<div>优质西蓝花</div>
-								<div>2.00/斤</div>
-								<div>
-									<div class="iconfont icon-jianshao"></div>
-									<input type="text" value="0"/>
-									<div class="iconfont icon-jia"></div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div>
-								<img src="../img/bl_06.png"/>
-							</div>
-							<div>
-								<div>优质西蓝花</div>
-								<div>2.00/斤</div>
-								<div>
-									<div class="iconfont icon-jianshao"></div>
-									<input type="text" value="0"/>
-									<div class="iconfont icon-jia"></div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div>
-								<img src="../img/bl_06.png"/>
-							</div>
-							<div>
-								<div>优质西蓝花</div>
-								<div>2.00/斤</div>
-								<div>
-									<div class="iconfont icon-jianshao"></div>
-									<input type="text" value="0"/>
-									<div class="iconfont icon-jia"></div>
-								</div>
-							</div>
-						</li>
-					</ul>
+					<ul class="ccbg"></ul>
 				</div>
 			</div>
 		</section>
@@ -152,7 +109,7 @@
 									</div>
 									<div>
 										<div class="iconfont icon-jianshao"></div>
-										<input type="text" class="inps" onkeyup="num(this)" value="0"/>
+										<input type="text" class="inps" onkeyup="num(this)" onblur="nums(this)" value="0"/>
 										<div class="iconfont icon-jia"></div>
 									</div>
 								</div>
@@ -204,6 +161,11 @@
 		if(reg.test(obj.value)){
 			return;
 		}else{
+			obj.value="";
+		}
+	}
+	function nums(obj){
+		if(obj.value==""){
 			obj.value=0;
 		}
 	}

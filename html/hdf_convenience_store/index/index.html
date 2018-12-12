@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/layout.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/swiper-4.3.3.min.css"/>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	    <header class="clearfix">
+	    	<div>
+	    		<input type="text" class="iconfont icon-sousuo1" placeholder="&#xe62e;手机电脑" />
+	    	</div>
+	    	<div>
+	    		<div class="iconfont icon-tubiao13"></div>
+	    		<div>分类</div>
+	    	</div>
+	    </header>
+		<section class="sets">
+			<div>
+				<div class="swiper-container" id="swiper1">
+				    <div class="swiper-wrapper">
+				        <div class="swiper-slide" id="latest_activity">
+				        	<img src="../../../img/index_s1.png">
+				        </div>
+				        <div class="swiper-slide" id="Introduction">
+				        	<img src="../../../img/index_s1.png">
+				        </div>
+				        <div class="swiper-slide" id="instructions">
+				        	<img src="../../../img/index_s1.png">
+				        </div>
+				        <div class="swiper-slide" id="donation">
+				        	<img src="../../../img/index_s1.png">
+				        </div>
+				    </div>
+				    <div class="swiper-pagination"></div>
+				</div>
+				<div class="menu">
+					<a href="../convenience_store/home.html">
+						<div>
+							<img src="../../../img/index_share.png"/>
+						</div>
+						<div>共享便利店</div>
+					</a>
+					<a href="javascript:;">
+						<div>
+							<img src="../../../img/index_inster.png"/>
+						</div>
+						<div>我的兴趣</div>
+					</a>
+					<a href="javascript:;">
+						<div>
+							<img src="../../../img/index_hourse.png"/>
+						</div>
+						<div>共享商城</div>
+					</a>
+				</div>
+				<div class="trading">
+	        		<div>
+	        			<div class="act">新鲜</div>
+	        		</div>
+	        		<div>
+	        			<div>附近</div>
+	        		</div>
+				</div>
+	        	<div class="contents">
+	        		<div class="shows">
+	        			<div>
+	        				<div>img</div>
+	        				<div>
+	        					<div>name</div>
+	        					<div>其他</div>
+	        				</div>
+	        			</div>
+	        			<div>
+	        				<div>
+	        					<span>¥15</span>
+	        					夏日斜跨小包包女2018新款潮韩版百搭时尚
+	        				</div>
+	        				<div class="aas">
+	        					<div>
+	        						<img src="../../../img/index_small_1.png">
+	        						<img src="../../../img/index_small_1.png">
+	        						<img src="../../../img/index_small_1.png">
+	        						<img src="../../../img/index_small_1.png">
+	        					</div>
+	        				</div>
+							<div class="">浏览<span>12</span></div>
+	        			</div>
+	        		</div>
+	        		<div class="shows">
+	        			<div>
+	        				<div>img</div>
+	        				<div>
+	        					<div>name</div>
+	        					<div>其他</div>
+	        				</div>
+	        			</div>
+	        			<div>
+	        				<div>
+	        					<span>¥15</span>
+	        					夏日斜跨小包包女2018新款潮韩版百搭时尚
+	        				</div>
+	        				<div class="aas">
+	        					<div>
+	        						<img src="../../../img/index_small_1.png">
+	        						<img src="../../../img/index_small_1.png">
+	        						<img src="../../../img/index_small_1.png">
+	        						<img src="../../../img/index_small_1.png">
+	        					</div>
+	        				</div>
+							<div class="">浏览<span>12</span></div>
+	        			</div>
+	        		</div>
+	        	</div>
+			</div>
+		</section>
+		<footer>
+			<div>
+				<div class="iconfont icon-shouye"></div>
+				<div>主页</div>
+			</div>
+			<div>
+				<div class="iconfont icon-shoucangxing"></div>
+				<div>封地</div>
+			</div>
+			<div>
+				<div></div>
+				<div>发布</div>
+			</div>
+			<div>
+				<div class="iconfont icon-12"></div>
+				<div>消息</div>
+			</div>
+			<div>
+				<div class="iconfont icon-wode1"></div>
+				<div>我的</div>
+			</div>
+		</footer>
+		
+
+<script type="text/javascript">
+	var mySwiper1 = new Swiper ('#swiper1',{
+		loop:true,
+		autoplay: true,//可选选项，自动滑动
+	    direction: 'horizontal',
+	    pagination: {
+		    el: '.swiper-pagination',
+		 },
+	})
+   	$(".trading>div").click(function(){
+   		window.location.href="../convenience_store/home.html";
+   		console.log(11);
+   		$(this).children().addClass("act");
+   		$(this).siblings().children().removeClass("act");
+   	})
+	
+	$(".shows").click(function(){
+		window.location.href="../shopping/shopping.html";
+	})
+	
+	
+	
+	
+	
+	
+	
+</script>
+	</body>
+</html>

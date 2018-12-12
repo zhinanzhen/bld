@@ -1,5 +1,5 @@
 @charset "utf-8";
-$heights:0.4rem;/*head高度*/
+$heights:0.4rem;/*head高度，沉浸式0.8，普通0.4*/
 $heighta:0.4rem;/*后退键高度*/
 html, body {
     height: 100%;
@@ -11,6 +11,7 @@ html, body {
 .heads{
     width: 100%;
     height:$heights;
+//  padding-top:0.4rem;/*沉浸式打开*/
     display: flex;
     position:absolute;
     top: 0;
