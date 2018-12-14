@@ -20,10 +20,10 @@
 			</div>
 			<div class="attract-apply tc">
 				<p>
-					<input type="text" class="attract-input" placeholder="我要报名"/>
+					<input type="text" id="phone" class="attract-input" placeholder="我要报名"/>
 				</p>
 				
-				<button class="attract-button">我要报名</button>
+				<button class="attract-button" onclick="save()">我要报名</button>
 				<p>
 					留下电话，三个工作日内获得电话审核
 				</p>
@@ -31,5 +31,34 @@
 		</div>
 		<script src="js/x_rem.js"></script>
 		<script src="js/all.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript">
+			function save(){
+				var phone=$("#phone").val();
+				if(isEmptyString(phone)){
+					alert("请填写联系联系方式");
+					return false;
+				}
+				$.ajax({
+					//处理session每次不唯一问题
+					xhrFields: {
+						withCredentials: true
+					},
+					type: 'POST',
+					url: baseUrl + 'api/attractmerchant/save',
+					dataType: 'json',
+					data: {
+						phone:phone
+					},
+					success: function (data) {
+						alert("申请已提交,随后工作人员会与您联系,请保持电话畅通");
+						location.reload();
+					},
+					error: function (data) {
+						console.log(data);
+					}
+				});
+			}
+		</script>
 	</body>
 </html>

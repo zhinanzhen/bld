@@ -25,14 +25,14 @@
 						<div>
 							<p class="f-s-38">李涵</p>
 							<div>
-								<span>关注&nbsp;23</span>
-								<span class="m-l-34">粉丝&nbsp;54</span>
-								<span class="m-l-34">信誉分&nbsp;0</span>
-								<span class="m-l-34">赞&nbsp;23</span>
+								<span>关注&nbsp;<span id="attentionNum">54</span></span>
+								<span class="m-l-34">粉丝&nbsp;<span id="fansNum">54</span></span>
+								<span class="m-l-34">信誉分&nbsp;<span id="honestNum">54</span></span>
+								<span class="m-l-34">赞&nbsp;<span id="praiseNum">54</span></span>
 							</div>
 						</div>
 						<div class="row">
-							<img src="img/portrait.png" alt="" class="my-portrait"/>
+							<img id="headpicPath" src="img/portrait.png" alt="" class="my-portrait"/>
 							<div class="my-b-i-l"></div>
 						</div>
 					</div>
@@ -79,7 +79,7 @@
 	 							<div class="flex h-width">
 	 								<div class="row">
 	 									<img src="img/product.png" alt="" class="my-list-icon"/>
-	 									<span class="l-h-5">&nbsp; 我的共享</span>
+	 									<span class="l-h-5">&nbsp; 我的新品</span>
 	 								</div>
 	 								 <div class="row">
 	 									<span class="l-h-5">12</span> 
@@ -112,7 +112,7 @@
  						</a>
  					</li>
  					<li class="">
- 						<a href="">
+ 						<a href="my-feedback.html">
  							<div class="my-list">
 	 							<div class="flex h-width">
 	 								<div class="row">
@@ -145,10 +145,37 @@
  				</ul>
  			</nav>
 		</div>
-		<script type="text/javascript">
-		
-			
-		</script>
+		<script src="js/all.js"></script>
 		<script src="js/x_rem.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript">
+			var userId=isLogin();
+			//获取用户信息
+			$.ajax({
+				//处理session每次不唯一问题
+				xhrFields: {
+					withCredentials: true
+				},
+				type: 'POST',
+				url: baseUrl + 'api/user/userInfo',
+				dataType: 'json',
+				data: {
+					userId:userId
+				},
+				success: function (data) {
+					$(".f-s-38").text(data.user.username);
+					$("#fansNum").text(data.fansNum);
+					$("#attentionNum").text(data.attentionNum);
+					$("#honestNum").text(data.honestNum);
+					$("#praiseNum").text(data.praiseNum);
+					if(!isEmptyString(data.user.headpicPath)){
+						$("#headpicPath").attr('src',data.user.headpicPath);
+					}
+				},
+				error: function (data) {
+					console.log(data);
+				}
+			});
+		</script>
 	</body>
 </html>

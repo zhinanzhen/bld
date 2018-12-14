@@ -19,7 +19,7 @@
 			<div class="h-width">
 				<div class="tc c-84 f-s-3 account-balance">
 					<div>我的余额</div>
-					<div>￥300.00</div>
+					<div>￥<span id="balance">0.00</span></div>
 				</div>
 				<div>
 					<div>
@@ -33,5 +33,28 @@
 		</div>
 		<script src="js/x_rem.js"></script>
 		<script src="js/all.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript">
+			var userId=isLogin();
+			$.ajax({
+				//处理session每次不唯一问题
+				xhrFields: {
+					withCredentials: true
+				},
+				type: 'POST',
+				url: baseUrl + 'api/account/balance',
+				dataType: 'json',
+				data: {
+					userId:userId
+				},
+				success: function (data) {
+					console.log(data);
+					$("#balance").text(data.data.balance);
+				},
+				error: function (data) {
+					console.log(data);
+				}
+			});
+		</script>
 	</body>
 </html>
