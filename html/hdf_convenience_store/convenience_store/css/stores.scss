@@ -3,6 +3,11 @@
 header{
     background-color: #fac74d;
 }
+.heads{
+    >.fbs{
+        font:normal 0.18rem PingFang-SC-Medium;
+    }
+}
 .sets{
     top:$heights;
     bottom:0.4rem;

@@ -1,0 +1,202 @@
+@charset "UTF-8";
+/*head高度，沉浸式0.8，普通0.4*/
+/*后退键高度*/
+html, body {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.heads {
+  width: 100%;
+  height: 0.4rem;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fac74d;
+  box-shadow: 0rem 0rem 0.5rem 0rem rgba(164, 164, 164, 0.33);
+}
+.heads > .icon-guanbi {
+  width: 0.6rem;
+  height: 0.4rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.25rem;
+}
+.heads > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.18rem PingFang-SC-Regular;
+}
+.heads > .fbs {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0.8rem;
+  height: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.15rem PingFang-SC-Medium;
+}
+
+.sets {
+  width: 100%;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+}
+
+/*单行隐藏*/
+.yincang {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*多行隐藏*/
+.yincangs {
+  overflow: hidden;
+  /*超出隐藏*/
+  display: -webkit-box;
+  /*将对象作为弹性伸缩盒子模型显示。*/
+  -webkit-box-orient: vertical;
+  /*从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）*/
+  -webkit-line-clamp: 2;
+  /*超出2行用省略号表示*/
+}
+
+.heads {
+  background: white;
+}
+.heads > div > div {
+  width: 1.8rem;
+  /*1.215*/
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.heads > div > div > div {
+  width: 0.405rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.18rem PingFang-SC-Medium;
+}
+.heads > div > div .act {
+  border-bottom: 0.02rem solid #fac74d;
+}
+.heads > .fbs {
+  color: #fac74d;
+  font-size: 0.2rem;
+}
+
+.sets {
+  top: 0.4rem;
+  bottom: 0;
+}
+.sets > div {
+  padding-bottom: 0.2rem;
+}
+
+.imags {
+  width: 100%;
+  height: 3.75rem;
+  background: #eeeeee;
+}
+.imags > img {
+  width: 100%;
+  height: 100%;
+}
+
+.ma_child_money {
+  display: flex;
+  align-items: flex-end;
+  padding: 0.105rem 0 0.165rem 0.2rem;
+}
+.ma_child_money > div:nth-child(1) {
+  display: flex;
+  align-items: flex-end;
+}
+.ma_child_money > div:nth-child(1) > div:nth-child(1) {
+  padding-bottom: 0.05rem;
+  color: #ef1866;
+  font: normal 0.15rem PingFang-SC-Medium;
+}
+.ma_child_money > div:nth-child(1) > div:nth-child(2) {
+  color: #ef1866;
+  font: normal 0.3rem PingFang-SC-Medium;
+}
+.ma_child_money > div:nth-child(2) {
+  margin-left: 0.145rem;
+  display: flex;
+  padding-bottom: 0.05rem;
+}
+.ma_child_money > div:nth-child(2) > div {
+  color: #666666;
+  font: normal 0.15rem PingFang-SC-Medium;
+}
+
+.ma_child_bodys {
+  padding: 0 0.13rem;
+  border-bottom: 0.09rem solid #eeeeee;
+}
+.ma_child_bodys > div:nth-child(1) {
+  color: #333333;
+  font: normal 0.15rem SimSun;
+}
+.ma_child_bodys > div:nth-child(2) {
+  padding: 0.105rem 0 0.125rem 0;
+  color: #999999;
+  font: normal 0.12rem SimSun;
+}
+
+.evaluation {
+  padding: 0.1rem 0;
+  border-bottom: 0.01rem solid #eeeeee;
+}
+.evaluation > div:nth-child(1) {
+  padding: 0 0.13rem;
+}
+.evaluation > div:nth-child(1) > div {
+  color: #333333;
+  font: normal 0.15rem PingFang-SC-Medium;
+}
+.evaluation > div:nth-child(1) > div > span {
+  color: #333333;
+  font: normal 0.15rem PingFang-SC-Medium;
+}
+.evaluation > div:nth-child(2) {
+  padding: 0 0.13rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.evaluation > div:nth-child(2) > div {
+  height: 0.235rem;
+  padding: 0 0.08rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FCE3A6;
+  border-radius: 0.118rem;
+  color: #000000;
+  margin-top: 0.1rem;
+  margin-right: 0.1rem;
+  font: normal 0.12rem PingFang-SC-Medium;
+}
+
+/*# sourceMappingURL=mall_child.css.map */

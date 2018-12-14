@@ -18,7 +18,7 @@
 	    	<div>
 	    		<input type="text" class="iconfont icon-sousuo1" placeholder="&#xe62e;手机电脑" />
 	    	</div>
-	    	<div>
+	    	<div onclick="location.href='classification.html';">
 	    		<div class="iconfont icon-tubiao13"></div>
 	    		<div>分类</div>
 	    	</div>
@@ -55,7 +55,7 @@
 						</div>
 						<div>我的兴趣</div>
 					</a>
-					<a href="javascript:;">
+					<a href="../mall/mall.html">
 						<div>
 							<img src="../../../img/index_hourse.png"/>
 						</div>
@@ -155,14 +155,13 @@
 		    el: '.swiper-pagination',
 		 },
 	})
-   	$(".trading>div").click(function(){
-   		window.location.href="../convenience_store/home.html";
+   	$(".trading>div").click(function(){//共享血拼
    		console.log(11);
    		$(this).children().addClass("act");
    		$(this).siblings().children().removeClass("act");
    	})
 	
-	$(".shows").click(function(){
+	$(".shows").click(function(){//共享血拼
 		window.location.href="../shopping/shopping.html";
 	})
 	

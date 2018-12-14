@@ -37,6 +37,9 @@
         background:rgba(99,99,99,0.26);
         border-top:0.01rem solid rgba(0,0,0,0.6);
     }
+    >.act{
+        background:white;
+    }
 }
 .menu::-webkit-scrollbar {/*隐藏滚动条*/
     display: none;

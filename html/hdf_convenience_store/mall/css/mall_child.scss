@@ -1,0 +1,152 @@
+@charset "utf-8";
+@import "../../css/layout.scss";
+.heads{
+    background:white;
+    >div{
+        >div{
+            width:1.8rem;/*1.215*/
+            height:100%;
+            display: flex;
+            justify-content: space-between;
+            >div{
+                width: 0.405rem;
+                height:100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #333333;
+                font:normal 0.18rem PingFang-SC-Medium;
+            }
+            .act{
+                border-bottom:0.02rem solid #fac74d;
+            }
+        }
+    }
+    >.fbs{
+        color:#fac74d;
+        font-size:0.2rem;
+    }
+}
+.sets{
+    top:$heights;
+    bottom:0;
+    >div{
+        padding-bottom:0.2rem;
+    }
+}
+.imags{
+    width:100%;
+    height:3.75rem;
+    background:#eeeeee;
+    >img{
+        width:100%;
+        height:100%;
+    }
+}
+.ma_child_money{
+    display: flex;
+    align-items: flex-end;
+    padding:0.105rem 0 0.165rem 0.2rem;
+    >div:nth-child(1){
+        display: flex;
+        align-items: flex-end;
+        >div:nth-child(1){
+            padding-bottom:0.05rem;
+            color: #ef1866;
+            font:normal 0.15rem PingFang-SC-Medium;
+        }
+        >div:nth-child(2){
+            color: #ef1866;
+            font:normal 0.3rem PingFang-SC-Medium;
+        }
+    }
+    >div:nth-child(2){
+        margin-left:0.145rem;
+        display: flex;
+        padding-bottom:0.05rem;
+        >div{
+            color: #666666;
+            font:normal 0.15rem PingFang-SC-Medium;
+        }
+    }
+}
+.ma_child_bodys{
+    padding:0 0.13rem;
+    border-bottom:0.09rem solid #eeeeee;
+    >div:nth-child(1){
+        color: #333333;
+        font:normal 0.15rem SimSun;
+    }
+    >div:nth-child(2){
+        padding:0.105rem 0 0.125rem 0; 
+        color: #999999;
+        font:normal 0.12rem SimSun;
+    }
+}
+.evaluation{
+    padding:0.1rem 0;
+    border-bottom:0.01rem solid #eeeeee;
+    >div:nth-child(1){
+        padding:0 0.13rem;
+        >div{
+            color: #333333;
+            font:normal 0.15rem PingFang-SC-Medium;
+            >span{
+                color: #333333;
+                font:normal 0.15rem PingFang-SC-Medium;
+            }
+        }
+    }
+   >div:nth-child(2){
+       padding:0 0.13rem;
+       display: flex;
+       flex-wrap: wrap;
+        >div{
+            height: 0.235rem;
+            padding:0 0.08rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:#FCE3A6;
+            border-radius: 0.118rem;
+            color: #000000;
+            margin-top:0.1rem;
+            margin-right:0.1rem;
+            font:normal 0.12rem PingFang-SC-Medium;
+        }
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

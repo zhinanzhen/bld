@@ -119,6 +119,9 @@ html, body {
   background: rgba(99, 99, 99, 0.26);
   border-top: 0.01rem solid rgba(0, 0, 0, 0.6);
 }
+.menu > .act {
+  background: white;
+}
 
 .menu::-webkit-scrollbar {
   /*隐藏滚动条*/

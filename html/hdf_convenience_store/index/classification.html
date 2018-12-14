@@ -16,8 +16,9 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" onclick="javascript :history.back(-1);"></i>
+			<i class="iconfont icon-guanbi" onclick="location.href='index.html'"></i>
 			<div>分类</div>
+			
 		</header>
 		<section class="sets">
 			<div>
@@ -27,12 +28,12 @@
 				</div>
 				<div class="fics">
 					<ul class="menu">
-						<li>女装</li>
-						<li>女装</li>
-						<li>女装</li>
-						<li>女装</li>
-						<li>女装</li>
-						<li>女装</li>
+						<li class="act">女装</li>
+						<li>女装1</li>
+						<li>女装2</li>
+						<li>女装3</li>
+						<li>女装4</li>
+						<li>女装5</li>
 						<li>女装</li>
 						<li>女装</li>
 						<li>女装</li>
@@ -42,7 +43,7 @@
 						<li>女装</li>
 						<li>女装</li>
 					</ul>
-					<div class="menu_child">
+					<div class="menu_child" onclick="location.href='../shopping/shopping.html'">
 						<div class="recommended">
 							<div>
 								<div>
@@ -69,7 +70,8 @@
 <script type="text/javascript">
 	$(function(){
 		$(".menu>li").click(function(){
-			
+			$(this).addClass("act");
+			$(this).siblings().removeClass("act");
 		})
 	})
 </script>
