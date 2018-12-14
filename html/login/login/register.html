@@ -40,7 +40,7 @@
                     </div>
                     <div class="user-box user-id">
                             <img src="../images/relation.png" alt="">
-                            <input type="text" placeholder="请输入18位身份证号" class="phoneVal">
+                            <input type="text" placeholder="请输入18位身份证号" class="idNum">
                         </div>
                 </div>
                 <div class="login-submit register-submit">
@@ -57,10 +57,12 @@
         var phoneVal = $('.phoneVal').val();
         var codeVal = $('.codeVal').val();
         var passWord = $('.passWord').val();
+        var idNum = $('.idNum').val();
         // uuid接收
         var uuid_register;
         // 验证码
         $('.getCode').click(function(){
+            phoneVal = $('.phoneVal').val();
             // 随机数
             var uuid = RndNum(5);
             function RndNum(n){
@@ -70,7 +72,6 @@
                 return rnd;
             }
             uuid_register = uuid;
-            console.log(uuid)
             $.ajax({
                 type:'POST',
                 url:url_prefix+'api/user/sendCaptcha',
@@ -81,7 +82,7 @@
                     type: 1
                 },
                 success:function(data){
-                    console.log('验证吗接受成功');
+                    console.log('验证码接受成功');
                 },
                 error:function(data){
                     alert(data);
@@ -90,19 +91,30 @@
         });
         // 注册
         $('.registerBtn').click(function(){
+            phoneVal = $('.phoneVal').val();
+            codeVal = $('.codeVal').val();
+            passWord = $('.passWord').val();
+            idNum = $('.idNum').val();
             console.log(uuid_register)
             $.ajax({
                 type:'POST',
-                url:url_prefix+'api/user/sendCaptcha',
+                url:url_prefix+'api/user/register',
                 dataType:'json',
                 data:{
                     mobile:phoneVal,
                     uuid: uuid_register,
                     password: passWord,
-                    captcha: codeVal
+                    captcha: codeVal,
+                    idNum:idNum
                 },
                 success:function(data){
-                    console.log('注册成功');
+                    if(data.code==0){
+                        console.log('注册成功');
+                        window.location.href="login.html";
+                    }else{
+                        alert(data.msg);
+                    }
+
                 },
                 error:function(data){
                     alert(data);

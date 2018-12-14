@@ -65,6 +65,7 @@
                     console.log(data);
                     console.log('登录成功');
                     isLogin=true;
+                    localStorage.setItem('userId',data.userId);
 					localStorage.setItem('ssk', JSON.stringify(isLogin));
                     window.location.href="../../hdf_convenience_store/index/index.html";
                 },error:function(data){
