@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的兴趣</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/layout.css"/>
+		<link rel="stylesheet" type="text/css" href="css/Interest.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/swiper-4.3.3.min.css"/>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/children.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header class="heads">
+			<i class="iconfont icon-guanbi" onclick="location.href='../index/index.html'"></i>
+			<div>我的兴趣</div>
+		</header>
+		<div class="menu">
+			<div>
+				<div class="act">商品</div>
+			</div>
+			<div>
+				<div>封地</div>
+			</div>
+			<div>
+				<div>好友动态</div>
+			</div>
+		</div>
+		<section class="sets">
+			<div>
+				<div class="swiper-container" id="swiper1">
+				    <div class="swiper-wrapper">
+				        <div class="swiper-slide goods_father">
+							<div class="goods">
+								<div>
+									<img src="../../../img/index_shop_goods.png"/>
+								</div>
+								<div>
+									<div>
+										<div>¥9.98</div>
+										<del>¥9.98</del>
+										<div>折扣</div>
+									</div>
+									<div>
+										增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。
+										增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。
+									</div>
+								</div>
+							</div>
+							<div class="goods">
+								<div>
+									<img src="../../../img/index_shop_goods.png"/>
+								</div>
+								<div>
+									<div>
+										<div>¥9.98</div>
+										<del>¥9.98</del>
+										<div>折扣</div>
+									</div>
+									<div>
+										增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。
+										增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。
+									</div>
+								</div>
+							</div>
+							<div class="goods">
+								<div>
+									<img src="../../../img/index_shop_goods.png"/>
+								</div>
+								<div>
+									<div>
+										<div>¥9.98</div>
+										<del>¥9.98</del>
+										<div>折扣</div>
+									</div>
+									<div>
+										增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。
+										增肌养生不二选择，帮助您拥有一副羡煞旁人的身材。
+									</div>
+								</div>
+							</div>
+				        </div>
+				        <div class="swiper-slide fief_father">
+				        	<div class="fief">
+				        		<div></div>
+				        		<div>小路烧烤</div>
+				        		<div>
+				        			<div>加入</div>
+				        		</div>
+				        	</div>
+				        	<div class="fief">
+				        		<div></div>
+				        		<div>小路烧烤</div>
+				        		<div>
+				        			<div>加入</div>
+				        		</div>
+				        	</div>
+				        	<div class="fief">
+				        		<div></div>
+				        		<div>小路烧烤</div>
+				        		<div>
+				        			<div>加入</div>
+				        		</div>
+				        	</div>
+				        	<div class="fief">
+				        		<div></div>
+				        		<div>小路烧烤</div>
+				        		<div>
+				        			<div>加入</div>
+				        		</div>
+				        	</div>
+				       	</div>
+				        <div class="swiper-slide friends_trends">
+				        	<div class="trends">
+				        		<div>
+				        			<div>
+				        				<img src="../img/loading.gif"/>
+				        			</div>
+				        			<div>
+				        				<div class="yincang">哈法小龙侠</div>
+				        				<div>4分钟前</div>
+				        			</div>
+				        		</div>
+				        		<div>
+				        			<div>
+				        				来我村留学的小宝宝们看过来，知无不言。一站式资讯，学姐带你飞。
+				        			</div>
+				        			<div>
+				        				<div></div>
+				        				<div></div>
+				        				<div></div>
+				        			</div>
+				        		</div>
+				        		<div>
+				        			<div class="iconfont icon-fenxiang">
+				        				<span>分享</span>
+				        			</div>
+				        			<div class="iconfont icon-xinxi2">
+				        				<span>112</span>
+				        			</div>
+				        			<div class="iconfont icon-dianzan">
+				        				<span>点赞</span>
+				        			</div>
+				        		</div>
+				        	</div>
+				       	</div>
+				    </div>
+				</div>
+			</div>
+		</section>
+<script type="text/javascript">
+	$(function(){
+		var zuobiao = JSON.parse(localStorage.getItem('zuobiaoa'));
+		console.log(zuobiao);
+		var mySwiper1 = new Swiper ('#swiper1', {
+		    direction: 'horizontal',
+		    initialSlide :zuobiao,
+			loop:true,//循环
+			on:{
+			    slideChangeTransitionStart: function(my){//swiper4中使用
+			      	var xiabiao=this.realIndex;//循环状态下获取下标
+		        	console.log(xiabiao);
+		        	localStorage.setItem('zuobiaoa', JSON.stringify(xiabiao));
+				    $(".menu>div").eq(zuobiao).children().addClass("act");
+				    $(".menu>div").eq(zuobiao).siblings().children().removeClass("act");
+			    },
+			}
+		})
+		$(".menu>div").click(function(){
+			console.log(mySwiper1.realIndex);
+		    var zuobiao=$(this).index();
+		    localStorage.setItem('zuobiaoa', JSON.stringify(zuobiao));
+		    $(".menu>div").eq(zuobiao).children().addClass("act");
+		    $(".menu>div").eq(zuobiao).siblings().children().removeClass("act");
+		    mySwiper1.slideTo(zuobiao+1,500,false);
+		})
+		$("#swiper1").on("click",".trends",function(){
+			window.location.href="Dynamic_details.html";
+		})
+		
+		
+	})
+</script>
+	</body>
+</html>

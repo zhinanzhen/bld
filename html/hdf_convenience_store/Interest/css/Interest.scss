@@ -1,0 +1,247 @@
+@charset "utf-8";
+@import "../../css/layout.scss";
+$heighta:0.4rem;
+$colora:#333333;
+$fonta:normal 0.15rem AdobeHeitiStd-Regular;
+.menu{
+    position:absolute;
+    top:$heights;
+    left:0;
+    width:100%;
+    padding:0 0.1rem;
+    height:0.4rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom:0.01rem solid #eeeeee;
+    >div{
+        width:(100%/3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        >div{
+            color:$colora;
+            font:$fonta;
+        }
+    }
+}
+.act{
+    border-bottom:0.02rem solid #fac64c;
+}
+.sets{
+    top:$heights+$heighta;
+    bottom:0;
+}
+#swiper1{
+    >.swiper-wrapper{
+        >.goods_father,>.fief_father{
+            display: flex;
+            flex-wrap:wrap;
+            justify-content: space-between;
+            padding:0.15rem 0.1rem 0 0.1rem; 
+        }
+        >.friends_trends{
+            
+        }
+    }
+}
+.goods{
+    width: 1.7rem;
+    height: 2.15rem;
+    margin-bottom:0.15rem;
+    padding:0 0.09rem 0.055rem 0.085rem;
+    box-shadow: 0rem 0rem 0.063rem 0.003rem rgba(4, 0, 0, 0.2);
+    >div:nth-child(1){
+        width: 1.5rem;
+        height: 1.53rem;
+        >img{
+            width:100%;
+            height:100%;
+        }
+    }
+    >div:nth-child(2){
+        >div:nth-child(1){
+            height:0.28rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >div:nth-child(1){
+                color: #ef1866;
+                font:$fonta;
+            }
+            >del:nth-child(2){
+                color: #666666;
+                font:normal 0.12rem AdobeHeitiStd-Regular;;
+            }
+            >div:nth-child(3){
+                width: 0.3rem;
+                height: 0.15rem;
+                border-radius: 0.03rem;
+                border: solid 0.005rem #f1b13b;
+                color: #f1b13b;
+                font:normal 0.09rem AdobeHeitiStd-Regular;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        >div:nth-child(2){
+            width: 1.525rem;
+            height: 0.3rem;
+            color: #333333;
+            font:normal 0.09rem SimSun;
+            line-height: 0.15rem;
+            letter-spacing: 0rem;
+            overflow:hidden; /*超出隐藏*/
+            display:-webkit-box; /*将对象作为弹性伸缩盒子模型显示。*/
+            -webkit-box-orient:vertical;/*从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）*/
+            -webkit-line-clamp:2; /*超出2行用省略号表示*/
+        }
+    }
+}
+.fief{
+    width:1.08rem;
+    height:1.57rem;
+    margin-bottom:0.15rem;
+    >div:nth-child(1){
+        width: 1.08rem;
+        height: 1.075rem;
+        background:#eeeeee;
+        >img{
+            width:100%;
+            height:100%;
+        }
+    }
+    >div:nth-child(2){
+        width:100%;
+        height:0.385rem;
+        color: #191919;
+        font:normal 0.125rem SimHei;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    >div:nth-child(3){
+        width:100%;
+        >div{
+            width: 0.44rem;
+            height: 0.13rem;
+            background-color: #fea12a;
+            border-radius: 0.058rem;
+            border: solid 0.005rem #d7d5d7;
+            margin:0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #191919;
+            font:normal 0.114rem SimHei;
+        }
+        
+    }
+}
+.trends{
+    padding:0 0.2rem;
+    border-bottom:0.06rem solid #eeeeee;
+    >div:nth-child(1){/*个人信息*/
+        display: flex;
+        padding:0.2rem 0;
+        >div:nth-child(1){/*头像*/
+            width: 0.31rem;
+            height: 0.31rem;
+            background:#eeeeee;
+            border-radius:50%;
+            overflow: hidden;
+            >img{
+                width:100%;
+                height:100%;
+            }
+        }
+        >div:nth-child(2){/*名字*/
+           margin-left:0.1rem;
+            >div:nth-child(1){
+                width:2rem;
+                height:0.16rem;
+                color: #000000;
+                font:normal 0.11rem PingFang-SC-Regular;
+            }
+            >div:nth-child(2){
+                color: #999999;
+                font:normal 0.11rem PingFang-SC-Regular;
+            }
+        }
+    }
+    >div:nth-child(2){/*body*/
+        >div:nth-child(1){
+            color: #000000;
+            line-height: 0.18rem;
+            font:normal 0.12rem PingFang-SC-Regular;
+            word-wrap: break-word;
+        }
+        >div:nth-child(2){
+            display: flex;
+            margin-top:0.1rem;
+            >div{
+                width: 0.9rem;
+                height: 0.9rem;
+                margin-left:0.1rem;
+                background-color: #eeeeee;
+            }
+        }
+    }
+    >div:nth-child(3){/*分享*/
+       height:0.4rem;
+       display: flex;
+       justify-content:space-between;
+        >div{
+            width:1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size:0.15rem;
+            >span{
+                margin-left:0.05rem;
+                color:#999999;
+                font:normal 0.11rem PingFang-SC-Regular;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

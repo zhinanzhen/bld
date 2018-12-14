@@ -1,0 +1,336 @@
+@charset "UTF-8";
+/*head高度，沉浸式0.8，普通0.4*/
+/*后退键高度*/
+html, body {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.heads {
+  width: 100%;
+  height: 0.4rem;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fac74d;
+  box-shadow: 0rem 0rem 0.5rem 0rem rgba(164, 164, 164, 0.33);
+}
+.heads > .icon-guanbi {
+  width: 0.6rem;
+  height: 0.4rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.25rem;
+}
+.heads > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.18rem PingFang-SC-Regular;
+}
+.heads > .fbs {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0.8rem;
+  height: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.15rem PingFang-SC-Medium;
+}
+
+.sets {
+  width: 100%;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+}
+
+/*单行隐藏*/
+.yincang {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*多行隐藏*/
+.yincangs {
+  overflow: hidden;
+  /*超出隐藏*/
+  display: -webkit-box;
+  /*将对象作为弹性伸缩盒子模型显示。*/
+  -webkit-box-orient: vertical;
+  /*从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）*/
+  -webkit-line-clamp: 2;
+  /*超出2行用省略号表示*/
+}
+
+.sets {
+  top: 0.4rem;
+  bottom: 0.6rem;
+}
+.sets > div > div:nth-child(2) {
+  height: 0.4rem;
+  color: #333333;
+  font: normal 0.15rem PingFang-SC-Regular;
+  line-height: 0.4rem;
+  padding-left: 0.2rem;
+  border-bottom: 0.01rem solid #eeeeee;
+}
+
+.trends {
+  padding: 0 0.2rem;
+  border-bottom: 0.06rem solid #eeeeee;
+}
+.trends > div:nth-child(1) {
+  /*个人信息*/
+  display: flex;
+  padding: 0.2rem 0;
+}
+.trends > div:nth-child(1) > div:nth-child(1) {
+  /*头像*/
+  width: 0.31rem;
+  height: 0.31rem;
+  background: #eeeeee;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.trends > div:nth-child(1) > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+}
+.trends > div:nth-child(1) > div:nth-child(2) {
+  /*名字*/
+  margin-left: 0.1rem;
+}
+.trends > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+  width: 2rem;
+  height: 0.16rem;
+  color: #000000;
+  font: normal 0.11rem PingFang-SC-Regular;
+}
+.trends > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) {
+  color: rgba(0, 0, 0, 0.6);
+  font: normal 0.11rem PingFang-SC-Regular;
+}
+.trends > div:nth-child(2) {
+  /*body*/
+}
+.trends > div:nth-child(2) > div:nth-child(1) {
+  color: #000000;
+  line-height: 0.18rem;
+  font: normal 0.12rem PingFang-SC-Regular;
+  word-wrap: break-word;
+}
+.trends > div:nth-child(2) > div:nth-child(2) {
+  display: flex;
+  margin-top: 0.1rem;
+}
+.trends > div:nth-child(2) > div:nth-child(2) > div {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-left: 0.1rem;
+  background-color: #eeeeee;
+}
+.trends > div:nth-child(2) > div:nth-child(2) > div > img {
+  width: 100%;
+  height: 100%;
+}
+.trends > div:nth-child(3) {
+  /*分享*/
+  height: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+}
+.trends > div:nth-child(3) > div {
+  width: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.15rem;
+}
+.trends > div:nth-child(3) > div > span {
+  width: 0.5rem;
+  height: 100%;
+  margin-left: 0.05rem;
+  display: flex;
+  align-items: center;
+  color: #999999;
+  font: normal 0.11rem PingFang-SC-Regular;
+}
+
+.reply {
+  padding: 0 0.2rem 0.1rem 0.2rem;
+}
+.reply > div:nth-child(2) {
+  color: rgba(0, 0, 0, 0.8);
+  font: normal 0.15rem PingFang-SC-Regular;
+  word-wrap: break-word;
+}
+.reply > div:nth-child(3) {
+  padding: 0.1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.reply > div:nth-child(3) > div {
+  width: 0.55rem;
+  height: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.18rem;
+}
+.reply > div:nth-child(3) > div > span {
+  width: 0.3rem;
+  height: 100%;
+  display: inline-block;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 0.05rem;
+  color: rgba(0, 0, 0, 0.6);
+  font: normal 0.11rem PingFang-SC-Regular;
+}
+
+.namea {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0;
+}
+.namea > div:nth-child(1) {
+  width: 0.31rem;
+  height: 0.31rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.namea > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+}
+.namea > div:nth-child(2) {
+  margin-left: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.namea > div:nth-child(2) > div:nth-child(1) {
+  width: 2rem;
+  height: 0.16rem;
+  color: #000000;
+  font: normal 0.11rem PingFang-SC-Regular;
+}
+.namea > div:nth-child(2) > div:nth-child(2) {
+  color: rgba(0, 0, 0, 0.7);
+  font: normal 0.11rem PingFang-SC-Regular;
+}
+
+.replys {
+  width: 100%;
+  position: relative;
+}
+.replys > div:nth-child(2) {
+  width: 100%;
+  padding: 0.2rem 0 0 0;
+  background: #f4f4f4;
+  border-radius: 0.05rem;
+  overflow: hidden;
+}
+
+.icon-sanjiao-copy {
+  position: absolute;
+  top: -0.18rem;
+  left: 0.15rem;
+  color: #f4f4f4;
+  font-size: 0.25rem;
+}
+
+.replys_child {
+  width: 100%;
+  padding: 0.05rem 0.2rem;
+  border-bottom: 0.01rem solid #E8E8E8;
+}
+.replys_child > div:nth-child(1) {
+  /*信息*/
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.replys_child > div:nth-child(1) > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+}
+.replys_child > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.replys_child > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+}
+.replys_child > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {
+  width: 1rem;
+  height: 0.15rem;
+  margin-left: 0.1rem;
+  color: #516ad5;
+  font: normal 0.09rem PingFang-SC-Regular;
+}
+.replys_child > div:nth-child(1) > div:nth-child(2) {
+  color: #666666;
+  font: normal 0.09rem PingFang-SC-Regular;
+}
+.replys_child > div:nth-child(2) {
+  padding: 0.05rem 0;
+  color: #333333;
+  font: normal 0.09rem PingFang-SC-Regular;
+}
+
+.replys_child:last-child {
+  border: none;
+}
+
+footer {
+  width: 100%;
+  height: 0.6rem;
+  background: #eeeeee;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0.1rem 0 0.1rem 0.165rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+footer > input {
+  width: 3.06rem;
+  height: 0.42rem;
+  color: #999999;
+  font: normal 0.15rem PingFang-SC-Regular;
+  padding: 0 0.05rem;
+}
+footer > div {
+  width: 0.525rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
+  font: normal 0.15rem PingFang-SC-Regular;
+}
+
+/*# sourceMappingURL=Dynamic_details.css.map */
