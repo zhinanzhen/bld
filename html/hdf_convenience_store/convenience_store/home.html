@@ -13,7 +13,7 @@
 		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/children.js" type="text/javascript" charset="utf-8"></script>
-		
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=5059cf2e34f9bc9173aefe87f0d62f09"></script>
 	</head>
 	<body>
 		<header class="heads">
@@ -44,18 +44,7 @@
 						<div>我加入的便利店</div>
 					</div>
 					<div class="joina joinc">
-						<div class="sk">
-							<div></div>
-							<div>007</div>
-						</div>
-						<div class="sk">
-							<div></div>
-							<div>007</div>
-						</div>
-						<div class="sk">
-							<div></div>
-							<div>007</div>
-						</div>
+
 					</div>
 				</div>
 				<div class="bld">
@@ -66,21 +55,6 @@
 						<div>附近便利店</div>
 					</div>
 					<div class="joina joinb">
-						<div>
-							<div></div>
-							<div>007</div>
-							<div>加入</div>
-						</div>
-						<div>
-							<div></div>
-							<div>007</div>
-							<div>加入</div>
-						</div>
-						<div>
-							<div></div>
-							<div>007</div>
-							<div>加入</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -91,6 +65,9 @@
 		//加载动画
 		$(".sets>div").hide();
 		$(".sets").append(loading());
+		//获取位置信息
+		var cityName="郑州市";
+		getCurCity();
 		//5.1 	便利店页面banner
 		ajaxs("api/ad/list",'post',{type:2},function(data){
 			console.log(data);
@@ -112,14 +89,16 @@
 		})
 		//5.2	我加入的便利店
 		var ssk = JSON.parse(localStorage.getItem('ssk'));
+		var userId=JSON.parse(localStorage.getItem("userId"));
+		console.log("用户id"+userId);
 		if(ssk){
-			ajaxs("api/store/mylist",'post',{},function(data){
+			ajaxs("api/store/mylist",'post',{userId:userId},function(data){
 				console.log(data);
 				var ks="",data=data.list;
 				for(i in data){
-					ks+=`<div class="sk" data-idb=${data[i].storeId} data-names=${data[i].name} data-imgs=${urla+data[i].showPic} >
+					ks+=`<div class="sk" data-idb=${data[i].storeId} data-names=${data[i].name} data-imgs=${data[i].showPic} >
 							<div>
-								<img src=${urla+data[i].showPic} />
+								<img src=${data[i].showPic} />
 							</div>
 							<div>${data[i].name}</div>
 						</div>`;
@@ -133,24 +112,65 @@
 					var arr=[index,names,imgs];
 					localStorage.setItem('bld_m', JSON.stringify(arr));
 					window.location.href="stores.html";
-				})
+				});
 			},function(err){
 				console.log(err);
-			})
+			});
 		}else{
 			console.log("登录已过期，请重新登录,无法获取加入的便利店");
 			alert("登录已过期，请重新登录");
-//			window.location.href="../../login/login/login.html";
+			//window.location.href="../../login/login/login.html";
 		}
-		
-		
+
+
 		//5.3	附近便利店
-		ajaxs("api/store/nearlist",'post',{cityName:"郑州"},function(data){
+		ajaxs("api/store/nearlist",'post',{cityName:cityName},function(data){
 			console.log(data);
+			var ks="",data=data.list;
+			for(i in data){
+				ks+=`<div class="sk" data-idb=${data[i].storeId} data-names=${data[i].name} data-imgs=${data[i].showPic} >
+			<div>
+				<img src=${data[i].showPic} />
+			</div>
+				<div>${data[i].name}</div>
+				</div>`;
+			}
+			$(".joinb").html(ks);
+			//进入便利店
+			$(".joinb").on("click",".sk",function(){
+				var index=$(this).data("idb");
+				var names=$(this).data("names");
+				var imgs=$(this).data("imgs");
+				var arr=[index,names,imgs];
+				localStorage.setItem('bld_m', JSON.stringify(arr));
+				window.location.href="stores.html";
+			});
 		},function(err){
 			console.log(err);
 		})
-		
+		function getCurCity(){
+			var map, geolocation;//加载地图，调用浏览器定位服务
+			map = new AMap.Map('container', {
+				resizeEnable: true
+			});
+			map.plugin('AMap.Geolocation', function() {
+				geolocation = new AMap.Geolocation({
+					enableHighAccuracy: true,
+					timeout: 10000
+				});
+				geolocation.getCityInfo(getCity);
+			});
+			function getCity(status, result) {
+				if(status!='complete'){
+					console.log(status)
+					showToast('定位失败');
+				}else{
+					//console.log(result.city);
+					//console.log(result);
+					cityName=result.city;
+				}
+			}
+		}
 		$(document).ajaxStop(function(){
 			console.log("所有 AJAX 请求已完成");
 		  	//加载成功，隐藏动画
