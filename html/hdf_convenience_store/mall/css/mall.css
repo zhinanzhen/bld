@@ -51,7 +51,10 @@ html, body {
   color: #333333;
   font: normal 0.15rem PingFang-SC-Medium;
 }
-
+#swiper1 img{
+  width: 3.75rem;
+  height: 2rem;
+}
 .sets {
   width: 100%;
   overflow: auto;
@@ -223,7 +226,7 @@ html, body {
   background: white;
 }
 .like > div:nth-child(1) {
-  width: 100%;
+  width: 1.855rem;
   height: 1.85rem;
   background: #eeeeee;
 }

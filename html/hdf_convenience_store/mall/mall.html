@@ -20,10 +20,13 @@
 			<div>共享商城</div>
 			<p class="fbs iconfont icon-ziyuan1"></p>
 		</header>
-		<section class="sets" onclick="location.href='mall_child.html'">
+		<section class="sets">
 			<div>
-				<div class="imgas">
-					<img src=""/>
+				<div  class="swiper-container" id="swiper1">
+					<div class="swiper-wrapper">
+
+					</div>
+					<div class="swiper-pagination"></div>
 				</div>
 				<div class="limit">
 					<div class="buy">
@@ -36,20 +39,7 @@
 						</div>
 					</div>
 					<div>
-						<div>
-							<div class="zsk">
-								<div>
-									<img src=""/>
-								</div>
-								<div>
-									<div class="yincang">北欧魔豆吊灯客北欧魔豆吊灯客北欧魔豆吊灯客北欧魔豆吊灯客</div>
-									<div>
-										<div>¥39</div>
-										<del>¥118</del>
-									</div>
-								</div>
-							</div>
-							
+						<div class="limit-shop">
 						</div>
 					</div>
 				</div>
@@ -59,33 +49,78 @@
 					<div></div>
 				</div>
 				<div class="like_father">
-					<div class="zsk like">
-						<div>
-							<img src=""/>
-						</div>
-						<div>
-							<div class="yincang">北欧魔豆吊灯客北欧魔豆吊灯客北欧魔豆吊灯客北欧魔豆吊灯客</div>
-							<div>
-								<div>¥39</div>
-								<del>¥118</del>
-							</div>
-						</div>
-					</div>
-					<div class="zsk like">
-						<div>
-							<img src=""/>
-						</div>
-						<div>
-							<div class="yincang">北欧魔豆吊灯客北欧魔豆吊灯客北欧魔豆吊灯客北欧魔豆吊灯客</div>
-							<div>
-								<div>¥39</div>
-								<del>¥118</del>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</section>
+
+	<script type="text/javascript">
+		//请求banner
+		ajaxs("api/ad/list",'post',{type:2},function(data){
+			var listImg = data.list;
+			for (var index = 0; index < listImg.length; index++) {
+				const imgs = listImg[index];
+				console.log(imgs);
+				var html = '<div class="swiper-slide" onclick="detail('+imgs.id+')"><a href="'+ imgs.url +'"><img src="'+ imgs.image +'" alt="'+ imgs.title +'"></a></div>';
+				$('.swiper-wrapper').append(html);
+			}
+			var mySwiper1 = new Swiper ('#swiper1',{
+				loop:true,
+				autoplay: true,//可选选项，自动滑动
+				direction: 'horizontal',
+				pagination: {
+					el: '.swiper-pagination',
+				},
+			})
+		},function(err){
+			console.log(err);
+		});
+
+		// 限时购
+		ajaxs("api/product/limittime",'post',{},function(data){
+			var listImg = data.list;
+			for (var index = 0; index < listImg.length; index++) {
+				const imgs = listImg[index];
+				console.log(imgs);
+                var html = '<div class="zsk" onclick="detail('+imgs.id+')"><div><img src="' + imgs.image
+                    + '"/></div><div><div class="yincang">' + imgs.name
+                    + '</div><div><div>￥' + imgs.price + '</div><del>￥' + imgs.cost + '</del></div></div></div>';
+				$('.limit-shop').append(html);
+			}
+		},function(err){
+			console.log(err);
+		});
+
+		// 猜你喜欢
+		ajaxs("api/product/hot",'post',{userId:123456},function(data){
+			var listImg = data.list;
+			for (var index = 0; index < listImg.length; index++) {
+				const imgs = listImg[index];
+				console.log(imgs);
+                var html =' <div class="zsk like" onclick="detail('+imgs.id+')">                    '
+                    +' 	<div>                                 '
+                    +' 		<img src="' + imgs.image + '"/>                     '
+                    +' 	</div>                                '
+                    +' 	<div>                                 '
+                    +' 		<div class="yincang">' + imgs.name + '</div>       '
+                    +' 		<div>                             '
+                    +' 			<div>￥' + imgs.price + '</div>               '
+                    +' 			<del>￥' + imgs.cost + '</del>              '
+                    +' 		</div>                            '
+                    +' 	</div>                                '
+                    +' </div>                                    '
+				$('.like_father').append(html);
+			}
+		},function(err){
+			console.log(err);
+		});
+
+		function detail(id) {
+            window.location.href='mall_child.html?productId=' + id
+        }
+
+</script>
+
 	</body>
 
 </html>

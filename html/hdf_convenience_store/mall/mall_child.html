@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/mall_child.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/swiper-4.3.3.min.css"/>
 		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/all.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/children.js" type="text/javascript" charset="utf-8"></script>
@@ -29,45 +30,59 @@
 		<section class="sets">
 			<div>
 				<div class="imags">
-					<img src=""/>
+					<img id="shop-img" src=""/>
 				</div>
 				<div class="ma_child_money">
 					<div>
 						<div>¥</div>
-						<div>269</div>
+						<div id="show-price">269</div>
 					</div>
 					<div>
 						<div>¥</div>
-						<div>599</div>
+						<div id="show-cost">599</div>
 					</div>
 				</div>
 				<div class="ma_child_bodys">
-					<div>
-						翔威加重呼啦圈 成人瘦腰收腰可拆卸泡棉呼拉圈 女士减肥健腹瘦身圈健身器材 蓝灰色
+					<div id="shop-name">
 					</div>
-					<div>
-						时尚健身，玲珑动人，转动青春，健身快乐，我是女神我作主。
+					<div id="shop-introduction">
 					</div>
 				</div>
 				<div class="evaluation">
 					<div>
-						<div>宝贝评价（<span>962</span>）</div>
+						<div>宝贝评价（<span id="shop-comment"></span>）</div>
 					</div>
-					<div>
-						<div>质量不错</div>
-						<div>手感不错</div>
-						<div>物流很快</div>
-						<div>物流很快</div>
-						<div>物流</div>
-						<div>物流很快</div>
-						<div>物流很快</div>
-						<div>物流很快</div>
-						<div>物流</div>
-						<div>物流很快</div>
-						<div>物流很快</div>
+					<div class="show-labels">
 					</div>
 				</div>
 			</div>
 		</section>
+		<div class="publish">
+			<button>确定发布</button>
+		</div>
+
+	<script type="text/javascript">
+		ajaxs("api/product/info",'post',{productId:getUrlString("productId")},function(data){
+		    var shopDetail = data.data;
+			$("#shop-img").attr('src',shopDetail.image);
+			$("#show-price").html(shopDetail.price);
+			$("#show-cost").html(shopDetail.cost);
+			$("#shop-name").html(shopDetail.name);
+			$("#shop-introduction").html(shopDetail.introduction);
+			$("#shop-comment").html(shopDetail.commentnum);
+            var jsonObj = JSON.parse(shopDetail.prop1);//转换为json对象
+			if(!jsonObj){
+			    return;
+			}
+            var labels = "";
+			for(var i=0;i<jsonObj.length;i++){
+                labels += "<div>"+ jsonObj[i] + "</div>"; //取json中的值
+            }
+			$(".show-labels").html(labels);
+		},function(err){
+			console.log(err);
+		});
+	</script>
+	
 	</body>
 </html>
