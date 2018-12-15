@@ -198,5 +198,25 @@ html, body {
   margin-right: 0.1rem;
   font: normal 0.12rem PingFang-SC-Medium;
 }
-
+/*.publish {*/
+  /*height: 1.733rem;*/
+  /*line-height: 1.173rem;*/
+  /*width: 100%;*/
+  /*!*background-color: #fff;*!*/
+  /*position: fixed;*/
+  /*bottom: 0%;*/
+  /*border-top: 1px solid #eee;*/
+  /*z-index: 3;*/
+/*}*/
+/*.publish > button {*/
+  /*width: 90%;*/
+  /*position: relative;*/
+  /*top: 5%;*/
+  /*height: 0.93rem;*/
+  /*left: 5%;*/
+  /*font-size: 20px;*/
+  /*text-align: center;*/
+  /*!*background-color: #ff4445;*!*/
+  /*color: #fff;*/
+/*}*/
 /*# sourceMappingURL=mall_child.css.map */
