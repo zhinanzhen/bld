@@ -27,18 +27,7 @@
 			<div>
 				<div class="swiper-container" id="swiper1">
 				    <div class="swiper-wrapper">
-				        <div class="swiper-slide" id="latest_activity">
-				        	<img src="../../../img/index_s1.png">
-				        </div>
-				        <div class="swiper-slide" id="Introduction">
-				        	<img src="../../../img/index_s1.png">
-				        </div>
-				        <div class="swiper-slide" id="instructions">
-				        	<img src="../../../img/index_s1.png">
-				        </div>
-				        <div class="swiper-slide" id="donation">
-				        	<img src="../../../img/index_s1.png">
-				        </div>
+
 				    </div>
 				    <div class="swiper-pagination"></div>
 				</div>
@@ -71,54 +60,7 @@
 	        		</div>
 				</div>
 	        	<div class="contents">
-	        		<div class="shows">
-	        			<div>
-	        				<div>img</div>
-	        				<div>
-	        					<div>name</div>
-	        					<div>其他</div>
-	        				</div>
-	        			</div>
-	        			<div>
-	        				<div>
-	        					<span>¥15</span>
-	        					夏日斜跨小包包女2018新款潮韩版百搭时尚
-	        				</div>
-	        				<div class="aas">
-	        					<div>
-	        						<img src="../../../img/index_small_1.png">
-	        						<img src="../../../img/index_small_1.png">
-	        						<img src="../../../img/index_small_1.png">
-	        						<img src="../../../img/index_small_1.png">
-	        					</div>
-	        				</div>
-							<div class="">浏览<span>12</span></div>
-	        			</div>
-	        		</div>
-	        		<div class="shows">
-	        			<div>
-	        				<div>img</div>
-	        				<div>
-	        					<div>name</div>
-	        					<div>其他</div>
-	        				</div>
-	        			</div>
-	        			<div>
-	        				<div>
-	        					<span>¥15</span>
-	        					夏日斜跨小包包女2018新款潮韩版百搭时尚
-	        				</div>
-	        				<div class="aas">
-	        					<div>
-	        						<img src="../../../img/index_small_1.png">
-	        						<img src="../../../img/index_small_1.png">
-	        						<img src="../../../img/index_small_1.png">
-	        						<img src="../../../img/index_small_1.png">
-	        					</div>
-	        				</div>
-							<div class="">浏览<span>12</span></div>
-	        			</div>
-	        		</div>
+
 	        	</div>
 			</div>
 		</section>
@@ -129,48 +71,87 @@
 			</div>
 			<div>
 				<div class="iconfont icon-shoucangxing"></div>
-				<div>封地</div>
+				<div><a href="../../../wyz-convenience/fief/fief.html">封地</a></div>
 			</div>
 			<div>
 				<div></div>
-				<div>发布</div>
+				<div><a href="../../publish/publish.html">发布</a></div>
 			</div>
 			<div>
 				<div class="iconfont icon-12"></div>
-				<div>消息</div>
+				<div><a href="../../../wyz-convenience/new/new.html">消息</a></div>
 			</div>
 			<div>
 				<div class="iconfont icon-wode1"></div>
-				<div>我的</div>
+				<div><a href="../../publish/publish.html">我的</a></div>
 			</div>
 		</footer>
 		
 
 <script type="text/javascript">
-	var mySwiper1 = new Swiper ('#swiper1',{
-		loop:true,
-		autoplay: true,//可选选项，自动滑动
-	    direction: 'horizontal',
-	    pagination: {
-		    el: '.swiper-pagination',
-		 },
-	})
-   	$(".trading>div").click(function(){//共享血拼
-   		console.log(11);
+	//请求banner
+	ajaxs("api/ad/list",'post',{type:3},function(data){
+		var listImg = data.list;
+		for (let index = 0; index < listImg.length; index++) {
+			const imgs = listImg[index];
+			console.log(imgs);
+			var html = '<div class="swiper-slide"><a href="'+ imgs.url +'"><img src="'+ imgs.image +'" alt="'+ imgs.title +'"></a></div>';
+			$('.swiper-wrapper').append(html);
+		}
+		var mySwiper1 = new Swiper ('#swiper1',{
+			loop:true,
+			autoplay: true,//可选选项，自动滑动
+			direction: 'horizontal',
+			pagination: {
+				el: '.swiper-pagination',
+			},
+		})
+	},function(err){
+		console.log(err);
+	});
+
+   	$(".trading>div").click(function(){//共享血拼;
    		$(this).children().addClass("act");
    		$(this).siblings().children().removeClass("act");
+		getProduct();
    	})
 	
 	$(".shows").click(function(){//共享血拼
 		window.location.href="../shopping/shopping.html";
 	})
-	
-	
-	
-	
-	
-	
-	
+
+	getProduct();
+	//获取推荐商品
+	function getProduct(){
+		var type="0";
+		//TODO 获取地理位置
+		var cityName="郑州";
+		if($(".act").text()=="附近"){
+			type="1";
+		}else{
+			type="0";//新鲜
+		}
+		//获取推荐商品
+		ajaxs("api/sproduct/index",'post',{type:type,cityName:cityName},function(data){
+			console.log(data);
+			var data=data.list,ks="";
+
+			for(i in data){
+				var productImage=JSON.parse(data[i].productImage);
+				var imgString='';
+				for(j in productImage){
+					imgString+='<img src="'+productImage[j]+'">';
+				}
+				ks+='<div class="shows"><div><div><img src="'+data[i].userHeadpic+'"/></div><div><div>'+data[i].nickname+'</div><div>'+data[i].createDate+'</div></div></div><div><div><span>¥'+data[i].price+'</span>'+data[i].introduction+'</div><div class="aas"><div>' +
+						imgString +
+						'</div></div><div class="">浏览<span>'+data[i].hits+'</span></div></div></div>';
+			}
+			$(".contents").html(ks);
+		},function(err){
+			console.log(err);
+		});
+	}
+
 </script>
 	</body>
 </html>
