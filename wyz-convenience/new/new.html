@@ -17,25 +17,25 @@
             <p>消息</p>
         </div>
         <div class="new-menu">
-            <div>
+            <div onClick="location.href='./secpages/praise.html'">
                 <img src="../images/like.png" alt="">
                 <span>赞</span>
             </div>
-            <div>
+            <div onClick="location.href='./secpages/comment.html'">
                 <img src="../images/information.png" alt="">
                 <span>评论</span>
             </div>
-            <div>
+            <div onClick="location.href='./secpages/attention.html'">
                 <img src="../images/friend.png" alt="">
                 <span>关注</span>
             </div>
-            <div>
+            <div onClick="location.href='./secpages/myfriends.html'">
                 <img src="../images/friends.png" alt="">
                 <span>好友</span>
             </div>
         </div>
         <div class="new-newbox">
-            <div class="new-newboxs">
+            <div class="new-newboxs" onClick="location.href='../fief/secpage/subpage/hechat.html'">
                 <img src="../images/yuan.png" alt="">
                 <div class="new-user">
                     <p>铭铭</p>
@@ -46,7 +46,7 @@
                     <p>1</p>
                 </div>
             </div>
-            <div class="new-newboxs">
+            <div class="new-newboxs" onClick="location.href='../fief/secpage/subpage/hechat.html'">
                 <img src="../images/li.png" alt="">
                 <div class="new-user">
                     <p>李丽</p>
@@ -54,10 +54,19 @@
                 </div>
                 <div class="new-time">
                     <span>15：31</span>
-                    <p>1</p>
                 </div>
             </div>
-            <div class="new-newboxs">
+            <div class="new-newboxs" onClick="location.href='../fief/secpage/subpage/hechat.html'">
+                <img src="../images/yuan.png" alt="">
+                <div class="new-user">
+                    <p>铭铭</p>
+                    <span>帮我点个赞，谢谢啊！</span>
+                </div>
+                <div class="new-time">
+                    <span>15：31</span>
+                </div>
+            </div>
+            <div class="new-newboxs" onClick="location.href='../fief/secpage/subpage/hechat.html'">
                 <img src="../images/yuan.png" alt="">
                 <div class="new-user">
                     <p>铭铭</p>
@@ -68,7 +77,7 @@
                     <p>1</p>
                 </div>
             </div>
-            <div class="new-newboxs">
+            <div class="new-newboxs" onClick="location.href='../fief/secpage/subpage/hechat.html'">
                 <img src="../images/yuan.png" alt="">
                 <div class="new-user">
                     <p>铭铭</p>
@@ -76,18 +85,6 @@
                 </div>
                 <div class="new-time">
                     <span>15：31</span>
-                    <p>1</p>
-                </div>
-            </div>
-            <div class="new-newboxs">
-                <img src="../images/yuan.png" alt="">
-                <div class="new-user">
-                    <p>铭铭</p>
-                    <span>帮我点个赞，谢谢啊！</span>
-                </div>
-                <div class="new-time">
-                    <span>15：31</span>
-                    <p>1</p>
                 </div>
             </div>
         </div>
@@ -116,4 +113,26 @@
         </ul>   
     </div>
 </body>
+<script>
+    $(function(){
+        $.ajax({
+                
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/msglistuser/list',
+                dataType:'json',
+                data:{
+                    forumId:forumId,
+                },
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+    })
+</script>
 </html>

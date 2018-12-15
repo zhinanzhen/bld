@@ -50,6 +50,9 @@
             var phoneVal = $('.phoneVal').val();
             var pwd = $('.passWord').val();
             $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
                 type:'POST',
                 url:url_prefix+'api/user/login',
                 dataType:'json',
@@ -58,16 +61,16 @@
                     password: pwd
                 },
                 success:function(data){
+                    // console.log(data.token);
                     console.log(data);
-                    console.log('登录成功');
-                    // window.location.href="home.html";
+                    // window.localStorage.setItem('token',JSON.stringify(data.token));
+                    // window.location.href="../fief/fief.html"
                 },
                 error:function(data){
                     console.log(data)
                 }
             });
         })
-    
     })
 </script>
 </html>

@@ -14,7 +14,7 @@
 <body>
     <div>
         <div class="fief-nav">
-            <div class="fief-tit">
+            <div class="fief-tit" onClick="location.href='./secpage/cityselection.html'">
                 <img src="../images/location.png" alt="">
                 <span>郑州大学高新区校区</span> 
             </div>
@@ -30,11 +30,11 @@
             <span>我的封地</span>
         </div>
         <div class="fief-mythemecon">
-            <div>
+            <!-- <div onClick="location.href='./secpage/fiefdetails.html'">
                 <img src="../images/foodie.png" alt="">
                 <span>吃货</span>
-            </div>
-            <div>
+            </div> -->
+            <div class="fief-cj" onClick="location.href='./secpage/createfief.html'">
                 <img src="../images/add.png" alt="">
             </div>
         </div>
@@ -43,26 +43,26 @@
             <span>附近封地</span>
         </div>
         <div class="fief-mythemeconb">
-            <div>
+            <!-- <div onClick="location.href='./secpage/fiefjoin.html'">
                 <img src="../images/grill.png" alt="">
                 <p>小路烧烤</p>
                 <button>加入</button>
             </div>
-            <div>
+            <div onClick="location.href='./secpage/fiefjoin.html'">
                 <img src="../images/housing.png" alt="">
                 <p>链家房源</p>
                 <button>加入</button>
             </div>
-            <div>
+            <div onClick="location.href='./secpage/fiefjoin.html'">
                 <img src="../images/outdoors-.png" alt="">
                 <p>阿旺户外</p>
                 <button>加入</button>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="index-nav">
         <ul>
-            <li onClick="location.href='../../html/hdf_convenience_store/index/index.html'">
+            <li onClick="location.href='../home/home.html'">
                 <img src="../images/zhuye2.png" alt="" class="homepage">
                 <span>主页</span>
             </li>
@@ -84,4 +84,48 @@
         </ul>   
     </div>
 </body>
+<script>
+     $(function(){
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/forum/mylist',
+                dataType:'json',
+                data:{
+                },
+                success:function(data){
+                    console.log(data);
+                    $.each(data.list,function(index,item){
+                        var html = '<a href="./secpage/fiefdetails.html?'+ item.forumId +'"><div><img src='+ item.showPic +'><span>'+ item.name +'</span></div></a>';
+                        $('.fief-cj').before(html)
+                    })
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/forum/nearlist',
+                dataType:'json',
+                data:{
+                    cityName:'郑州',
+                },
+                success:function(data){
+                    console.log(data);
+                    $.each(data.list,function(index,item){
+                        $('.fief-mythemeconb').append('<a href="./secpage/fiefjoin.html?'+ item.forumId +'"><div><img src="'+ item.showPic +'" alt=""><p>'+ item.name +'</p><button>加入</button></div></a>')
+                    })
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+        })
+</script>
 </html>

@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>发布二手商品</title>
+    <title>发布物品</title>
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
     <link rel="stylesheet" href="../../css/publish/publish.css"/>
@@ -16,12 +16,12 @@
 <div class="layer">
     <header>
         <i onclick="back()"></i>
-        <h3>发布商品</h3>
+        <h3>发布物品</h3>
     </header>
     <div class="content">
         <div class="say">
-            <input type="text" class="style"  placeholder="请描述物品名称，型号等"/>
-            <textarea placeholder="详细描述会为你带来更加快速的成交哦;
+            <input id="name" type="text" class="style"  placeholder="请描述物品名称，型号等"/>
+            <textarea id="introduction" placeholder="详细描述会为你带来更加快速的成交哦;
      1.请描述你的物品优势，例如品牌，原价
      2.请描述该物品的相关信息，是否损坏，是否拆卸
      3.请描述该物品是否保留保修凭证，是否还在保修期内"></textarea>
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <h3>价格标准：</h3>
+        <h3>价格标准：<input id="price" type="text" placeholder="请输入价格"/></h3>
         <div class="status">请选择竞价方式</div>
         <div class="status_span clearfix">
             <span class="active">+/-20%</span>
@@ -71,10 +71,10 @@
             </div>
 
         </div>
-        <div class="promise">
+        <!--<div class="promise">
             <input type="checkbox"/>
             我保证该物品为原厂正品，不存在仿制伪造。
-        </div>
+        </div>-->
         <div class="publish">
             <button>确定发布</button>
         </div>
@@ -89,7 +89,7 @@
 <script src="../../js/base/Historyback.js"></script>
 <script src="../../js/all.js"></script>
 <script>
-
+    isLogin();
     //竞价方式的选择
     $(".status_span span").click(function(){
             $(this).addClass("active");
@@ -101,7 +101,6 @@
     /*提货方式*/
     $(".get_goods>span").click(function(){
         $(this).children().addClass("active");
-       // console.log($(this).siblings());
         $(this).siblings().children().removeClass("active");
         console.log($(this).text());
     })
@@ -117,14 +116,29 @@
             flag=true;
         }
     })
+    //提交
     var list=[];
     $(".publish button ").click(function(){
-
+        var name=$("#name").val();
+        if(isEmptyString(name)){
+            alert("请输入宝贝名称");
+            return false;
+        }
+        var introduction=$("#introduction").val();
+        if(isEmptyString(introduction)){
+            alert("请输入宝贝介绍");
+            return false;
+        }
+        var name=$("#name").val();
+        if(isEmptyString(name)){
+            alert("请输入宝贝名称");
+            return false;
+        }
         $(".title_span .active").each(function(i){
             var sortid=$(this).data("value");
             list.push(sortid);
         });
-        //console.log(list);//成功 数组形式
+        console.log(list);//成功 数组形式
     })
 
     /*上传图片*/

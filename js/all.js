@@ -20,18 +20,14 @@ function ajaxs(url,type,data,suFn,erFn){
 		}
 	});
 }
-function login() {
-	localStorage.setItem('userId','654321');
-}
 
 function isLogin() {
-	login();//之后去掉
 	var userId=localStorage.getItem('userId');
     if(userId){
         userId.replace(/\"/g,"");
 		return userId;
     }else{
-        window.location.href="./login.html";
+        window.location.href="../login/login/login.html";
     }
 }
 
