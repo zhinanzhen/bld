@@ -12,6 +12,7 @@
 		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=5059cf2e34f9bc9173aefe87f0d62f09"></script>
 	</head>
 	<body>
 	    <header class="clearfix">
@@ -83,12 +84,14 @@
 			</div>
 			<div>
 				<div class="iconfont icon-wode1"></div>
-				<div><a href="../../publish/publish.html">我的</a></div>
+				<div><a href="../../h_store/my.html">我的</a></div>
 			</div>
 		</footer>
-		
 
 <script type="text/javascript">
+	//获取城市位置信息
+	var cityName="郑州市";
+	getCurCity();
 	//请求banner
 	ajaxs("api/ad/list",'post',{type:3},function(data){
 		var listImg = data.list;
@@ -124,8 +127,6 @@
 	//获取推荐商品
 	function getProduct(){
 		var type="0";
-		//TODO 获取地理位置
-		var cityName="郑州";
 		if($(".act").text()=="附近"){
 			type="1";
 		}else{
@@ -151,7 +152,29 @@
 			console.log(err);
 		});
 	}
-
+	function getCurCity(){
+		var map, geolocation;//加载地图，调用浏览器定位服务
+		map = new AMap.Map('container', {
+			resizeEnable: true
+		});
+		map.plugin('AMap.Geolocation', function() {
+			geolocation = new AMap.Geolocation({
+				enableHighAccuracy: true,
+				timeout: 10000
+			});
+			geolocation.getCityInfo(getCity);
+		});
+		function getCity(status, result) {
+			if(status!='complete'){
+				console.log(status)
+				showToast('定位失败');
+			}else{
+				//console.log(result.city);
+				//console.log(result);
+				cityName=result.city;
+			}
+		}
+	}
 </script>
 	</body>
 </html>

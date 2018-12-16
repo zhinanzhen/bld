@@ -164,10 +164,10 @@
 				},
 				success: function (data) {
 					$(".f-s-38").text(data.user.username);
-					$("#fansNum").text(data.fansNum);
-					$("#attentionNum").text(data.attentionNum);
-					$("#honestNum").text(data.honestNum);
-					$("#praiseNum").text(data.praiseNum);
+					$("#fansNum").text(data.fansNum);//粉丝数
+					$("#attentionNum").text(data.attentionNum);//关注数
+					$("#honestNum").text(data.honestNum);//信誉分
+					$("#praiseNum").text(data.praiseNum);//赞
 					if(!isEmptyString(data.user.headpicPath)){
 						$("#headpicPath").attr('src',data.user.headpicPath);
 					}

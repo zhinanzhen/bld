@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../css/base.css"/>
     <link rel="stylesheet" href="../../css/header.css"/>
     <link rel="stylesheet" href="../../css/publish/publish.css"/>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=5059cf2e34f9bc9173aefe87f0d62f09"></script>
     <style>
         body{
             background-color: #fff;!important;
@@ -46,19 +47,19 @@
         <h3>价格标准：<input id="price" type="text" placeholder="请输入价格"/></h3>
         <div class="status">请选择竞价方式</div>
         <div class="status_span clearfix">
-            <span class="active">+/-20%</span>
-            <span>+/-10%</span>
-            <span>原价</span>
-            <span>无所谓</span>
+            <span class="active" value="0">原价</span>
+            <span value="1">+/-10%</span>
+            <span value="2">+/-20%</span>
+            <span value="3">无所谓</span>
         </div>
         <div class="get_goods">
             <span>
                 物流发货
-                <i class="active">√</i>
+                <i class="active" value="0">√</i>
             </span>
             <span>
                同城自提
-                <i>√</i>
+                <i value="1">√</i>
             </span>
         </div>
         <div class="title">
@@ -71,10 +72,10 @@
             </div>
 
         </div>
-        <!--<div class="promise">
+        <div class="promise">
             <input type="checkbox"/>
             我保证该物品为原厂正品，不存在仿制伪造。
-        </div>-->
+        </div>
         <div class="publish">
             <button>确定发布</button>
         </div>
@@ -89,7 +90,13 @@
 <script src="../../js/base/Historyback.js"></script>
 <script src="../../js/all.js"></script>
 <script>
-    isLogin();
+    var userId=isLogin();
+    //常见上传图片的文件列表
+    var files=[];
+    //位置
+    var cityname="郑州",locationx;
+
+    getCurCity();
     //竞价方式的选择
     $(".status_span span").click(function(){
             $(this).addClass("active");
@@ -117,7 +124,6 @@
         }
     })
     //提交
-    var list=[];
     $(".publish button ").click(function(){
         var name=$("#name").val();
         if(isEmptyString(name)){
@@ -129,17 +135,76 @@
             alert("请输入宝贝介绍");
             return false;
         }
-        var name=$("#name").val();
-        if(isEmptyString(name)){
-            alert("请输入宝贝名称");
+        var price=$("#price").val();
+        if(isEmptyString(price)){
+            alert("请输入价格");
             return false;
         }
+        //竞价方式
+        var pricetype=$(".status_span .active").attr("value");
+        var ismail,isself;
+        if($(".get_goods .active").attr("value")=="0"){
+            ismail=1;
+            isself=0;
+        }else if($(".get_goods .active").attr("value")=="1"){
+            ismail=0;
+            isself=1;
+        }
+        //商品分类
+        var productcategoryid,categoryname;
+        //标签
+        var lables=[];
         $(".title_span .active").each(function(i){
-            var sortid=$(this).data("value");
-            list.push(sortid);
+            var lable=$(this).text();
+            lables.push(lable);
         });
-        console.log(list);//成功 数组形式
-    })
+        lables=JSON.stringify(lables);
+
+        var formdata = new FormData();
+        for ( var i in files) {
+            formdata.append("files", files[i]);
+        }
+
+        formdata.append("name", name);
+        formdata.append("userId", userId);
+        formdata.append("introduction", introduction);
+        formdata.append("pricetype", pricetype);
+        formdata.append("ismail", ismail);
+        formdata.append("isself", isself);
+        formdata.append("productcategoryid", productcategoryid);
+        formdata.append("categoryname", categoryname);
+        formdata.append("cityname", cityname);
+        formdata.append("locationx", locationx);
+        formdata.append("lables", lables);
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/sproduct/save',
+            dataType: false,
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                if(data.code==0){
+                    alert("发布成功");
+                    go();
+                }else{
+                    alert("发布失败");
+                }
+            },
+            error: function (data) {
+                console.log(data);
+                alert("发布失败");
+            }
+        });
+
+    });
 
     /*上传图片*/
     function imgChange(obj1, obj2) {
@@ -151,6 +216,7 @@
         for (var i = 0; i < fileList.length; i++) {
             if(file.files && file.files[i]){
                 var fileData = file.files[i];
+                files.push(fileData);
                 var size = fileData.size;   //是字节数
                 var isAllow = false;
                 if(!size) isAllow = false;
@@ -169,6 +235,7 @@
             img.setAttribute("src", imgArr[i]);
             var imgAdd = document.createElement("div");
             imgAdd.setAttribute("class", "z_addImg");
+            imgAdd.setAttribute("id",files.indexOf(fileData));
             imgAdd.appendChild(img);
             imgContainer.appendChild(imgAdd);
             //getBase64Image(img,imgArr[i]);
@@ -196,6 +263,7 @@
                 sure.onclick = function() {
                     mask.style.display = "none";
                     t.style.display = "none";
+                    files.splice(t.id,1);
                 };
             }
         };
@@ -229,6 +297,30 @@
     }
     function removeDom(id){
         document.getElementById(id).outerHTML='';
+    }
+    function getCurCity(){
+        var map, geolocation;//加载地图，调用浏览器定位服务
+        map = new AMap.Map('container', {
+            resizeEnable: true
+        });
+        map.plugin('AMap.Geolocation', function() {
+            geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true,
+                timeout: 10000
+            });
+            geolocation.getCityInfo(getCity);
+        });
+        function getCity(status, result) {
+            if(status!='complete'){
+                console.log(status)
+                showToast('定位失败');
+            }else{
+                //console.log(result.city);
+                //console.log(result);
+                cityName=result.city;
+                locationx=JSON.stringify(result.center);
+            }
+        }
     }
 </script>
 </html>
