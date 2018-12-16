@@ -29,6 +29,7 @@
 		</header>
 		<section class="sets">
 			<div>
+				<input id="hideShopId" hidden>
 				<div class="imags">
 					<img id="shop-img" src=""/>
 				</div>
@@ -57,9 +58,11 @@
 				</div>
 			</div>
 		</section>
-		<div class="publish">
-			<button>确定发布</button>
-		</div>
+		<footer>
+			<div>收藏</div>
+			<div>加入购物车</div>
+			<div class="buyNow">立即购买</div>
+		</footer>
 
 	<script type="text/javascript">
 		ajaxs("api/product/info",'post',{productId:getUrlString("productId")},function(data){
@@ -70,6 +73,7 @@
 			$("#shop-name").html(shopDetail.name);
 			$("#shop-introduction").html(shopDetail.introduction);
 			$("#shop-comment").html(shopDetail.commentnum);
+			$("#hideShopId").val(shopDetail.id);
             var jsonObj = JSON.parse(shopDetail.prop1);//转换为json对象
 			if(!jsonObj){
 			    return;
@@ -82,6 +86,41 @@
 		},function(err){
 			console.log(err);
 		});
+
+		$(".buyNow").click(function () {
+		    var productId = $("#hideShopId").val();
+			// 保存订单
+            var existDefaultAdress = isExistDefaultAdress();
+            alert(existDefaultAdress);
+            return;
+			var params = JSON.stringify({type:2,orderItems:[{productid:productId,quantity:1}]});
+            ajaxs("api/order/save",'post',params,function(data){
+                console.log(data)
+                if(data.code == 0){
+					// 查询默认地址
+					if(isExistDefaultAdress()){
+//                        window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+					}else{
+//                        window.location.href='../buy/address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+					}
+                }
+            },function(err){
+                console.log(err);
+            },{contentType : 'application/json;charset=utf-8'});
+        });
+
+		function isExistDefaultAdress() {
+		    var flag = false;
+            ajaxs("api/receiver/defaultinfo",'post',{},function(data){
+                console.log(data);
+                if(data.code == 0){
+                    flag = true;
+                }
+            },function(err){
+                console.log(err);
+            });
+            return flag;
+        }
 	</script>
 	
 	</body>

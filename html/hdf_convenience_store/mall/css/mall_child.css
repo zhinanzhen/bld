@@ -219,4 +219,21 @@ html, body {
   /*!*background-color: #ff4445;*!*/
   /*color: #fff;*/
 /*}*/
+footer {
+  width: 100%;
+  height: 0.5rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  box-shadow: 0rem 0rem 0.04rem 0rem rgba(150, 149, 149, 0.38);
+}
+footer > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
 /*# sourceMappingURL=mall_child.css.map */

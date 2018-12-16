@@ -21,8 +21,8 @@
 var urls="http://39.104.181.50:8080/bld/";
 var urls_local="http://127.0.0.1:8080/bld/";
 var urla="http://39.104.181.50:8080";
-function ajaxs(url,type,data,suFn,erFn){
-	$.ajax({
+function ajaxs(url,type,data,suFn,erFn,params){
+	$.ajax(Object.assign({
 		url:urls_local+url,
  		xhrFields:{
            withCredentials:true
@@ -34,9 +34,9 @@ function ajaxs(url,type,data,suFn,erFn){
 			suFn(data);
 		},
         error: function(error) {
-            erFn(error);         
+            erFn(error);
         }
-	});
+	},params || {}));
 }
 
 
