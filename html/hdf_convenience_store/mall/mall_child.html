@@ -90,18 +90,15 @@
 		$(".buyNow").click(function () {
 		    var productId = $("#hideShopId").val();
 			// 保存订单
-            var existDefaultAdress = isExistDefaultAdress();
-            alert(existDefaultAdress);
-            return;
 			var params = JSON.stringify({type:2,orderItems:[{productid:productId,quantity:1}]});
             ajaxs("api/order/save",'post',params,function(data){
                 console.log(data)
                 if(data.code == 0){
 					// 查询默认地址
 					if(isExistDefaultAdress()){
-//                        window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+                        window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
 					}else{
-//                        window.location.href='../buy/address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+                        window.location.href='../buy/add_address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
 					}
                 }
             },function(err){
@@ -113,12 +110,12 @@
 		    var flag = false;
             ajaxs("api/receiver/defaultinfo",'post',{},function(data){
                 console.log(data);
-                if(data.code == 0){
+                if(data.code == 0 && data.data){
                     flag = true;
                 }
             },function(err){
                 console.log(err);
-            });
+            },{async:false});
             return flag;
         }
 	</script>

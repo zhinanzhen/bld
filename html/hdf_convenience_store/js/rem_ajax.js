@@ -39,7 +39,11 @@ function ajaxs(url,type,data,suFn,erFn,params){
 	},params || {}));
 }
 
-
+function getUrlString(name) {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
 //上拉加载
 //_loadIndex 为请求的页数    _loadState为请求状态  0 可以请求  1 正在请求  2 请求结束
 var _loadIndex =1,
