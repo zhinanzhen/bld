@@ -49,8 +49,8 @@ function lsget(key){
     return JSON.parse(localStorage.getItem(key));
 }
 //设置localstage值
-function lsset(key,value){
-    return localStorage.setItem(key,JSON.stringify(value));
+function lsset(key,value) {
+    return localStorage.setItem(key, JSON.stringify(value));
 }
 
 //上拉加载

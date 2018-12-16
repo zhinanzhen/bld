@@ -35,6 +35,7 @@
 				<span></span>
 				<span>元</span>
 			</div>
+
 			<div onclick="addorder()">结算</div>
 		</footer>
 		
@@ -55,6 +56,7 @@
 		var items=lsget("store")["items"];
 		// 保存订单
 		var params = JSON.stringify({type:1,orderItems:items});
+
 		ajaxs("api/order/save",'post',params,function(data){
 			console.log(data)
 			if(data.code == 0){

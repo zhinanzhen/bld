@@ -28,12 +28,12 @@ function ajaxs(url,type,data,suFn,erFn,params){
 }
 
 function isLogin() {
-	var userId=localStorage.getItem('userId');
+	var userId=JSON.parse(localStorage.getItem('userId'));
     if(userId){
         userId.replace(/\"/g,"");
 		return userId;
     }else{
-        window.location.href="http://39.104.181.50:8080/page/html/login/login/login.html";
+        window.location.href="/bld/html/login/login/login.html";
     }
 }
 
