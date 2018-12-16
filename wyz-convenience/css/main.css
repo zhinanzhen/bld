@@ -125,15 +125,12 @@
 }
 .home-userimgbox{
     overflow: hidden;
-    height: 3.6rem /* 270/75 */;
-}
-.home-userimg{
-    width: 13333.333333rem;
 }
 .home-userimg img{
     width: 3.466667rem /* 260/75 */;
     height: 3.466667rem /* 260/75 */;
     float: left;
+    margin-top: .2rem /* 15/75 */;
     margin-right: .133333rem /* 10/75 */;
 }
 .home-browse{
@@ -2575,6 +2572,9 @@
 .mysale-itemcon{
     overflow: hidden;
     width: 10rem;
+    padding: .4rem /* 30/75 */;
+    box-sizing: border-box;
+    background: #eee;
 }
 .mysale-itemcon img{
     float: left;
@@ -2584,7 +2584,7 @@
 }
 .mysale-itemtit{
     float: left;
-    width: 7.066667rem /* 530/75 */;
+    width: 6rem /* 450/75 */;
 }
 .mysale-itemtit p{
     width: 6rem /* 450/75 */;
@@ -2616,4 +2616,114 @@
 }
 .mysale-delivery{
     display: none;
+}
+/* mysaledetails */
+.mysaledetails-box{
+    background: #eee;
+}
+.mysaledetails-user{
+    line-height: .8rem /* 60/75 */;
+    background: #fff;
+    padding: .4rem /* 30/75 */;
+}
+.mysaledetails-phone{
+    float: right;
+}
+.mysaledetails-order{
+    background: #fff;
+    line-height: .8rem /* 60/75 */;
+    padding: .4rem /* 30/75 */;
+}
+.mysaledetails-amount{
+    float: right;
+}
+.mysaledetails-footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: .2rem /* 15/75 */ .4rem /* 30/75 */;
+    overflow: hidden;
+   box-sizing: border-box;
+}
+.mysaledetails-footer p{
+    float: right;
+}
+.mysaledetails-footer p span{
+    display: inline-block;
+    border-radius: 2rem;
+    border: .013333rem /* 1/75 */ solid #ccc;
+    padding: .133333rem /* 10/75 */ .2rem /* 15/75 */;
+}
+.mysaledetails-delivery{
+    display: none;
+}
+/* issue */
+.issue-conbox{
+    margin-top: 1.2rem /* 90/75 */;
+}
+.issue-userbox{
+    padding-left: .266667rem /* 20/75 */;
+    padding-top: .4rem /* 30/75 */;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: .133333rem /* 10/75 */ solid #eee;
+}
+.issue-user{
+    overflow: hidden;
+}
+.issue-userhead{
+    width: 1.093333rem /* 82/75 */;
+    height: 1.093333rem /* 82/75 */;
+    float: left;
+}
+.issue-userspid p{
+    font-size: .32rem /* 24/75 */;
+    font-weight: bold;
+    line-height: .666667rem /* 50/75 */;
+    padding-left: .266667rem /* 20/75 */;
+    float: left;
+    line-height: 1.093333rem /* 82/75 */;
+}
+.issue-userspid img{
+    float: left;
+    width: .346667rem /* 26/75 */;
+    height: .253333rem /* 19/75 */;
+    margin-top: .413333rem /* 31/75 */;
+    margin-left: .066667rem /* 5/75 */;
+}
+.issue-userfont{
+    font-size: .253333rem /* 19/75 */;
+    color: #313131;
+}
+.issue-usertheme p{
+    line-height: 1.133333rem /* 85/75 */;
+}
+.issue-price{
+    font-size: .346667rem /* 26/75 */;
+    color: #ff4947;
+    font-weight: bold;
+    margin-right: .266667rem /* 20/75 */;
+}
+.issue-price+span{
+    color: #666666;
+}
+.issue-userimgbox{
+    overflow: hidden;
+    height: 3.6rem /* 270/75 */;
+}
+.issue-usersimg{
+    width: 13333.333333rem;
+}
+.issue-usersimg img{
+    width: 3.466667rem /* 260/75 */;
+    height: 3.466667rem /* 260/75 */;
+    float: left;
+    margin-right: .133333rem /* 10/75 */;
+}
+.issue-browse{
+    font-size: .306667rem /* 23/75 */;
+    color: #666666;
+    line-height: .933333rem /* 70/75 */;
 }
