@@ -57,6 +57,7 @@
 			</div>
 		</div>
 		<div class="orc" id="pay-order">一键付款</div>
+		<div id="pay-money"></div>
 	</div>
 </section>
 
@@ -115,11 +116,10 @@
     function payOrder(orderId,payType) {
         ajaxs("api/payment/pay",'post',{type:payType,orderId:orderId,ip:returnCitySN["cip"]},function(data){
             console.log(data);
-            if(data.code == 0){
-            }
+            $("#pay-money").html(data);
         },function(err){
             console.log(err);
-        },{async:false});
+        },{async:false,dataType:"html"});
     }
 
     // 订单与地址绑定
