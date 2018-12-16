@@ -2727,3 +2727,76 @@
     color: #666666;
     line-height: .933333rem /* 70/75 */;
 }
+/* mydynamic */
+.mydynamic-conbox{
+    margin-top: 1.2rem /* 90/75 */;
+}
+#mydynamic-del{
+    width: .386667rem /* 29/75 */;
+    height: .44rem /* 33/75 */;
+    float: right;
+}
+/* issueindex */
+.issueindex-box{
+    width: 100%;
+    height: 100%;
+    padding-top: 130%;
+}
+.issueindex-conbox{
+    width: 5.6rem /* 420/75 */;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+.issueindex-conbox div{
+    text-align: center;
+}
+.issueindex-conbox div img{
+    width: 1.706667rem /* 128/75 */;
+    height: 1.706667rem /* 128/75 */;
+    margin-bottom: .333333rem /* 25/75 */;
+}
+.issueindex-back{
+    width: .48rem /* 36/75 */;
+    height: .48rem /* 36/75 */;
+    margin: 1.2rem /* 90/75 */ auto 0 auto;
+}
+/* search */
+.search-nav{
+}
+.search-back{
+    width: .28rem /* 21/75 */;
+    height: .493333rem /* 37/75 */;
+    position: absolute;
+    top: .373333rem /* 28/75 */;
+    left: .4rem /* 30/75 */;
+}
+.search-inputbox img{
+    display: inline-block;
+    vertical-align: middle;
+}
+.search-inputbox{
+    width: 7.466667rem /* 560/75 */;
+    margin-left: .933333rem /* 70/75 */;
+    display: inline-block;
+    padding: .2rem /* 15/75 */ 1.066667rem /* 80/75 */;
+    box-sizing: border-box;
+    background: #eee;
+    margin-top: .133333rem /* 10/75 */;
+    border-radius: 2rem;
+}
+.search-inputbox input{
+    border: none;
+    outline: none;
+    background: #eee;
+}
+.search-imgs{
+    width: .453333rem /* 34/75 */;
+    height: .453333rem /* 34/75 */;
+}
+.search-ss{
+    margin-left: .4rem /* 30/75 */;
+}
+.search-itemcon{
+    margin-top: .4rem /* 30/75 */;
+}
