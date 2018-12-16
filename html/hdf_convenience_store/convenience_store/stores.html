@@ -39,6 +39,36 @@
 		</footer>
 		
 <script type="text/javascript">
+	function isExistDefaultAdress() {
+		var flag = false;
+		ajaxs("api/receiver/defaultinfo",'post',{},function(data){
+			console.log(data);
+			if(data.code == 0 && data.data){
+				flag = true;
+			}
+		},function(err){
+			console.log(err);
+		},{async:false});
+		return flag;
+	}
+	function addorder(){
+		var items=lsget("store")["items"];
+		// 保存订单
+		var params = JSON.stringify({type:1,orderItems:items});
+		ajaxs("api/order/save",'post',params,function(data){
+			console.log(data)
+			if(data.code == 0){
+				// 查询默认地址
+				if(isExistDefaultAdress()){
+					window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+				}else{
+					window.location.href='../buy/add_address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+				}
+			}
+		},function(err){
+			console.log(err);
+		},{contentType : 'application/json;charset=utf-8'});
+	}
 	$(function(){
 		var arr = JSON.parse(localStorage.getItem('bld_m'));
 		console.log(arr);
@@ -192,9 +222,9 @@
 		},function(err){
 			console.log(err);
 		})
-		$("footer>div:eq(1)").click(function(){
+		/*$("footer>div:eq(1)").click(function(){
 			window.location.href="../buy/order.html";
-		})
+		})*/
 	});
 	function num(obj){//只能输入正整数,可以为0
 		var reg=/^([1-9]\d*|[0]{1,1})$/; //含0正整数
