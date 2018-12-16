@@ -160,7 +160,6 @@
        ajaxs("api/sproduct/index",'post',{type:type,cityName:cityName},function(data){
            console.log(data);
            var data=data.list,ks="";
-
            for(i in data){
                var productImage=JSON.parse(data[i].productImage);
                var imgString='';

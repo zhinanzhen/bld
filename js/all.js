@@ -26,7 +26,19 @@ function ajaxs(url,type,data,suFn,erFn,params){
 		}
 	},params || {}));
 }
+//获取用户信息,如果有参数则获取参数指定id用户,如果没有则返回当前登录用户
+function getUserInfo(userId){
+	if(isEmptyString(userId)){
+		userId=isLogin();
+	}
+	ajaxs("api/user/userInfo",'post',{userId:userId},function(data){
+			console("信息"+data.user);
+			return data.user;
+	},function(err){
+		console.log(err);
+	});
 
+}
 function isLogin() {
 	var userId=JSON.parse(localStorage.getItem('userId'));
     if(userId){
