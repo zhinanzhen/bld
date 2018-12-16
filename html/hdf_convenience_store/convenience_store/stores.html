@@ -31,7 +31,7 @@
 		</section>
 		<footer>
 			<div>
-				<span>合计：¥</span>
+				<span>合计：¥<span id="totalPrice">0</span></span>
 				<span></span>
 				<span>元</span>
 			</div>
@@ -44,7 +44,15 @@
 		console.log(arr);
 		$(".heads>div:eq(1)").html(arr[1]);
 		$(".banners>img").attr("src",arr[2]);
-		
+
+		//创建购物车信息
+		var cart=lsget("store"+arr[0]);
+		if(!cart){
+			cart={"storeId":arr[0],"totalPrice":0,"items":[]};
+			lsset("store"+arr[0],cart);
+		}
+		//item {productid:"",quantity:1,price:1}
+		var items=cart["items"];
 		//5.4	id获取便利店信息
 		/*ajaxs("api/store/info",'post',{storeid:arr[0]},function(data){
 			console.log(data);
@@ -73,7 +81,7 @@
 				$(".ccbg>li").hide();
 				$(".ccbg").append(loading());
 				menu(index,indexs);
-			})
+			});
 			function menu(index,indexs){
 				if(index==""){
 					index=1
@@ -95,7 +103,7 @@
 						if(data[i].unit==null){
 							data[i].unit="斤"
 						}
-						ks+=`<li class="singles" data-singles=${data[i].id}>
+						ks+=`<li class="singles" data-singles=${data[i].id} data-price=${data[i].price}>
 								<div>
 									<img src=${data[i].image} />
 								</div>
@@ -114,6 +122,7 @@
 							</li>`;
 					}
 					$(".ccbg").html(ks);
+
 					//商品数量
 					$(".ccbg").on("click",".icon-jia",function(){
 						var th=$(this);
@@ -128,18 +137,34 @@
 					
 					function calculate(th,evl){
 						var singles=th.closest(".singles").data("singles");
-						console.log(singles);
+						var price=th.closest(".singles").data("price");
+
+						//console.log("productid"+singles);
+						//console.log("productprice"+price);
 						var inps=Number(th.siblings(".inps").val());
-						console.log(inps);
+						var quantity=inps;
+						var totalPrice=parseFloat($("#totalPrice").text());
 						if(evl=="+"){
+							quantity+=1;
 							th.siblings(".inps").val(inps+1);
+							//更新合计信息
+							totalPrice+=price;
 						}else{
 							if(inps<=0){
 								th.siblings(".inps").val(0);
 							}else{
+								quantity-=1;
 								th.siblings(".inps").val(inps-1);
+								//更新合计信息
+								totalPrice-=price;
 							}
-							
+						}
+						//设置合计,更新缓存
+						$("#totalPrice").text(totalPrice);
+						for(p in items){
+							if(items[p]){
+
+							}
 						}
 					}
 					
@@ -153,7 +178,7 @@
 		$("footer>div:eq(1)").click(function(){
 			window.location.href="../buy/order.html";
 		})
-	})
+	});
 	function num(obj){//只能输入正整数,可以为0
 		var reg=/^([1-9]\d*|[0]{1,1})$/; //含0正整数
 		if(reg.test(obj.value)){
