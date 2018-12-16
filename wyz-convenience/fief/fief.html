@@ -10,6 +10,7 @@
     <script src="../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../js/lib/flexible.js"></script>
     <script src="../js/lib/common.js"></script>
+    <script src="../../js/all.js"></script>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=5059cf2e34f9bc9173aefe87f0d62f09"></script>
 </head>
 <body>
@@ -63,7 +64,7 @@
     </div>
     <div class="index-nav">
         <ul>
-            <li onClick="location.href='../../../html/hdf_convenience_store/index/index.html'">
+            <li onClick="location.href='../home/home.html'">
                 <img src="../images/zhuye2.png" alt="" class="homepage">
                 <span>主页</span>
             </li>
@@ -71,7 +72,7 @@
               <img src="../images/fengdiindex.png" alt="" class="fief">
               <span>封地</span>
             </li>
-            <li>
+            <li onClick="location.href='../issue/issueindex.html'">
                  <img src="../images/fabu1.png" alt="" class="issue">  
             </li>
               <li onClick="location.href='../new/new.html'">
@@ -87,6 +88,7 @@
 </body>
 <script>
      $(function(){
+         isLogin();
             $.ajax({
                 xhrFields: {
                     withCredentials: true

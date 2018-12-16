@@ -12,6 +12,9 @@
     <script src="../js/lib/flexible.js"></script>
     <script src="../js/lib/common.js"></script>
     <script src="../js/lib/swiper.js"></script>
+    <script src="../../js/all.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=5059cf2e34f9bc9173aefe87f0d62f09"></script>
+
 </head>
 <body>
     <div class="home-box">
@@ -30,26 +33,32 @@
         </div>
         <div class="home-vl">
             <div>
+                <a href="../../html/hdf_convenience_store/convenience_store/home.html">
                 <img src="../images/enjoy.png" alt="" class="home-vl-l">
                 <b>共享便利店</b>
+                 </a>
             </div>
             <div>
+                <a href="../me/myinterest%20.html">
                 <img src="../images/interest.png" alt="" class="home-vl-l">
                 <b>我的兴趣</b>
+                    </a>
             </div>
             <div>
+                <a href="../../html/hdf_convenience_store/mall/mall.html">
                 <img src="../images/store.png" alt="" class="home-vl-l">
                 <b>共享商城</b>
+                    </a>
             </div>
         </div>
         <div class="home-dynamic">
             <div class="home-dt">
                 <div class="home-index">新鲜</div>
                 <div>附近</div>
-                <div>正品</div>
             </div>
         </div>
         <div class="home-userbox">
+            <div id="content">
             <div class="home-user">
                 <img src="../images/head.png" alt="" class="home-userhead">
                 <div class="home-userid">
@@ -72,6 +81,7 @@
                 </div>
                 <span class="home-browse">浏览12</span>
             </div>
+            </div>
         </div>
     </div>
     <div class="index-nav">
@@ -84,7 +94,7 @@
               <img src="../images/fengdi.png" alt="" class="fief">
               <span>封地</span>
             </li>
-            <li>
+            <li onClick="location.href='../issue/issueindex.html'">
                  <img src="../images/fabu1.png" alt="" class="issue">  
             </li>
               <li onClick="location.href='../new/new.html'">
@@ -99,11 +109,23 @@
     </div>
 </body>
 <script>
+    $('.home-dt div').click(function(){
+        $(this).addClass('home-index').siblings().removeClass('home-index');
+
+        if($(this).text()=="新鲜"){
+            getProduct(0);
+        }else{
+            getProduct(1);
+        }
+    })
+    //获取城市位置信息
+    var cityName="郑州市";
    $(function(){
+       getCurCity();
        // 请求banner
         $.ajax({
             type:'POST',
-            url:url_prefix+'api/ad/list',
+            url:baseUrl+'api/ad/list',
             dataType:'json',
             data:{
                 type: 3
@@ -131,6 +153,67 @@
         });
         
    })
+   getProduct(0);
+   //获取推荐商品
+   function getProduct(type){
+       //获取推荐商品
+       ajaxs("api/sproduct/index",'post',{type:type,cityName:cityName},function(data){
+           console.log(data);
+           var data=data.list,ks="";
 
+           for(i in data){
+               var productImage=JSON.parse(data[i].productImage);
+               var imgString='';
+               for(j in productImage){
+                   imgString+='<img src="'+productImage[j]+'">';
+               }
+               ks+=`<div class="home-user">
+                <img src=${data[i].userHeadpic} alt="" class="home-userhead">
+                <div class="home-userid">
+                    <p><span></span> ${data[i].nickname}</p>
+                    <img src="../images/identity.png" alt="">
+                    <span class="home-userfont">&nbsp;${data[i].createDate}</span>
+                </div>
+            </div>
+            <div class="home-usertheme">
+                 <p>
+                    <span class="home-price">￥${data[i].price}</span>
+                    <span>${data[i].introduction}</span>
+                </p>
+                <div class="home-userimgbox">
+                    <div class="home-userimg">
+                        ${imgString}
+                    </div>
+                </div>
+                <span class="home-browse">浏览12</span>`;
+           }
+           $("#content").html(ks);
+       },function(err){
+           console.log(err);
+       });
+   }
+   function getCurCity(){
+       var map, geolocation;//加载地图，调用浏览器定位服务
+       map = new AMap.Map('container', {
+           resizeEnable: true
+       });
+       map.plugin('AMap.Geolocation', function() {
+           geolocation = new AMap.Geolocation({
+               enableHighAccuracy: true,
+               timeout: 10000
+           });
+           geolocation.getCityInfo(getCity);
+       });
+       function getCity(status, result) {
+           if(status!='complete'){
+               console.log(status)
+               showToast('定位失败');
+           }else{
+               //console.log(result.city);
+               //console.log(result);
+               cityName=result.city;
+           }
+       }
+   }
 </script>
 </html>

@@ -37,7 +37,7 @@
       <div onClick="location.href='myshared.html'">
         <img src="../images/share1.png" alt="" class="me-centerleft me-leftimgt"/> <span>我的共享</span> <img src="../images/backbs.png" alt="" class="me-centerright"/>
       </div>
-      <div>
+      <div onClick="location.href='mynew.html'">
         <img src="../images/product-.png" alt="" class="me-centerleft me-leftimgs"/> <span>我的新品</span> <img src="../images/backbs.png" alt="" class="me-centerright"/>
       </div>
       <div onClick="location.href='../../html/h_store/my-attract.html'">
@@ -58,7 +58,7 @@
                   <img src="../images/fengdi.png" alt="" class="fief">
                   <span>封地</span>
                 </li>
-                <li>
+                <li  onClick="location.href='../issue/issueindex.html'">
                      <img src="../images/fabu1.png" alt="" class="issue">  
                 </li>
                   <li onClick="location.href='../new/new.html'">
@@ -74,6 +74,7 @@
   </body>
   <script type="text/javascript">
       var userId=isLogin();
+      console.log("本地缓存id:"+userId);
       //获取用户信息
       $.ajax({
           //处理session每次不唯一问题

@@ -133,6 +133,12 @@ html, body {
   color: #333333;
   font: normal 0.18rem AdobeHeitiStd-Regular;
 }
+.icon-xuanze{
+  color: #FFCC66;
+}
+.icon-tubiao-xuanze{
+  color: #3FC60C;
+}
 .orb > div > div:nth-child(3) {
   font-size: 0.2rem;
 }

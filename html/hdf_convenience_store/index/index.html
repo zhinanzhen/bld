@@ -113,13 +113,13 @@
 		console.log(err);
 	});
 
-   	$(".trading>div").click(function(){//共享血拼;
+   	$(".trading>div").click(function(){//切换tab
    		$(this).children().addClass("act");
    		$(this).siblings().children().removeClass("act");
 		getProduct();
    	})
 	
-	$(".shows").click(function(){//共享血拼
+	$(".shows").click(function(){
 		window.location.href="../shopping/shopping.html";
 	})
 
