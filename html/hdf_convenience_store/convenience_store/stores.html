@@ -35,7 +35,7 @@
 				<span></span>
 				<span>元</span>
 			</div>
-			<div>结算</div>
+			<div onclick="addorder()">结算</div>
 		</footer>
 		
 <script type="text/javascript">
@@ -46,10 +46,12 @@
 		$(".banners>img").attr("src",arr[2]);
 
 		//创建购物车信息
-		var cart=lsget("store"+arr[0]);
+//		var cart=lsget("store"+arr[0]);
+		var cart;//每次进店置空
 		if(!cart){
 			cart={"storeId":arr[0],"totalPrice":0,"items":[]};
-			lsset("store"+arr[0],cart);
+//			lsset("store"+arr[0],cart);
+			lsset("store",cart);
 		}
 		//item {productid:"",quantity:1,price:1}
 		var items=cart["items"];
@@ -143,7 +145,7 @@
 						//console.log("productprice"+price);
 						var inps=Number(th.siblings(".inps").val());
 						var quantity=inps;
-						var totalPrice=parseFloat($("#totalPrice").text());
+						var totalPrice=Number($("#totalPrice").text());
 						if(evl=="+"){
 							quantity+=1;
 							th.siblings(".inps").val(inps+1);
@@ -160,12 +162,27 @@
 							}
 						}
 						//设置合计,更新缓存
-						$("#totalPrice").text(totalPrice);
-						for(p in items){
-							if(items[p]){
-
+						$("#totalPrice").text(totalPrice.toFixed(2));
+						//更新items
+						var isdeal=false;
+						for(var p in items){
+							if(items[p].productid==singles){
+								items[p].quantity=quantity;
+								isdeal=true;
 							}
 						}
+						if(items.length==0||!isdeal){
+							var obj={};
+							obj["productid"]=singles;
+							obj["quantity"]=quantity;
+							obj["price"]=price;
+							items.push(obj);
+							isdeal=true;
+						}
+						cart["items"]=items;
+						cart["totalPrice"]=totalPrice.toFixed(2);
+//						lsset("store"+cart["storeId"],cart);
+						lsset("store",cart);
 					}
 					
 				},function(err){
