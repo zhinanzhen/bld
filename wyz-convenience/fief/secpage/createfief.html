@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建封地</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../js/lib/flexible.js"></script>
+    <script src="../../js/lib/common.js"></script>
+</head>
+<body>
+    <header class="hechat-nav">
+        <img src="../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>建立封地</p>
+    </header>
+    <div class="createfief-conbox">
+        <p>请选择想要建立封地类型</p>
+        <div class="createfief-con">
+            <span class="createfief-itemcolor">地理</span>
+            <span>语言</span>
+            <span>兴趣</span>
+            <span>电影</span>
+            <span>历史</span>
+            <span>文化</span>
+            <span>户外</span>
+            <span>军事</span>
+            <span>诗歌</span>
+            <span>天文</span>
+        </div>
+    </div>
+    <div class="createfief-itembox">
+        <div class="createfief-item">
+            <span>封地名称:</span>
+            <input type="text" id="fiefname">
+        </div>
+        <div class="createfief-item" id="create-file">
+            <span>封地头像:</span>
+            <input type="file" name="file" id="forumImg" class="createfief-inputfile" /> 
+            <label for="forumImg" class='createfief-btnsuccess'>点击选择</label>
+        </div>
+        <div class="createfief-item">
+            <span>封地类别:</span>
+            <!-- <input type="text" id="filebusinesstype"> -->
+            <select name="" id="filebusinesstype">
+                <option value="兴趣交友">兴趣交友</option>
+                <option value="吃喝玩乐">吃喝玩乐</option>
+                <option value="亲人朋友">亲人朋友</option>
+                <option value="工作沟通">工作沟通</option>
+            </select>
+        </div>
+        <div class="createfief-item">
+            <span>封地介绍:</span>
+            <input type="text" id="fileintro">
+        </div>
+        <div class="createfief-item">
+            <span>封地规模:</span>
+            <input type="number" id="filedeclare">
+        </div>
+        <div class="createfief-item"> 
+            <span>申请人姓名:</span>
+            <input type="text" id="fileusername">
+        </div>
+        <div class="createfief-item">
+            <span>封地人数:</span>
+            <span>20</span>
+        </div>
+    </div>
+    <div class="createfief-text">
+        <p class="createfief-tfone">封地建立准则</p>
+        <p>①建立者需在7~15天内凑齐5位封地居民，否则系统将自动遣散封地</p>
+        <p>②申请者建立封地时信誉积分＞5，并且具有达成的交易5笔以上，才可以申请封地。</p>
+        <p>③封地申请费用200元，活动期间费用0.</p>
+        <div class="createfief-submit">
+            <button>提交申请</button>
+        </div>
+        <div class="createfief-foooter">
+            <img src="../../images/right.png" alt="">
+            <span>提交申请默认为同意《关于封地申请相关规定》，最终解释权归本公司所有</span>
+        </div>
+    </div>
+</body>
+<script>
+    $(function(){
+        
+        $('.createfief-con span').click(function(){
+            
+            if($(this).attr("class")){
+                $(this).removeClass('createfief-itemcolor');
+            }else{
+                $(this).addClass('createfief-itemcolor');
+            }
+        });
+        var label=[];
+        $('.createfief-submit').click(function(){
+            
+            $('.createfief-itemcolor').each(function(index){
+                    label.push($(this).text())     
+                })
+                var labels = JSON.stringify(label)
+                // console.log($('#filebusinesstype').val());
+            var formdata = new FormData();
+            formdata.append("file", $('#forumImg')[0].files[0]);
+            formdata.append("labels",labels);
+            formdata.append("name", $('#fiefname').val());
+            formdata.append("businesstype", $('#filebusinesstype').val());
+            formdata.append("intro",$('#fileintro').val());
+            formdata.append("declare",$('#filedeclare').val());
+            formdata.append("username ",$('#fileusername').val());
+            formdata.append("maxnum",20);
+
+            $.ajax({
+                //处理session每次不唯一问题
+                xhrFields: {
+                    withCredentials: true
+                },
+                type: 'POST',
+                url: url_prefix + 'api/forum/save',
+                dataType: false,
+                data: formdata,
+                async: false,
+                cache: false,  
+                processData: false,  
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    alert("成功");
+                },
+                error: function (data) {
+                    console.log(data);
+                    alert("失败");
+                }
+            });
+           
+        })
+    })
+</script>
+</html>
