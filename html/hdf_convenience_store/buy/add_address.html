@@ -32,18 +32,18 @@
 				<div class="add">
 					<div class="adda">
 						<div>收货人</div>
-						<input type="text" placeholder="姓名" />
+						<input name="consignee" type="text" placeholder="姓名" />
 					</div>
 					<div class="adda addb">
 						<div>联系方式</div>
-						<input type="text" placeholder="手机号码" />
+						<input name="phone" type="text" placeholder="手机号码" />
 					</div>
 					<div>
 						<div>所在地区</div>
-						<input type="text" id="myAddrs" placeholder="选择所在地区" />
+						<input name="areaname" type="text" id="myAddrs" placeholder="选择所在地区" />
 					</div>
 					<div class="txt">
-						<textarea placeholder="详细地址"></textarea>
+						<textarea name="address" placeholder="详细地址"></textarea>
 					</div>
 				</div>
 				<div class="adds">保存</div>
@@ -52,6 +52,29 @@
 		
 <script>
     $(function(){
+        $(".adds").click(function () {
+            var consignee = $("input[name='consignee']").val();
+            var phone = $("input[name='phone']").val();
+            var areaname =  $("input[name='areaname']").val();
+            var address =  $("textarea[name='address']").val();
+            if(!consignee || !phone|| !areaname|| !address){
+                alert("参数不能为空");
+			}
+            var params = {};
+            params.consignee = consignee;
+            params.phone = phone;
+            params.areaname = areaname;
+            params.address = address;
+            params.isdefault = true;
+            ajaxs("api/receiver/save",'post',JSON.stringify(params),function(data){
+                console.log(data);
+                if(data.code == 0){
+                    window.location.href='./order.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");
+                }
+            },function(err){
+                console.log(err);
+            },{contentType : 'application/json;charset=utf-8'});
+        });
         /**
          * 通过数组id获取地址列表数组
          *
