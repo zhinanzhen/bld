@@ -10,22 +10,23 @@
     <script src="../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../js/lib/flexible.js"></script>
     <script src="../js/lib/common.js"></script>
+      <script src="../../js/all.js"></script>
   </head>
   <body>
     <div class="me-nav">
       <div class="me-navleft">
-        <img src="../images/set.png" alt="" class="me-leftimg" />
+          <a href="../../html/h_store/setting.html"><img src="../images/set.png" alt="" class="me-leftimg" /></a>
         <img src="../images/qr.png" alt="" class="me-rightimg" />
       </div>
       <div class="me-navright">
         <p class="me-navname">李涵</p>
         <p class="me-navbot">
-          关注 <span>23</span>粉丝 <span>54</span> 信誉分 <span>0</span>赞
-          <span>23</span>
+          关注 <span id="attentionNum">23</span>粉丝 <span id="fansNum">54</span> 信誉分 <span id="honestNum">0</span>赞
+          <span id="praiseNum">23</span>
         </p>
       </div>
       <div class="me-navtit">
-        <img src="../images/name.png" alt="" class="me-namel" />
+        <img src="../images/name.png" alt="" class="me-namel" id="headpicPath"/>
         <img src="../images/backb.png" alt="" class="me-namer" />
       </div>
     </div>
@@ -39,10 +40,10 @@
       <div>
         <img src="../images/product-.png" alt="" class="me-centerleft me-leftimgs"/> <span>我的新品</span> <img src="../images/backbs.png" alt="" class="me-centerright"/>
       </div>
-      <div>
+      <div onClick="location.href='../../html/h_store/my-attract.html'">
         <img src="../images/cooperation.png" alt="" class="me-centerleft me-leftimgf"/> <span>招商合作</span> <img src="../images/backbs.png" alt="" class="me-centerright"/>
       </div>
-      <div>
+      <div onClick="location.href='../../html/h_store/my-feedback.html'">
         <img src="../images/feedback.png" alt="" class="me-centerleft me-leftimgx"/> <span>意见反馈</span> <img src="../images/backbs.png" alt="" class="me-centerright"/>
       </div>
       <div><img src="../images/help.png" alt="" class="me-centerleft me-leftimgn"/> <span class="me-help">帮助</span> <img src="../images/backbs.png" alt="" class="me-centerright"/></div>
@@ -71,4 +72,34 @@
             </ul>   
         </div>
   </body>
+  <script type="text/javascript">
+      var userId=isLogin();
+      //获取用户信息
+      $.ajax({
+          //处理session每次不唯一问题
+          xhrFields: {
+              withCredentials: true
+          },
+          type: 'POST',
+          url: baseUrl + 'api/user/userInfo',
+          dataType: 'json',
+          data: {
+              userId:userId
+          },
+          success: function (data) {
+              console.log(data);
+              $(".me-navname").text(data.user.username);
+              $("#fansNum").text(data.fansNum);//粉丝数
+              $("#attentionNum").text(data.attentionNum);//关注数
+              $("#honestNum").text(data.honestNum);//信誉分
+              $("#praiseNum").text(data.praiseNum);//赞
+              if(!isEmptyString(data.user.headpicPath)){
+                  $("#headpicPath").attr('src',data.user.headpicPath);
+              }
+          },
+          error: function (data) {
+              console.log(data);
+          }
+      });
+  </script>
 </html>

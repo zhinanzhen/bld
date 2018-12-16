@@ -20,7 +20,7 @@
         </div>
         <div class="account-detail">
             <p>我的余额</p>
-            <p>￥300.00</p>
+            <p>￥<span id="balance">300.00</span></p>
         </div>
         <div class="account-button">
             <button class="account-buttontop">充值</button>
@@ -28,4 +28,27 @@
         </div>
     </div>
 </body>
+<script src="../../js/all.js"></script>
+<script type="text/javascript">
+    var userId=isLogin();
+    $.ajax({
+        //处理session每次不唯一问题
+        xhrFields: {
+            withCredentials: true
+        },
+        type: 'POST',
+        url: baseUrl + 'api/account/balance',
+        dataType: 'json',
+        data: {
+            userId:userId
+        },
+        success: function (data) {
+            console.log(data);
+            $("#balance").text(data.data.balance);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+</script>
 </html>
