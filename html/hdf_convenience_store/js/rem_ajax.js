@@ -19,7 +19,7 @@
 
 //ajax调用
 var urls="http://39.104.181.50:8080/bld/";
-var urls_local="http://127.0.0.1:8080/bld/";
+var urls_local="http://192.168.5.235:8080/bld/";
 var urla="http://39.104.181.50:8080";
 function ajaxs(url,type,data,suFn,erFn,params){
 	$.ajax(Object.assign({
