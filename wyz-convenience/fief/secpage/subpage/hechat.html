@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聊天</title>
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../js/lib/flexible.js"></script>
+    <script src="../../../js/lib/common.js"></script>
+</head>
+<body class="hechat-bgcolor">
+    <header class="hechat-nav">
+        <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>魏雨</p>
+    </header>
+    <div class="hechat-con">
+        <div class="hechat-he">
+            <img src="../../../images/hetit.png" alt="" class="hechat-hetit">
+            <div class="hechat-conhebox">
+                <div>
+                    <span></span>
+                    <p>你在家？</p>
+                </div>
+            </div>
+        </div>
+        <div class="hechat-me">
+            <img src="../../../images/metit.png" alt="" class="hechat-metit">
+            <div class="hechat-conmebox">
+                <div>
+                    <span></span>
+                    <p>我在家</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="hechat-footer">
+        <div class="hechat-ftbox">
+            <img src="../../../images/voice.png" alt="">
+            <input type="text" class="hechat-input">
+            <img src="../../../images/expression.png" alt="">
+            <img src="../../../images/more.png" alt="" class="hechat-ftimg">
+            <button>发送</button>
+        </div>
+    </footer>
+</body>
+<script>
+    $(function(){
+        // var url_prefix='http://39.104.181.50:8080/bld/';
+        var userId =location.search.substring(1);
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/msg/log',
+                dataType:'json',
+                data:{
+                    userId:userId,
+                    toUserId:'123456',
+                },
+                success:function(data){
+                    console.log(data);
+                   
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+        $('.hechat-input').bind('input propertychange', function() { 
+            if($('.hechat-input').val()){
+                $('.hechat-ftimg').css("display","none");
+                $('.hechat-ftbox button').css("display","block")
+            }else{
+                $('.hechat-ftimg').css("display","block");
+                $('.hechat-ftbox button').css("display","none")
+            }
+        });
+        $('.hechat-ftbox button').click(function(){
+            // $('.hechat-input').val('')
+            // $('.hechat-ftimg').css("display","block");
+            // $('.hechat-ftbox button').css("display","none")
+            var content = $('.hechat-input').val();
+            // localstage.getitem(userId);
+            console.log(userId)
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/spacedynamic/addSpaceDynamic',
+                dataType:'json',
+                data:{
+                    userId: userId,
+                    content:content,
+                    type:'2',
+                    toUserId:'123456',
+                },
+                success:function(data){
+                    console.log(data)
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+        })
+    })
+</script>
+</html>

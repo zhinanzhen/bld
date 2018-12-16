@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>好友详情1</title>
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../js/lib/flexible.js"></script>
+    <script src="../../../js/lib/common.js"></script>
+</head>
+<body class="friendsdetails-box">
+    <header class="friendsdetails-nav">
+        <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);" class="friendsdetails-back">
+        <div class="friendsdetails-userbox">
+            <!-- <img src="../../../images/han.png" alt="" class="friendsdetails-usertit">
+            <b>李翰</b> <span>女</span><span>23</span>
+            <p>座右铭：万般皆下品惟有读书高</p> -->
+        </div>
+    </header>
+    <div class="friendsdetails-select">
+        <button class="friendsdetails-buttonleft">拒绝</button>
+        <button class="friendsdetails-buttonright">同意</button>
+    </div>
+</body>
+<script>
+    $(function(){
+        // var url_prefix='http://39.104.181.50:8080/bld/';
+        // var forumUserId =location.search.substring(1);
+
+        var splitStr = location.search.substring(1).split("&");  
+        var urlObj = {}  
+        for(var i = 0; i < splitStr.length; i++){
+            urlObj[splitStr[i].split("=")[0]] = splitStr[i].split("=")[1];
+        }
+        var forumUserId = urlObj.forumUserId;
+        var userId = urlObj.userId;
+        //     console.log(userId);
+        // console.log(forumUserId);
+        var ispass;
+        //获取个人信息
+        $.ajax({
+                    
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type:'POST',
+                    url:url_prefix+'api/user/userInfo',
+                    dataType:'json',
+                    data:{
+                        userId:userId,
+                    },
+                    success:function(data){
+                        // console.log(data.user);
+                        $('.friendsdetails-userbox').append('<img src="'+ data.user.headpicPath +'" alt="" class="friendsdetails-usertit"><b>'+ data.user.username +'</b> <span>'+ data.user.sex +'</span><p>'+ data.user.intro +'</p>')
+                        
+                    },
+                    error:function(data){
+                    console.log(data)
+                    }
+                });
+        $('.friendsdetails-buttonleft').click(function(){ 
+            ispass=0;
+            $.ajax({
+                    
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type:'POST',
+                    url:url_prefix+'api/forum/applypass',
+                    dataType:'json',
+                    data:{
+                        // forumId:forumId,
+                        forumUserId:forumUserId,
+                        isPass:ispass,
+                    },
+                    success:function(data){
+                        console.log(data);
+                    },
+                    error:function(data){
+                    console.log(data)
+                    }
+                });
+        })
+        $('.friendsdetails-buttonright').click(function(){
+            ispass=1;
+            $.ajax({
+                    
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type:'POST',
+                    url:url_prefix+'api/forum/applypass',
+                    dataType:'json',
+                    data:{
+                        // forumId:forumId,
+                        forumUserId:forumUserId,
+                        isPass:ispass,
+                    },
+                    success:function(data){
+                        console.log(data);
+                    },
+                    error:function(data){
+                    console.log(data)
+                    }
+                });
+        })
+    })
+</script>
+</html>

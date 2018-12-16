@@ -115,6 +115,8 @@
 </body>
 <script>
     $(function(){
+        // localstage.getitem(userId);
+        
         $.ajax({
                 
                 xhrFields: {
@@ -124,7 +126,7 @@
                 url:url_prefix+'api/msglistuser/list',
                 dataType:'json',
                 data:{
-                    forumId:forumId,
+                    userId:'123456',
                 },
                 success:function(data){
                     console.log(data);

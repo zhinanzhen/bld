@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>公告</title>
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../js/lib/flexible.js"></script>
+    <script src="../../../js/lib/common.js"></script>
+</head>
+<body class="announcement-box">
+    <header class="announcement-nav">
+        <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);" class="announcement-back">
+        <p>公告</p>
+        <img src="../../../images/bianji.png" alt="" class="announcement-bianji">
+    </header>
+    <div class="announcement-conbox">
+        <!-- <div class="announcement-con" onClick="location.href='./callboard.html'">
+            <p><b>大家注意</b><span>2018.11.10 07:30</span></p>
+            <span>大家是一个文明的团体，请勿在封地说脏话</span>
+        </div>
+        <div class="announcement-con" onClick="location.href='./callboard.html'">
+            <p><b>大家注意</b><span>2018.11.10 07:30</span></p>
+            <span>大家是一个文明的团体，请勿在封地说脏话</span>
+        </div> -->
+    </div>
+</body>
+<script>
+    $(function(){
+        // var url_prefix='http://39.104.181.50:8080/bld/';
+        var forumId =location.search.substring(1);
+        console.log(forumId)
+        $('.announcement-bianji').click(function(){
+            window.location.href = './announce.html?'+ forumId +'';
+        })
+        $.ajax({
+                
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/notice/list',
+                dataType:'json',
+                data:{
+                    forumId:forumId,
+                },
+                success:function(data){
+                    console.log(data);
+                    $.each(data.list,function(index,item){
+                        $('.announcement-conbox').append('<a href="./callboard.html?'+ item.noticeId +'"><div class="announcement-con"><p><b>'+ item.title +'</b><span>'+ item.sendTime +'</span></p><span>'+ item.content +'</span></div></a>')
+                    })
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+    })
+</script>
+</html>

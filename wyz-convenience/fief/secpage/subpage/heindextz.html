@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对方主页帖子</title>
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../js/lib/flexible.js"></script>
+    <script src="../../../js/lib/common.js"></script>
+</head>
+<body>
+    <header class="heindextz-nav">
+        <div class="heindextz-navleft">
+            <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        </div>
+        <div class="heindextz-navright">
+            <!-- <p class="heindextz-text"><b class="heindextz-name">李涵</b><span>+ 关注</span><span>+ 好友</span></p>
+            <p class="heindextz-bot">关注<span>23</span>粉丝 <span>54</span> 信誉分 <span>0</span>赞 <span>23</span></p> -->
+        </div>
+        <div class="heindextz-names">
+            <!-- <img src="../../../images/name.png" alt=""> -->
+        </div>
+    </header>
+    <div class="heindextz-navbox">
+        他的帖子
+    </div>
+    <div class="heindextz-conbox">
+        <div class="heindextz-con">
+            <div class="heindextz-user">
+                <div class="heindextz-username">
+                    <img src="../../../images/total.png" alt="">
+                    <div class="heindextz-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
+                </div>
+                <div class="heindextz-usercon">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝121，美味多多，快乐多多</p>
+                </div>
+                <div class="heindextz-userft">
+                    <div>
+                        <img src="../../../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../../../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../../../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="heindextz-con">
+            <div class="heindextz-user">
+                <div class="heindextz-username">
+                    <img src="../../../images/total.png" alt="">
+                    <div class="heindextz-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
+                </div>
+                <div class="heindextz-usercon">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
+                    <img src="../../../images/foots-2.png" alt=""><img src="../../../images/foots-1.png" alt="">
+                </div>
+                <div class="heindextz-userft">
+                    <div>
+                        <img src="../../../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../../../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../../../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="heindextz-userbox">
+            <div class="heindextz-user">
+                <img src="../../../images/head.png" alt="" class="heindextz-userhead">
+                <div class="heindextz-userspid">
+                    <p>aaxiao兔子</p>
+                    <img src="../../../images/identity.png" alt="">
+                </div>
+            </div>
+            <div class="heindextz-usertheme">
+                <p>
+                    <span class="heindextz-price">￥15</span>
+                    <span>夏日斜跨小包包女2018新款潮韩版百搭时尚</span>
+                </p>
+                <div class="heindextz-userimgbox">
+                    <div class="heindextz-usersimg">
+                        <img src="../../../images/concen.png" alt="">
+                        <img src="../../../images/concen.png" alt="">
+                        <img src="../../../images/concen.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <span class="heindextz-browse">浏览12</span>
+        </div>
+    </div>
+    
+    <footer class="heindextz-news">
+        <div class="heindextz-chat" onClick="location.href='./hechat.html'">
+            <img src="../../../images/liaotian.png" alt="">
+            <span>聊天</span>
+        </div>
+    </footer>
+</body>
+<script>
+    $(function(){
+        // var url_prefix='http://39.104.181.50:8080/bld/';
+        var userId =location.search.substring(1);
+        //获取个人信息
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/user/userInfo',
+                dataType:'json',
+                data:{
+                    userId:userId,
+                },
+                success:function(data){
+                    console.log(data);
+                    $('.heindextz-navright').append('<p class="heindextz-text"><b class="heindextz-name">'+ data.user.username +'</b><span>+ 关注</span><span>+ 好友</span></p><p class="heindextz-bot">关注<span>'+ data.attentionNum +'</span>粉丝 <span>'+ data.fansNum +'</span> 信誉分 <span>'+ data.honestNum +'</span>赞 <span>'+ data.praiseNum +'</span></p>');
+                    $('.heindextz-names').append('<img src="'+ data.user.headpicPath +'" alt="">')
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+            //获取他的帖子
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/spacedynamic/queryMySpaceDynamic',
+                dataType:'json',
+                data:{
+                    userId:userId,
+                },
+                success:function(data){
+                    console.log(data);
+                   
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+        $('.heindextz-chat').click(function(){
+            window.location.href='./hechat.html?'+ userId +''
+        })
+    })
+</script>
+</html>

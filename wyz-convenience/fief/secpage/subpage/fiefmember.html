@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>封地成员</title>
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../js/lib/flexible.js"></script>
+    <script src="../../../js/lib/common.js"></script>
+</head>
+<body>
+    <header class="hechat-nav">
+        <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>封地成员</p>
+    </header>
+    <div class="fiefmember-itembox">
+        <!-- <div class="fiefmember-item" onClick="location.href='./heindextz.html'">
+            <img src="../../../images/xiaomo.png" alt="">
+            <span>李筱沫</span>
+        </div>
+        <div class="fiefmember-item" onClick="location.href='./heindextz.html'">
+            <img src="../../../images/xiaomo.png" alt="">
+            <span>李白萧</span>
+        </div>         -->
+    </div>
+</body>
+<script>
+    $(function(){
+        // var url_prefix='http://39.104.181.50:8080/bld/';
+        var forumId =location.search.substring(1);
+        $.ajax({
+                
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/forum/memberlist',
+                dataType:'json',
+                data:{
+                    forumId:forumId,
+                },
+                success:function(data){
+                    console.log(data);
+                    $.each(data.list,function(index,item){
+                        $('.fiefmember-itembox').append('<a href="./heindextz.html?'+ item.userId +'"><div class="fiefmember-item"><img src="'+ item.headPic +'" alt=""><span>'+ item.userName +'</span></div></a>')
+                    })
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+    })
+</script>
+</html>

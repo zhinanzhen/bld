@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>申请加入封地</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../js/lib/flexible.js"></script>
+    <script src="../../js/lib/common.js"></script>
+</head>
+<body>
+    <header class="interest-nav">
+        <img src="../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <!-- <p>生活社</p> -->
+    </header>
+    <div class="fiefjoin-banner">
+        <!-- <img src="../../images/banner.png" alt=""> -->
+    </div>
+    <div class="fiefjoin-text">
+        <!-- <p>
+            本封地创建于2018年8月2号
+            系生活相关的一切进行探讨交流，以方便居民生活系生活相关的一切进行探讨交流，以方便居民生活为前提，整合一切有关信息为前提，整合一切有关信息，方便，务实。我们提供有房屋租赁，线下交易等等。欢迎大家进入封地进行讨论，谢谢！
+        </p> -->
+        
+    </div>
+    <div class="fiefjoin-itme">
+        <div class="fiefjoin-label">
+           <b>封地标签</b>
+           <!-- <span>生活</span><span>交流</span> -->
+        </div>
+        <div class="fiefjoin-rz">
+            <b>认证机构</b>
+            <!-- <span>共享便利店APP</span> -->
+        </div>
+        <div class="fiefjoin-location">
+            <b>封地位置</b>
+            <!-- <span>郑州市郑东新区</span> -->
+        </div>
+        <div class="fiefjoin-member">
+            <b>封地成员</b>
+            <!-- <span>12人</span> -->
+        </div>
+    </div>
+    <footer class="fiefjoin-footer">
+        <button id="fiefjoin">申请加入封地</button>
+    </footer>
+</body>
+<script>
+    $(function(){
+        var forumId =location.search.substring(1);
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/forum/info',
+                dataType:'json',
+                data:{
+                    forumId: forumId,
+                },
+                success:function(data){
+                    console.log(data.data)
+                    var item = data.data;
+                    $('.interest-nav').append('<p>'+item.name+'</p>');
+                    $('.fiefjoin-banner').append('<img src="'+ item.showpic +'" alt="">');
+                    $('.fiefjoin-text').append('<p>'+ item.intro +'</p>');
+                    $('.fiefjoin-rz').append('<span>'+ item.organizationname +'</span>')
+                    $('.fiefjoin-location').append('<span>'+ item.cityname +'</span>')
+                    $('.fiefjoin-member').append('<span>'+ item.memnernum +'</span>')
+                    var label = JSON.parse(item.labels);
+                    for (let i = 0; i < label.length; i++) {
+                        // console.log(label[i])
+                        $('.fiefjoin-label').append('<span>'+ label[i] +'</span>')
+                    }
+                    // console.log(item.labels);
+                    // $.each(item.labels,function(index,item){
+                        // var con =;
+                        // $.each(con,function(index,item){
+                        //     console.log(item);
+                        // })
+                    // })
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+
+        $('#fiefjoin').click(function(){
+
+            $.ajax({
+                
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/forum/apply',
+                dataType:'json',
+                data:{
+                    forumId:forumId,
+                },
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+        })
+    })
+</script>
+</html> 

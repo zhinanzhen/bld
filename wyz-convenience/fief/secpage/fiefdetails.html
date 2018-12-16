@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>封地详情</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../js/lib/flexible.js"></script>
+    <script src="../../js/lib/common.js"></script>
+</head>
+<body>
+    <header class="fiefdetails-nav">
+        <img src="../../images/backc.png" alt="" onclick="javascript :history.back(-1);" class="fiefdetails-back">
+        <img src="../../images/fabut.png" alt="" class="fiefdetails-fabut" onClick="location.href='./subpage/postings.html'">
+        <!-- <img src="../../images/bannercf.png" alt="" class="fiefdetails-banner"> -->
+        <span></span>
+    </header>
+    <div class="fiefdetails-center">
+        <div class="fiefdetails-fiefcy" >
+          <span>封地成员</span> <img src="../../images/backbs.png" alt="" class="shared-centerright"/>
+        </div>
+        <div class="fiefdetails-fiefsq" onClick="location.href='./subpage/applymember.html'">
+          <span>申请成员</span> <img src="../../images/backbs.png" alt="" class="shared-centerright"/>
+        </div>
+        <div class="fiefdetails-fiefgg">
+          <span>公告</span> <img src="../../images/backbs.png" alt="" class="shared-centerright"/>
+        </div>
+    </div>
+    <div class="fiefdetails-rmtz">
+        <p>热门帖子</p>
+    </div>
+    <div class="fiefdetails-con">
+        <div class="fiefdetails-user" onClick="location.href='./subpage/postdetails.html'">
+            <div class="fiefdetails-username">
+                <img src="../../images/total.png" alt="">
+                <div class="fiefdetails-userid">
+                    <p>哈法小龙侠</p>
+                    <span>4分钟前</span>
+                </div>
+            </div>
+            <div class="fiefdetails-usercon">
+                <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
+            </div>
+            <div class="fiefdetails-userft">
+                <div class="fiefdetails-userfx">
+                    <img src="../../images/share.png" alt="">
+                    <span>分享</span>
+                </div>
+                <div>
+                    <img src="../../images/pin.png" alt="">
+                    <span>112</span>
+                </div>
+                <div>
+                    <img src="../../images/zan.png" alt="">
+                    <span>点赞</span>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="fiefdetails-con">
+        <div class="fiefdetails-user" onClick="location.href='./subpage/postdetails.html'">
+            <div class="fiefdetails-username">
+                <img src="../../images/total.png" alt="">
+                <div class="fiefdetails-userid">
+                    <p>哈法小龙侠</p>
+                    <span>4分钟前</span>
+                </div>
+            </div>
+            <div class="fiefdetails-usercon">
+                <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
+                <img src="../../images/foots-2.png" alt=""><img src="../../images/foots-1.png" alt="">
+            </div>
+            <div class="fiefdetails-userft">
+                <div class="fiefdetails-userfx">
+                    <img src="../../images/share.png" alt="">
+                    <span>分享</span>
+                </div>
+                <div>
+                    <img src="../../images/pin.png" alt="">
+                    <span>112</span>
+                </div>
+                <div>
+                    <img src="../../images/zan.png" alt="">
+                    <span>点赞</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(function(){
+        var forumId =location.search.substring(1);
+        // console.log(forumId);
+        $('.fiefdetails-fabut').click(function(){
+            window.location.href='./subpage/postings.html?'+ forumId +''
+        })
+        $('.fiefdetails-fiefcy').click(function(){
+            window.location.href = './subpage/fiefmember.html?'+ forumId +''
+        })
+        $('.fiefdetails-fiefsq').click(function(){
+            window.location.href = './subpage/applymember.html?'+ forumId +''
+        })
+        $('.fiefdetails-fiefgg').click(function(){
+            window.location.href = './subpage/announcement.html?'+ forumId +''
+        })
+        //获取封地信息
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/forum/info',
+                dataType:'json',
+                data:{
+                    forumId: forumId,
+                },
+                success:function(data){
+                    console.log(data)
+                        $('.fiefdetails-nav span').append(data.data.name)
+                        $('.fiefdetails-nav').append('<img src="'+data.data.showpic+'" alt="" class="fiefdetails-banner">')
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+            // 获取热门帖子
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/forum/hotarticle',
+                dataType:'json',
+                data:{
+                    forumId: forumId,
+                },
+                success:function(data){
+                    console.log(data)
+                        
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+        })
+</script>
+</html>

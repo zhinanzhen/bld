@@ -1,5 +1,5 @@
 //var baseUrl="http://39.104.181.50:8080/bld/";
-var baseUrl="http://127.0.0.1:8080/bld/";
+var baseUrl="http://192.168.5.235:8080/bld/";
 
 //获取地址栏后面的信息
 function getUrlString(name) {
@@ -33,7 +33,7 @@ function isLogin() {
         userId.replace(/\"/g,"");
 		return userId;
     }else{
-        window.location.href="../login/login/login.html";
+        window.location.href="/html/login/login/login.html";
     }
 }
 

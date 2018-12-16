@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>发布公告</title>
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../js/lib/flexible.js"></script>
+    <script src="../../../js/lib/common.js"></script>
+</head>
+<body class="announce-box">
+    <header class="announce-nav">
+        <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>发布公告</p>
+        <span id="announce-confirm">确定</span>
+    </header>
+    <div class="announce-con">
+        <input type="text" placeholder="发布公告标题" id="annoubce-bt">
+        <textarea name="" placeholder="发布公告内容" id="announce-nr"></textarea>
+    </div>
+</body>
+<script>
+    $(function(){
+        // var url_prefix='http://39.104.181.50:8080/bld/';
+        var forumId =location.search.substring(1);
+        $('#announce-confirm').click(function(){
+            var title = $('#annoubce-bt').val();
+            var content = $('#announce-nr').val();
+            console.log(title);
+            console.log(content);
+            console.log(forumId);
+            $.ajax({
+                
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/notice/save',
+                dataType:'json',
+                data:{
+                    title:title,
+                    content:content,
+                    objectid:forumId,
+                },
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+        })
+    })
+</script>
+</html>
