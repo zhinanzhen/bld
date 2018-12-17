@@ -107,7 +107,7 @@ html, body {
 
 .sets {
   top: 0.4rem;
-  bottom: 0;
+  bottom: 0.5rem;
 }
 .sets > div {
   padding-bottom: 0.2rem;
@@ -198,42 +198,117 @@ html, body {
   margin-right: 0.1rem;
   font: normal 0.12rem PingFang-SC-Medium;
 }
-/*.publish {*/
-  /*height: 1.733rem;*/
-  /*line-height: 1.173rem;*/
-  /*width: 100%;*/
-  /*!*background-color: #fff;*!*/
-  /*position: fixed;*/
-  /*bottom: 0%;*/
-  /*border-top: 1px solid #eee;*/
-  /*z-index: 3;*/
-/*}*/
-/*.publish > button {*/
-  /*width: 90%;*/
-  /*position: relative;*/
-  /*top: 5%;*/
-  /*height: 0.93rem;*/
-  /*left: 5%;*/
-  /*font-size: 20px;*/
-  /*text-align: center;*/
-  /*!*background-color: #ff4445;*!*/
-  /*color: #fff;*/
-/*}*/
+
+.evaluation_details {
+  padding: 0.13rem 0;
+}
+
+.details {
+  padding: 0 0.125rem;
+}
+.details > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+}
+.details > div:nth-child(1) > div:nth-child(1) {
+  width: 0.415rem;
+  height: 0.415rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #eeeeee;
+}
+.details > div:nth-child(1) > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+}
+.details > div:nth-child(1) > div:nth-child(2) {
+  color: #000000;
+  font: normal 0.18rem PingFang-SC-Regular;
+  margin-left: 0.085rem;
+}
+.details > div:nth-child(2) {
+  padding: 0.1rem 0 0.145rem 0.1rem;
+  color: rgba(0, 0, 0, 0.6);
+  font: normal 0.12rem SimSun;
+  letter-spacing: 0;
+}
+.details > div:nth-child(3) {
+  font: normal 0.13rem PingFang-SC-Regular;
+}
+.details > div:nth-child(3) > div {
+  margin-top: 0.15rem;
+}
+.details > div:nth-child(3) > div > img {
+  display: inline-block;
+  width: 1.05rem;
+  height: 1.05rem;
+  background: #eeeeee;
+}
+.details > div:nth-child(4) {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.215rem;
+}
+.details > div:nth-child(4) > div:nth-child(1) {
+  color: rgba(33, 33, 33, 0.6);
+  font: normal 0.12rem SimSun;
+}
+.details > div:nth-child(4) > div:nth-child(1) > span {
+  color: rgba(33, 33, 33, 0.6);
+  font: normal 0.12rem SimSun;
+}
+.details > div:nth-child(4) > div:nth-child(2) {
+  display: flex;
+  font-size: 0.15rem;
+}
+.details > div:nth-child(4) > div:nth-child(2) > span {
+  display: inline-block;
+  padding: 0 0.05rem;
+  height: 0.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: normal 0.12rem SimSun;
+}
+
 footer {
   width: 100%;
   height: 0.5rem;
+  padding: 0 0.2rem;
   position: absolute;
   left: 0;
   bottom: 0;
   display: flex;
-  box-shadow: 0rem 0rem 0.04rem 0rem rgba(150, 149, 149, 0.38);
+  align-items: center;
+  justify-content: space-around;
 }
 footer > div {
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
+footer > div:nth-child(1) {
+  width: 0.5rem;
+  height: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #EF1866;
+  font-size: 0.2rem;
+}
+footer > div:nth-child(2), footer > div:nth-child(3) {
+  width: 1.2rem;
+  height: 0.37rem;
+  border-radius: 0.04rem;
+  font: normal 0.12rem SimSun;
+}
+footer > div:nth-child(2) {
+  color: #333333;
+  border: solid 0.005rem #333333;
+}
+footer > div:nth-child(3) {
+  color: #ffffff;
+  background: #EF1866;
+}
+
 /*# sourceMappingURL=mall_child.css.map */

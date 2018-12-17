@@ -48,13 +48,16 @@
     width:2.75rem;
     height:5.67rem;
     overflow:auto;
-    >div:nth-child(1),>div:nth-child(3){
-        width:100%;
-        display: flex;
-        flex-wrap: wrap; 
-    }
-    >div:nth-child(2){
-        padding:0 0 0.1rem 0.2rem;
+    position:relative;
+    >div{
+        >div:nth-child(1),>div:nth-child(3){
+            width:100%;
+            display: flex;
+            flex-wrap: wrap; 
+        }
+        >div:nth-child(2){
+            padding:0 0 0.1rem 0.2rem;
+        }
     }
 }
 .recommended{

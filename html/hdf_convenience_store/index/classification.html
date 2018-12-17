@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" onclick="location.href='index.html'"></i>
+			<i class="iconfont icon-guanbi" onclick="history.back(-1)"></i>
 			<div>分类</div>
 			
 		</header>
@@ -44,20 +44,24 @@
 						<li>女装</li>
 					</ul>
 					<div class="menu_child" onclick="location.href='../shopping/shopping.html'">
-						<div class="recommended">
-							<div>
-								<div>
-									<div></div>
-									<div class="yincang">帆布鞋</div>
-								</div>
+						<div>
+							<div class="recommended fk">
+								<!--<div>
+									<div>
+										<div>
+											<img src="" alt="" />
+										</div>
+										<div class="yincang">帆布鞋</div>
+									</div>
+								</div>-->
 							</div>
-						</div>
-						<div>热门分类</div>
-						<div class="recommended">
-							<div>
+							<div>热门分类</div>
+							<div class="recommended">
 								<div>
-									<div></div>
-									<div class="yincang">帆布鞋</div>
+									<div>
+										<div></div>
+										<div class="yincang">帆布鞋</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -69,10 +73,54 @@
 		
 <script type="text/javascript">
 	$(function(){
-		$(".menu>li").click(function(){
-			$(this).addClass("act");
-			$(this).siblings().removeClass("act");
-		})
+		//推荐显示
+		$(".menu_child>div>div").hide();
+		ajaxs("api/productcategory/list",'post',{type:"0"},function(data){
+			console.log(data);
+			var data=data.list,cycle="";
+			for(i in data){
+				cycle+=`<li data-ids=${data[i].id}>${data[i].name}</li>`;
+			}
+			$(".menu").html(cycle);
+			$(".menu>li:first-child").addClass("act");
+			var ind=$(".menu>li:first-child").data("ids");
+			funk(ind);
+			$(".menu>li").click(function(){
+				$(this).addClass("act");
+				$(this).siblings().removeClass("act");
+				ind=$(this).data("ids");
+				//加载动画
+				$(".menu_child>div").hide();
+				$(".menu_child").append(loading());
+				funk(ind);
+			})
+			function funk(ind){
+				ajaxs("api/product/cproductlist",'post',{categoryId:ind},function(data){
+					//加载成功，隐藏动画
+					$(".menu_child>div").show();
+					$("#loading").remove();
+					//点击菜单只显示第一组
+					$(".menu_child>div>div:eq(0)").show();
+					console.log(data);
+					var data=data.list,cycle="";
+					for(i in data){
+						cycle+=`<div data-idk=${data[i].id}>
+									<div>
+										<div>
+											<img src=${data[i].image} alt="" />
+										</div>
+										<div class="yincang">${data[i].name}</div>
+									</div>
+								</div>`;
+					}
+					$(".fk").html(cycle);
+				},function(err){
+					console.log(err);
+				})
+			}
+		},function(err){
+			console.error(err);
+		});
 	})
 </script>
 	</body>

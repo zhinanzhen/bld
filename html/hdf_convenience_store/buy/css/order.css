@@ -59,6 +59,25 @@ html, body {
   left: 0;
 }
 
+/*单行隐藏*/
+.yincang {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*多行隐藏*/
+.yincangs {
+  overflow: hidden;
+  /*超出隐藏*/
+  display: -webkit-box;
+  /*将对象作为弹性伸缩盒子模型显示。*/
+  -webkit-box-orient: vertical;
+  /*从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）*/
+  -webkit-line-clamp: 2;
+  /*超出2行用省略号表示*/
+}
+
 .sets {
   top: 0.4rem;
   bottom: 0;
@@ -69,6 +88,7 @@ html, body {
   padding: 0.15rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-image: url(../../img/bl_11.png);
   background-size: 100% 100%;
 }
@@ -85,12 +105,19 @@ html, body {
 }
 .locations > div:nth-child(1) > div:nth-child(2) {
   display: flex;
-  color: #333333;
-  font: normal 0.15rem AdobeHeitiStd-Regular;
 }
 .locations > div:nth-child(1) > div:nth-child(2) > i {
   padding: 0.01rem 0.02rem 0 0;
   font-size: 0.15rem;
+}
+.locations > div:nth-child(1) > div:nth-child(2) > span {
+  display: inline-block;
+  width: 100%;
+  max-height: 0.6rem;
+  color: #333333;
+  font: normal 0.15rem AdobeHeitiStd-Regular;
+  letter-spacing: 0rem;
+  line-height: 0.2rem;
 }
 .locations > div:nth-child(2) {
   width: 10%;
@@ -132,12 +159,6 @@ html, body {
   margin-left: 0.2rem;
   color: #333333;
   font: normal 0.18rem AdobeHeitiStd-Regular;
-}
-.icon-xuanze{
-  color: #FFCC66;
-}
-.icon-tubiao-xuanze{
-  color: #3FC60C;
 }
 .orb > div > div:nth-child(3) {
   font-size: 0.2rem;

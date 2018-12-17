@@ -132,13 +132,14 @@ html, body {
   width: 2.75rem;
   height: 5.67rem;
   overflow: auto;
+  position: relative;
 }
-.menu_child > div:nth-child(1), .menu_child > div:nth-child(3) {
+.menu_child > div > div:nth-child(1), .menu_child > div > div:nth-child(3) {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
-.menu_child > div:nth-child(2) {
+.menu_child > div > div:nth-child(2) {
   padding: 0 0 0.1rem 0.2rem;
 }
 

@@ -26,12 +26,12 @@
 			<div>
 				<div>
 					<div id="address-name"></div>
-					<div id="address-id" hidden></div>
+					<!--<div id="address-id" hidden></div>-->
 					<div id="address-phone"></div>
 				</div>
 				<div>
 					<i class="iconfont icon-location"></i>
-					<span id="address-address"></span>
+					<span id="address-address" class="yincangs"></span>
 				</div>
 			</div>
 			<div class="iconfont icon-qianjin" id="allAddress"></div>
@@ -66,7 +66,11 @@
         console.log(data);
         if(data.code == 0){
             $("#address-name").html(data.data.name);
-            $("#address-id").html(data.data.id);
+            $("#address-name").data("address-id",data.data.id);
+            
+            console.log($("#address-name").data("address-id"));
+//          $("#address-id").html(data.data.id);
+            
             $("#address-phone").html(data.data.phone);
             $("#address-areaName").html(data.data.areaName);
             $("#address-address").html(data.data.areaName + "<br>" + data.data.address);
@@ -102,7 +106,8 @@
 
     $("#pay-order").click(function () {
 		// 订单设置收货地址
-        if(setAddress(getUrlString("orderId"),$("#address-id").html())){
+//      if(setAddress(getUrlString("orderId"),$("#address-id").html())){
+        if(setAddress(getUrlString("orderId"),$("#address-name").data("address-id"))){
             // 支付
 			var payType = 0;
             if($("#zhifubao-order").attr("class").indexOf("icon-xuanze") != -1){

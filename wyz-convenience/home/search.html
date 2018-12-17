@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <script src="../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../js/lib/flexible.js"></script>
+    <script src="../js/lib/ajax.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
     <header class="search-nav">
@@ -20,11 +21,35 @@
         <span class="search-ss">搜索</span>
     </header>
     <div class="mysale-itemcon search-itemcon">
-            <img src="../images/banner.png" alt="">
-            <div class="mysale-itemtit">
-                <p>鲁美诺斯3152 F-35全球限量版军表 瑞士制造 </p>
-                <span class="mysale-price">￥3000元</span>
-            </div>
+        <img src="../images/banner.png" alt="">
+        <div class="mysale-itemtit">
+            <p>鲁美诺斯3152 F-35全球限量版军表 瑞士制造 </p>
+            <span class="mysale-price">￥3000元</span>
         </div>
+    </div>
+        
+      
+<script type="text/javascript">
+	$(function(){
+		$(".search-ss").click(function(){
+			var sd=$(".search-inputbox>input").val();
+			if(sd==""){
+				alert("请输入你要搜索的内容");
+			}else{
+				ajaxs("api/product/search",'post',{key:sd},function(data){
+					console.log(data);
+					var data=data.list;
+					if(data!=""){
+						
+					}else{
+						alert("没有你要找的商品");
+					}
+		       	},function(err){
+		           console.log(err);
+		       	});
+			}
+		})
+	})
+</script>
 </body>
 </html>
