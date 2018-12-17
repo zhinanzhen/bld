@@ -2989,3 +2989,45 @@
     background: #ef1866;
     color: #fff;
 }
+/* feeback */
+.feeback-teb{
+    margin-top: 1.2rem /* 90/75 */;
+    line-height: 1.333333rem /* 100/75 */;
+    width: 8.4rem /* 630/75 */;
+    margin: 1.2rem /* 90/75 */ auto .133333rem /* 10/75 */ auto;
+    display: flex;
+    justify-content: space-between;
+}
+.feeback-text{
+    margin-left: .533333rem /* 40/75 */;
+    padding: .133333rem /* 10/75 */;
+}
+.feeback-text textarea{
+    width: 8.4rem /* 630/75 */;
+    height: 3.6rem /* 270/75 */;
+    padding: .2rem /* 15/75 */;
+    box-sizing: border-box;
+}
+.feeback-add{
+    width: 2.493333rem /* 187/75 */;
+    height: 2.493333rem /* 187/75 */;
+    display: block;
+    background: #e5e5e5;
+    overflow: hidden;
+    text-align: center;
+    font-size: .4rem /* 30/75 */;
+    color: #333;
+    margin-top: .666667rem /* 50/75 */;
+}
+.feeback-add img{
+    width: 1.12rem /* 84/75 */;
+    height: 1.013333rem /* 76/75 */;
+    margin: .466667rem /* 35/75 */ auto .2rem /* 15/75 */ auto;
+}
+.feeback-sub{
+    width: 9.2rem /* 690/75 */;
+    text-align: center;
+    padding: .333333rem /* 25/75 */ 0;
+    background: #fac74d;
+    margin: .933333rem /* 70/75 */ auto 0 auto;
+}
