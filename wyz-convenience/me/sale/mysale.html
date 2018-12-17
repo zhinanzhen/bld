@@ -27,12 +27,23 @@
 </body>
 <script src="../../../js/all.js"></script>
 <script>
+    var userId=isLogin();
     $(function(){
-        var userId=isLogin();
         ajaxs("api/sproduct/mySoldList",'post',{userId:userId},function(datas){
             var ks="",data=datas.list;
 
             for(var i in data){
+                var statusString="";
+                if(data[i].orderStatus=="pendingShipment"){//待发货
+                    statusString=`<span onclick="location.href='inputShipNo.html?orderId=${data[i].orderId}'">输入订单</span>
+                <span onclick="sureSend(${data[i].orderId},${data[i].productId})">确认发货</span>`;
+                }else if(data[i].orderStatus=="shipped"){
+                    statusString=`<span onclick="location.href='getShip.html?orderId=${data[i].orderId}'">查看物流</span>
+                <span>等待收货</span>`;
+                }else if(data[i].orderStatus=="received"){
+                    statusString=`<span onclick="location.href='getShip.html?orderId=${data[i].orderId}'">查看物流</span>
+                <span>买家已收货</span>`;
+                }
                 ks+=`<div class="mysale-username">
             <p>${datas.userName}</p>
         </div>
@@ -49,8 +60,7 @@
         </div>
         <div class="mysale-footer">
             <p>
-                <span>查看物流</span>
-                <span>等待收货</span>
+                ${statusString}
             </p>
         </div>`;
             }
@@ -70,6 +80,15 @@
             }
         });
     });
+
+    //卖家确认发货
+    function sureSend(orderId,productId){
+        ajaxs("api/sproduct/mySoldList",'post',{userId:userId,orderId:orderId,productId:productId},function(data){
+                location.reload();
+        },function(err){
+            console.log(err);
+        });
+    }
 
 </script>
 </html>
