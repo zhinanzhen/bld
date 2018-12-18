@@ -1,0 +1,105 @@
+@charset "UTF-8";
+/*head高度，沉浸式0.8，普通0.4*/
+/*后退键高度*/
+html, body {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.heads {
+  width: 100%;
+  height: 0.4rem;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fac74d;
+  box-shadow: 0rem 0rem 0.5rem 0rem rgba(164, 164, 164, 0.33);
+}
+.heads > .icon-guanbi {
+  width: 0.6rem;
+  height: 0.4rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.25rem;
+}
+.heads > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.18rem PingFang-SC-Regular;
+}
+.heads > .fbs {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0.8rem;
+  height: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font: normal 0.15rem PingFang-SC-Medium;
+}
+
+.sets {
+  width: 100%;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+}
+
+/*单行隐藏*/
+.yincang {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*多行隐藏*/
+.yincangs {
+  overflow: hidden;
+  /*超出隐藏*/
+  display: -webkit-box;
+  /*将对象作为弹性伸缩盒子模型显示。*/
+  -webkit-box-orient: vertical;
+  /*从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）*/
+  -webkit-line-clamp: 2;
+  /*超出2行用省略号表示*/
+}
+
+.fbs {
+  font: normal 0.18rem PingFang-SC-Regular;
+}
+
+.sets {
+  top: 0.4rem;
+  bottom: 0;
+}
+
+.menu > li {
+  height: 0.5rem;
+  color: #333333;
+  font: normal 0.16rem PingFang-SC-Regular;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.15rem;
+  border-bottom: 1px solid #eeeeee;
+}
+.menu > li > i {
+  color: #fac74d;
+  font-size: 0.15rem;
+}
+
+/*# sourceMappingURL=classification.css.map */
