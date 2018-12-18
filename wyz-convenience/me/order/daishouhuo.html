@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>待收货</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../js/lib/flexible.js"></script>
+    <style type="text/css">
+       /* body {background-color: red}
+        p {margin-left: 20px}*/
+       .mysale-deliver{
+           margin-top: 1.2rem;
+       }
+        .orderStatus{
+            float: right;
+            color: #ff6600;
+        }
+    </style>
+</head>
+<body>
+    <header class="postings-nav">
+        <img src="../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>待收货</p>
+    </header>
+    <div class="mysale-deliver">
+
+    </div>
+
+</body>
+<script src="../../../js/all.js"></script>
+<script>
+    $(function(){
+        var userId=isLogin();
+        ajaxs("api/order/myList",'post',{status:"shipped"},function(datas){
+            console.log(datas);
+            var ks="",data=datas.list;
+            for(var i in data){
+                var statusString='',opString='';
+                if(data[i].status=="pendingPayment"){
+                    statusString="待付款";
+                    opString=`<span>去支付</span>`;
+                }else if(data[i].status=="pendingShipment"){
+                    statusString="待商家发货";
+                    opString=``;
+                }else if(data[i].status=="shipped"){
+                    statusString="商家已经发货";
+                    opString=`<span>查看物流</span><span>确认收货</span>`;
+                }else if(data[i].status=="received"){
+                    statusString="订单已完成";
+                    opString=`<span>评价</span>`;
+                }else if(data[i].status=="completed"){
+                    statusString="订单已评价";
+                }else if(data[i].status=="canceled"){
+                    statusString="订单已取消";
+                }
+                var itemString="";
+                for(var j in data[i].items){
+                    itemString+=`<div class="mysale-itemcon"><img src=${data[i].items[j].image} alt=""><div class="mysale-itemtit">
+                <p>${data[i].items[j].name}</p>
+                <span class="mysale-price">￥${data[i].items[j].price}元</span>
+                <span class="mysale-amount">x${data[i].items[j].quantity}</span>
+            </div></div>`;
+                }
+                ks+=`<div class="mysale-username">
+            <span>${data[i].consignee}</span><span class="orderStatus">${statusString}</span>
+        </div>
+        ${itemString}
+        <div class="mysale-amountbox">
+            <p>共${data[i].quantity}件商品<span>合计:</span><span>￥${data[i].totalPrice}</span></p>
+        </div>
+        <div class="mysale-footer">
+            <p>
+                ${opString}
+            </p>
+        </div>`;
+            }
+            $(".mysale-deliver").html(ks);
+        },function(err){
+            console.log(err);
+        });
+    })
+</script>
+</html>

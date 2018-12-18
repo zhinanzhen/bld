@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>发布动态</title>
+    <link rel="stylesheet" href="../../../css/reset.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../js/lib/flexible.js"></script>
+    <script src="../../../js/lib/common.js"></script>
+    <script src="../../../../js/all.js"></script>
+</head>
+<body class="postings-box">
+    <header class="postings-nav">
+        <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>发布动态</p>
+        <span class="postings-push">确定</span>
+    </header>
+    <div class="postings-con">
+        <textarea type="text" placeholder="想说点啥,就说吧" id="postings-text"></textarea>
+        <input type="file" name='files' id="uploadMostPic" multiple accept="image/*"/>
+        <!-- <div class="postings-add">
+            <img src="../../../images/fbtp.png" alt="">
+            添加图片
+        </div> -->
+        <!-- <img id="cropedBigImg" src="" width="100px" height="100px"/> -->
+        <label for="uploadMostPic" class="postings-add">
+            <img src="../../../images/fbtp.png" alt="">
+            添加图片
+        </label>
+    </div>
+</body>
+<script>
+    $(function(){
+        isLogin();
+        $('.postings-push').click(function(){
+            var content = $('#postings-text').val();
+
+            var formdata = new FormData();
+            var files = $('#uploadMostPic')[0].files;
+            console.log(files.length);
+            for(var i=0;i<=files.length;i++){
+                formdata.append("files", files[i]);
+            }
+            formdata.append("content", content);
+            formdata.append("type", 0);
+            $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/spacedynamic/addSpaceDynamic',
+            dataType: false,
+            data: formdata,
+            async: false,
+            cache: false,  
+            processData: false,  
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                location.href='../../../me/sale/mydynamic.html'
+            },
+            error: function (data) {
+                console.log(data);
+                alert("失败");
+            }
+        });
+        })
+    })
+</script>
+</html>
