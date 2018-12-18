@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>意见反馈</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../js/lib/flexible.js"></script>
+    <script src="../js/lib/common.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="hechat-nav">
+        <img src="../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>意见反馈</p>
+    </header>
+    <div class="feeback-teb">
+        <label><input name="Fruit" type="radio" value="" /> 内容意见</label> 
+        <label><input name="Fruit" type="radio" value="" /> 产品意见</label> 
+        <label><input name="Fruit" type="radio" value="" /> BUG问题</label> 
+        <label><input name="Fruit" type="radio" value="" /> 其它 </label> 
+    </div>
+    <div class="feeback-text">
+        <textarea name="" id="" cols="30" rows="10" placeholder="请详细填写您想反馈的内容"></textarea>
+        <input type="file" name='files' id="uploadMostPic" multiple accept="image/*"/>
+            <!-- <div class="postings-add">
+                <img src="../../../images/fbtp.png" alt="">
+                添加图片
+            </div> -->
+            <!-- <img id="cropedBigImg" src="" width="100px" height="100px"/> -->
+            <label for="uploadMostPic" class="feeback-add">
+                <img src="../images/fbtp.png" alt="">
+                <p>添加图片</p>
+            </label>
+    </div>
+    <div class="feeback-sub">
+        提交
+    </div>
+</body>
+</html>

@@ -13,4 +13,5 @@ function ajaxs(url,type,data,suFn,erFn){
         error: function(error) {
             erFn(error);         
         }
-	})};
+	})
+};
