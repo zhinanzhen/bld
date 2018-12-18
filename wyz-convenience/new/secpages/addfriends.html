@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
+    <script src="../../js/lib/common.js"></script>
 </head>
 <body>
     <header class="myfriends-nav">
@@ -28,4 +29,33 @@
         <img src="../../images/jiab.png" alt="" class="addfriends-add">
     </div> 
 </body>
+<script>
+    $(function(){
+        
+        $(".addfriends-newfriends input").on("input",function(){
+            var key = $(".addfriends-newfriends input").val();
+            console.log(key)
+            $.ajax({
+                    
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type:'POST',
+                    url:url_prefix+'api/user/search',
+                    dataType:'json',
+                    data:{
+                        // forumId:forumId,
+                        userId:'654321',
+                        key:key,
+                    },
+                    success:function(data){
+                        console.log(data);
+                    },
+                    error:function(data){
+                    console.log(data)
+                    }
+                });
+        })
+    })
+</script>
 </html>

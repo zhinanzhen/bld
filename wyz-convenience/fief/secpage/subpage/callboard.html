@@ -17,13 +17,27 @@
         <p>公告详情</p>
     </header>
     <div class="callboard-con">
-        <div class="callboard-tit">
+        <!-- <div class="callboard-tit">
             <h4>公告</h4>
             <span>2018.11.10 07:30</span>
         </div>
         <div class="callboard-titcon">
             <p>大家是一个文明的团体，请勿在封地说脏话</p>
-        </div>
+        </div> -->
     </div>
 </body>
+<script>
+    $(function(){
+        var splitStr = location.search.substring(1).split("&");  
+        var urlObj = {}  
+        for(var i = 0; i < splitStr.length; i++){
+            urlObj[splitStr[i].split("=")[0]] = splitStr[i].split("=")[1];
+        }
+        var tit=decodeURI(urlObj.tit);
+        var sendTime = decodeURI(urlObj.sendTime);
+        var content = decodeURI(urlObj.content);
+        // console.log(content);
+        $('.callboard-con').append('<div class="callboard-tit"><h4>'+ tit +'</h4><span>'+ sendTime +'</span></div><div class="callboard-titcon"><p>'+ content +'</p></div>')
+    })
+</script>
 </html>

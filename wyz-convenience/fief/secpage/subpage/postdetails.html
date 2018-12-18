@@ -17,7 +17,7 @@
         <p>帖子详情</p>
     </header>
     <div class="postdetails-con">
-        <div class="postdetails-user">
+        <!-- <div class="postdetails-user">
             <div class="postdetails-username">
                 <img src="../../../images/total.png" alt="">
                 <div class="postdetails-userid">
@@ -42,7 +42,7 @@
                     <span>点赞</span>
                 </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="postdetails-middle">
             <div>
@@ -50,7 +50,7 @@
             </div>
         </div>
     <div class="postdetails-hfcon">
-        <div class="postdetails-user">
+        <!-- <div class="postdetails-user">
             <div class="postdetails-username">
                 <img src="../../../images/total.png" alt="">
                 <div class="postdetails-userid">
@@ -65,8 +65,8 @@
         <div class="postdetails-hfconft">
             <img src="../../../images/zan.png" alt="" class="postdetails-pimg">
             <img src="../../../images/pin.png" alt="">
-        </div>
-        <div class="postdetails-userhf">
+        </div> -->
+        <!-- <div class="postdetails-userhf">
             <div class="postdetails-usersy"></div>
             <div class="postdetails-userhfitme">
                 <img src="../../../images/useritme.png" alt="">
@@ -92,11 +92,76 @@
                     <p class="postdetails-hfitmecon">这个没有的，村子太小没有地铁，不过有轮渡。</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <footer class="postdetails-ft">
         <input type="text" placeholder="写下评论吧…">
-        <span>发送</span>
+        <span class="postdetails-submit">发送</span>
     </footer>
 </body>
+<script>
+    $(function(){
+        var splitStr = location.search.substring(1).split("&");  
+        var urlObj = {}  
+        for(var i = 0; i < splitStr.length; i++){
+            urlObj[splitStr[i].split("=")[0]] = splitStr[i].split("=")[1];
+        }
+        var spaceDynamicId = urlObj.spaceDynamicId;
+        var userId = urlObj.userId;
+        var sourceId;
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/spacedynamic/info',
+                dataType:'json',
+                data:{
+                    spaceDynamicId: spaceDynamicId,
+                },
+                success:function(data){
+                    console.log(data)
+                    var item=data.spaceDynamic
+                   
+                        var html = ' <div class="postdetails-user"><div class="postdetails-username"><img src="'+ item.headpic_path +'" alt=""><div class="postdetails-userid"><p>'+ item.name +'</p><span>'+ item.publish_time +'</span></div></div><div class="postdetails-usercon"><p>'+ item.content +'</p></div><div class="postdetails-userft"><div class="postdetails-userfx"><img src="../../../images/share.png" alt=""><span>分享</span></div><div><img src="../../../images/pin.png" alt=""><span>'+ data.commentList.length +'</span></div><div><img src="../../../images/zan.png" alt=""><span>点赞</span></div></div></div>'
+                        $('.postdetails-con').append(html)
+                    sourceId = item.space_dynamic_id
+                  //获取评论消息
+                    $.each(data.commentList,function(index,item){
+                        $('.postdetails-hfcon').append('<div class="postdetails-user"><div class="postdetails-username"><img src="'+ item.headpic_path +'" alt=""><div class="postdetails-userid"><p>'+ item.reply_name +'</p><span>'+ item.publish_time +'</span></div></div><div class="postdetails-userconb"><p>'+ item.content +'</p></div></div><div class="postdetails-hfconft"><img src="../../../images/zan.png" alt="" class="postdetails-pimg"><img src="../../../images/pin.png" alt=""></div>')
+                    })
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+            //添加评论
+        $('.postdetails-submit').click(function(){
+            var content = $('.postdetails-ft input').val();
+            console.log(sourceId)
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/comment/save',
+                dataType:'json',
+                data:{
+                    userId: userId,
+                    content:content,
+                    
+                    sourceId:sourceId
+                },
+                success:function(data){
+                    console.log(data);
+                    // $('.postdetails-ft input').val('');
+                    location=location;
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+        })
+    })
+</script>
 </html>

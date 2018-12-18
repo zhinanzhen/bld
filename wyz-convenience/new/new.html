@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="new-newbox">
-            <div class="new-newboxs" onClick="location.href='../fief/secpage/subpage/hechat.html'">
+            <!-- <div class="new-newboxs" onClick="location.href='../fief/secpage/subpage/hechat.html'">
                 <img src="../images/yuan.png" alt="">
                 <div class="new-user">
                     <p>铭铭</p>
@@ -86,7 +86,7 @@
                 <div class="new-time">
                     <span>15：31</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="index-nav">
@@ -116,7 +116,7 @@
 <script>
     $(function(){
         // localstage.getitem(userId);
-        
+        // 获取会话列表
         $.ajax({
                 
                 xhrFields: {
@@ -130,6 +130,9 @@
                 },
                 success:function(data){
                     console.log(data);
+                    $.each(data.list,function(index,item){
+                        $('.new-newbox').append('<a href="../fief/secpage/subpage/hechat.html?'+ item.userId +'"><div class="new-newboxs"><img src="'+ item.toHeadPic +'" alt=""><div class="new-user"><p>'+ item.name +'</p><span>' + item.lastMsg + '</span></div><div class="new-time"><span>'+ item.lastTime +'</span></div></div></a>')
+                    })
                 },
                 error:function(data){
                 console.log(data)

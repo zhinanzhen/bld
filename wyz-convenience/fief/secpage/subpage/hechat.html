@@ -50,6 +50,7 @@
     $(function(){
         // var url_prefix='http://39.104.181.50:8080/bld/';
         var userId =location.search.substring(1);
+        //获取聊天记录
         $.ajax({
                 xhrFields: {
                     withCredentials: true
@@ -78,28 +79,27 @@
                 $('.hechat-ftbox button').css("display","none")
             }
         });
+        //发送消息
         $('.hechat-ftbox button').click(function(){
-            // $('.hechat-input').val('')
-            // $('.hechat-ftimg').css("display","block");
-            // $('.hechat-ftbox button').css("display","none")
+            $('.hechat-con').append('<div class="hechat-me"><img src="../../../images/metit.png" alt="" class="hechat-metit"><div class="hechat-conmebox"><div><span></span><p>'+ $('.hechat-input').val() +'</p></div></div></div>')
             var content = $('.hechat-input').val();
-            // localstage.getitem(userId);
             console.log(userId)
             $.ajax({
                 xhrFields: {
                     withCredentials: true
                 },
                 type:'POST',
-                url:url_prefix+'api/spacedynamic/addSpaceDynamic',
+                url:url_prefix+'api/msg/send',
                 dataType:'json',
                 data:{
-                    userId: userId,
+                    userId: '654321',
                     content:content,
-                    type:'2',
-                    toUserId:'123456',
+                    type:0,
+                    toUserId:userId,
                 },
                 success:function(data){
-                    console.log(data)
+                    console.log(data);
+                    $('.hechat-input').val('');
                 },
                 error:function(data){
                     console.log(data)

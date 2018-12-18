@@ -1001,6 +1001,7 @@
 
 .hechat-he,.hechat-me{
     overflow: hidden;
+    margin: .533333rem /* 40/75 */ 0;
 }
 .hechat-me{
     margin-top: .2rem /* 15/75 */
@@ -1098,7 +1099,7 @@
     right: 0;
 }
 .hechat-ftbox button{
-    background: #008842;
+    background: #eee;
     border: none;
     padding: .133333rem /* 10/75 */ .133333rem /* 10/75 */;
     display: none;

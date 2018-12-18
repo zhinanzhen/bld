@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
+    <script src="../../js/lib/common.js"></script>
 </head>
 <body>
     <header class="myfriends-nav">
@@ -72,4 +73,26 @@
         </div>        
     </div>
 </body>
+<script>
+    $(function(){
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/relationuser/list',
+                dataType:'json',
+                data:{
+                    userId:'654321',
+                },
+                success:function(data){
+                    console.log(data);
+                   
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+    })
+</script>
 </html>
