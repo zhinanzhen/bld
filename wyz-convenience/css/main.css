@@ -3032,3 +3032,19 @@
     background: #fac74d;
     margin: .933333rem /* 70/75 */ auto 0 auto;
 }
+/* mydetail */
+.mydetail-conbox{
+    margin-top: 1.2rem /* 90/75 */;
+}
+.mydetail-item{
+    font-size: .4rem /* 30/75 */;
+    padding: .4rem /* 30/75 */;
+    border-bottom: .013333rem /* 1/75 */ solid #ccc;
+}
+.mydetail-date,.mydetail-num{
+    float: right;
+}
+.mydetail-date{
+    font-size: .293333rem /* 22/75 */;
+    color: #666;
+}
