@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css" />
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
+    <script src="../../js/lib/common.js"></script>
 </head>
 <body>
     <header class="hechat-nav">
@@ -51,4 +52,30 @@
         </div>
     </div>
 </body>
+<script>
+    $(function(){
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/spacedynamic/queryMySpaceDynamic',
+                dataType:'json',
+                data:{
+                    userId:'654321',
+                    type:'0',
+                },
+                success:function(data){
+                    console.log(data);
+                    var user=data.user;
+                    var html = '<div class="comment-item">'+
+                        '<div class="comment-userbox"><img src="../../images/xiaoyu.png" alt="" class="comment-usertit"><div class="comment-user"><p>魏雨</p><span>2018.11.15 15：46</span></div></div><p class="comment-constant">很不错哦！</p><div class="comment-usercon"><img src="../../images/happy.png" alt=""><p>今天参加了沉浸式游戏剧表演，很喜欢这个剧组，演员们在一起也很开心！</p></div><div class="comment-reply"><p>回复魏雨:</p></div></div>'
+                   $('.comment-conbox').append()
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+    })
+</script>
 </html>

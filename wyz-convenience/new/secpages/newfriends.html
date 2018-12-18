@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
+    <script src="../../js/lib/common.js"></script>
 </head>
 <body>
    <header class="hechat-nav">
@@ -16,7 +17,7 @@
         <p>新朋友</p>
     </header>
     <div class="newfriends-itembox">
-        <div class="newfriends-userbox" onClick="location.href='../../fief/secpage/subpage/friendsdetails.html'">
+        <div class="newfriends-userbox" onClick="location.href='./friendsdetails.html'">
             <img src="../../images/xiaomo.png" alt="">
             <div class="newfriends-item">
                 <div class="newfriends-user">
@@ -25,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="newfriends-userbox" onClick="location.href='../../fief/secpage/subpage/friendsdetails.html'">
+        <div class="newfriends-userbox" onClick="location.href='./friendsdetails.html'">
             <img src="../../images/xiaoyu.png" alt="">
             <div class="newfriends-item">
                 <div class="newfriends-user">
@@ -34,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="newfriends-userbox" onClick="location.href='../../fief/secpage/subpage/friendsdetails.html'">
+        <div class="newfriends-userbox" onClick="location.href='.friendsdetails.html'">
             <img src="../../images/xiangyang.png" alt="">
             <div class="newfriends-item">
                 <div class="newfriends-user">
@@ -45,4 +46,25 @@
         </div>
     </div> 
 </body>
+<script>
+    $(function(){
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/relationuser/auditList',
+                dataType:'json',
+                data:{
+                    userId:'654321',
+                },
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+    })
+</script>
 </html>
