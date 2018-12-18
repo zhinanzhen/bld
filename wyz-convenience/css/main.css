@@ -3048,3 +3048,74 @@
     font-size: .293333rem /* 22/75 */;
     color: #666;
 }
+/* topup */
+.topup-box{
+    background: #eee;
+}
+.topup-con{
+    margin-top: 1.466667rem /* 110/75 */;
+}
+.topup-wxcz{
+    background: #fff;
+    font-size: .426667rem /* 32/75 */;
+    padding: .4rem /* 30/75 */;
+    border-bottom: .013333rem /* 1/75 */ solid #ccc;
+}
+.topup-wxcz img{
+    display: inline-block;
+    vertical-align: middle;
+}
+.topup-weiwei{
+      width: .613333rem /* 46/75 */;
+    height: .506667rem /* 38/75 */; 
+}
+.topup-wwright{
+    float: right;
+    width: .573333rem /* 43/75 */;
+    height: .386667rem /* 29/75 */;
+}
+
+.topup-zfbzf{
+    background: #fff;
+    font-size: .426667rem /* 32/75 */;
+    padding: .4rem /* 30/75 */;
+}
+.topup-zfbzf img{
+    display: inline-block;
+    vertical-align: middle;
+}
+.topup-zfbzf .topup-zfright{
+    float: right;
+    width: .573333rem /* 43/75 */;
+    height: .386667rem /* 29/75 */;
+    display: none;
+}
+.topup-je{
+    margin-top: .266667rem /* 20/75 */;
+    background: #fff;
+    padding: .4rem /* 30/75 */;
+}
+.topup-je p{
+    font-size: .4rem /* 30/75 */;
+    color: #666;
+    margin-bottom: .4rem /* 30/75 */;
+}
+.topup-je span{
+    font-size: .64rem /* 48/75 */;
+}
+.topup-je input{
+    height: .64rem /* 48/75 */;
+    vertical-align: top;
+    border: none;
+    font-size: .4rem /* 30/75 */;
+    padding-top: .133333rem /* 10/75 */;
+}
+.topup-qd{
+    width: 9.2rem /* 690/75 */;
+    margin: .666667rem /* 50/75 */ auto 0 auto;
+    text-align: center;
+    background: #fac74d;
+    border-radius: .066667rem /* 5/75 */;
+    font-size: .48rem /* 36/75 */;
+    line-height: 1.2rem /* 90/75 */;
+}
