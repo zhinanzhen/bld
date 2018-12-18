@@ -1,5 +1,6 @@
 .layer > header > h3 {
-  line-height: 2rem;
+  line-height: 1.3rem;
+  font-size: .48rem /* 36/75 */;
 }
 /*header{
   height:200/75rem;
@@ -12,7 +13,7 @@
 }*/
 .content {
   width: 100%;
-  padding-top: 2.66666667rem;
+  padding-top: 1.5rem;
 }
 .content .say {
   padding: 0 0.4rem;
