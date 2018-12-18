@@ -1,5 +1,6 @@
 .layer > header > h3 {
-  line-height: 2rem;
+  line-height: 1.3rem;
+  font-size: .48rem /* 36/75 */;
 }
 /*header{
   height:200/75rem;

@@ -16,63 +16,57 @@
         <p>我的帖子</p>
     </header>
     <div class="mydynamic-conbox">
-        <div class="opposite-con">
-            <div class="opposite-user">
-                <div class="opposite-username">
-                    <img src="../../images/total.png" alt="">
-                    <div class="opposite-userid">
-                        <p>哈法小龙侠</p>
-                        <span>4分钟前</span>
-                    </div>
-                </div>
-                <div class="opposite-usercon">
-                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝121，美味多多，快乐多多</p>
-                </div>
-                <div class="opposite-userft">
-                    <div>
-                        <img src="../../images/share.png" alt="">
-                        <span>分享</span>
-                    </div>
-                    <div>
-                        <img src="../../images/pin.png" alt="">
-                        <span>112</span>
-                    </div>
-                    <div>
-                        <img src="../../images/zan.png" alt="">
-                        <span>点赞</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="opposite-con">
-            <div class="opposite-user">
-                <div class="opposite-username">
-                    <img src="../../images/total.png" alt="">
-                    <div class="opposite-userid">
-                        <p>哈法小龙侠</p>
-                        <span>4分钟前</span>
-                    </div>
-                </div>
-                <div class="opposite-usercon">
-                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
-                    <img src="../../images/foots-2.png" alt=""><img src="../../images/foots-1.png" alt="">
-                </div>
-                <div class="opposite-userft">
-                    <div>
-                        <img src="../../images/share.png" alt="">
-                        <span>分享</span>
-                    </div>
-                    <div>
-                        <img src="../../images/pin.png" alt="">
-                        <span>112</span>
-                    </div>
-                    <div>
-                        <img src="../../images/zan.png" alt="">
-                        <span>点赞</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
+<script src="../../../js/all.js"></script>
+<script>
+    var userId=isLogin();
+    $(function(){
+        ajaxs("api/spacedynamic/queryMySpaceDynamic",'post',{userId:userId,type:2},function(datas){
+            console.log(datas);
+            var ks="",data=datas.spaceDynamicList;
+            for(var i in data){
+                var productImage=JSON.parse(data[i].resources);
+                var imgString='';
+                for(var j in productImage){
+                    imgString+='<img src="'+productImage[j]+'">';
+                }
+                ks+=`<div class="opposite-con">
+            <div class="opposite-user">
+                <div class="opposite-username">
+                    <img src=${datas.user.headpic_path} alt="" class="mydynamic-usert">
+                    <div class="opposite-userid">
+                        <p>${datas.user.name}</p>
+                        <span>${data[i].publish_time}</span>
+                        <img src="../../images/del.png" alt="" id="mydynamic-del">
+                    </div>
+
+                </div>
+                <div class="opposite-usercon">
+                    <p>${data[i].content}</p>
+                    ${imgString}
+                </div>
+                <div class="opposite-userft">
+                    <div>
+                        <img src="../../images/share.png" alt="">
+                        <span>${data[i].share}</span>
+                    </div>
+                    <div>
+                        <img src="../../images/pin.png" alt="">
+                        <span>${data[i].comment}</span>
+                    </div>
+                    <div>
+                        <img src="../../images/zan.png" alt="">
+                        <span>${data[i].praise}</span>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+            }
+            $(".mydynamic-conbox").html(ks);
+        },function(err){
+            console.log(err);
+        });
+    });
+</script>
 </html>

@@ -52,10 +52,15 @@
     var userId=isLogin();
     $(function(){
         ajaxs("api/sproduct/mySoldList",'post',{userId:userId},function(datas){
+            console.log(datas);
             var ks="",data=datas.list;
-
+            var status="",statusString="",pendingShipmentString="",shippedString="";
+            if($('.mysale-deliver').css("display")=="block"){//待发货
+                status="pendingShipment";//待发货
+            }else{
+                status="shipped";//已经发货
+            }
             for(var i in data){
-                var statusString="";
                 if(data[i].orderStatus=="pendingShipment"){//待发货
                     statusString=`<span onclick="location.href='inputShipNo.html?orderId=${data[i].orderId}'">输入订单</span>
                 <span onclick="sureSend(${data[i].orderId},${data[i].productId})">确认发货</span>`;
@@ -66,6 +71,12 @@
                     statusString=`<span onclick="location.href='getShip.html?orderId=${data[i].orderId}'">查看物流</span>
                 <span>买家已收货</span>`;
                 }
+                if(status=="pendingShipment"){//待发货
+                    ks=pendingShipmentString;
+                }else{
+                    ks=shippedString;
+                }
+
                 ks+=`<div class="mysale-username">
             <p>${datas.userName}</p>
         </div>
@@ -77,25 +88,22 @@
                 <span class="mysale-amount">x1</span>
             </div>
         </div>
-        <div class="mysale-amountbox">
-<<<<<<< HEAD
-            <p>共一件商品 <span>合计: </span><span> ￥3000</span></p>
-        </div>
-        <div class="mysale-footer">
-            <p>
-                <span>查看物流</span>
-                <span class="mysale-qrfh">等待收货</span>
-=======
+        <div>
             <p>共一件商品<span>合计:</span><span>￥${data[i].price}</span></p>
         </div>
         <div class="mysale-footer">
             <p>
                 ${statusString}
->>>>>>> c7745ff0623beb7ae6e79b2ae10929e46256db71
             </p>
         </div>`;
+                if(status=="pendingShipment"){//待发货
+                    pendingShipmentString=ks;
+                }else{
+                    shippedString=ks;
+                }
             }
-            $(".mysale-delivery").html(ks);
+            $(".mysale-deliver").html(pendingShipmentString);
+            $(".mysale-delivery").html(shippedString);
         },function(err){
             console.log(err);
         });
@@ -115,7 +123,7 @@
     //卖家确认发货
     function sureSend(orderId,productId){
         ajaxs("api/sproduct/mySoldList",'post',{userId:userId,orderId:orderId,productId:productId},function(data){
-                location.reload();
+            location.reload();
         },function(err){
             console.log(err);
         });
