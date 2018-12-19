@@ -22,13 +22,13 @@
         <p>意见反馈</p>
     </header>
     <div class="feeback-teb">
-        <label><input name="Fruit" type="radio" value="" /> 内容意见</label> 
-        <label><input name="Fruit" type="radio" value="" /> 产品意见</label> 
-        <label><input name="Fruit" type="radio" value="" /> BUG问题</label> 
-        <label><input name="Fruit" type="radio" value="" /> 其它 </label> 
+        <label><input name="Fruit" type="radio" value="内容意见" checked/> 内容意见</label>
+        <label><input name="Fruit" type="radio" value="产品意见" /> 产品意见</label>
+        <label><input name="Fruit" type="radio" value="BUG问题" /> BUG问题</label>
+        <label><input name="Fruit" type="radio" value="其它" /> 其它 </label>
     </div>
     <div class="feeback-text">
-        <textarea name="" id="" cols="30" rows="10" placeholder="请详细填写您想反馈的内容"></textarea>
+        <textarea name="" id="context" cols="30" rows="10" placeholder="请详细填写您想反馈的内容"></textarea>
         <input type="file" name='files' id="uploadMostPic" multiple accept="image/*"/>
             <!-- <div class="postings-add">
                 <img src="../../../images/fbtp.png" alt="">
@@ -44,4 +44,51 @@
         提交
     </div>
 </body>
+<script src="../../js/all.js"></script>
+<script>
+    function tijiao(){
+        var type=$("input[name='Fruit']:checked").val();
+        var context=$("#context").val();
+        if(isEmptyString(context)){
+            alert("请输入反馈内容");
+            return false;
+        }
+        var files=$('#uploadMostPic')[0].files;
+        var formdata = new FormData();
+        for ( var i in files) {
+            formdata.append("files", files[i]);
+        }
+
+        formdata.append("type", type);
+        formdata.append("context", context);
+        $.ajax({
+            //处理session每次不唯一问题
+            xhrFields: {
+                withCredentials: true
+            },
+            type: 'POST',
+            url: baseUrl + 'api/feedback/save',
+            dataType: false,
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                if(data.code==0){
+                    alert("谢谢您的意见");
+                    go();
+                }else{
+                    alert("提交失败");
+                }
+            },
+            error: function (data) {
+                console.log(data);
+                alert("提交失败");
+            }
+        });
+    }
+
+</script>
 </html>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
+    <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 </head>
 <body class="topup-box">
     <header class="postings-nav">
@@ -29,13 +30,15 @@
         <div class="topup-je">
             <p>提现金额</p>
             <span>￥</span>
-            <input type="number">
+            <input type="number" id="amount">
         </div>
         <div class="topup-qd">
             确定
         </div>
     </div>
+    <div id="pay-money"></div>
 </body>
+<script src="../../../js/all.js"></script>
 <script>
     $(function(){
         $('.topup-wxcz').click(function(){
@@ -45,8 +48,25 @@
         $('.topup-zfbzf').click(function(){
                 $('.topup-wwright').css("display","none");
                 $('.topup-zfright').css("display","block")
-        })
-    
+        });
+        var userId=isLogin();
+        var type= 0,amount=0;
+        if($('.topup-zfright').css("display")=="block"){
+            type=1;
+        }
+        amount=$("#amount").value();
+        if(amount<=0){
+            alert("请输入正确的金额");
+            return false;
+        }
+        ajaxs("api/account/withdraw",'post',{userId:userId,type:type,amount:amount},function(datas){
+            console.log(datas);
+           if(datas.code==0){
+               alert("提交成功,工作人员随后会处理");
+           }
+        },function(err){
+            console.log(err);
+        });
     })
 </script>
 </html>

@@ -16,18 +16,33 @@
         <p>明细</p>
     </header>
     <div class="mydetail-conbox">
-        <div class="mydetail-item">
-            <p>提现<span class="mydetail-date">2018-10-14</span></p>
-            <p>余额：<span>3.90</span><span class="mydetail-num">-100.00</span></p>
-        </div>
-        <div class="mydetail-item">
-            <p>充值<span class="mydetail-date">2018-10-14</span></p>
-            <p>余额：<span>3.90</span><span class="mydetail-num">+100.00</span></p>
-        </div>
-        <div class="mydetail-item">
-            <p>提现<span class="mydetail-date">2018-10-14</span></p>
-            <p>余额：<span>3.90</span><span class="mydetail-num">-100.00</span></p>
-        </div>
     </div>
 </body>
+<script src="../../../js/all.js"></script>
+<script>
+    $(function(){
+        var userId=isLogin();
+        ajaxs("api/account/log",'post',{userId:userId},function(datas){
+            console.log(datas);
+            var ks="",data=datas.list;
+            for(var i in data){
+                var opName="",isAddString="";
+                if(data[i].type=="0"){
+                    opName="充值";
+                    isAddString="+";
+                }else if(data[i].type=="1"){
+                    opName="提现";
+                    isAddString="-";
+                }
+                ks+=`<div class="mydetail-item">
+            <p>${opName}<span class="mydetail-date">2018-10-14</span></p>
+            <p>余额：<span>${data[i].balance.toFixed(2)}</span><span class="mydetail-num">${isAddString}${data[i].amount.toFixed(2)}</span></p>
+        </div>`;
+            }
+            $(".mydetail-conbox").html(ks);
+        },function(err){
+            console.log(err);
+        });
+    });
+</script>
 </html>

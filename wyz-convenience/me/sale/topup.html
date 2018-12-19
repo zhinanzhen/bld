@@ -29,24 +29,41 @@
         <div class="topup-je">
             <p>充值金额</p>
             <span>￥</span>
-            <input type="number">
+            <input type="number" id="amount">
         </div>
         <div class="topup-qd">
             确定
         </div>
     </div>
+    <div id="pay-money"></div>
 </body>
+<script src="../../../js/all.js"></script>
 <script>
     $(function(){
         $('.topup-wxcz').click(function(){
-                $('.topup-wwright').css("display","block");
-                $('.topup-zfright').css("display","none")
+            $('.topup-wwright').css("display","block");
+            $('.topup-zfright').css("display","none")
         });
         $('.topup-zfbzf').click(function(){
-                $('.topup-wwright').css("display","none");
-                $('.topup-zfright').css("display","block")
-        })
-    
+            $('.topup-wwright').css("display","none");
+            $('.topup-zfright').css("display","block")
+        });
+        var userId=isLogin();
+        var type= 0,amount=0;
+        if($('.topup-zfright').css("display")=="block"){
+            type=1;
+        }
+        amount=$("#amount").value();
+        if(amount<=0){
+            alert("请输入正确的金额");
+            return false;
+        }
+        ajaxs("api/account/recharge",'post',{userId:userId,type:type,amount:amount,ip:returnCitySN["cip"]},function(datas){
+            console.log(datas);
+            $("#pay-money").html(datas);
+        },function(err){
+            console.log(err);
+        });
     })
 </script>
 </html>
