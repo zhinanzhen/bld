@@ -44,7 +44,7 @@
 		var flag = false;
 		ajaxs("api/receiver/defaultinfo",'post',{},function(data){
 			console.log(data);
-			if(data.code == 0 && data.data){
+			if(data.code == 0&&data.data){
 				flag = true;
 			}
 		},function(err){

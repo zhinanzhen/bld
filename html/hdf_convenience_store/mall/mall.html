@@ -60,7 +60,6 @@
 			var listImg = data.list;
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
-				console.log(imgs);
 				var html = '<div class="swiper-slide imgas" onclick="detail('+imgs.id+')"><a href="'+ imgs.url +'"><img src="'+ imgs.image +'" alt="'+ imgs.title +'"></a></div>';
 				$('.swiper-wrapper').append(html);
 			}
@@ -81,7 +80,6 @@
 			var listImg = data.list;
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
-				console.log(imgs);
                 var html = '<div class="zsk" onclick="detail('+imgs.id+')"><div><img src="' + imgs.image
                     + '"/></div><div><div class="yincang">' + imgs.name
                     + '</div><div><div>￥' + imgs.price + '</div><del>￥' + imgs.cost + '</del></div></div></div>';
@@ -94,10 +92,9 @@
 		// 猜你喜欢
 		ajaxs("api/product/hot",'post',{userId:123456},function(data){
 			var listImg = data.list;
-			console.log(listImg);
+			console.dir(listImg);
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
-				console.log(imgs);
                 var html =' <div class="zsk like" onclick="detail('+imgs.id+')">                    '
                     +' 	<div>                                 '
                     +' 		<img src="' + imgs.image + '"/>                     '

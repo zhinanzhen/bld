@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" id="back"></i>
+			<i class="iconfont icon-guanbi" onclick="location.href='order.html'"></i>
 			<div>收货地址</div>
 		</header>
 		<section class="sets">
@@ -63,25 +63,15 @@
 		</footer>
 <script type="text/javascript">
 	$(function(){
-		//设为默认地址
-		$(".sets").on("click",".defaults",function(){
-			
-		});
-		//编辑地址
-		$(".sets").on("click",".editor",function(){
-			window.location.href="add_address.html";
-		});
+		//添加地址
 		$(".add-address").click(function () {
-            window.location.href='./add_address.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");
+			var par=[0]//0:添加地址，1：编辑地址
+            window.location.href='./add_address.html?ind='+par;
         });
         //加载地址
         initData();
-        //改变默认地址后返回
-        $("#back").click(function () {
-            window.location.href='./order.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");
-        });
-
 	});
+	//加载地址
 	function initData() {
         ajaxs("api/receiver/list",'post',{},function(data){
             console.log(data);
@@ -92,17 +82,17 @@
 			    }else{
 			         val =`<i class="iconfont icon-xuanze-danxuan"><span>设为默认地址</span></i>`;
 			    }
-				htmls +=`<div class="adds">
+				htmls +=`<div class="adds" data-hiaddid=${item.id}>
 								<div>
 									<div>
 										收件人:
 									</div>
-									<div>${item.consignee}</div>
-									<div>${item.phone}</div>
+									<div class="names">${item.consignee}</div>
+									<div class="phones">${item.phone}</div>
 								</div>
 								<div>取货地址：<span>${item.areaName}</span></div>
 								<div>
-									<div class="defaults" onclick="modidfyAddress(this)" data-hiaddid=${item.id}>${val}</div>
+									<div class="defaults" onclick="modidfyAddress(this)">${val}</div>
 									<div>
 										<div class="editor">编辑</div>
 										<div>删除</div>
@@ -111,12 +101,22 @@
 							</div>`;
          	})
 			$(".all-address").html(htmls);
+			//编辑地址
+			$(".sets").on("click",".editor",function(){
+				var par=[1,//0:添加地址，1：编辑地址
+					$(this).closest(".adds").data("hiaddid"),//id
+					$(this).closest(".adds").find(".names").html(),//名字
+					$(this).closest(".adds").find(".phones").html()//电话
+				]
+				window.location.href="add_address.html?ind="+par;
+			});
         },function(err){
             console.log(err);
         });
     }
+	//改变默认地址
     function modidfyAddress(obj) {
-        var params = {id: $(obj).data("hiaddid"),isdefault:true};
+        var params = {id: $(obj).closest(".adds").data("hiaddid"),isdefault:true};
        ajaxs("api/receiver/update",'post',JSON.stringify(params),function(data){
             console.log(data);
             if(data.code == 0){

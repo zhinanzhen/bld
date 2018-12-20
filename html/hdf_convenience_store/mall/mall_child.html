@@ -25,7 +25,7 @@
 					<div>详情</div>
 				</div>
 			</div>
-			<p class="fbs iconfont icon-ziyuan1"></p>
+			<p class="fbs iconfont icon-ziyuan1" onclick="location.href='shopping_cart.html'"></p>
 		</header>
 		<section class="sets">
 			<div>
@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				<div class="evaluation_details">
-					<div class="details">
+					<!--<div class="details">
 						<div>
 							<div>
 								<img src=""/>
@@ -91,7 +91,7 @@
 								<span>999+</span>
 							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<!--商品介绍-->
 				<div class="introduce">
@@ -136,9 +136,15 @@
                 console.log(data)
                 isLogin();
                	if(data.code == 0){
+               		//订单信息
+					var Shared={
+						orderId:data.data.orderId,
+						totalprice:data.data.totalprice
+					}
+               		localStorage.setItem('Shared', JSON.stringify(Shared));
 					// 查询默认地址
 					if(isExistDefaultAdress()){
-                        window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+                        window.location.href='../buy/order.html';
 					}else{
                         window.location.href='../buy/add_address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
 					}
@@ -150,6 +156,7 @@
 		$(".icon-aixin").click(function(){
 			$(this).css("color","#EF1866");
 		})
+		//用户是否有地址
 		function isExistDefaultAdress() {
 		    var flag = false;
             ajaxs("api/receiver/defaultinfo",'post',{},function(data){
