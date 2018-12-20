@@ -89,6 +89,8 @@
     width: 1.093333rem /* 82/75 */;
     height: 1.093333rem /* 82/75 */;
     float: left;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .home-userid p{
     font-size: .32rem /* 24/75 */;
