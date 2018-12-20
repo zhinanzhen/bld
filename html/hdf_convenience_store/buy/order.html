@@ -17,7 +17,7 @@
 </head>
 <body>
 <header class="heads">
-	<i class="iconfont icon-guanbi" onclick="location.href='../convenience_store/stores.html'"></i>
+	<i class="iconfont icon-guanbi" onclick="javascript :history.back(-1);"></i>
 	<div>订单结算</div>
 </header>
 <section class="sets">
@@ -48,12 +48,12 @@
 			<div>
 				<div class="iconfont icon-weixinzhifu"></div>
 				<div>微信支付</div>
-				<div id="weixin-order" class="iconfont icon-tubiao-xuanze"></div>
+				<div id="weixin-order" class="pay iconfont icon-tubiao-xuanze"></div>
 			</div>
 			<div>
 				<div class="iconfont icon-zhifubaozhifu"></div>
 				<div>支付宝支付</div>
-				<div id="zhifubao-order" class="iconfont icon-xuanze"></div>
+				<div id="zhifubao-order" class="pay iconfont icon-xuanze"></div>
 			</div>
 		</div>
 		<div class="orc" id="pay-order">一键付款</div>
@@ -80,30 +80,24 @@
     },function(err){
         console.log(err);
     });
-    $("#allAddress").click(function () {
+    $(".locations").click(function () {
         window.location.href='./address.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");
     });
-
-    $("#weixin-order").click(function () {
-		if($(this).attr("class").indexOf("icon-xuanze") == -1){
-            $(this).removeClass("icon-tubiao-xuanze");
-            $(this).addClass("icon-xuanze");
-
-            $("#zhifubao-order").addClass("icon-tubiao-xuanze");
-            $("#zhifubao-order").removeClass("icon-xuanze");
-        }
-    });
-
-    $("#zhifubao-order").click(function () {
-        if($(this).attr("class").indexOf("icon-xuanze") == -1){
-            $(this).removeClass("icon-tubiao-xuanze");
-            $(this).addClass("icon-xuanze");
-
-            $("#weixin-order").addClass("icon-tubiao-xuanze");
-            $("#weixin-order").removeClass("icon-xuanze");
-        }
-    });
-
+	//选择支付方式
+   	$(".orb>div").click(function(){
+   		var ind=$(this);
+	   	if(ind.is(".icon-xuanze")){
+	   		ind.children(".pay").removeClass("icon-xuanze");
+	   		ind.children(".pay").addClass("icon-tubiao-xuanze");
+	   		ind.siblings().children(".pay").addClass("icon-xuanze");
+	   		ind.siblings().children(".pay").removeClass("icon-tubiao-xuanze");
+	   	}else{
+	   		ind.children(".pay").addClass("icon-xuanze");
+	   		ind.children(".pay").removeClass("icon-tubiao-xuanze");
+	   		ind.siblings().children(".pay").removeClass("icon-xuanze");
+	   		ind.siblings().children(".pay").addClass("icon-tubiao-xuanze");
+	   	}
+   	})
     $("#pay-order").click(function () {
 		// 订单设置收货地址
 //      if(setAddress(getUrlString("orderId"),$("#address-id").html())){

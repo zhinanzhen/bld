@@ -134,7 +134,8 @@
 			var params = JSON.stringify({type:2,orderItems:[{productid:productId,quantity:1}]});
             ajaxs("api/order/save",'post',params,function(data){
                 console.log(data)
-                if(data.code == 0){
+                isLogin();
+               	if(data.code == 0){
 					// 查询默认地址
 					if(isExistDefaultAdress()){
                         window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
@@ -146,7 +147,9 @@
                 console.log(err);
             },{contentType : 'application/json;charset=utf-8'});
         });
-
+		$(".icon-aixin").click(function(){
+			$(this).css("color","#EF1866");
+		})
 		function isExistDefaultAdress() {
 		    var flag = false;
             ajaxs("api/receiver/defaultinfo",'post',{},function(data){

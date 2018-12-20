@@ -61,7 +61,7 @@
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
 				console.log(imgs);
-				var html = '<div class="swiper-slide" onclick="detail('+imgs.id+')"><a href="'+ imgs.url +'"><img src="'+ imgs.image +'" alt="'+ imgs.title +'"></a></div>';
+				var html = '<div class="swiper-slide imgas" onclick="detail('+imgs.id+')"><a href="'+ imgs.url +'"><img src="'+ imgs.image +'" alt="'+ imgs.title +'"></a></div>';
 				$('.swiper-wrapper').append(html);
 			}
 			var mySwiper1 = new Swiper ('#swiper1',{
@@ -94,6 +94,7 @@
 		// 猜你喜欢
 		ajaxs("api/product/hot",'post',{userId:123456},function(data){
 			var listImg = data.list;
+			console.log(listImg);
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
 				console.log(imgs);

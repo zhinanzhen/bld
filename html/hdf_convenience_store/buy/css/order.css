@@ -169,9 +169,9 @@ html, body {
 .orb > div:nth-child(2) > div:nth-child(1) {
   color: #09AAF0;
 }
-.orb > div:nth-child(2) > div:nth-child(3) {
+
+.icon-xuanze {
   color: #FFCC66;
-  font-size: 0.2rem;
 }
 
 .orc {
