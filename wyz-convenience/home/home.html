@@ -21,7 +21,7 @@
         <div class="home-nav">
             <div class="home-seek">
                 <img src="../images/seek.png" alt="">
-                <input type="text" placeholder="手机 电脑">
+                <input type="text" placeholder="手机 电脑" id="home-seek">
             </div>
             <img src="../images/menu.png" alt="" class="home-menu" onclick="location.href='../../html/hdf_convenience_store/index/classification.html'" >
         </div>
@@ -109,6 +109,30 @@
     </div>
 </body>
 <script>
+	$("#home-seek").keyup(()=>{
+		$.ajax({
+			type:"post",
+			url:baseUrl+"api/product/search",
+			dataType:'json',
+			xhrFields: {
+						withCredentials: true
+			},
+			data:{
+				"key":$("#home-seek").val()
+			},
+			success:function(data){
+				console.log(data)
+			},
+			error:function(error){
+				console.log(error);
+			}
+		});
+		
+	})
+	 
+	
+	
+	
     $('.home-dt div').click(function(){
         $(this).addClass('home-index').siblings().removeClass('home-index');
 
@@ -211,6 +235,7 @@
                //console.log(result.city);
                //console.log(result);
                cityName=result.city;
+	           localStorage.setItem('cityName',JSON.stringify(result.city));
            }
        }
    }
