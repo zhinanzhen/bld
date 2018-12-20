@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
+    <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 </head>
 <body class="topup-box">
     <header class="postings-nav">
@@ -31,7 +32,7 @@
             <span>￥</span>
             <input type="number" id="amount">
         </div>
-        <div class="topup-qd">
+        <div class="topup-qd" onclick="tijiao()">
             确定
         </div>
     </div>
@@ -48,22 +49,28 @@
             $('.topup-wwright').css("display","none");
             $('.topup-zfright').css("display","block")
         });
-        var userId=isLogin();
-        var type= 0,amount=0;
+    });
+    var userId=isLogin();
+    var ip=returnCitySN["cip"]
+    function tijiao(){
+        var type= 0,amount= 0;
         if($('.topup-zfright').css("display")=="block"){
             type=1;
         }
-        amount=$("#amount").value();
+        amount=$("#amount").val();
         if(amount<=0){
             alert("请输入正确的金额");
             return false;
         }
-        ajaxs("api/account/recharge",'post',{userId:userId,type:type,amount:amount,ip:returnCitySN["cip"]},function(datas){
+        ajaxs("api/account/recharge",'post',{userId:userId,type:type,amount:amount,ip:ip},function(datas){
             console.log(datas);
+            if(datas.code==10){
+                toLogin();
+            }
             $("#pay-money").html(datas);
         },function(err){
             console.log(err);
-        });
-    })
+        },{async:false,dataType:"html"});
+    }
 </script>
 </html>

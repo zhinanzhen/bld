@@ -35,7 +35,7 @@
                     isAddString="-";
                 }
                 ks+=`<div class="mydetail-item">
-            <p>${opName}<span class="mydetail-date">2018-10-14</span></p>
+            <p>${opName}<span class="mydetail-date">${data[i].createTime}</span></p>
             <p>余额：<span>${data[i].balance.toFixed(2)}</span><span class="mydetail-num">${isAddString}${data[i].amount.toFixed(2)}</span></p>
         </div>`;
             }
