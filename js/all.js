@@ -49,6 +49,10 @@ function isLogin() {
     }
 }
 
+function toLogin() {
+	window.location.href="/bld/html/login/login/login.html";
+}
+
 function isEmptyString(obj) {
 	if(typeof obj == "undefined" || obj == null || obj == ""){
 		return true;
