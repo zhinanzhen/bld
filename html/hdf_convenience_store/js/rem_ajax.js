@@ -36,7 +36,7 @@ function ajaxs(url,type,data,suFn,erFn,params){
         error: function(error) {
             erFn(error);
         }
-	},params || {}));
+	},params||{}));
 }
 
 function getUrlString(name) {

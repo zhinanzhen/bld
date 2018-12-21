@@ -25,7 +25,7 @@
 					<div>详情</div>
 				</div>
 			</div>
-			<p class="fbs iconfont icon-ziyuan1" onclick="location.href='shopping_cart.html'"></p>
+			<p class="fbs iconfont icon-ziyuan1" onclick="shopping_cart()"></p>
 		</header>
 		<section class="sets">
 			<div>
@@ -106,7 +106,7 @@
 		</footer>
 
 	<script type="text/javascript">
-		ajaxs("api/product/info",'post',{productId:getUrlString("productId")},function(data){
+		ajaxs("api/product/info",'post',{productId:JSON.parse(localStorage.getItem("shops"))},function(data){
 		    var shopDetail = data.data;
 			$("#shop-img").attr('src',shopDetail.image);
 			$("#show-price").html(shopDetail.price);
@@ -119,15 +119,23 @@
 			if(!jsonObj){
 			    return;
 			}
-            var labels = "";
+            var labels ="";
 			for(var i=0;i<jsonObj.length;i++){
-                labels += "<div>"+ jsonObj[i] + "</div>"; //取json中的值
+                labels += "<div>"+ jsonObj[i]+"</div>"; //取json中的值
             }
 			$(".show-labels").html(labels);
 		},function(err){
 			console.log(err);
 		});
-
+		//购物车
+		function shopping_cart(){
+			var cart={
+				address:1,//0:共享商城首页,1:共享商城店铺
+			}
+			localStorage.setItem('shopping_cart', JSON.stringify(cart));
+			window.location.href="shopping_cart.html";
+		}
+		//立即购买
 		$(".buyNow").click(function () {
 		    var productId = $("#hideShopId").val();
 			// 保存订单
@@ -155,6 +163,27 @@
         });
 		$(".icon-aixin").click(function(){
 			$(this).css("color","#EF1866");
+		})
+		//加入购物车
+		$("footer>div:eq(1)").click(function(){
+			var params={
+				
+			}
+			ajaxs("api/cart/addproduct",'post',params,function(data){
+				console.log(data);
+            },function(err){
+                console.log(err);
+            },{contentType : 'application/json;charset=utf-8'});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//			window.location.href="shopping_cart.html";
 		})
 		//用户是否有地址
 		function isExistDefaultAdress() {

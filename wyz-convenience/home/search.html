@@ -8,51 +8,115 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/main.css">
     <script src="../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../js/all.js"></script>
     <script src="../js/lib/flexible.js"></script>
     <script src="../js/lib/ajax.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body class="search-box">
-    <header class="search-nav">
-        <img src="../images/back.png" alt="" onclick="javascript :history.back(-1);" class="search-back">
-        <div class="search-inputbox">
-            <img src="../images/sousuo.png" alt="" class="search-imgs">
-            <input type="text" placeholder="搜商品">
-        </div>
-        <span class="search-ss">搜索</span>
-    </header>
-    <div class="mysale-itemcon search-itemcon">
-<<<<<<< HEAD
-        <img src="../images/banner.png" alt="">
-        <div class="mysale-itemtit">
-            <p>鲁美诺斯3152 F-35全球限量版军表 瑞士制造 </p>
-            <span class="mysale-price">￥3000元</span>
-        </div>
-    </div>
+	<div>
+	    <header class="search-nav">
+	        <img src="../images/back.png" alt="" onclick="javascript :history.back(-1);" class="search-back">
+	        <div class="search-inputbox">
+	            <img src="../images/sousuo.png" alt="" class="search-imgs">
+	            <input type="text" placeholder="搜商品" class="search-seek">
+	        </div>
+	        <span class="search-ss">搜索</span>
+	    </header>
+    	<nav>		
+    		<ul class="search-list">
+    			<!--<li>
+    				<div class="mysale-itemcon search-itemcon">
+				        <img src="../images/banner.png" alt="">
+				        <div class="mysale-itemtit">
+				            <p>鲁美诺斯3152 F-35全球限量版军表 瑞士制造 </p>
+				            <span class="mysale-price">￥3000元</span>
+				        </div>
+				    </div>
+    			</li>-->
+    		</ul>
+    	</nav>
+	    
         
-      
+    </div>  
 <script type="text/javascript">
-	$(function(){
-		$(".search-ss").click(function(){
-			var sd=$(".search-inputbox>input").val();
-			if(sd==""){
-				alert("请输入你要搜索的内容");
-			}else{
-				ajaxs("api/product/search",'post',{key:sd},function(data){
-					console.log(data);
-					var data=data.list;
-					if(data!=""){
-						
-					}else{
-						alert("没有你要找的商品");
-					}
-		       	},function(err){
-		           console.log(err);
-		       	});
-			}
-		})
-	})
+//	$(function(){
+//		$(".search-ss").click(function(){
+//			var sd=$(".search-inputbox>input").val();
+//			if(sd==""){
+//				alert("请输入你要搜索的内容");
+//			}else{
+//				ajaxs("api/product/search",'post',{key:sd},function(data){
+//					console.log(data);
+//					var data=data.list;
+//					if(data!=""){
+//						
+//					}else{
+//						alert("没有你要找的商品");
+//					}
+//		       	},function(err){
+//		           console.log(err);
+//		       	});
+//			}
+//		})
+//	})
+	
+	(()=>{
+		 
+			//搜索商品
+			$(".search-seek").keyup(()=>{
+				
+				if($(".search-seek").val() == ""){
+					console.log("搜索内容不能为空");
+				}else{
+					
+				
+				
+					$.ajax({
+						type:"post",
+						url:baseUrl+"api/product/search",
+						dataType:'json',
+						xhrFields: {
+							withCredentials: true
+						},
+						data:{
+							"key":$(".search-seek").val()
+						},
+						success:function(data){
+							console.log(data);
+							var html= "";
+							for(let i = 0; i<data.list.length; i++){
+								html+=`
+									<li>
+					    				<div class="mysale-itemcon search-itemcon">
+									        <img src="${data.list[i].image}" alt="">
+									        <div class="mysale-itemtit">
+									            <p>${data.list[i].introduction}</p>
+									            <span class="mysale-price">￥${data.list[i].price}元</span>
+									        </div>
+									    </div>
+					    			</li>
+									 
+								`
+								console.log(data.list[i]);
+							}
+							$(".search-list").html(html);
+							
+						},
+						error:function(error){
+							console.log(error);
+						}
+					});
+				}
+			})
+			
+			
+	
+		
+		
+	})();
+	
 </script>
-=======
+<!--=======
         <div class="search-bg">
             <img src="../images/banner.png" alt="">
             <div class="mysale-itemtit">
@@ -61,6 +125,6 @@
             </div>
         </div>
     </div>
->>>>>>> f69d0c48d5eccae223357f7cf343dcfd647db7dc
+>>>>>>> f69d0c48d5eccae223357f7cf343dcfd647db7dc-->
 </body>
 </html>

@@ -19,7 +19,8 @@
 			<i class="iconfont icon-guanbi" onclick="location.href='javascript :history.back(-1);"></i>
 			<!--<i class="iconfont icon-guanbi" onclick="location.href='../index/index.html'"></i>-->
 			<div>共享商城</div>
-			<p class="fbs iconfont icon-ziyuan1" onclick="location.href='shopping_cart.html'"></p>
+			<p class="fbs iconfont icon-ziyuan1" onclick="shopping_cart()"></p>
+			<!--<p class="fbs iconfont icon-ziyuan1" onclick="location.href='shopping_cart.html'"></p>-->
 		</header>
 		<section class="sets">
 			<div>
@@ -113,9 +114,18 @@
 		},function(err){
 			console.log(err);
 		});
-
+		//购物车
+		function shopping_cart(){
+			var cart={
+				address:0,//0:共享商城首页
+			}
+			localStorage.setItem('shopping_cart', JSON.stringify(cart));
+			window.location.href="shopping_cart.html";
+		}
 		function detail(id) {
-            window.location.href='mall_child.html?productId=' + id
+			localStorage.setItem('shops', JSON.stringify(id));
+            window.location.href='mall_child.html';
+//          window.location.href='mall_child.html?productId=' + id
         }
 
 </script>

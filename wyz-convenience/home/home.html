@@ -16,14 +16,18 @@
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=5059cf2e34f9bc9173aefe87f0d62f09"></script>
 
 </head>
-<body>
+<body style="position: relative;">
     <div class="home-box">
         <div class="home-nav">
-            <div class="home-seek">
-                <img src="../images/seek.png" alt="">
-                <input type="text" placeholder="手机 电脑" id="home-seek">
-            </div>
+        	<a href="search.html">
+        		<div class="home-seek">
+	                <img src="../images/seek.png" alt="">
+	                <input type="text" placeholder="手机 电脑" id="home-seek">
+            	</div>
+        	</a>
+           
             <img src="../images/menu.png" alt="" class="home-menu" onclick="location.href='../../html/hdf_convenience_store/index/classification.html'" >
+      		 
         </div>
         <div class="swiper-container">
              <div class="swiper-wrapper">
@@ -83,6 +87,7 @@
             </div>
             </div>
         </div>
+    	 
     </div>
     <div class="index-nav">
         <ul>
@@ -109,30 +114,9 @@
     </div>
 </body>
 <script>
-	$("#home-seek").keyup(()=>{
-		$.ajax({
-			type:"post",
-			url:baseUrl+"api/product/search",
-			dataType:'json',
-			xhrFields: {
-						withCredentials: true
-			},
-			data:{
-				"key":$("#home-seek").val()
-			},
-			success:function(data){
-				console.log(data)
-			},
-			error:function(error){
-				console.log(error);
-			}
-		});
-		
-	})
+ 
 	 
-	
-	
-	
+ 
     $('.home-dt div').click(function(){
         $(this).addClass('home-index').siblings().removeClass('home-index');
 

@@ -17,7 +17,8 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" onclick="location.href='../index/index.html'"></i>
+			<i class="iconfont icon-guanbi" onclick="funk()"></i>
+			<!--<i class="iconfont icon-guanbi" onclick="location.href='../index/index.html'"></i>-->
 			<div>我的购物车</div>
 		</header>
 		<section class="sets">
@@ -79,5 +80,19 @@
 				进行结算(<span>4</span>)
 			</div>
 		</footer>
+		
+		
+		
+<script type="text/javascript">
+	var sd=JSON.parse(localStorage.getItem("shopping_cart"));
+	console.log(sd.address);
+	function funk(){
+		if(sd.address==0){
+			window.location.href="mall.html";
+		}else if(sd.address==1){
+			window.location.href="mall_child.html";
+		}
+	}
+</script>
 	</body>
 </html>
