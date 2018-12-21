@@ -106,6 +106,16 @@
 		</footer>
 
 	<script type="text/javascript">
+		ajaxsk("api/product/info",'post',{productId:JSON.parse(localStorage.getItem("shops"))},function(data){
+			console.log(data);
+		},function(err){
+			console.log(err);
+		});
+		
+		
+		
+		
+		
 		ajaxs("api/product/info",'post',{productId:JSON.parse(localStorage.getItem("shops"))},function(data){
 		    var shopDetail = data.data;
 			$("#shop-img").attr('src',shopDetail.image);
@@ -127,7 +137,7 @@
 		},function(err){
 			console.log(err);
 		});
-		//购物车
+		//打开购物车
 		function shopping_cart(){
 			var cart={
 				address:1,//0:共享商城首页,1:共享商城店铺
@@ -166,27 +176,24 @@
 		})
 		//加入购物车
 		$("footer>div:eq(1)").click(function(){
+			console.log(isLogin());
 			var params={
-				
-			}
+				type:1,//0:便利店,1:二手
+				userId:isLogin(),//用户id
+				productId:localStorage.getItem("shops"),//商品id
+				num:1//数量
+			};
 			ajaxs("api/cart/addproduct",'post',params,function(data){
 				console.log(data);
+				if(data.msg=="success"){
+					alert("添加成功！");
+				}
             },function(err){
                 console.log(err);
-            },{contentType : 'application/json;charset=utf-8'});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-//			window.location.href="shopping_cart.html";
+            });
 		})
 		//用户是否有地址
-		function isExistDefaultAdress() {
+		function isExistDefaultAdress(){
 		    var flag = false;
             ajaxs("api/receiver/defaultinfo",'post',{},function(data){
                 console.log(data);

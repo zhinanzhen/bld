@@ -85,7 +85,7 @@ html, body {
 
 .shopping {
   width: 100%;
-  overflow: auto;
+  overflow-x: auto;
   padding: 0.065rem;
   border-bottom: 0.01rem solid #eeeeee;
 }
@@ -99,6 +99,7 @@ html, body {
 .shopping > div > div:nth-child(1) {
   width: 0.42rem;
   height: 1.15rem;
+  font-size: 0.18rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,6 +116,7 @@ html, body {
   height: 0.795rem;
   background: #eeeeee;
   margin: 0 0.265rem 0 0.19rem;
+  box-shadow: 0rem 0rem 0.01rem 0.01rem rgba(199, 199, 199, 0.1);
 }
 .shopping > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
   width: 2rem;

@@ -36,7 +36,7 @@
 									</div>
 									<div class="numbers">
 										<div class="iconfont icon-jianshao"></div>
-										<input type="" name="" id="" value="" />
+										<input type="text" value="" />
 										<div class="iconfont icon-jia"></div>
 									</div>
 								</div>
@@ -58,7 +58,7 @@
 									</div>
 									<div class="numbers">
 										<div class="iconfont icon-jianshao"></div>
-										<input type="" name="" id="" value="" />
+										<input type="text" value="" />
 										<div class="iconfont icon-jia"></div>
 									</div>
 								</div>
@@ -84,15 +84,90 @@
 		
 		
 <script type="text/javascript">
-	var sd=JSON.parse(localStorage.getItem("shopping_cart"));
-	console.log(sd.address);
-	function funk(){
-		if(sd.address==0){
-			window.location.href="mall.html";
-		}else if(sd.address==1){
-			window.location.href="mall_child.html";
+	(()=>{
+//	$(document).ready(function(){
+		var sd=JSON.parse(localStorage.getItem("shopping_cart"));
+		console.log(sd.address);
+		function funk(){//返回页面
+			if(sd.address==0){
+				window.location.href="mall.html";
+			}else if(sd.address==1){
+				window.location.href="mall_child.html";
+			}
+		}
+		//获取购物车信息
+		ajaxs("api/cart/getitem",'post',{type:1,userId:isLogin()},function(data){
+			console.log(data);
+			var data=data.list,ks="";
+			$.each(data, function(index,item) {
+				ks+=`<div class="shopping" data-sta=${item.productId}>
+						<div>
+							<div class="iconfont icon-tubiao-xuanze xzs"></div>
+							<div>
+								<img src=${item.image} />
+								<div>
+									<div class="yincangs">${item.name}</div>
+									<div>
+										<div>¥${item.price}</div>
+										<div class="numbers" data-munks=${item.price*item.quantity}>
+											<div class="iconfont icon-jianshao"></div>
+											<input type="text" class="inp" onkeyup="num(this)" onafterpaste="num(this)" onblur="nums(this)" value=${item.quantity} />
+											<div class="iconfont icon-jia"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>删除</div>
+						</div>
+					</div>`;
+			});
+			$(".sets>div").html(ks);
+			//选择
+			$(".sets").on("click",".xzs",function(){
+				var aa=$(this);
+				var arrid=aa.closest(".shopping").data("sta");
+				console.log(arrid);
+			})
+			//加
+			$(".sets").on("click",".icon-jia",function(){
+				var nums=Number($(this).prev().val())+1;
+				$(this).prev().val(nums);
+			})
+			//减
+			$(".sets").on("click",".icon-jianshao",function(){
+				var nums=Number($(this).next().val())-1;
+				console.log(nums);
+				if(nums<=0){
+					$(this).next().val(1);
+				}else{
+					$(this).next().val(nums);
+				}
+			})
+			//input
+        },function(err){
+            console.log(err);
+        });
+//	})
+	 })();
+	function num(obj){
+		console.log(obj);
+		if(obj.value.length==1){
+			obj.value=obj.value.replace(/[^1-9]/g,'');
+			obj.closest(".shopping").data("kks",obj.value);
+		}else{
+			obj.value=obj.value.replace(/\D/g,'');
+			obj.closest(".shopping").data("kks",obj.value);
 		}
 	}
+	function nums(obj){
+		if(obj.value==""){
+			obj.value="1"
+			obj.closest(".shopping").data("kks","1");
+		}
+	}
+	
+	
+	
 </script>
 	</body>
 </html>
