@@ -161,11 +161,11 @@
 					}
                		localStorage.setItem('Shared', JSON.stringify(Shared));
 					// 查询默认地址
-					/*if(isExistDefaultAdress()){
+					if(isExistDefaultAdress()){
                         window.location.href='../buy/order.html';
 					}else{
                         window.location.href='../buy/add_address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
-					}*/
+					}
                 }
             },function(err){
                 console.log(err);
