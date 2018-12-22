@@ -1,5 +1,6 @@
 .layer > header > h3 {
-  line-height: 2rem;
+  line-height: 1.3rem;
+  font-size: .48rem /* 36/75 */;
 }
 /*header{
   height:200/75rem;
@@ -13,6 +14,7 @@
 .content {
   width: 100%;
   padding-top: 2.66666667rem;
+  padding-bottom: 2rem;
 }
 .content .say {
   padding: 0 0.4rem;
@@ -376,4 +378,33 @@
   position: absolute;
   top: 70%;
   left: 12%;
+}
+/*商品分类*/
+.forward {
+  width: 100%;
+  height: 1.06666667rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.66666667rem;
+  margin: 0.13333333rem 0;
+  border-bottom: 1px solid #ccc;
+}
+.forward > div:nth-child(1) {
+  height: 100%;
+  line-height: 1.06666667rem;
+  font-size: 18px;
+}
+[data-dpr="2"] .forward > div:nth-child(1) {
+  font-size: 36px;
+}
+[data-dpr="3"] .forward > div:nth-child(1) {
+  font-size: 54px;
+}
+.forward > div:nth-child(2) {
+  width: 1.06666667rem;
+  height: 100%;
+  background: url("../../img/right.png") no-repeat center;
+  -webkit-background-size: 75%;
+  background-size: 75%;
 }

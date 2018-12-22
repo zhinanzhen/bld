@@ -16,52 +16,67 @@
         <p>我发布的商品</p>
     </header>
     <div class="issue-conbox">
-        <div class="issue-userbox">
+    </div>
+</body>
+<script src="../../../js/all.js"></script>
+<script type="text/javascript">
+    var userId=isLogin();
+    var user;
+    console.log("本地缓存id:"+userId);
+    //获取用户信息
+    ajaxs("api/user/userInfo",'post',{userId:userId},function(data){
+        console.log(data);
+        user=data.user;
+    },function(err){
+        console.log(err);
+    },{async:false});
+    $.ajax({
+        //处理session每次不唯一问题
+        xhrFields: {
+            withCredentials: true
+        },
+        type: 'POST',
+        url: baseUrl + 'api/sproduct/pubList',
+        dataType: 'json',
+        data: {
+            userId:userId
+        },
+        success: function (data) {
+            console.log(data);
+            var ks="",data=data.list;
+            for(var i in data){
+                var productImage=JSON.parse(data[i].productImage);
+                var imgString='';
+                for(j in productImage){
+                    imgString+='<img src="'+productImage[j]+'">';
+                }
+                ks+=`<div class="issue-userbox">
             <div class="issue-user">
-                <img src="../../images/head.png" alt="" class="issue-userhead">
+                <img src=${user.headpicPath} alt="" class="issue-userhead">
                 <div class="issue-userspid">
-                    <p>aaxiao兔子</p>
+                    <p>${user.username}</p>
                     <img src="../../images/identity.png" alt="">
                 </div>
             </div>
             <div class="issue-usertheme">
                 <p>
-                    <span class="issue-price">￥15</span>
-                    <span>夏日斜跨小包包女2018新款潮韩版百搭时尚</span>
+                    <span class="issue-price">￥${data[i].price}</span>
+                    <span>${data[i].name}</span>
                 </p>
                 <div class="issue-userimgbox">
                     <div class="issue-usersimg">
-                        <img src="../../images/concen.png" alt="">
-                        <img src="../../images/concen.png" alt="">
-                        <img src="../../images/concen.png" alt="">
+                        ${imgString}
                     </div>
                  </div>
             </div>
-            <span class="issue-browse">浏览12</span>
-        </div>
-        <div class="issue-userbox">
-                <div class="issue-user">
-                    <img src="../../images/head.png" alt="" class="issue-userhead">
-                    <div class="issue-userspid">
-                        <p>aaxiao兔子</p>
-                        <img src="../../images/identity.png" alt="">
-                    </div>
-                </div>
-                <div class="issue-usertheme">
-                    <p>
-                        <span class="issue-price">￥15</span>
-                        <span>夏日斜跨小包包女2018新款潮韩版百搭时尚</span>
-                    </p>
-                    <div class="issue-userimgbox">
-                        <div class="issue-usersimg">
-                            <img src="../../images/concen.png" alt="">
-                            <img src="../../images/concen.png" alt="">
-                            <img src="../../images/concen.png" alt="">
-                        </div>
-                     </div>
-                </div>
-                <span class="issue-browse">浏览12</span>
-            </div>
-    </div>
-</body>
+            <span class="issue-browse">浏览${data[i].hits}</span>
+        </div>`;
+            }
+            $(".issue-conbox").html(ks);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+</script>
 </html>

@@ -25,7 +25,7 @@
 					<div>详情</div>
 				</div>
 			</div>
-			<p class="fbs iconfont icon-ziyuan1"></p>
+			<p class="fbs iconfont icon-ziyuan1" onclick="shopping_cart()"></p>
 		</header>
 		<section class="sets">
 			<div>
@@ -56,16 +56,67 @@
 					<div class="show-labels">
 					</div>
 				</div>
+				<div class="evaluation_details">
+					<!--<div class="details">
+						<div>
+							<div>
+								<img src=""/>
+							</div>
+							<div>德玛**250</div>
+						</div>
+						<div>
+							2018-08-09 颜色分类：太空灰  【2018夏装新款】遮肚子显瘦
+							知性OL夏季上衣简约通勤女士衬衣t恤成熟气质V领条纹短袖衬衫女 
+						</div>
+						<div>
+							衣服收到了，非常喜欢，颜色面料都很舒服，下次还要买！
+							衣服收到了，非常喜欢，颜色面料都很舒服，下次还要买！
+							衣服收到了，非常喜欢，颜色面料都很舒服，下次还要买！
+							衣服收到了，非常喜欢，颜色面料都很舒服，下次还要买！
+							衣服收到了，非常喜欢，颜色面料都很舒服，下次还要买！
+							衣服收到了，非常喜欢，颜色面料都很舒服，下次还要买！
+							衣服收到了，非常喜欢，颜色面料都很舒服，下次还要买！
+							<div>
+								<img src="" alt="" />
+								<img src="" alt="" />
+								<img src="" alt="" />
+								<img src="" alt="" />
+							</div>
+						</div>
+						<div>
+							<div>
+								浏览<span>306</span>次
+							</div>
+							<div class="iconfont icon-dianzan">
+								<span>999+</span>
+							</div>
+						</div>
+					</div>-->
+				</div>
+				<!--商品介绍-->
+				<div class="introduce">
+					
+				</div>
 			</div>
 		</section>
 		<footer>
-			<div>收藏</div>
+			<div class="iconfont icon-aixin"></div>
 			<div>加入购物车</div>
 			<div class="buyNow">立即购买</div>
 		</footer>
 
 	<script type="text/javascript">
-		ajaxs("api/product/info",'post',{productId:getUrlString("productId")},function(data){
+		ajaxsk("api/product/info",'post',{productId:JSON.parse(localStorage.getItem("shops"))},function(data){
+			console.log(data);
+		},function(err){
+			console.log(err);
+		});
+		
+		
+		
+		
+		
+		ajaxs("api/product/info",'post',{productId:JSON.parse(localStorage.getItem("shops"))},function(data){
 		    var shopDetail = data.data;
 			$("#shop-img").attr('src',shopDetail.image);
 			$("#show-price").html(shopDetail.price);
@@ -78,25 +129,40 @@
 			if(!jsonObj){
 			    return;
 			}
-            var labels = "";
+            var labels ="";
 			for(var i=0;i<jsonObj.length;i++){
-                labels += "<div>"+ jsonObj[i] + "</div>"; //取json中的值
+                labels += "<div>"+ jsonObj[i]+"</div>"; //取json中的值
             }
 			$(".show-labels").html(labels);
 		},function(err){
 			console.log(err);
 		});
-
+		//打开购物车
+		function shopping_cart(){
+			var cart={
+				address:1,//0:共享商城首页,1:共享商城店铺
+			}
+			localStorage.setItem('shopping_cart', JSON.stringify(cart));
+			window.location.href="shopping_cart.html";
+		}
+		//立即购买
 		$(".buyNow").click(function () {
 		    var productId = $("#hideShopId").val();
 			// 保存订单
 			var params = JSON.stringify({type:2,orderItems:[{productid:productId,quantity:1}]});
             ajaxs("api/order/save",'post',params,function(data){
                 console.log(data)
-                if(data.code == 0){
+                isLogin();
+               	if(data.code == 0){
+               		//订单信息
+					var Shared={
+						orderId:data.data.orderId,
+						totalprice:data.data.totalprice
+					}
+               		localStorage.setItem('Shared', JSON.stringify(Shared));
 					// 查询默认地址
 					if(isExistDefaultAdress()){
-                        window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+                        window.location.href='../buy/order.html';
 					}else{
                         window.location.href='../buy/add_address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
 					}
@@ -105,8 +171,29 @@
                 console.log(err);
             },{contentType : 'application/json;charset=utf-8'});
         });
-
-		function isExistDefaultAdress() {
+		$(".icon-aixin").click(function(){
+			$(this).css("color","#EF1866");
+		})
+		//加入购物车
+		$("footer>div:eq(1)").click(function(){
+			console.log(isLogin());
+			var params={
+				type:1,//0:便利店,1:二手
+				userId:isLogin(),//用户id
+				productId:localStorage.getItem("shops"),//商品id
+				num:1//数量
+			};
+			ajaxs("api/cart/addproduct",'post',params,function(data){
+				console.log(data);
+				if(data.msg=="success"){
+					alert("添加成功！");
+				}
+            },function(err){
+                console.log(err);
+            });
+		})
+		//用户是否有地址
+		function isExistDefaultAdress(){
 		    var flag = false;
             ajaxs("api/receiver/defaultinfo",'post',{},function(data){
                 console.log(data);

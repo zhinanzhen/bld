@@ -26,12 +26,12 @@
 			<div>
 				<div>
 					<div id="address-name"></div>
-					<div id="address-id" hidden></div>
+					<!--<div id="address-id" hidden></div>-->
 					<div id="address-phone"></div>
 				</div>
 				<div>
 					<i class="iconfont icon-location"></i>
-					<span id="address-address"></span>
+					<span id="address-address" class="yincangs"></span>
 				</div>
 			</div>
 			<div class="iconfont icon-qianjin" id="allAddress"></div>
@@ -48,12 +48,12 @@
 			<div>
 				<div class="iconfont icon-weixinzhifu"></div>
 				<div>微信支付</div>
-				<div id="weixin-order" class="iconfont icon-tubiao-xuanze"></div>
+				<div id="weixin-order" class="pay iconfont icon-tubiao-xuanze"></div>
 			</div>
 			<div>
 				<div class="iconfont icon-zhifubaozhifu"></div>
 				<div>支付宝支付</div>
-				<div id="zhifubao-order" class="iconfont icon-xuanze"></div>
+				<div id="zhifubao-order" class="pay iconfont icon-xuanze"></div>
 			</div>
 		</div>
 		<div class="orc" id="pay-order">一键付款</div>
@@ -62,47 +62,49 @@
 </section>
 
 <script type="text/javascript">
+	var shared = JSON.parse(localStorage.getItem('Shared'));
+	console.log(shared);
     ajaxs("api/receiver/defaultinfo",'post',{},function(data){
         console.log(data);
         if(data.code == 0){
             $("#address-name").html(data.data.name);
-            $("#address-id").html(data.data.id);
+            $("#address-name").data("address-id",data.data.id);
+            
+            console.log($("#address-name").data("address-id"));
+            
+//          $("#address-id").html(data.data.id);
+            
             $("#address-phone").html(data.data.phone);
             $("#address-areaName").html(data.data.areaName);
             $("#address-address").html(data.data.areaName + "<br>" + data.data.address);
-            $("#order-id").html(getUrlString("orderId"));
-            $("#order-price").html(getUrlString("totalprice"));
+            
+            $("#order-id").html(shared.orderId);
+            $("#order-price").html("¥"+shared.totalprice);
         }
     },function(err){
         console.log(err);
     });
-    $("#allAddress").click(function () {
-        window.location.href='./address.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");
+    $(".locations").click(function () {
+        window.location.href='./address.html';
     });
-
-    $("#weixin-order").click(function () {
-		if($(this).attr("class").indexOf("icon-xuanze") == -1){
-            $(this).removeClass("icon-tubiao-xuanze");
-            $(this).addClass("icon-xuanze");
-
-            $("#zhifubao-order").addClass("icon-tubiao-xuanze");
-            $("#zhifubao-order").removeClass("icon-xuanze");
-        }
-    });
-
-    $("#zhifubao-order").click(function () {
-        if($(this).attr("class").indexOf("icon-xuanze") == -1){
-            $(this).removeClass("icon-tubiao-xuanze");
-            $(this).addClass("icon-xuanze");
-
-            $("#weixin-order").addClass("icon-tubiao-xuanze");
-            $("#weixin-order").removeClass("icon-xuanze");
-        }
-    });
-
+	//选择支付方式
+   	$(".orb>div").click(function(){
+   		var ind=$(this);
+	   	if(ind.is(".icon-xuanze")){
+	   		ind.children(".pay").removeClass("icon-xuanze");
+	   		ind.children(".pay").addClass("icon-tubiao-xuanze");
+	   		ind.siblings().children(".pay").addClass("icon-xuanze");
+	   		ind.siblings().children(".pay").removeClass("icon-tubiao-xuanze");
+	   	}else{
+	   		ind.children(".pay").addClass("icon-xuanze");
+	   		ind.children(".pay").removeClass("icon-tubiao-xuanze");
+	   		ind.siblings().children(".pay").removeClass("icon-xuanze");
+	   		ind.siblings().children(".pay").addClass("icon-tubiao-xuanze");
+	   	}
+   	})
     $("#pay-order").click(function () {
 		// 订单设置收货地址
-        if(setAddress(getUrlString("orderId"),$("#address-id").html())){
+        if(setAddress(getUrlString("orderId"),$("#address-name").data("address-id"))){
             // 支付
 			var payType = 0;
             if($("#zhifubao-order").attr("class").indexOf("icon-xuanze") != -1){
@@ -121,9 +123,8 @@
             console.log(err);
         },{async:false,dataType:"html"});
     }
-
     // 订单与地址绑定
-    function setAddress(orderId,receiverId) {
+    function setAddress(orderId,receiverId){
         var flag = false;
         ajaxs("api/order/setReceiver",'post',{orderId:orderId,receiverId:receiverId},function(data){
             console.log(data);

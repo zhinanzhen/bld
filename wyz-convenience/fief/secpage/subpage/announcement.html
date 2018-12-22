@@ -50,7 +50,7 @@
                 success:function(data){
                     console.log(data);
                     $.each(data.list,function(index,item){
-                        $('.announcement-conbox').append('<a href="./callboard.html?'+ item.noticeId +'"><div class="announcement-con"><p><b>'+ item.title +'</b><span>'+ item.sendTime +'</span></p><span>'+ item.content +'</span></div></a>')
+                        $('.announcement-conbox').append('<a href="./callboard.html?tit=' + item.title + '&sendTime='+ item.sendTime +'&content='+ item.content +'"><div class="announcement-con"><p><b>'+ item.title +'</b><span>'+ item.sendTime +'</span></p><span>'+ item.content +'</span></div></a>')
                     })
                 },
                 error:function(data){

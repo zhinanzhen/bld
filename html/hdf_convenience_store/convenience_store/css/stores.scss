@@ -47,12 +47,12 @@ header{
             align-items: center;
             justify-content: center;
         }
-        >li:first-child{
-            border:none;
-        }
         >.active{
             border-left:0.05rem solid #fa4408;
             background:#ffffff;
+        }
+        >li:first-child{
+            border:none;
         }
     }
     >.ccbg{

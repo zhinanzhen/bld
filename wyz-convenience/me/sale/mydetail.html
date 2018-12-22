@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>明细</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../js/lib/flexible.js"></script>
+</head>
+<body>
+    <header class="postings-nav">
+        <img src="../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>明细</p>
+    </header>
+    <div class="mydetail-conbox">
+    </div>
+</body>
+<script src="../../../js/all.js"></script>
+<script>
+    $(function(){
+        var userId=isLogin();
+        ajaxs("api/account/log",'post',{userId:userId},function(datas){
+            console.log(datas);
+            var ks="",data=datas.list;
+            for(var i in data){
+                var opName="",isAddString="";
+                if(data[i].type=="0"){
+                    opName="充值";
+                    isAddString="+";
+                }else if(data[i].type=="1"){
+                    opName="提现";
+                    isAddString="-";
+                }
+                ks+=`<div class="mydetail-item">
+            <p>${opName}<span class="mydetail-date">${data[i].createTime}</span></p>
+            <p>余额：<span>${data[i].balance.toFixed(2)}</span><span class="mydetail-num">${isAddString}${data[i].amount.toFixed(2)}</span></p>
+        </div>`;
+            }
+            $(".mydetail-conbox").html(ks);
+        },function(err){
+            console.log(err);
+        });
+    });
+</script>
+</html>

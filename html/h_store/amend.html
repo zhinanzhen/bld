@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/base.css"/>
 		<link rel="stylesheet" href="css/all.css" />
 		<link rel="stylesheet" href="css/commonality.css" />
+		<link rel="stylesheet" href="css/notie.min.css" />
 	</head>
 	<body>
 		<div>
@@ -23,19 +24,19 @@
 					<li class="list">
 						<div class="h-width">
 							<span>请输入原始密码</span>
-							<input type="text" />
+							<input type="text" id="oldpassword"/>
 						</div>
 					</li>
 					<li class="list">
 						<div class="h-width">
 							<span>请输入新密码</span>
-							<input type="text" />
+							<input type="text" id="newpassword"/>
 						</div>
 					</li>
 					<li class="list">
 						<div class="h-width">
 							<span>请输入确认密码</span>
-							<input type="text" />
+							<input type="text" class="notarize"/>
 						</div>
 					</li>
 				</ul>
@@ -44,7 +45,108 @@
 				</div>
 			</nav>
 		</div>
+		<script src="js/notie.min.js"></script>
+		<script src="js/jquery.min.js"></script>
 		<script src="js/x_rem.js"></script>
 		<script src="js/all.js"></script>
+		<script src="../../js/all.js"></script>
+		<script type="text/javascript">
+		(()=>{
+			//新密码
+			var newpassword = $("#newpassword");
+			//旧密码
+			var oldpassword = $("#oldpassword");
+		
+			
+			$(".button").click(()=>{
+				console.log(newpassword.val());
+				if(oldpassword.val() == ""){
+					notie.alert({type: 'warning', text:"原始密码不能为空",Position:"bottom"});
+					
+				}else if(newpassword.val() == ""){
+					notie.alert({type: 'warning', text:"新密码不能为空",Position:"bottom"});
+ 
+				}else if($(".notarize").val() == ""){
+					notie.alert({type: 'warning', text:"确认密码不能为空",Position:"bottom"});
+					 
+					//如果两次密码不一样
+				}else if($(".notarize").val() == newpassword.val() == ""){
+					notie.alert({type: 'warning', text:"如果两次密码不一样",Position:"bottom"});
+					 
+				}else{
+					$.ajax({
+						type:"post",
+						url: baseUrl+"api/user/changePwdByOld",
+						dataType: 'json',
+						data:{
+							"mobile":window.localStorage.phone,
+							"newpassword": newpassword.val(),
+							"oldpassword": oldpassword.val()
+						},
+						success:function(data){
+							if(data.code == 0){
+								notie.alert({type: 'warning', text:"修改密码成功",Position:"bottom"});
+								console.log("修改密码成功");
+							}else{
+								 
+								notie.alert({type: 'warning', text:data.msg,Position:"bottom"});
+							}
+							console.log(data);
+						},
+						error:function(error){
+							console.log(error);
+						}
+					});
+				}
+				
+				
+					
+				
+			})
+					
+					
+			 
+			 
+				
+			
+			
+			
+		})();
+			
+			
+			
+			
+			
+			
+//			 $.ajax({
+//        //处理session每次不唯一问题
+//        xhrFields: {
+//            withCredentials: true
+//        },
+//        type: 'POST',
+//        url: baseUrl + 'api/user/userInfo',
+//        dataType: 'json',
+//        data: {
+//            userId:userId
+//        },
+//        success: function (data) {
+//            console.log(data);
+//            $(".me-navname").text(data.user.username);
+//            $("#fansNum").text(data.fansNum);//粉丝数
+//            $("#attentionNum").text(data.attentionNum);//关注数
+//            $("#honestNum").text(data.honestNum);//信誉分
+//            $("#praiseNum").text(data.praiseNum);//赞
+//            if(!isEmptyString(data.user.headpicPath)){
+//                $("#headpicPath").attr('src',data.user.headpicPath);
+//            }
+//        },
+//        error: function (data) {
+//            console.log(data);
+//        }
+//    });
+//			
+			
+			
+		</script>
 	</body>
 </html>

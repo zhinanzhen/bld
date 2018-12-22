@@ -14,14 +14,16 @@
     }
 }
 .imgas{
-    width:100%;
-    height:2.045rem;
-    padding:0.35rem 0 0.185rem 0;
-    background:#ffffff;
-    >img{
+    >a{
         width:100%;
-        height:100%;
-        background:#eeeeee;
+        height:2.045rem;
+        padding:0.35rem 0 0.185rem 0;
+        background:#ffffff;
+        >img{
+            width:100%;
+            height:100%;
+            background:#eeeeee;
+        }
     }
 }
 .limit{
@@ -91,6 +93,7 @@
         padding:0 0.05rem;
         >div:nth-child(1){
             color: #333333;
+            text-align: center;
             font:normal 0.11rem PingFang-SC-Medium;
             line-height:0.2rem;
         }
@@ -129,12 +132,13 @@
 }
 .like_father{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 .like{
     width: 1.855rem;
     height: 2.47rem;
-    margin:0;
+    margin:0 0 0.1rem 0;
     border:none;
     background:white;
     >div:nth-child(1){

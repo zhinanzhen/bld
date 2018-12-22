@@ -40,12 +40,18 @@ $fontb:normal 0.12rem PingFang-SC-Regular;
        position:relative;
        >div:nth-child(1){
            color: #666666;
-           font:normal 0.14rem PingFang-SC-Regular;
+           display: flex;
            >.icon-tubiao-xuanze{
                color:#333333;
            }
            >.icon-xuanze-danxuan{
                color:#B1DB77;
+           }
+           >i{
+               >span{
+                   margin-left:0.05rem;
+                   font:normal 0.14rem PingFang-SC-Regular;
+               }
            }
        }
        >div:nth-child(2){

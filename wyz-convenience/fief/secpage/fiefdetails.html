@@ -32,62 +32,65 @@
     <div class="fiefdetails-rmtz">
         <p>热门帖子</p>
     </div>
-    <div class="fiefdetails-con">
-        <div class="fiefdetails-user" onClick="location.href='./subpage/postdetails.html'">
-            <div class="fiefdetails-username">
-                <img src="../../images/total.png" alt="">
-                <div class="fiefdetails-userid">
-                    <p>哈法小龙侠</p>
-                    <span>4分钟前</span>
+    <div id="fiefdetails-usercon">
+
+        <!-- <div class="fiefdetails-con">
+            <div class="fiefdetails-user" onClick="location.href='./subpage/postdetails.html'">
+                <div class="fiefdetails-username">
+                    <img src="../../images/total.png" alt="">
+                    <div class="fiefdetails-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
                 </div>
-            </div>
-            <div class="fiefdetails-usercon">
-                <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
-            </div>
-            <div class="fiefdetails-userft">
-                <div class="fiefdetails-userfx">
-                    <img src="../../images/share.png" alt="">
-                    <span>分享</span>
+                <div class="fiefdetails-usercon">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
                 </div>
-                <div>
-                    <img src="../../images/pin.png" alt="">
-                    <span>112</span>
-                </div>
-                <div>
-                    <img src="../../images/zan.png" alt="">
-                    <span>点赞</span>
-                </div>
-            </div> 
-        </div>
-    </div>
-    <div class="fiefdetails-con">
-        <div class="fiefdetails-user" onClick="location.href='./subpage/postdetails.html'">
-            <div class="fiefdetails-username">
-                <img src="../../images/total.png" alt="">
-                <div class="fiefdetails-userid">
-                    <p>哈法小龙侠</p>
-                    <span>4分钟前</span>
-                </div>
-            </div>
-            <div class="fiefdetails-usercon">
-                <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
-                <img src="../../images/foots-2.png" alt=""><img src="../../images/foots-1.png" alt="">
-            </div>
-            <div class="fiefdetails-userft">
-                <div class="fiefdetails-userfx">
-                    <img src="../../images/share.png" alt="">
-                    <span>分享</span>
-                </div>
-                <div>
-                    <img src="../../images/pin.png" alt="">
-                    <span>112</span>
-                </div>
-                <div>
-                    <img src="../../images/zan.png" alt="">
-                    <span>点赞</span>
-                </div>
+                <div class="fiefdetails-userft">
+                    <div class="fiefdetails-userfx">
+                        <img src="../../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div> 
             </div>
         </div>
+        <div class="fiefdetails-con">
+            <div class="fiefdetails-user" onClick="location.href='./subpage/postdetails.html'">
+                <div class="fiefdetails-username">
+                    <img src="../../images/total.png" alt="">
+                    <div class="fiefdetails-userid">
+                        <p>哈法小龙侠</p>
+                        <span>4分钟前</span>
+                    </div>
+                </div>
+                <div class="fiefdetails-usercon">
+                    <p>业余爱好就是喜欢美食，希望大家一起过来品尝，美味多多，快乐多多</p>
+                    <img src="../../images/foots-2.png" alt=""><img src="../../images/foots-1.png" alt="">
+                </div>
+                <div class="fiefdetails-userft">
+                    <div class="fiefdetails-userfx">
+                        <img src="../../images/share.png" alt="">
+                        <span>分享</span>
+                    </div>
+                    <div>
+                        <img src="../../images/pin.png" alt="">
+                        <span>112</span>
+                    </div>
+                    <div>
+                        <img src="../../images/zan.png" alt="">
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </body>
 <script>
@@ -118,7 +121,7 @@
                     forumId: forumId,
                 },
                 success:function(data){
-                    console.log(data)
+                    // console.log(data)
                         $('.fiefdetails-nav span').append(data.data.name)
                         $('.fiefdetails-nav').append('<img src="'+data.data.showpic+'" alt="" class="fiefdetails-banner">')
                 },
@@ -139,7 +142,10 @@
                 },
                 success:function(data){
                     console.log(data)
-                        
+                    $.each(data.list,function(index,item){
+                        var html ='<a href="./subpage/postdetails.html?spaceDynamicId='+ item.space_dynamic_id +'&userId='+ item.user_id +'"><div class="fiefdetails-con"><div class="fiefdetails-user"><div class="fiefdetails-username"><img src="'+ item.headPic +'" alt=""><div class="fiefdetails-userid"><p>'+ item.userName +'</p><span>'+ item.create_time +'</span></div></div><div class="fiefdetails-usercon"><p>'+ item.content +'</p></div><div class="fiefdetails-userft"><div class="fiefdetails-userfx"><img src="../../images/share.png" alt=""><span>分享</span></div><div><img src="../../images/pin.png" alt=""><span>'+ item.comment +'</span></div><div><img src="../../images/zan.png" alt=""><span>点赞</span></div></div> </div></div></a>'
+                        $('#fiefdetails-usercon').append(html)
+                    })
                 },
                 error:function(data){
                     console.log(data)

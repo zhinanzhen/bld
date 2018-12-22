@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" id="back"></i>
+			<i class="iconfont icon-guanbi" onclick="location.href='order.html'"></i>
 			<div>收货地址</div>
 		</header>
 		<section class="sets">
@@ -63,68 +63,64 @@
 		</footer>
 <script type="text/javascript">
 	$(function(){
-		//设为默认地址
-		$(".sets").on("click",".defaults",function(){
-			
-		});
-		//编辑地址
-		$(".sets").on("click",".editor",function(){
-			window.location.href="add_address.html";
-		});
+		//添加地址
 		$(".add-address").click(function () {
-            window.location.href='./add_address.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");
+			var par=[0]//0:添加地址，1：编辑地址
+            window.location.href='./add_address.html?ind='+par;
         });
+        //加载地址
         initData();
-
-        $("#back").click(function () {
-            window.location.href='./order.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");
-        });
-
 	});
+	//加载地址
 	function initData() {
         ajaxs("api/receiver/list",'post',{},function(data){
             console.log(data);
-            if(data.code == 0 && data.list){
-                var html = "";
-                for(var i in data.list){
-                    html += obtainHtml(data.list[i]);
-                }
-                $(".all-address").html(html);
-            }
+            var data=data.list;htmls="";
+            $.each(data,function(index,item){
+				if(!item.isDefault){
+			        val =`<i class="iconfont icon-tubiao-xuanze"><span>设为默认地址</span></i>`;
+			    }else{
+			         val =`<i class="iconfont icon-xuanze-danxuan"><span>设为默认地址</span></i>`;
+			    }
+				htmls +=`<div class="adds" data-hiaddid=${item.id}>
+								<div>
+									<div>
+										收件人:
+									</div>
+									<div class="names">${item.consignee}</div>
+									<div class="phones">${item.phone}</div>
+								</div>
+								<div>取货地址：<span>${item.areaName}</span></div>
+								<div>
+									<div class="defaults" onclick="modidfyAddress(this)">${val}</div>
+									<div>
+										<div class="editor">编辑</div>
+										<div>删除</div>
+									</div>
+								</div>
+							</div>`;
+         	})
+			$(".all-address").html(htmls);
+			//编辑地址
+			$(".sets").on("click",".editor",function(){
+				var par=[1,//0:添加地址，1：编辑地址
+					$(this).closest(".adds").data("hiaddid"),//id
+					$(this).closest(".adds").find(".names").html(),//名字
+					$(this).closest(".adds").find(".phones").html()//电话
+				]
+				window.location.href="add_address.html?ind="+par;
+			});
         },function(err){
             console.log(err);
         });
     }
-    function obtainHtml(address) {
-        var html = '<div class="adds">                                            '
-            + '	<div>                                                        '
-            + '		<div>收件人:</div>                                       '
-            + '		<div class="consignee">' + address.consignee + '</div>           '
-            + '		<div class="phone">' + address.phone + '</div>                   '
-            + '	</div>                                                       '
-            + '	<div>取货地址：<span>' + address.areaName + address.address + '</span></div> '
-            + '	<div>                                                        '
-            + '		<div class="defaults">                                   ';
-        if(!address.isDefault){
-            html += '<i onclick="modidfyAddress(this)" class="iconfont icon-tubiao-xuanze"><span id="hiddenAddressId" hidden>' + address.id + '</span></i>设为默认地址';
-        }else{
-            html += '<i class="iconfont icon-xuanze-danxuan"></i>设为默认地址';
-        }
-        html += '		</div>                                                   '
-            + '		<div>                                                    '
-            + '			<div class="editor">编辑</div>                       '
-            + '			<div>删除</div>                                      '
-            + '		</div>                                                   '
-            + '	</div>                                                       ';
-
-        return html;
-    }
+	//改变默认地址
     function modidfyAddress(obj) {
-        var params = {id: $(obj).find("#hiddenAddressId").html(),isdefault:true};
-        ajaxs("api/receiver/update",'post',JSON.stringify(params),function(data){
+        var params = {id: $(obj).closest(".adds").data("hiaddid"),isdefault:true};
+       ajaxs("api/receiver/update",'post',JSON.stringify(params),function(data){
             console.log(data);
             if(data.code == 0){
-                initData();
+				location=location;
             }
         },function(err){
             console.log(err);

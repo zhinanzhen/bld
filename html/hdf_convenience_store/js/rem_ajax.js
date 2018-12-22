@@ -19,16 +19,16 @@
 
 //ajax调用
 var urls="http://39.104.181.50:8080/bld/";
-var urls_local="http://192.168.5.235:8080/bld/";
+var urls_local="http://127.0.0.1:8080/bld/";
 var urla="http://39.104.181.50:8080";
 function ajaxs(url,type,data,suFn,erFn,params){
 	$.ajax(Object.assign({
-		url:urls_local+url,
- 		xhrFields:{
+		url:urls+url,
+   		xhrFields:{
            withCredentials:true
        	},
 		type: type,
-        dataType : "json",
+        dataType:"json",
         data:data,
 		success: function(data) {
 			suFn(data);
@@ -36,14 +36,41 @@ function ajaxs(url,type,data,suFn,erFn,params){
         error: function(error) {
             erFn(error);
         }
-	},params || {}));
+	},params||{}));
 }
+
+function ajaxsk(url,type,data,suFn,erFn){
+	$.ajax({
+		url:urls+url,
+   		xhrFields:{
+           withCredentials:true
+       	},
+		type:type,
+        dataType : "json",
+        data:data,
+		success: function(data){
+			suFn(data);
+		},error: function(error){
+            erFn(error);
+        }
+	});
+}
+
 
 function getUrlString(name) {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
 }
+//获取localstage值
+function lsget(key){
+    return JSON.parse(localStorage.getItem(key));
+}
+//设置localstage值
+function lsset(key,value) {
+    return localStorage.setItem(key, JSON.stringify(value));
+}
+
 //上拉加载
 //_loadIndex 为请求的页数    _loadState为请求状态  0 可以请求  1 正在请求  2 请求结束
 var _loadIndex =1,

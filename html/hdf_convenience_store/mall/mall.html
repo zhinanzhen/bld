@@ -16,9 +16,10 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" onclick="location.href='../index/index.html'"></i>
+			<i class="iconfont icon-guanbi" onclick="location.href='../../../wyz-convenience/home/home.html'"></i>
 			<div>共享商城</div>
-			<p class="fbs iconfont icon-ziyuan1"></p>
+			<p class="fbs iconfont icon-ziyuan1" onclick="shopping_cart()"></p>
+			<!--<p class="fbs iconfont icon-ziyuan1" onclick="location.href='shopping_cart.html'"></p>-->
 		</header>
 		<section class="sets">
 			<div>
@@ -60,8 +61,7 @@
 			var listImg = data.list;
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
-				console.log(imgs);
-				var html = '<div class="swiper-slide" onclick="detail('+imgs.id+')"><a href="'+ imgs.url +'"><img src="'+ imgs.image +'" alt="'+ imgs.title +'"></a></div>';
+				var html = '<div class="swiper-slide imgas" onclick="detail('+imgs.id+')"><a href="'+ imgs.url +'"><img src="'+ imgs.image +'" alt="'+ imgs.title +'"></a></div>';
 				$('.swiper-wrapper').append(html);
 			}
 			var mySwiper1 = new Swiper ('#swiper1',{
@@ -81,7 +81,6 @@
 			var listImg = data.list;
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
-				console.log(imgs);
                 var html = '<div class="zsk" onclick="detail('+imgs.id+')"><div><img src="' + imgs.image
                     + '"/></div><div><div class="yincang">' + imgs.name
                     + '</div><div><div>￥' + imgs.price + '</div><del>￥' + imgs.cost + '</del></div></div></div>';
@@ -94,9 +93,9 @@
 		// 猜你喜欢
 		ajaxs("api/product/hot",'post',{userId:123456},function(data){
 			var listImg = data.list;
+			console.dir(listImg);
 			for (var index = 0; index < listImg.length; index++) {
 				const imgs = listImg[index];
-				console.log(imgs);
                 var html =' <div class="zsk like" onclick="detail('+imgs.id+')">                    '
                     +' 	<div>                                 '
                     +' 		<img src="' + imgs.image + '"/>                     '
@@ -114,9 +113,18 @@
 		},function(err){
 			console.log(err);
 		});
-
+		//购物车
+		function shopping_cart(){
+			var cart={
+				address:0,//0:共享商城首页
+			}
+			localStorage.setItem('shopping_cart', JSON.stringify(cart));
+			window.location.href="shopping_cart.html";
+		}
 		function detail(id) {
-            window.location.href='mall_child.html?productId=' + id
+			localStorage.setItem('shops', JSON.stringify(id));
+            window.location.href='mall_child.html';
+//          window.location.href='mall_child.html?productId=' + id
         }
 
 </script>

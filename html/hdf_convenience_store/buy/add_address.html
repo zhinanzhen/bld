@@ -15,6 +15,8 @@
 		<script src="../js/rem_ajax.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/swiper-4.3.3.min.js" type="text/javascript" charset="utf-8"></script>
 		
+		
+		<script src="../../../js/all.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/jquery.scs.min.js"></script>
 		<script src="../js/cnaddrarr.min.js"></script>
@@ -24,7 +26,7 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" onclick="javascript :history.back(-1);"></i>
+			<i class="iconfont icon-guanbi" onclick="location.href='address.html'"></i>
 			<div>添加地址</div>
 		</header>
 		<section class="sets">
@@ -32,11 +34,11 @@
 				<div class="add">
 					<div class="adda">
 						<div>收货人</div>
-						<input name="consignee" type="text" placeholder="姓名" />
+						<input name="consignee" class="name" type="text" placeholder="姓名" />
 					</div>
 					<div class="adda addb">
 						<div>联系方式</div>
-						<input name="phone" type="text" placeholder="手机号码" />
+						<input name="phone" class="phone" type="text" placeholder="手机号码" />
 					</div>
 					<div>
 						<div>所在地区</div>
@@ -52,6 +54,18 @@
 		
 <script>
     $(function(){
+    	
+    	var ind=getRequest().ind;
+    	ind=ind.split(",");
+    	if(ind[0]==1){
+    		$(".name").val(ind[2]);
+    		$(".phone").val(ind[3]);
+    	}else{
+    		console.log(222);
+    	}
+    	
+    	
+    	
         $(".adds").click(function () {
             var consignee = $("input[name='consignee']").val();
             var phone = $("input[name='phone']").val();
@@ -60,13 +74,20 @@
             if(!consignee || !phone|| !areaname|| !address){
                 alert("参数不能为空");
 			}
+            var url="";
             var params = {};
             params.consignee = consignee;
             params.phone = phone;
             params.areaname = areaname;
             params.address = address;
             params.isdefault = true;
-            ajaxs("api/receiver/save",'post',JSON.stringify(params),function(data){
+	    	if(ind[0]==1){//编辑地址
+	    		url="api/receiver/update";
+	    		params.id=ind[1];
+	    	}else{//添加地址
+	    		url="api/receiver/save";
+	    	}
+            ajaxs(url,'post',JSON.stringify(params),function(data){
                 console.log(data);
                 if(data.code == 0){
                     window.location.href='./order.html?orderId=' + getUrlString("orderId") + "&totalprice=" + getUrlString("totalprice");

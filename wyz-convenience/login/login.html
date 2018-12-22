@@ -22,11 +22,11 @@
         <div class="login-user">
             <div class="user-box">
                 <img src="../images/mobile.png" alt="">
-                <input type="text" placeholder="手机号/邮箱" class="phoneVal">
+                <input type="text" placeholder="手机号/邮箱" class="phoneVal" value="654321">
             </div>
             <div class="user-box user-password">
                 <img src="../images/pass.png" alt="">
-                <input type="text" placeholder="请输入密码" class="passWord">
+                <input type="text" placeholder="请输入密码" class="passWord" value="123456">
             </div>
         </div>
         <div class="login-submit">
@@ -61,7 +61,6 @@
                     password: pwd
                 },
                 success:function(data){
-                    // console.log(data.token);
                     console.log(data);
                     // window.localStorage.setItem('token',JSON.stringify(data.token));
                     window.location.href="../fief/fief.html"

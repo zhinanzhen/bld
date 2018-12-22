@@ -128,12 +128,12 @@ header {
   align-items: center;
   justify-content: center;
 }
-.category > .menu > li:first-child {
-  border: none;
-}
 .category > .menu > .active {
   border-left: 0.05rem solid #fa4408;
   background: #ffffff;
+}
+.category > .menu > li:first-child {
+  border: none;
 }
 .category > .ccbg {
   width: 2.75rem;

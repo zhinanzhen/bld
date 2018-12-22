@@ -1,0 +1,25 @@
+@charset "utf-8";
+@import "../../css/layout.scss";
+.fbs{
+    font: normal 0.18rem PingFang-SC-Regular;
+}
+.sets{
+    top:$heights;
+    bottom:0;
+}
+.menu{
+    >li{
+        height:0.5rem;
+        color: #333333;
+        font:normal 0.16rem PingFang-SC-Regular;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding:0 0.15rem;
+        border-bottom:1px solid #eeeeee;
+        >i{
+            color:#fac74d;
+            font-size:0.15rem;
+        }
+    }
+}

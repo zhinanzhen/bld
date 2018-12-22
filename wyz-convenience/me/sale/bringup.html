@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提现</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/lib/jquery-1.11.2.min.js"></script>
+    <script src="../../js/lib/flexible.js"></script>
+    <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+</head>
+<body class="topup-box">
+    <header class="postings-nav">
+        <img src="../../images/back.png" alt="" onclick="javascript :history.back(-1);">
+        <p>提现</p>
+    </header>
+    <div class="topup-con">
+        <div class="topup-wxcz">
+            <img src="../../images/weiwei.png" alt="" class="topup-weiwei">
+            <span>提现到微信</span>
+            <img src="../../images/dui.png" alt="" class="topup-wwright">
+        </div>
+        <div class="topup-zfbzf">
+            <img src="../../images/baobao.png" alt="" class="topup-weiwei">
+            <span>提现到支付宝</span>
+            <img src="../../images/dui.png" alt="" class="topup-zfright">
+        </div>
+        <div class="topup-je">
+            <p>提现金额</p>
+            <span>￥</span>
+            <input type="number" id="amount">
+        </div>
+        <div class="topup-qd">
+            确定
+        </div>
+    </div>
+    <div id="pay-money"></div>
+</body>
+<script src="../../../js/all.js"></script>
+<script>
+    $(function(){
+        $('.topup-wxcz').click(function(){
+                $('.topup-wwright').css("display","block");
+                $('.topup-zfright').css("display","none")
+        });
+        $('.topup-zfbzf').click(function(){
+                $('.topup-wwright').css("display","none");
+                $('.topup-zfright').css("display","block")
+        });
+        var userId=isLogin();
+        var type= 0,amount=0;
+        if($('.topup-zfright').css("display")=="block"){
+            type=1;
+        }
+        amount=$("#amount").value();
+        if(amount<=0){
+            alert("请输入正确的金额");
+            return false;
+        }
+        ajaxs("api/account/withdraw",'post',{userId:userId,type:type,amount:amount},function(datas){
+            console.log(datas);
+           if(datas.code==0){
+               alert("提交成功,工作人员随后会处理");
+           }
+        },function(err){
+            console.log(err);
+        });
+    })
+</script>
+</html>

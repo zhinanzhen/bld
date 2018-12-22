@@ -59,6 +59,25 @@ html, body {
   left: 0;
 }
 
+/*单行隐藏*/
+.yincang {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*多行隐藏*/
+.yincangs {
+  overflow: hidden;
+  /*超出隐藏*/
+  display: -webkit-box;
+  /*将对象作为弹性伸缩盒子模型显示。*/
+  -webkit-box-orient: vertical;
+  /*从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）*/
+  -webkit-line-clamp: 2;
+  /*超出2行用省略号表示*/
+}
+
 .sets {
   top: 0.4rem;
   bottom: 0.4rem;
@@ -99,13 +118,17 @@ html, body {
 }
 .adds > div:nth-child(3) > div:nth-child(1) {
   color: #666666;
-  font: normal 0.14rem PingFang-SC-Regular;
+  display: flex;
 }
 .adds > div:nth-child(3) > div:nth-child(1) > .icon-tubiao-xuanze {
   color: #333333;
 }
 .adds > div:nth-child(3) > div:nth-child(1) > .icon-xuanze-danxuan {
   color: #B1DB77;
+}
+.adds > div:nth-child(3) > div:nth-child(1) > i > span {
+  margin-left: 0.05rem;
+  font: normal 0.14rem PingFang-SC-Regular;
 }
 .adds > div:nth-child(3) > div:nth-child(2) {
   display: flex;

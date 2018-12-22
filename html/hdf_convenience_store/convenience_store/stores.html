@@ -18,7 +18,7 @@
 		<header class="heads">
 			<div class="iconfont icon-guanbi" onclick="location.href='home.html';"></div>
 			<div>家乐福</div>
-			<div class="iconfont icon-sousuo1 fbs"></div>
+			<div class="iconfont icon-sousuo1 fbs" onclick="location.href='../../../wyz-convenience/home/search.html'"></div>
 		</header>
 		<section class="sets">
 			<div>
@@ -35,10 +35,42 @@
 				<span></span>
 				<span>元</span>
 			</div>
-			<div>结算</div>
+
+			<div onclick="addorder()">结算</div>
 		</footer>
 		
 <script type="text/javascript">
+	function isExistDefaultAdress() {
+		var flag = false;
+		ajaxs("api/receiver/defaultinfo",'post',{},function(data){
+			console.log(data);
+			if(data.code == 0&&data.data){
+				flag = true;
+			}
+		},function(err){
+			console.log(err);
+		},{async:false});
+		return flag;
+	}
+	function addorder(){
+		var items=lsget("store")["items"];
+		// 保存订单
+		var params = JSON.stringify({type:1,orderItems:items});
+
+		ajaxs("api/order/save",'post',params,function(data){
+			console.log(data)
+			if(data.code == 0){
+				// 查询默认地址
+				if(isExistDefaultAdress()){
+					window.location.href='../buy/order.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+				}else{
+					window.location.href='../buy/add_address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+				}
+			}
+		},function(err){
+			console.log(err);
+		},{contentType : 'application/json;charset=utf-8'});
+	}
 	$(function(){
 		var arr = JSON.parse(localStorage.getItem('bld_m'));
 		console.log(arr);
@@ -46,20 +78,16 @@
 		$(".banners>img").attr("src",arr[2]);
 
 		//创建购物车信息
-		var cart=lsget("store"+arr[0]);
+//		var cart=lsget("store"+arr[0]);
+		var cart;//每次进店置空
 		if(!cart){
 			cart={"storeId":arr[0],"totalPrice":0,"items":[]};
-			lsset("store"+arr[0],cart);
+//			lsset("store"+arr[0],cart);
+			lsset("store",cart);
 		}
 		//item {productid:"",quantity:1,price:1}
 		var items=cart["items"];
-		//5.4	id获取便利店信息
-		/*ajaxs("api/store/info",'post',{storeid:arr[0]},function(data){
-			console.log(data);
-		},function(err){
-			console.log(err);
-		})*/
-		//5.5	商品类目
+		//4.2商品类目
 		ajaxs("api/productcategory/list",'post',{type:"0"},function(data){
 			console.log(data);
 			var data=data.list,ks="";
@@ -143,7 +171,7 @@
 						//console.log("productprice"+price);
 						var inps=Number(th.siblings(".inps").val());
 						var quantity=inps;
-						var totalPrice=parseFloat($("#totalPrice").text());
+						var totalPrice=Number($("#totalPrice").text());
 						if(evl=="+"){
 							quantity+=1;
 							th.siblings(".inps").val(inps+1);
@@ -160,12 +188,27 @@
 							}
 						}
 						//设置合计,更新缓存
-						$("#totalPrice").text(totalPrice);
-						for(p in items){
-							if(items[p]){
-
+						$("#totalPrice").text(totalPrice.toFixed(2));
+						//更新items
+						var isdeal=false;
+						for(var p in items){
+							if(items[p].productid==singles){
+								items[p].quantity=quantity;
+								isdeal=true;
 							}
 						}
+						if(items.length==0||!isdeal){
+							var obj={};
+							obj["productid"]=singles;
+							obj["quantity"]=quantity;
+							obj["price"]=price;
+							items.push(obj);
+							isdeal=true;
+						}
+						cart["items"]=items;
+						cart["totalPrice"]=totalPrice.toFixed(2);
+//						lsset("store"+cart["storeId"],cart);
+						lsset("store",cart);
 					}
 					
 				},function(err){
@@ -175,9 +218,9 @@
 		},function(err){
 			console.log(err);
 		})
-		$("footer>div:eq(1)").click(function(){
+		/*$("footer>div:eq(1)").click(function(){
 			window.location.href="../buy/order.html";
-		})
+		})*/
 	});
 	function num(obj){//只能输入正整数,可以为0
 		var reg=/^([1-9]\d*|[0]{1,1})$/; //含0正整数

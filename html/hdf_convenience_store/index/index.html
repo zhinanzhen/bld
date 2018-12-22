@@ -61,7 +61,30 @@
 	        		</div>
 				</div>
 	        	<div class="contents">
-
+	        		<div class="shows">
+	        			<div>
+	        				<div>
+	        					<img src=""/>
+	        				</div>
+	        				<div>
+	        					<div>小红</div>
+	        					<div>2018-03-26 21:15:16</div>
+	        				</div>
+	        			</div>
+	        			<div>
+	        				<div>
+	        					<span>¥26</span>我阿斯顿发生的
+	        				</div>
+	        				<div class="aas">
+	        					<div>
+									<img src="" alt="" />
+								</div>
+	        				</div>
+	        				<div class="">浏览
+	        					<span>55</span>
+	        				</div>
+	        			</div>
+	        		</div>
 	        	</div>
 			</div>
 		</section>
@@ -113,13 +136,13 @@
 		console.log(err);
 	});
 
-   	$(".trading>div").click(function(){//共享血拼;
+   	$(".trading>div").click(function(){//切换tab
    		$(this).children().addClass("act");
    		$(this).siblings().children().removeClass("act");
 		getProduct();
    	})
 	
-	$(".shows").click(function(){//共享血拼
+	$(".shows").click(function(){
 		window.location.href="../shopping/shopping.html";
 	})
 
@@ -147,7 +170,7 @@
 						imgString +
 						'</div></div><div class="">浏览<span>'+data[i].hits+'</span></div></div></div>';
 			}
-			$(".contents").html(ks);
+//			$(".contents").html(ks);
 		},function(err){
 			console.log(err);
 		});

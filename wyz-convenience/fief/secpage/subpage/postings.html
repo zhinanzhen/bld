@@ -10,6 +10,7 @@
     <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../../js/lib/flexible.js"></script>
     <script src="../../../js/lib/common.js"></script>
+    <script src="../../../../js/all.js"></script>
 </head>
 <body class="postings-box">
     <header class="postings-nav">
@@ -52,7 +53,7 @@
                 withCredentials: true
             },
             type: 'POST',
-            url: url_prefix + 'api/spacedynamic/addSpaceDynamic',
+            url: baseUrl + 'api/spacedynamic/addSpaceDynamic',
             dataType: false,
             data: formdata,
             async: false,

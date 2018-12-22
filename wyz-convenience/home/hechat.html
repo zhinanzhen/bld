@@ -45,4 +45,67 @@
         </div>
     </footer>
 </body>
+<script>
+    $(function(){
+        // var url_prefix='http://39.104.181.50:8080/bld/';
+        var userId =location.search.substring(1);
+        $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/msg/log',
+                dataType:'json',
+                data:{
+                    userId:userId,
+                    toUserId:'123456',
+                },
+                success:function(data){
+                    console.log(data);
+                   
+                },
+                error:function(data){
+                console.log(data)
+                }
+            });
+        $('.hechat-input').bind('input propertychange', function() { 
+            if($('.hechat-input').val()){
+                $('.hechat-ftimg').css("display","none");
+                $('.hechat-ftbox button').css("display","block")
+            }else{
+                $('.hechat-ftimg').css("display","block");
+                $('.hechat-ftbox button').css("display","none")
+            }
+        });
+        $('.hechat-ftbox button').click(function(){
+            $('.hechat-con').append('<div class="hechat-me"><img src="../../../images/metit.png" alt="" class="hechat-metit"><div class="hechat-conmebox"><div><span></span><p>'+ $('.hechat-input').val() +'</p></div></div></div>')
+            // $('.hechat-input').val('')
+            // $('.hechat-ftimg').css("display","block");
+            // $('.hechat-ftbox button').css("display","none")
+            var content = $('.hechat-input').val();
+            console.log(userId)
+            $.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+                type:'POST',
+                url:url_prefix+'api/msg/send',
+                dataType:'json',
+                data:{
+                    userId: userId,
+                    content:content,
+                    type:0,
+                    toUserId:'123456',
+                },
+                success:function(data){
+                    console.log(data)
+                   
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+        })
+    })
+</script>
 </html>
