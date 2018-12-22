@@ -1,0 +1,47 @@
+.ranking-header i{
+	font-size: .36rem;
+    float: left;
+}
+.ranking-header{
+	padding: .4rem 0 .27rem .3rem;
+	text-align: center;
+	font-size: .36rem;
+	background-color: #FAC74D;
+}
+
+
+.ranking{
+	padding: 0rem 1.21rem 0rem .46rem;
+	
+	line-height: .5rem;
+	font-size: .26rem;
+}
+.ranking li{
+	padding:.2rem 0;
+	border-bottom: 1px solid #e4e4e4;
+}
+.ranking img{
+	width: .65rem;
+	height: .65rem;
+}
+
+.ranking-several{
+	padding-right:.5rem;
+}
+
+
+.ranking-describe{
+	width: 2.19rem;
+	padding: 0 1.25rem 0 .28rem;
+}
+
+
+
+
+
+
+
+
+
+
+

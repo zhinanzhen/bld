@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../../html/hdf_convenience_store/css/iconfont.css" />
+		<link rel="stylesheet" href="../css/swiper.css">
+		<link rel="stylesheet" href="../css/quality.css">
+		<script src="../js/lib/jquery-1.11.2.min.js"></script>
+		<script src="../js/lib/x_rem.js"></script>
+		<script src="../js/lib/swiper.js"></script>
+		<script src="../../js/all.js"></script>
+	</head>
+
+	<body>
+		<div>
+			<div class="quality-header">
+				<div class="quality-title">
+					正品商城
+				</div>
+				 
+					<!--<i class="icon-guanbi iconfont"></i>-->
+					<input type="text" name="" id="" value="" class="quality-input"/>
+				 
+			</div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			<nav class="quality-classify">
+				<ul>
+					<li>
+						<a href="">
+							<div>
+								<img src="../images/bannercf.png" alt="" />
+							</div>
+							<span>营养保健</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<div>
+								<img src="../images/bannercf.png" alt="" />
+							</div>
+							<span>营养保健</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<div>
+								<img src="../images/bannercf.png" alt="" />
+							</div>
+							<span>营养保健</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<div>
+								<img src="../images/bannercf.png" alt="" />
+							</div>
+							<span>营养保健</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<div>
+								<img src="../images/bannercf.png" alt="" />
+							</div>
+							<span>营养保健</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<div>
+								<img src="../images/bannercf.png" alt="" />
+							</div>
+							<span>营养保健</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<!--推荐-->
+			<nav class="quality-recommend">
+				<ul class="">
+					<li>推荐:</li>
+					<li>直销</li>
+					<li>品牌</li>
+					<li>母婴</li>
+					<li>母婴</li>
+					<li>母婴</li>
+					<li>母婴</li>
+				</ul>
+			</nav>
+			<!--优惠 抢购 满减-->
+			<div class="quality-discounts flex">
+				<div class="quality-flash-sale">
+					<h1 class="quality-flash-sale-title">
+	        			<b>限时</b>抢购
+	        			<div>
+	        				<span>15</span>:
+	        				<span>30</span>:
+	        				<span>00</span>
+	        			</div>
+	        			<div class="quality-flash-sale-img">
+	        				<img src="../images/banners.png" alt="" />
+	        			</div>
+	        			<div class="quality-flash-sale-price">
+	        				99元
+	        			</div>
+	        		</h1>
+				</div>
+				<div class="quality-Money-Off">
+					<h2 class="quality-Money-Off-title">潮流男装</h2>
+					<h1 class="quality-Money-Off-activity">满500送海潮</h1>
+					<div class="quality-Money-Off-img">
+						<img src="../images/banners.png" alt="" />
+					</div>
+					<div class="quality-Money-Off-GO">
+						GO
+					</div>
+				</div>
+			</div>
+			<!--饮品-->
+			<div class="quality-drinks">
+				<nav>
+					<ul>
+						<li>
+							<img src="../images/add.png" alt="" />
+							<div class="introduce">
+								凉茶植物饮料
+							</div>
+							<p class="quality-drinks-sell">月销售300件</p>
+							<p class="quality-drinks-price">￥69.0</p>
+						</li>
+						<li>
+							<img src="../images/add.png" alt="" />
+							<div class="introduce">
+								凉茶植物饮料
+							</div>
+							<p class="quality-drinks-sell">月销售300件</p>
+							<p class="quality-drinks-price">￥69.0</p>
+						</li>
+						<li>
+							<img src="../images/add.png" alt="" />
+							<div class="introduce">
+								凉茶植物饮料
+							</div>
+							<p class="quality-drinks-sell">月销售300件</p>
+							<p class="quality-drinks-price">￥69.0</p>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<script>
+			(() => {
+				// 请求banner
+				$.ajax({
+					type: 'POST',
+					url: baseUrl + 'api/ad/list',
+					dataType: 'json',
+					data: {
+						type: 3
+					},
+					success: function(data) {
+						var listImg = data.list;
+						for(let index = 0; index < listImg.length; index++) {
+							const imgs = listImg[index];
+							console.log(imgs);
+							var html = '<div class="swiper-slide"><a href="' + imgs.url + '"><img src="' + imgs.image + '" alt="' + imgs.title + '"></a></div>';
+							$('.swiper-wrapper').append(html);
+						}
+						// 开启轮播
+						var mySwiper = new Swiper('.swiper-container', {
+							autoplay: true, //可选选项，自动滑动
+							loop: true,
+							pagination: {
+
+								el: '.swiper-pagination',
+							},
+						})
+					},
+					error: function(data) {
+						console.log(data)
+					}
+				});
+
+			})();
+		</script>
+	</body>
+
+</html>

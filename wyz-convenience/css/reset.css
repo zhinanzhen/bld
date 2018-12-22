@@ -9,6 +9,7 @@ fieldset, img {
 img {
   display: block; }
 
+ 
 a {
   color: #666;
   text-decoration: none; }
@@ -45,3 +46,33 @@ textarea {
 
 table {
   border-collapse: collapse; }
+
+
+
+/*两端对其*/
+.flex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap
+}
+/*排成一行*/
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* 清理浮动 */
+.quality-classify > ul:after,.quality-drinks ul:after{
+    display: block;
+    content: " ";
+    clear: both;
+}
+
+/*2.添加新的样式*/
+.lt{
+    float: left;
+}
+.rt{
+    float: right;
+}
