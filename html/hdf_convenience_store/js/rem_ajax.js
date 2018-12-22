@@ -24,11 +24,11 @@ var urla="http://39.104.181.50:8080";
 function ajaxs(url,type,data,suFn,erFn,params){
 	$.ajax(Object.assign({
 		url:urls+url,
-   		xhrFields:{
+ 		xhrFields:{
            withCredentials:true
        	},
 		type: type,
-        dataType:"json",
+        dataType : "json",
         data:data,
 		success: function(data) {
 			suFn(data);
@@ -38,24 +38,6 @@ function ajaxs(url,type,data,suFn,erFn,params){
         }
 	},params||{}));
 }
-
-function ajaxsk(url,type,data,suFn,erFn){
-	$.ajax({
-		url:urls+url,
-   		xhrFields:{
-           withCredentials:true
-       	},
-		type:type,
-        dataType : "json",
-        data:data,
-		success: function(data){
-			suFn(data);
-		},error: function(error){
-            erFn(error);
-        }
-	});
-}
-
 
 function getUrlString(name) {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
