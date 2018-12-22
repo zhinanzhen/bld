@@ -18,7 +18,6 @@
 	<body>
 		<header class="heads">
 			<i class="iconfont icon-guanbi" onclick="funk()"></i>
-			<!--<i class="iconfont icon-guanbi" onclick="location.href='../index/index.html'"></i>-->
 			<div>我的购物车</div>
 		</header>
 		<section class="sets">
@@ -71,36 +70,26 @@
 		</section>
 		<footer>
 			<div>
-				<div class="iconfont icon-tubiao-xuanze">
+				<div class="iconfont icon-tubiao-xuanze alls">
 					<span>全选</span>
 				</div>
-				<div>合计：¥<span>1060.00</span></div>
+				<div>合计：¥<span id="us">0</span></div>
 			</div>
 			<div>
-				进行结算(<span>4</span>)
+				进行结算(<span id="mun">0</span>)
 			</div>
 		</footer>
 		
 		
 		
 <script type="text/javascript">
-	(()=>{
-//	$(document).ready(function(){
-		var sd=JSON.parse(localStorage.getItem("shopping_cart"));
-		console.log(sd.address);
-		function funk(){//返回页面
-			if(sd.address==0){
-				window.location.href="mall.html";
-			}else if(sd.address==1){
-				window.location.href="mall_child.html";
-			}
-		}
+	$(document).ready(function(){
 		//获取购物车信息
-		ajaxs("api/cart/getitem",'post',{type:1,userId:isLogin()},function(data){
+		ajaxs("api/cart/getitem",'post',{type:2,userId:isLogin()},function(data){
 			console.log(data);
-			var data=data.list,ks="";
+			var data=data.list,ks="",arrs=[];
 			$.each(data, function(index,item) {
-				ks+=`<div class="shopping" data-sta=${item.productId}>
+				ks+=`<div class="shopping" data-sta=${item.productId} data-price=${item.price*item.quantity}>
 						<div>
 							<div class="iconfont icon-tubiao-xuanze xzs"></div>
 							<div>
@@ -109,29 +98,31 @@
 									<div class="yincangs">${item.name}</div>
 									<div>
 										<div>¥${item.price}</div>
-										<div class="numbers" data-munks=${item.price*item.quantity}>
+										<div class="numbers">
 											<div class="iconfont icon-jianshao"></div>
-											<input type="text" class="inp" onkeyup="num(this)" onafterpaste="num(this)" onblur="nums(this)" value=${item.quantity} />
+											<input type="text" class="inp" onkeyup="num(this)" onafterpaste="num(this)" value=${item.quantity} data-munk=${item.quantity} data-totals=${item.price} />
 											<div class="iconfont icon-jia"></div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div>删除</div>
+							<div class="deles">删除</div>
 						</div>
 					</div>`;
 			});
 			$(".sets>div").html(ks);
-			//选择
-			$(".sets").on("click",".xzs",function(){
-				var aa=$(this);
-				var arrid=aa.closest(".shopping").data("sta");
-				console.log(arrid);
-			})
 			//加
 			$(".sets").on("click",".icon-jia",function(){
+				var beforek=$(this).closest(".shopping").data("price");//当前商品开始总价
 				var nums=Number($(this).prev().val())+1;
 				$(this).prev().val(nums);
+				$(this).prev().data("munk",nums);//当前商品数量
+				var totals=$(this).prev().data("totals");//当前商品价格
+				$(this).closest(".shopping").data("price",nums*totals);//当前商品总价
+				//判断当前商品是否被选中
+				if($(this).closest(".shopping").find(".xzs").is(".icon-xuanze")){
+					us();
+				}
 			})
 			//减
 			$(".sets").on("click",".icon-jianshao",function(){
@@ -139,35 +130,160 @@
 				console.log(nums);
 				if(nums<=0){
 					$(this).next().val(1);
+					$(this).next().data("munk",nums);//当前商品数量
+					var totals=$(this).next().data("totals");//当前商品价格
+					$(this).closest(".shopping").data("price",nums*totals);//当前商品总价
+					//判断当前商品是否被选中
+					if($(this).closest(".shopping").find(".xzs").is(".icon-xuanze")){
+						us();
+					}
 				}else{
 					$(this).next().val(nums);
+					$(this).next().data("munk",nums);//当前商品数量
+					var totals=$(this).next().data("totals");//当前商品价格
+					$(this).closest(".shopping").data("price",nums*totals);//当前商品总价
+					//判断当前商品是否被选中
+					if($(this).closest(".shopping").find(".xzs").is(".icon-xuanze")){
+						us();
+					}
 				}
 			})
-			//input
+			//input失去焦点后如果为空，显示原本的数量,并计算当前商品总价
+			$(".sets").on("blur",".inp",function(){
+				var ths=$(this).val();//数量
+				var munk=$(this).data("munk");//原有数量
+				var price=$(this).data("totals");//单价
+				if(ths==""){
+					$(this).val(munk);
+					$(this).closest(".shopping").data("price",$(this).val()*price);
+					console.log($(this).closest(".shopping").data("price"));
+				}
+			})
+			//选择商品结账
+			$(".sets").on("click",".xzs",function(){
+				var aa=$(this);
+				var arrid=aa.closest(".shopping").data("sta");//当前商品id
+				var munk=aa.closest(".shopping").find(".inp").data("munk");//当前商品数量
+				var price=aa.closest(".shopping").data("price");//当前商品总价
+				if(aa.is(".icon-tubiao-xuanze")){//选中
+					aa.removeClass("icon-tubiao-xuanze");
+					aa.addClass("icon-xuanze");
+					arrs.push(aa.closest(".shopping").data("price"));
+					console.log(arrs);
+					//选中的商品总价
+					var sti=eval(arrs.join("+"));
+					$("#us").html(sti)
+					$("#mun").html($(".sets .icon-xuanze").length);
+					var fg=true;//是否全部选中，改变全选状态
+					$(".sets .xzs").each(function(){
+						if($(this).is(".icon-tubiao-xuanze")){
+							console.log(111);
+							return fg=false;
+						}
+					});
+					if(fg){
+						$(".alls").removeClass("icon-tubiao-xuanze");
+						$(".alls").addClass("icon-xuanze");
+					}
+					console.log(fg);
+				}else{//取消
+					aa.addClass("icon-tubiao-xuanze");
+					aa.removeClass("icon-xuanze");
+					$("#mun").html($(".sets .icon-xuanze").length);
+					$(".alls").addClass("icon-tubiao-xuanze");
+					$(".alls").removeClass("icon-xuanze");
+					//取消选中后从数组中删除
+					removeWithoutCopy(arrs,price);
+				}
+			})
+			function removeWithoutCopy(arrs,price) {
+				for(i in arrs){
+					if(arrs[i]==price){
+						arrs.splice(i,1);
+						i--;
+						return console.log(arrs);
+					}
+				}
+				var sti=eval(arrs.join("+"));
+				$("#us").html(sti)
+			}
+			//全选
+			$(".alls").click(function(){
+				if($(this).is(".icon-tubiao-xuanze")){
+					$(this).removeClass("icon-tubiao-xuanze");
+					$(this).addClass("icon-xuanze");
+					$(this).children("span").html("取消");
+					$(".xzs").removeClass("icon-tubiao-xuanze");
+					$(".xzs").addClass("icon-xuanze");
+					$("#mun").html($(".sets .icon-xuanze").length);
+					us();
+				}else{
+					$(this).addClass("icon-tubiao-xuanze");
+					$(this).removeClass("icon-xuanze");
+					$(this).children("span").html("全选");
+					$(".xzs").addClass("icon-tubiao-xuanze");
+					$(".xzs").removeClass("icon-xuanze");
+				}
+			})
+			function us(){
+				arrs=[];
+				for(var i=0;i<$(".sets .xzs").length;i++){
+					arrs.push($(".sets .xzs:eq("+i+")").closest(".shopping").data("price"));
+				}
+				var sti=eval(arrs.join("+"));
+				$("#us").html(sti)
+			}
+			//删除
+			$(".sets").on("click",".deles",function(){
+				var aa=$(this).closest(".shopping")
+			})
+			//结算
+			$("footer>div:eq(1)").click(function(){
+				var arr=[];
+				$(".sets .xzs").each(function() {
+					if($(this).is(".icon-xuanze")){
+						var orderItems={
+							productid:$(this).closest(".shopping").data("sta"),//商品id
+							quantity:$(this).closest(".shopping").find(".inp").data("munk")//数量
+						}
+						arr.push(orderItems);
+					}
+				});
+				console.log(arr);
+				$(this).children("span").html($(".sets .xzs").length);
+				var params={
+					type:2,
+					shippingmethod:"物流",
+					orderItems:arr
+				}
+				console.log(params);
+				ajaxs("api/order/save",'post',params,function(data){
+					console.log(data);
+	            },function(err){
+	                console.log(err);
+	            },{contentType : 'application/json;charset=utf-8'});
+			})
         },function(err){
             console.log(err);
         });
-//	})
-	 })();
+	})
+	//input验证不能输入包含0在内的字母和汉子
 	function num(obj){
-		console.log(obj);
 		if(obj.value.length==1){
 			obj.value=obj.value.replace(/[^1-9]/g,'');
-			obj.closest(".shopping").data("kks",obj.value);
 		}else{
 			obj.value=obj.value.replace(/\D/g,'');
-			obj.closest(".shopping").data("kks",obj.value);
 		}
 	}
-	function nums(obj){
-		if(obj.value==""){
-			obj.value="1"
-			obj.closest(".shopping").data("kks","1");
+	function funk(){//返回页面
+		var sd=JSON.parse(localStorage.getItem("shopping_cart"));
+		console.log(sd.address);
+		if(sd.address==0){
+			window.location.href="mall.html";
+		}else if(sd.address==1){
+			window.location.href="mall_child.html";
 		}
 	}
-	
-	
-	
 </script>
 	</body>
 </html>
