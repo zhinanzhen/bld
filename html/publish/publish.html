@@ -31,7 +31,7 @@
         <div class="imageBox">
            <div class="z_photo">
                 <div class="z_file">
-                    <input type="file" capture="camera" name="file" id="file" value=""  accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+                    <input type="file" capture="camera" name="file" id="file" value=""  accept="image/*" multiple="multiple" onchange="imgChange('z_photo','z_file')" />
                 </div>
             </div>
             <div class="z_mask">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <h3>价格标准：<input id="price" type="text" placeholder="请输入价格"/></h3>
+        <h3>价格标准：<input id="price" type="number" placeholder="请输入价格"/></h3>
         <div class="status">请选择竞价方式</div>
         <div class="status_span clearfix">
             <span class="active" value="0">原价</span>
@@ -62,10 +62,10 @@
                 <i value="1">√</i>
             </span>
         </div>
-        <div class="forward" onclick="">
+        <!--<div class="forward" onclick="location.href='../hdf_convenience_store/publish/classification.html'">
         	<div>商品分类</div>
         	<div></div>
-        </div>
+        </div>-->
         <div class="title">
             <h3>添加标签丰富信息，出租更快捷哦</h3>
             <div class="title_span clearfix">
@@ -154,6 +154,7 @@
             isself=1;
         }
         //商品分类
+//        var productcategoryid=lsget("productcategoryid"),categoryname=lsget("categoryname");
         var productcategoryid,categoryname;
         //标签
         var lables=[];
@@ -172,6 +173,7 @@
         formdata.append("userId", userId);
         formdata.append("introduction", introduction);
         formdata.append("pricetype", pricetype);
+        formdata.append("price", price);
         formdata.append("ismail", ismail);
         formdata.append("isself", isself);
         formdata.append("productcategoryid", productcategoryid);
@@ -196,7 +198,8 @@
                 console.log(data);
                 if(data.code==0){
                     alert("发布成功");
-                    go();
+                    //回到首页
+                    window.location.href="/bld/wyz-convenience/home/home.html";
                 }else{
                     alert("发布失败");
                 }

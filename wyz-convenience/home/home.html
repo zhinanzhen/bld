@@ -114,9 +114,6 @@
     </div>
 </body>
 <script>
- 
-	 
- 
     $('.home-dt div').click(function(){
         $(this).addClass('home-index').siblings().removeClass('home-index');
 
@@ -182,17 +179,17 @@
                     <span class="home-userfont">&nbsp;${data[i].createDate}</span>
                 </div>
             </div>
-            <div class="home-usertheme">
+            <div class="home-usertheme" id=${data[i].id} onclick="detail(this)">
                  <p>
                     <span class="home-price">￥${data[i].price}</span>
-                    <span>${data[i].introduction}</span>
+                    <span>${data[i].name}</span>
                 </p>
                 <div class="home-userimgbox">
                     <div class="home-userimg">
                         ${imgString}
                     </div>
                 </div>
-                <span class="home-browse">浏览12</span>`;
+                <span class="home-browse">浏览${data[i].hits}</span>`;
            }
            $("#content").html(ks);
        },function(err){
@@ -223,5 +220,9 @@
            }
        }
    }
+    function detail(obj) {
+        window.location.href='../../html/hdf_convenience_store/mall/mall_child.html?id='+obj.id;
+//          window.location.href='mall_child.html?productId=' + id
+    }
 </script>
 </html>
