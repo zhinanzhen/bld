@@ -10,14 +10,16 @@
     <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../../js/lib/flexible.js"></script>
     <script src="../../../js/lib/common.js"></script>
+    <script src="../../../../js/all.js"></script>
+
 </head>
 <body class="hechat-bgcolor">
     <header class="hechat-nav">
         <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);">
-        <p>魏雨</p>
+        <p class="chat-name">魏雨</p>
     </header>
     <div class="hechat-con">
-        <div class="hechat-he">
+        <!--<div class="hechat-he">
             <img src="../../../images/hetit.png" alt="" class="hechat-hetit">
             <div class="hechat-conhebox">
                 <div>
@@ -34,7 +36,7 @@
                     <p>我在家</p>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
     <footer class="hechat-footer">
         <div class="hechat-ftbox">
@@ -48,8 +50,17 @@
 </body>
 <script>
     $(function(){
-        // var url_prefix='http://39.104.181.50:8080/bld/';
-        var userId =location.search.substring(1);
+        var userId=isLogin();
+        var toUserId = getUrlString("toUserId");
+        // 获取个人信息
+        ajaxs("api/user/userInfo",'post',{userId:toUserId},function(data){
+            console.log(data);
+            if(data.code == 0){
+                $(".chat-name").html(data.user.nickname);
+            }
+        },function(err){
+            console.log(err);
+        });
         //获取聊天记录
         $.ajax({
                 xhrFields: {
@@ -60,16 +71,18 @@
                 dataType:'json',
                 data:{
                     userId:userId,
-                    toUserId:'123456',
+                    toUserId:toUserId
                 },
                 success:function(data){
-                    console.log(data);
+                    if(data && data.list){
+                        appendHtml(data);
+                    }
                 },
                 error:function(data){
                 console.log(data)
                 }
             });
-        $('.hechat-input').bind('input propertychange', function() { 
+        $('.hechat-input').bind('input propertychange', function() {
             if($('.hechat-input').val()){
                 $('.hechat-ftimg').css("display","none");
                 $('.hechat-ftbox button').css("display","block")
@@ -80,9 +93,8 @@
         });
         //发送消息
         $('.hechat-ftbox button').click(function(){
-            $('.hechat-con').append('<div class="hechat-me"><img src="../../../images/metit.png" alt="" class="hechat-metit"><div class="hechat-conmebox"><div><span></span><p>'+ $('.hechat-input').val() +'</p></div></div></div>')
+            $('.hechat-con').append('<div class="hechat-me"><img alt="" class="hechat-metit headpicPath"><div class="hechat-conmebox"><div><span></span><p>'+ $('.hechat-input').val() +'</p></div></div></div>')
             var content = $('.hechat-input').val();
-            console.log(userId)
             $.ajax({
                 xhrFields: {
                     withCredentials: true
@@ -91,13 +103,14 @@
                 url:url_prefix+'api/msg/send',
                 dataType:'json',
                 data:{
-                    userId: '654321',
+                    userId: userId,
                     content:content,
                     type:0,
-                    toUserId:userId,
+                    toUserId:toUserId
                 },
                 success:function(data){
                     console.log(data);
+                    $(".headpicPath").attr('src',data.headpicPath);
                     $('.hechat-input').val('');
                 },
                 error:function(data){
@@ -105,6 +118,35 @@
                 }
             });
         })
-    })
+    });
+
+    function appendHtml(data) {
+        var html = "";
+        data.list.forEach(function (value , i) {
+            // 右边 自己
+            if(value.isSelf == 1){
+                html +=   '<div class="hechat-me">													'
+                        + '    <img src="' + value.headPic + '" alt="" class="hechat-metit">    '
+                        + '    <div class="hechat-conmebox">                                        '
+                        + '        <div>                                                            '
+                        + '            <span></span>                                                '
+                        + '            <p>' + value.content + '</p>                                                '
+                        + '        </div>                                                           '
+                        + '    </div>                                                               '
+                        + '</div>'
+            }else{
+                html += '<div class="hechat-he">												'
+                        + '	<img src="' + value.headPic + '" alt="" class="hechat-hetit">   '
+                        + '	<div class="hechat-conhebox">                                       '
+                        + '		<div>                                                           '
+                        + '			<span></span>                                               '
+                        + '			<p>' + value.content + '</p>                                             '
+                        + '		</div>                                                          '
+                        + '	</div>                                                              '
+                        + '</div>                                                               '
+            }
+        });
+        $(".hechat-con").append(html);
+    }
 </script>
 </html>

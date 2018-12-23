@@ -10,6 +10,8 @@
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
     <script src="../../js/lib/common.js"></script>
+    <script src="../../../js/all.js"></script>
+
 </head>
 <body>
     <header class="hechat-nav">
@@ -17,14 +19,14 @@
         <p>评论</p>
     </header> 
     <div class="comment-conbox">
-        <div class="comment-item">
+        <!--<div class="comment-item">
             <div class="comment-userbox">
                 <img src="../../images/xiaoyu.png" alt="" class="comment-usertit">
                 <div class="comment-user">
                     <p>魏雨</p>
                     <span>2018.11.15 15：46</span>
                 </div>
-            </div> 
+            </div>
             <p class="comment-constant">很不错哦！</p>
             <div class="comment-usercon">
                 <p>今天参加了沉浸式游戏剧表演，很喜欢这个剧组，演员们在一起也很开心！</p>
@@ -49,33 +51,42 @@
             <div class="comment-reply">
                 <p>回复魏雨:</p>
             </div>
-        </div>
+        </div>-->
     </div>
 </body>
 <script>
-    $(function(){
-        $.ajax({
-                xhrFields: {
-                    withCredentials: true
-                },
-                type:'POST',
-                url:url_prefix+'api/spacedynamic/queryMySpaceDynamic',
-                dataType:'json',
-                data:{
-                    userId:'654321',
-                    type:'0',
-                },
-                success:function(data){
-                    console.log(data);
-                    var user=data.user;
-                    var html = '<div class="comment-item">'+
-                        '<div class="comment-userbox"><img src="../../images/xiaoyu.png" alt="" class="comment-usertit"><div class="comment-user"><p>魏雨</p><span>2018.11.15 15：46</span></div></div><p class="comment-constant">很不错哦！</p><div class="comment-usercon"><img src="../../images/happy.png" alt=""><p>今天参加了沉浸式游戏剧表演，很喜欢这个剧组，演员们在一起也很开心！</p></div><div class="comment-reply"><p>回复魏雨:</p></div></div>'
-                   $('.comment-conbox').append()
-                },
-                error:function(data){
-                console.log(data)
-                }
-            });
-    })
+    $(function () {
+        var userId=isLogin();
+        ajaxs("api/comment/comentlist",'post',{userId:userId},function(data){
+            console.log(data);
+            if(data.code == 0 && data.list){
+                appendComentHtml(data.list);
+            }
+        },function(err){
+            console.log(err);
+        });
+    });
+    function appendComentHtml(data) {
+        var html = "";
+        data.forEach(function (value , i) {
+            html += '<div class="comment-item">													  '
+                    + '	<div class="comment-userbox">                                                 '
+                    + '		<img src="' + value.headpicPath + '" alt="" class="comment-usertit">        '
+                    + '		<div class="comment-user">                                                '
+                    + '			<p>' + value.nickname + '</p>                                                           '
+                    + '			<span>' + value.createTime + '</span>                                        '
+                    + '		</div>                                                                    '
+                    + '	</div>                                                                        '
+                    + '	<p class="comment-constant">' + value.commentContent + '</p>                                    '
+                    + '	<div class="comment-usercon">                                                 '
+                    + '		<p>' + value.content + '</p> '
+                    + '	</div>                                                                        '
+                   /* + '	<div class="comment-reply">                                                   '
+                    + '		<p>回复魏雨:</p>                                                          '
+                    + '	</div>                                                                        '*/
+                    + '</div>                                                                         ';
+        });
+        $(".comment-conbox").append(html);
+    }
 </script>
 </html>

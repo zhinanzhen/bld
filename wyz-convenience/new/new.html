@@ -10,6 +10,7 @@
     <script src="../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../js/lib/flexible.js"></script>
     <script src="../js/lib/common.js"></script>
+    <script src="../../js/all.js"></script>
 </head>
 <body>
     <div class="new-box">
@@ -115,10 +116,10 @@
 </body>
 <script>
     $(function(){
+        var userId=isLogin();
         // localstage.getitem(userId);
         // 获取会话列表
         $.ajax({
-                
                 xhrFields: {
                     withCredentials: true
                 },
@@ -126,12 +127,12 @@
                 url:url_prefix+'api/msglistuser/list',
                 dataType:'json',
                 data:{
-                    userId:'123456',
+                    userId:userId
                 },
                 success:function(data){
                     console.log(data);
                     $.each(data.list,function(index,item){
-                        $('.new-newbox').append('<a href="../fief/secpage/subpage/hechat.html?'+ item.userId +'"><div class="new-newboxs"><img src="'+ item.toHeadPic +'" alt=""><div class="new-user"><p>'+ item.name +'</p><span>' + item.lastMsg + '</span></div><div class="new-time"><span>'+ item.lastTime +'</span></div></div></a>')
+                        $('.new-newbox').append('<a href="../fief/secpage/subpage/hechat.html?toUserId='+ item.toUserId +'"><div class="new-newboxs"><img src="'+ item.toHeadPic +'" alt=""><div class="new-user"><p>'+ item.name +'</p><span>' + item.lastMsg + '</span></div><div class="new-time"><span>'+ item.lastTime +'</span></div></div></a>')
                     })
                 },
                 error:function(data){

@@ -10,6 +10,8 @@
     <script src="../../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../../js/lib/flexible.js"></script>
     <script src="../../../js/lib/common.js"></script>
+    <script src="../../../../js/all.js"></script>
+
 </head>
 <body>
     <header class="heindextz-nav">
@@ -17,18 +19,18 @@
             <img src="../../../images/back.png" alt="" onclick="javascript :history.back(-1);">
         </div>
         <div class="heindextz-navright">
-            <!-- <p class="heindextz-text"><b class="heindextz-name">李涵</b><span>+ 关注</span><span>+ 好友</span></p>
-            <p class="heindextz-bot">关注<span>23</span>粉丝 <span>54</span> 信誉分 <span>0</span>赞 <span>23</span></p> -->
+             <p class="heindextz-text"><b class="heindextz-name"></b><span>+ 关注</span><span>+ 好友</span></p>
+            <p class="heindextz-bot">关注<span class="heindextz-attentionNum">0</span>粉丝 <span class="heindextz-fansNum">0</span> 信誉分 <span class="heindextz-honestNum">0</span>赞 <span class="heindextz-praiseNum">0</span></p>
         </div>
         <div class="heindextz-names">
-            <!-- <img src="../../../images/name.png" alt=""> -->
+             <img class="heindextz-pic" alt="">
         </div>
     </header>
     <div class="heindextz-navbox">
         他的帖子
     </div>
     <div class="heindextz-conbox">
-        <div class="heindextz-con">
+        <!--<div class="heindextz-con">
             <div class="heindextz-user">
                 <div class="heindextz-username">
                     <img src="../../../images/total.png" alt="">
@@ -84,8 +86,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="heindextz-userbox">
+        </div>-->
+<!--        <div class="heindextz-userbox">
             <div class="heindextz-user">
                 <img src="../../../images/head.png" alt="" class="heindextz-userhead">
                 <div class="heindextz-userspid">
@@ -107,11 +109,11 @@
                 </div>
             </div>
             <span class="heindextz-browse">浏览12</span>
-        </div>
+        </div>-->
     </div>
     
     <footer class="heindextz-news">
-        <div class="heindextz-chat" onClick="location.href='./hechat.html'">
+        <div class="heindextz-chat">
             <img src="../../../images/liaotian.png" alt="">
             <span>聊天</span>
         </div>
@@ -119,50 +121,70 @@
 </body>
 <script>
     $(function(){
-        // var url_prefix='http://39.104.181.50:8080/bld/';
-        var userId =location.search.substring(1);
+//        var userId =location.search.substring(1);
+        var userId = getUrlString("userId");
         //获取个人信息
-        $.ajax({
-                xhrFields: {
-                    withCredentials: true
-                },
-                type:'POST',
-                url:url_prefix+'api/user/userInfo',
-                dataType:'json',
-                data:{
-                    userId:userId,
-                },
-                success:function(data){
-                    console.log(data);
-                    $('.heindextz-navright').append('<p class="heindextz-text"><b class="heindextz-name">'+ data.user.username +'</b><span>+ 关注</span><span>+ 好友</span></p><p class="heindextz-bot">关注<span>'+ data.attentionNum +'</span>粉丝 <span>'+ data.fansNum +'</span> 信誉分 <span>'+ data.honestNum +'</span>赞 <span>'+ data.praiseNum +'</span></p>');
-                    $('.heindextz-names').append('<img src="'+ data.user.headpicPath +'" alt="">')
-                },
-                error:function(data){
-                console.log(data)
-                }
-            });
-            //获取他的帖子
-            $.ajax({
-                xhrFields: {
-                    withCredentials: true
-                },
-                type:'POST',
-                url:url_prefix+'api/spacedynamic/queryMySpaceDynamic',
-                dataType:'json',
-                data:{
-                    userId:userId,
-                },
-                success:function(data){
-                    console.log(data);
-                   
-                },
-                error:function(data){
-                console.log(data)
-                }
-            });
+        ajaxs("api/user/userInfo",'post',{userId:userId},function(data){
+            console.log(data);
+            if(data.code == 0){
+                $(".heindextz-name").html(data.user.nickname);
+                $(".heindextz-attentionNum").html(data.attentionNum);
+                $(".heindextz-fansNum").html(data.fansNum);
+                $(".heindextz-honestNum").html(data.honestNum);
+                $(".heindextz-praiseNum").html(data.praiseNum);
+                $(".heindextz-pic").attr("src",data.user.headpicPath);
+            }
+        },function(err){
+            console.log(err);
+        });
+
+        //获取他的帖子
+        ajaxs("api/spacedynamic/queryMySpaceDynamic",'post',{userId:userId},function(data){
+            console.log(data);
+            if(data.code == 0 && data.user && data.spaceDynamicList){
+                appendHeindextzHtml(data.user,data.spaceDynamicList);
+            }
+        },function(err){
+            console.log(err);
+        });
+
         $('.heindextz-chat').click(function(){
-            window.location.href='./hechat.html?'+ userId +''
+            window.location.href='./hechat.html?toUserId='+ userId
         })
     })
+    function appendHeindextzHtml(user,spaceDynamicList) {
+        var html = "";
+        spaceDynamicList.forEach(function (value , i) {
+            html += '<div class="heindextz-con">															'
+                    + '	<div class="heindextz-user">                                                        '
+                    + '		<div class="heindextz-username">                                                '
+                    + '			<img src="' + user.headpic_path + '" alt="">                                '
+                    + '			<div class="heindextz-userid">                                              '
+                    + '				<p>' + user.name + '</p>                                                       '
+                    + '				<span>' + value.publish_time + '</span>                                                    '
+                    + '			</div>                                                                      '
+                    + '		</div>                                                                          '
+                    + '		<div class="heindextz-usercon">                                                 '
+                    + '			<p>' + value.content + '</p>    '
+                    + '		</div>                                                                          '
+                    + '		<div class="heindextz-userft">                                                  '
+                    + '			<div>                                                                       '
+                    + '				<img src="../../../images/share.png" alt="">                            '
+                    + '				<span>分享</span>                                                       '
+                    + '			</div>                                                                      '
+                    + '			<div>                                                                       '
+                    + '				<img src="../../../images/pin.png" alt="">                              '
+                    + '				<span>' + value.comment + '</span>                                                        '
+                    + '			</div>                                                                      '
+                    + '			<div>                                                                       '
+                    + '				<img src="../../../images/zan.png" alt="">                              '
+                    + '				<span>点赞</span>                                                       '
+                    + '			</div>                                                                      '
+                    + '		</div>                                                                          '
+                    + '	</div>                                                                              '
+                    + '</div>                                                                               ';
+        });
+        $(".heindextz-conbox").append(html);
+    }
 </script>
 </html>

@@ -10,6 +10,8 @@
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
     <script src="../../js/lib/common.js"></script>
+    <script src="../../../js/all.js"></script>
+
 </head>
 <body class="friendsdetails-box">
     <header class="friendsdetails-nav">
@@ -27,18 +29,9 @@
 </body>
 <script>
     $(function(){
-        // var url_prefix='http://39.104.181.50:8080/bld/';
-        // var forumUserId =location.search.substring(1);
-
-        var splitStr = location.search.substring(1).split("&");  
-        var urlObj = {}  
-        for(var i = 0; i < splitStr.length; i++){
-            urlObj[splitStr[i].split("=")[0]] = splitStr[i].split("=")[1];
-        }
-        var forumUserId = urlObj.forumUserId;
-        var userId = urlObj.userId;
-        //     console.log(userId);
-        // console.log(forumUserId);
+        var currentUserId = isLogin();
+        var userId = getUrlString("userId");
+        var relationId = getUrlString("relationId");
         var result;
         //获取个人信息
         $.ajax({
@@ -50,11 +43,18 @@
                     url:url_prefix+'api/user/userInfo',
                     dataType:'json',
                     data:{
-                        userId:'654321',
+                        userId:userId
                     },
                     success:function(data){
-                        // console.log(data.user);
-                        $('.friendsdetails-userbox').append('<img src="'+ data.user.headpicPath +'" alt="" class="friendsdetails-usertit"><b>'+ data.user.username +'</b> <span>'+ data.user.sex +'</span><p>'+ data.user.intro +'</p>')
+                        var sexName = "未知";
+                        if(data.user.sex == 1){
+                            sexName = "男";
+                        }else if(data.user.sex == 0){
+                            sexName = "女";
+                        }else{
+
+                        }
+                        $('.friendsdetails-userbox').append('<img src="'+ data.user.headpicPath +'" alt="" class="friendsdetails-usertit"><b>'+ data.user.username +'</b> <span>'+ sexName +'</span><p>'+ data.user.intro +'</p>')
                         
                     },
                     error:function(data){
@@ -73,12 +73,11 @@
                     url:url_prefix+'api/relationuser/audit',
                     dataType:'json',
                     data:{
-                        // forumId:forumId,
-                        relationId:'123456',//touserId
-                        result:result,
+                        relationId:relationId,//touserId
+                        result:result
                     },
                     success:function(data){
-                        console.log(data);
+                        window.location.href = './newfriends.html';
                     },
                     error:function(data){
                     console.log(data)
@@ -97,11 +96,11 @@
                     dataType:'json',
                     data:{
                         // forumId:forumId,
-                        relationId:'123456',//touserId
-                        result:result,
+                        relationId:relationId,//touserId
+                        result:result
                     },
                     success:function(data){
-                        console.log(data);
+                        window.location.href = './newfriends.html';
                     },
                     error:function(data){
                     console.log(data)

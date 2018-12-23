@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../../css/main.css" />
     <script src="../../js/lib/jquery-1.11.2.min.js"></script>
     <script src="../../js/lib/flexible.js"></script>
+    <script src="../../../js/all.js"></script>
+
 </head>
 <body class="praise-box">
    <header class="hechat-nav">
@@ -16,7 +18,7 @@
         <p>赞</p>
     </header> 
     <div class="praise-conbox">
-        <div class="praise-item">
+        <!--<div class="praise-item">
             <div class="praise-userbox">
                 <img src="../../images/xiaoyu.png" alt="" class="praise-usertit">
                 <div class="praise-user">
@@ -42,7 +44,39 @@
                 <img src="../../images/happy.png" alt="">
                 <p>今天参加了沉浸式游戏剧表演，很喜欢这个剧组，演员们在一起也很开心！</p>
             </div>
-        </div>
+        </div>-->
     </div>
+<script>
+    $(function () {
+        var userId=isLogin();
+        ajaxs("api/spacedynamic/praiselist",'post',{userId:userId},function(data){
+            console.log(data);
+            if(data.code == 0 && data.list){
+                appendPraiseHtml(data.list);
+            }
+        },function(err){
+            console.log(err);
+        });
+    });
+    function appendPraiseHtml(data) {
+        var html = "";
+        data.forEach(function (value , i) {
+            html += '<div class="praise-item">															'
+                    + '	<div class="praise-userbox">                                                        '
+                    + '		<img src="' + value.headpicPath + '" alt="" class="praise-usertit">               '
+                    + '		<div class="praise-user">                                                       '
+                    + '			<p>' + value.nickname + '</p>                                                                 '
+                    + '			<span>' + value.createTime + '</span>                                              '
+                    + '		</div>                                                                          '
+                    + '	</div>                                                                              '
+                    + '	<p class="parise-constant">赞了这条动态</p>                                         '
+                    + '	<div class="parise-usercon">                                                        '
+                    + '		<p>' + value.content + '</p>       '
+                    + '	</div>                                                                              '
+                    + '</div>                                                                               ';
+        });
+        $(".praise-conbox").append(html);
+    }
+</script>
 </body>
 </html>
