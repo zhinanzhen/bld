@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		<header class="heads">
-			<i class="iconfont icon-guanbi" onclick="location.href='mall.html'"></i>
+			<i class="iconfont icon-guanbi" onclick="go()"></i>
 			<div>
 				<div>
 					<div class="act">商品</div>
@@ -38,10 +38,10 @@
 						<div>¥</div>
 						<div id="show-price">269</div>
 					</div>
-					<div>
+					<!--<div>
 						<div>¥</div>
 						<div id="show-cost">599</div>
-					</div>
+					</div>-->
 				</div>
 				<div class="ma_child_bodys">
 					<div id="shop-name">
@@ -106,17 +106,14 @@
 		</footer>
 
 	<script type="text/javascript">
-		ajaxsk("api/product/info",'post',{productId:JSON.parse(localStorage.getItem("shops"))},function(data){
-			console.log(data);
-		},function(err){
-			console.log(err);
-		});
-		
-		
-		
-		
-		
-		ajaxs("api/product/info",'post',{productId:JSON.parse(localStorage.getItem("shops"))},function(data){
+		var id=getUrlString("id");
+		if(isEmptyString(id)){
+			id=lsget("productId");
+		}else{
+			lsset("productId",id+"");
+		}
+		console.log(id);
+		ajaxs("api/product/info",'post',{productId:id},function(data){
 		    var shopDetail = data.data;
 			$("#shop-img").attr('src',shopDetail.image);
 			$("#show-price").html(shopDetail.price);
@@ -149,7 +146,7 @@
 		$(".buyNow").click(function () {
 		    var productId = $("#hideShopId").val();
 			// 保存订单
-			var params = JSON.stringify({type:2,orderItems:[{productid:productId,quantity:1}]});
+			var params = JSON.stringify({type:1,orderItems:[{productid:productId,quantity:1}]});
             ajaxs("api/order/save",'post',params,function(data){
                 console.log(data)
                 isLogin();
@@ -180,7 +177,7 @@
 			var params={
 				type:1,//0:便利店,1:二手
 				userId:isLogin(),//用户id
-				productId:localStorage.getItem("shops"),//商品id
+				productId:lsget("productId"),//商品id
 				num:1//数量
 			};
 			ajaxs("api/cart/addproduct",'post',params,function(data){

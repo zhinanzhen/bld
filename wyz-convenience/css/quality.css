@@ -1,0 +1,237 @@
+.quality-header{
+	height: 1.5rem;
+	padding-top: .2rem;
+    background: #fac64c;
+    text-align: center;
+    
+}
+
+.quality-title{
+	
+	line-height: 0.8rem;
+	font-size: .36rem;
+}
+.quality-input{
+	width: 6rem;
+    height: .5rem;
+   	margin-top: -1rem;
+    padding: 2px;
+    font-size: .3rem;
+    border-radius: 8%;
+}
+    
+/*.swiper-container,.swiper-wrapper{
+	padding:0 .22rem 0 .22rem;
+	
+}*/
+/*轮播*/
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: -12px 5px;
+}
+
+.swiper-container img{
+	width:100%;
+}
+
+.swiper-pagination-bullet {
+    width: 39px;
+    height: 11px;
+    display: inline-block;
+    border-radius: 0%;
+    background: #000;
+    opacity: 0.2;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #007aff;
+}
+
+
+/**/
+
+.quality-classify{
+	font-size: .3rem;
+}
+
+.quality-classify img{
+	width: 1rem;
+    height: 1rem;
+    border-radius: 100%;   
+}
+    
+.quality-classify li{
+	float:left;
+	margin: .3rem 0 0 1rem;
+}
+
+
+/*推荐*/
+.quality-recommend{
+	background: #fe214c;
+	height: .5rem;
+	margin: .19rem 0 .1rem 0;
+}
+
+
+.quality-recommend li{
+	float: left;
+    margin-left: .4rem;
+    color: #FFFFFF;
+    font-size: .3rem;
+}
+
+/*优惠*/
+.quality-discounts{
+	padding:  0 .22rem;
+}
+
+.quality-flash-sale{
+	width: 2.86rem;
+	height: 2.9rem;
+	background: #fcc94c;
+}
+
+.quality-flash-sale-title{
+	margin-top: .14rem;
+	text-align: center;
+	font-size: .3rem;
+}
+
+.quality-flash-sale-title b{
+	font-size: .4rem;
+}
+ 
+.quality-flash-sale-img img{
+	width: 2rem;
+	margin: 0 0.4rem;
+    height: 1.35rem;
+}
+
+.quality-flash-sale-price{
+	margin-right: .09rem;
+	text-align: right;
+	color: #c20100;
+}
+
+    
+/*满减*/
+.quality-Money-Off{
+	position: relative;
+	width: 4rem;
+	height: 2.9rem;
+    background: #fcc94c;
+}
+.quality-Money-Off-title{
+ 	margin: .12rem 0 0rem .21rem;
+	font-size: .3rem;
+    color: #ffffff;
+}
+.quality-Money-Off-activity{
+	margin: .06rem 0 .3rem 0;
+	text-align: center;
+	color: #ff0107;
+	font-size: .4rem;
+}
+.quality-Money-Off-img img{
+	padding: 0 0.6rem;
+	height: 1.3rem;
+	width: 2.73rem;
+}
+
+.quality-Money-Off-GO{
+	position: absolute;
+    border-radius: 50%;
+    right: .2rem;
+    bottom: .38rem;
+    width: .77rem;
+    height: .77rem;
+    color: #ffffff;
+    font-size: 0.4rem;
+    line-height: .75rem;
+    text-align: center;
+    background: #ff0107;
+}
+.quality-drinks{
+	
+}
+.quality-drinks{
+	background-image: url(../images/quality.png);
+	width: 100%;
+	/*padding: 0 .3rem;*/
+    height: 2.58rem;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.quality-drinks nav{
+	padding: .9rem .3rem 0 .3rem;
+}
+
+.quality-drinks ul img{
+	width: 1.9rem;
+	height: 1.6rem;
+}
+.quality-drinks ul .introduce{
+	font-size: .3rem;
+}
+.quality-drinks ul{
+	padding: .2rem 0;
+    background: #ffffff;
+}
+.quality-drinks li{
+	float:left;
+	margin-left: .3rem;
+}
+
+.quality-drinks-sell{
+	font-size: .24rem;
+}
+
+.quality-drinks-price{
+	color: #e20411;
+    font-size: .3rem;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

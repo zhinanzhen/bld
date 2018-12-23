@@ -55,7 +55,7 @@
 	function addorder(){
 		var items=lsget("store")["items"];
 		// 保存订单
-		var params = JSON.stringify({type:1,orderItems:items});
+		var params = JSON.stringify({type:0,orderItems:items});
 
 		ajaxs("api/order/save",'post',params,function(data){
 			console.log(data)

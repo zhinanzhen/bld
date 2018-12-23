@@ -17,68 +17,39 @@
 		<header class="heads">
 			<i class="iconfont icon-guanbi" onclick="location.href='../convenience_store/stores.html'"></i>
 			<div>商品分类</div>
-			<p class="fbs">确定</p>
+			<!--<p class="fbs">确定</p>-->
 		</header>
 	    <section class="sets">
 	    	<div>
 	    		<ul class="menu">
-	    			<li>女装<i class="iconfont icon-dui"></i></li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
-	    			<li>女装</li>
-	    			<li>美妆</li>
-	    			<li>家用电器</li>
-	    			<li>生活百货</li>
 	    		</ul>
 	    	</div>
 	    </section>
 	    
 <script type="text/javascript">
 	$(function(){
+		ajaxs("api/productcategory/list",'post',{type:1},function(datas){
+			console.log(datas);
+			var ks="",data=datas.list;
+			for(var i in data){
+				if(i==0){
+					ks+=`<li id=${data[i].id}>${data[i].name}<i class="iconfont icon-dui"></i></li>`;
+				}else{
+					ks+=`<li id=${data[i].id}>${data[i].name}</li>`;
+				}
+			}
+			$(".menu").html(ks);
+		},function(err){
+			console.log(err);
+		},{async:false});
 		$(".menu>li").click(function(){
 			$(this).append(`<i class="iconfont icon-dui"></i>`).siblings().children(".icon-dui").remove();
-		})
+			lsset("productcategoryid",$(this).attr("id"));
+			lsset("categoryname",$(this).text());
+			window.history.go(-1);
+		});
+		lsset("productcategoryid",$(".icon-dui").parent().attr("id"));
+		lsset("categoryname",$(".icon-dui").parent().text());
 	})
 </script>
 	</body>

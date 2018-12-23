@@ -56,16 +56,18 @@
     $(function(){
     	
     	var ind=getRequest().ind;
-    	ind=ind.split(",");
-    	if(ind[0]==1){
-    		$(".name").val(ind[2]);
-    		$(".phone").val(ind[3]);
-    	}else{
-    		console.log(222);
-    	}
-    	
-    	
-    	
+        if(!isEmptyString(ind)){
+            ind=ind.split(",");
+            if(ind[0]==1){
+                $(".name").val(ind[2]);
+                $(".phone").val(ind[3]);
+            }else{
+                console.log(222);
+            }
+        }else{
+            ind=[0];//新增地址
+        }
+
         $(".adds").click(function () {
             var consignee = $("input[name='consignee']").val();
             var phone = $("input[name='phone']").val();
