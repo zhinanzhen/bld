@@ -122,9 +122,7 @@
 			window.location.href="shopping_cart.html";
 		}
 		function detail(id) {
-			localStorage.setItem('shops', JSON.stringify(id));
-            window.location.href='mall_child.html';
-//          window.location.href='mall_child.html?productId=' + id
+            window.location.href='mall_child.html?id='+id;
         }
 
 </script>

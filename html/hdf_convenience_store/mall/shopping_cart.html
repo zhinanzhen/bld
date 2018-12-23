@@ -85,7 +85,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		//获取购物车信息
-		ajaxs("api/cart/getitem",'post',{type:2,userId:isLogin()},function(data){
+		console.log(isLogin());
+		ajaxs("api/cart/getitem",'post',{type:1,userId:isLogin()},function(data){
 			console.log(data);
 			var data=data.list,ks="",arrs=[];
 			$.each(data, function(index,item) {
@@ -249,16 +250,35 @@
 						arr.push(orderItems);
 					}
 				});
-				console.log(arr);
+				if(arr.length<=0){
+					alert("请选择结算商品");
+					return false;
+				}
+				console.log("商品数据:"+arr);
 				$(this).children("span").html($(".sets .xzs").length);
 				var params={
-					type:2,
-					shippingmethod:"物流",
+					type:"1",
+					shippingmethod:"deliver",
 					orderItems:arr
 				}
 				console.log(params);
-				ajaxs("api/order/save",'post',params,function(data){
+				ajaxs("api/order/save",'post',JSON.stringify(params),function(data){
 					console.log(data);
+					isLogin();
+					if(data.code == 0){
+						//订单信息
+						var Shared={
+							orderId:data.data.orderId,
+							totalprice:data.data.totalprice
+						}
+						localStorage.setItem('Shared', JSON.stringify(Shared));
+						// 查询默认地址
+						if(isExistDefaultAdress()){
+							window.location.href='../buy/order.html';
+						}else{
+							window.location.href='../buy/add_address.html?orderId=' + data.data.orderId + "&totalprice=" + data.data.totalprice;
+						}
+					}
 	            },function(err){
 	                console.log(err);
 	            },{contentType : 'application/json;charset=utf-8'});

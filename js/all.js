@@ -1,5 +1,5 @@
-var baseUrl="http://39.104.181.50:8080/bld/";
-//var baseUrl="http://127.0.0.1:8080/bld/";
+//var baseUrl="http://39.104.181.50:8080/bld/";
+var baseUrl="http://127.0.0.1:8080/bld/";
 
 //获取地址栏后面的信息
 function getUrlString(name) {
@@ -54,10 +54,15 @@ function lsset(key,value) {
 function isLogin() {
 	var userId=JSON.parse(localStorage.getItem('userId'));
     if(userId){
+		//执行自行登录
         userId.replace(/\"/g,"");
+		ajaxs("api/user/aotologin",'post',{userId:userId},function(data){
+		},function(err){
+			console.log(err);
+		});
 		return userId;
     }else{
-        window.location.href="/bld/html/login/login/login.html";
+        window.location.href="/page/html/login/login/login.html";
     }
 }
 
