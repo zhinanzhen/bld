@@ -16,7 +16,7 @@
 <body>
     <header class="myfriends-nav">
         <img src="../../images/back.png" alt="" class="myfriends-back" onclick="javascript :history.back(-1);">
-        <p>好友(<span>20</span>)</p>
+        <p>好友(<span class="myfriends-num">20</span>)</p>
         <img src="../../images/jia.png" alt="" id="addfriends" onClick="location.href='addfriends.html'">
     </header>
     <div class="myfriends-newfriends" onClick="location.href='./newfriends.html'">
@@ -88,6 +88,7 @@
         });
     });
     function appendMyfriendsHtml(data) {
+        $(".myfriends-num").html(data.length);
         var html = "";
         data.forEach(function (value , i) {
             html += '<div class="myfriends-item" onClick=location.href="../../fief/secpage/subpage/heindextz.html?userId=' + value.id + '">'

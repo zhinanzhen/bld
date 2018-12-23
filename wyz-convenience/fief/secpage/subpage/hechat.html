@@ -61,27 +61,13 @@
         },function(err){
             console.log(err);
         });
+
         //获取聊天记录
-        $.ajax({
-                xhrFields: {
-                    withCredentials: true
-                },
-                type:'POST',
-                url:url_prefix+'api/msg/log',
-                dataType:'json',
-                data:{
-                    userId:userId,
-                    toUserId:toUserId
-                },
-                success:function(data){
-                    if(data && data.list){
-                        appendHtml(data);
-                    }
-                },
-                error:function(data){
-                console.log(data)
-                }
-            });
+        initHechat(userId,toUserId);
+        window.setInterval(function () {
+            initHechat(userId,toUserId);
+        }, 2000);
+
         $('.hechat-input').bind('input propertychange', function() {
             if($('.hechat-input').val()){
                 $('.hechat-ftimg').css("display","none");
@@ -119,6 +105,29 @@
             });
         })
     });
+
+    function initHechat(userId,toUserId) {
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type:'POST',
+            url:url_prefix+'api/msg/log',
+            dataType:'json',
+            data:{
+                userId:userId,
+                toUserId:toUserId
+            },
+            success:function(data){
+                if(data && data.list){
+                    appendHtml(data);
+                }
+            },
+            error:function(data){
+                console.log(data)
+            }
+        });
+    }
 
     function appendHtml(data) {
         var html = "";
